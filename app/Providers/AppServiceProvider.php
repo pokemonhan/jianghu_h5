@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,15 +32,15 @@ class AppServiceProvider extends ServiceProvider
          */
         Builder::macro('whereLike', function ($attributes, $terms) {
             $this->where(static function ($query) use ($attributes, $terms) {
-                foreach (array_wrap($attributes) as $attribute) {
+                foreach (Arr::wrap($attributes) as $attribute) {
                     // If it's a single item, wrap the value in an array e.g. $term = [$term];
-                    foreach (array_wrap($terms) as $term) {
+                    foreach (Arr::wrap($terms) as $term) {
                         // When whereLike contains a relationship.value, search the relationship value
-                        $query->when(str_contains($attribute, '.'),
+                        $query->when(Str::contains($attribute, '.'),
                             static function ($query) use ($attribute, $term) {
                                 [$relationName, $relationAttribute] = explode('.', $attribute);
                                 // Validating if the relationship exists on the current query
-                                $query->orWhereHas($relationName, static function ($query) use ($relationAttribute, $term) {
+                                $query->orWhereHas($relationName, function ($query) use ($relationAttribute, $term) {
                                     $query->where($relationAttribute, 'LIKE', "%{$term}%");
                                 });
                             },
