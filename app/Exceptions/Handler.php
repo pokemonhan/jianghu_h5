@@ -238,12 +238,7 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             $msg = $exception->getMessage();
             if ($msg == 'Unauthenticated.') {
-                $result = [
-                    'success' => false,
-                    'code' => $exception->getCode(),
-                    'data' => [],
-                    'message' => '您没有权限操作 请尝试先登录',
-                ];
+                throw new Exception('100034');
             } else {
                 $result = ['message' => $msg];
             }
