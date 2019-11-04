@@ -4,7 +4,7 @@ namespace App\Models\DeveloperUsage\Frontend;
 
 use App\Models\BaseModel;
 
-class FrontendAppRoute extends BaseModel
+class SystemRoutesApp extends BaseModel
 {
     protected $guarded = ['id'];
 }

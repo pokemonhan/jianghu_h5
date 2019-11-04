@@ -5,7 +5,7 @@ namespace App\Models\DeveloperUsage\Frontend;
 use App\Models\BaseModel;
 use Illuminate\Support\Facades\Route;
 
-class FrontendWebRoute extends BaseModel
+class SystemRoutesWeb extends BaseModel
 {
     protected $guarded = ['id'];
     protected $appends = ['real_route','route_to_update'];
