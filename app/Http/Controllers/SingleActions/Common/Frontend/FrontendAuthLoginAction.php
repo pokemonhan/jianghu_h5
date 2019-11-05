@@ -74,7 +74,7 @@ class FrontendAuthLoginAction
             'token_type' => 'Bearer',
             'expires_at' => $expireAt,
         ];
-        return $contll->msgOut(true, $data);
+        return msgOut(true, $data);
     }
 
     protected function throttleKey(Request $request):  ? string
