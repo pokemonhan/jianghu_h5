@@ -48,6 +48,11 @@ class Kernel extends HttpKernel
             'cors',
 //            'crypt',
         ],
+        'backend-api' => [
+            'throttle:500,1',
+            'bindings',
+            'cors',
+        ],
     ];
 
     /**

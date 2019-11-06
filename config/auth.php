@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User\FrontendUser;
+use App\Models\Admin\BackendAdminUser;
+
 return [
 
     /*
@@ -50,6 +52,10 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        'backend' => [
+            'driver' => 'jwt',
+            'provider' => 'admins',
+        ],
     ],
 
     /*
@@ -75,6 +81,10 @@ return [
             'model' => FrontendUser::class,
         ],
 
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => BackendAdminUser::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
