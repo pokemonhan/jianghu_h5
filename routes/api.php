@@ -14,13 +14,33 @@
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+Route::group([
+    'middleware' => ['backend-api'],
+    'namespace' => 'BackendApi\Headquarters',
+    'prefix' => 'headquarters-api',
+], static function () {
+        Route::match(['post', 'options'], 'login', ['as' => 'headquarters-api.login', 'uses' => 'BackendAuthController@login']);
+});
+
+Route::group([
+    'middleware' => ['backend-api'],
+    'namespace' => 'BackendApi\Headquarters',
+    'prefix' => 'headquarters-api',
+], static function () {
+    $sRouteDir = base_path().'/routes/backend/headquarters/';
+    $aRouteFiles = glob($sRouteDir.'*.php');
+    foreach ($aRouteFiles as $sRouteFile) {
+        include $sRouteFile;
+    }
+    unset($aRouteFiles);
+});
 
 Route::group([
     'middleware' => ['frontend-api'],
-    'namespace' => 'FrontendApi',
-    'prefix' => 'web-api',
+    'namespace' => 'FrontendApi\App',
+    'prefix' => 'app-api',
 ], static function () {
-    $sRouteDir = base_path().'/routes/frontend/';
+    $sRouteDir = base_path().'/routes/frontend/app/';
     $aRouteFiles = glob($sRouteDir.'*.php');
     foreach ($aRouteFiles as $sRouteFile) {
         include $sRouteFile;

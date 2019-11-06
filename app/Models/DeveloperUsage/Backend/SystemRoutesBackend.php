@@ -5,7 +5,7 @@ namespace App\Models\DeveloperUsage\Backend;
 use App\Models\BaseModel;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 
-class BackendAdminRoute extends BaseModel
+class SystemRoutesBackend extends BaseModel
 {
     protected $guarded = ['id'];
     
