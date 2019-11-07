@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
-use App\Http\SingleActions\Backend\Headquarters\GameType\AddToAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\DelToAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\EditToAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\IndexToAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\DelDoAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\EditDoAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\IndexDoAction;
 use App\Http\Requests\Backend\Headquarters\GameType\AddValidate;
 use App\Http\Requests\Backend\Headquarters\GameType\DelValidate;
 use App\Http\Requests\Backend\Headquarters\GameType\EditValidate;
@@ -19,44 +19,44 @@ use Illuminate\Http\JsonResponse;
 class BackendGameTypeController extends BackEndApiMainController
 {
     /**
-     * @param AddToAction $action  Action.
+     * @param AddDoAction $action  Action.
      * @param AddValidate $request Request.
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
-    public function addTo(AddToAction $action, AddValidate $request) :JsonResponse
+    public function addDo(AddDoAction $action, AddValidate $request) :JsonResponse
     {
         return $action->execute($request);
     }
 
     /**
-     * @param EditToAction $action  Action.
+     * @param EditDoAction $action  Action.
      * @param EditValidate $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function editTo(EditToAction $action, EditValidate $request) :JsonResponse
+    public function editDo(EditDoAction $action, EditValidate $request) :JsonResponse
     {
         return $action->execute($request);
     }
 
     /**
-     * @param IndexToAction $action Action.
+     * @param IndexDoAction $action Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexTo(IndexToAction $action) :JsonResponse
+    public function indexDo(IndexDoAction $action) :JsonResponse
     {
         return $action->execute();
     }
 
     /**
-     * @param DelToAction $action  Action.
+     * @param DelDoAction $action  Action.
      * @param DelValidate $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function delTo(DelToAction $action, DelValidate $request) :JsonResponse
+    public function delDo(DelDoAction $action, DelValidate $request) :JsonResponse
     {
         return $action->execute($request);
     }

@@ -5,10 +5,10 @@ namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class IndexToAction
+ * Class IndexDoAction
  * @package App\Http\Controllers\SingleActions\Backend\Headquarters\GameType
  */
-class IndexToAction extends BaseAction
+class IndexDoAction extends BaseAction
 {
     /**
      * @return JsonResponse

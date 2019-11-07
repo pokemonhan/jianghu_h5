@@ -6,24 +6,22 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Class AddToAction
+ * Class DelDoAction
  * @package App\Http\Controllers\SingleActions\Backend\Headquarters\GameType
  */
-class AddToAction extends BaseAction
+class DelDoAction extends BaseAction
 {
     /**
      * @param Request $request Request.
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(Request $request) :JsonResponse
     {
         $inputDatas = $request->all();
-        $this->model->name = $inputDatas['name'];
-        $this->model->sign = $inputDatas['sign'];
-        if ($this->model->save()) {
-            return msgOut(true, [], '200', '添加成功');
+        if ($this->model->where('id', $inputDatas['id'])->delete()) {
+            return msgOut(true, [], '200', '删除成功');
         }
-        return msgOut(false, [], '403', '添加失败');
+        return msgOut(false, [], '400', '删除失败');
     }
 }

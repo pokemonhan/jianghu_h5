@@ -6,10 +6,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Class EditToAction
+ * Class EditDoAction
  * @package App\Http\Controllers\SingleActions\Backend\Headquarters\GameType
  */
-class EditToAction extends BaseAction
+class EditDoAction extends BaseAction
 {
     /**
      * @param Request $request Request.
