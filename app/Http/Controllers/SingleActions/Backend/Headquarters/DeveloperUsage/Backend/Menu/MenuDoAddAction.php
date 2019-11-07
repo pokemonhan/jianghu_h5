@@ -33,10 +33,6 @@ class MenuDoAddAction
         if (isset($inputDatas['is_parent']) && (int) $inputDatas['is_parent'] === 1) {
             $parent = true;
         }
-        // $MenuEloq = $this->model::where('label', $inputDatas['label'])->first();
-        // if ($MenuEloq !== null) {
-        //     return msgOut(false, [], '100800');
-        // }
         $menuEloq = new BackendSystemMenu();
         $menuEloq->label = $inputDatas['label'];
         $menuEloq->en_name = $inputDatas['en_name'];

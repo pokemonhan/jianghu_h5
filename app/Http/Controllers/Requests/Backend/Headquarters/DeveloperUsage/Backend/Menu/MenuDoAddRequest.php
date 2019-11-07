@@ -27,8 +27,8 @@ class MenuDoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'label' => 'required|regex:/[\x{4e00}-\x{9fa5}]+/u', //操作日志
-            'en_name' => 'required|regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/', //operation.log
+            'label' => 'required|unique:backend_system_menus|regex:/[\x{4e00}-\x{9fa5}]+/u', //操作日志
+            'en_name' => 'required|unique:backend_system_menus|regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/', //operation.log
             'display' => 'required|numeric|in:0,1',
             'route' => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', // /operasyon/operation-log
             'icon' => 'regex:/^(?!\-)(?!.*\-$)(?!.*?\-\-)(?!\ )(?!.*\ $)(?!.*?\ \ )[a-z0-9 -]+$/',

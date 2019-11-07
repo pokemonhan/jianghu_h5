@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
 use App\Http\Controllers\Requests\BaseFormRequest;
+use Illuminate\Validation\Rule;
 
 /**
  * Class for menu edit request.
@@ -27,10 +28,18 @@ class MenuEditRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'label' => 'required|regex:/[\x{4e00}-\x{9fa5}]+/u', //操作日志
-            'en_name' => 'required|regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/', //operation.log
+            'menu_id' => 'required|numeric|exists:backend_system_menus,id',
+            'label' => [
+                'required',
+                Rule::unique('backend_system_menus')->ignore($this->get('menu_id')),
+                'regex:/[\x{4e00}-\x{9fa5}]+/u',
+            ], //操作日志
+            'en_name' => [
+                'required',
+                Rule::unique('backend_system_menus')->ignore($this->get('menu_id')),
+                'regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/',
+            ], //operation.log
             'display' => 'required|numeric|in:0,1',
-            'menu_id' => 'required|numeric',
             'route' => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', // /operasyon/operation-log
             'icon' => 'regex:/^(?!\-)(?!.*\-$)(?!.*?\-\-)(?!\ )(?!.*\ $)(?!.*?\ \ )[a-z0-9 -]+$/',
             'is_parent' => 'numeric|in:0,1',
