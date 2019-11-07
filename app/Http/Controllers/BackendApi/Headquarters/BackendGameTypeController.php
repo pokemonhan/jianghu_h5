@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\GameType\AddToAction;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\GameType\DelToAction;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\GameType\EditToAction;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\GameType\IndexToAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\AddToAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\DelToAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\EditToAction;
+use App\Http\SingleActions\Backend\Headquarters\GameType\IndexToAction;
 use App\Http\Requests\Backend\Headquarters\GameType\AddValidate;
 use App\Http\Requests\Backend\Headquarters\GameType\DelValidate;
 use App\Http\Requests\Backend\Headquarters\GameType\EditValidate;
@@ -54,6 +54,7 @@ class BackendGameTypeController extends BackEndApiMainController
      * @param DelToAction $action  Action.
      * @param DelValidate $request Request.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function delTo(DelToAction $action, DelValidate $request) :JsonResponse
     {

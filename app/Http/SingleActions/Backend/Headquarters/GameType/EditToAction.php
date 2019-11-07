@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SingleActions\Backend\Headquarters\GameType;
+namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

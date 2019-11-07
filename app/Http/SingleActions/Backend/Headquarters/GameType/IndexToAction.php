@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SingleActions\Backend\Headquarters\GameType;
+namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
 use Illuminate\Http\JsonResponse;
 
@@ -16,7 +16,7 @@ class IndexToAction extends BaseAction
      */
     public function execute() :JsonResponse
     {
-        $outputDatas = $this->model->get()->toArray();
+        $outputDatas = $this->model->get();
         return msgOut(true, $outputDatas, '200', '获取成功');
     }
 }
