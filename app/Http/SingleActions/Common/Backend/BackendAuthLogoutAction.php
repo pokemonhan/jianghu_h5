@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SingleActions\Common\Backend;
+namespace App\Http\SingleActions\Common\Backend;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;

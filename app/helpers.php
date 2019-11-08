@@ -9,7 +9,12 @@
 use Illuminate\Http\JsonResponse;
 
 if (!function_exists('configure')) {
-    function configure($sysKey = null, $default = null)
+    /**
+     * @param string|null $sysKey  SysKey.
+     * @param string|null $default Default.
+     * @return \Illuminate\Contracts\Foundation\Application|mixed
+     */
+    function configure(?string $sysKey = null, ?string $default = null)
     {
         if (is_null($sysKey)) {
             return app('Configure');
@@ -19,25 +24,25 @@ if (!function_exists('configure')) {
     }
 }
 
+
 /**
- * @param bool $success
- * @param mixed $data
- * @param string $code
- * @param mixed $message
- * @param string $placeholder
- * @param mixed $substituted
+ * @param boolean $success     Success.
+ * @param mixed   $data        Data.
+ * @param string  $code        Code.
+ * @param string  $message     Message.
+ * @param string  $placeholder Placeholder.
+ * @param string  $substituted Substituted.
  * @return JsonResponse
- * @throws Exception
+ * @throws Exception 异常.
  */
 function msgOut(
-    $success = false,
+    bool $success = false,
     $data = [],
-    $code = '',
-    $message = '',
-    $placeholder = '',
-    $substituted = ''
-): JsonResponse
-{
+    string $code = '',
+    string $message = '',
+    string $placeholder = '',
+    string $substituted = ''
+): JsonResponse {
     $defaultSuccessCode = '200';
     $defaultErrorCode = '404';
     if ($success === true) {
