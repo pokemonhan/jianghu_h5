@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
-use App\Http\Controllers\SingleActions\Common\Backend\BackendAuthLoginAction;
-use App\Http\Controllers\SingleActions\Common\Backend\BackendAuthLogoutAction;
+use App\Http\SingleActions\Common\Backend\BackendAuthLoginAction;
+use App\Http\SingleActions\Common\Backend\BackendAuthLogoutAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
