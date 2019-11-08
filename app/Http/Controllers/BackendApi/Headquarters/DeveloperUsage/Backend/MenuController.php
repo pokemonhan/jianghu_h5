@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
-use App\Http\Controllers\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDoAddRequest;
-use App\Http\Controllers\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuAllRequireInfosRequest;
-use App\Http\Controllers\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDeleteRequest;
-use App\Http\Controllers\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuEditRequest;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDoAddAction;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuAllRequireInfosAction;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuChangeParentAction;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDeleteAction;
-use App\Http\Controllers\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuEditAction;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDoAddRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuAllRequireInfosRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDeleteRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuEditRequest;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDoAddAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuAllRequireInfosAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuChangeParentAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDeleteAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuEditAction;
 use Illuminate\Http\JsonResponse;
 
 /**

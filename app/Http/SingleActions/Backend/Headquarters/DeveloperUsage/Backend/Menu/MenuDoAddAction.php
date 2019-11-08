@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
+namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Http\JsonResponse;

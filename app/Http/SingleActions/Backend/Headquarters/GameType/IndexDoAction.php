@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class IndexDoAction
- * @package App\Http\Controllers\SingleActions\Backend\Headquarters\GameType
+ * @package App\Http\SingleActions\Backend\Headquarters\GameType
  */
 class IndexDoAction extends BaseAction
 {

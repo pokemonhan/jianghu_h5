@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
+namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
-use App\Http\Controllers\Requests\BaseFormRequest;
+use App\Http\Requests\BaseFormRequest;
 use Illuminate\Validation\Rule;
 
 /**

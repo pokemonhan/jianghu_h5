@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
+namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
-use App\Http\Controllers\Requests\BaseFormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for menu delete request.
+ * Class for menu all require infos request.
  */
-class MenuDeleteRequest extends BaseFormRequest
+class MenuAllRequireInfosRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,7 @@ class MenuDeleteRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'toDelete' => 'required|array',
-            'toDelete.*' => 'int',
+            'type' => 'required|integer|in:1,2,3,0',
         ];
     }
 
