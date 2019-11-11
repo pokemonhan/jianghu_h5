@@ -32,8 +32,7 @@ class BackEndApiMainController extends Controller
     public $log_uuid; //当前的logId
     protected $currentGuard = 'backend';
     public $currentAuth;
-    public $minClassicPrizeGroup; //平台最低投注奖金组
-    public $maxClassicPrizeGroup; //平台最高投注奖金组
+
     /**
      * @var Agent
      */
@@ -60,11 +59,11 @@ class BackEndApiMainController extends Controller
                     $this->menuAccess();
                     $this->routeAccessCheck();
                     if ($this->routeAccessable === false) {
-                        return $this->msgOut($this->routeAccessable, [], '100001');
+                        return msgOut($this->routeAccessable, [], '100001');
                     }
                 }
             }
-            // $this->inputs = Input::all(); //获取所有相关的传参数据
+            $this->inputs = Request::all(); //获取所有相关的传参数据
             //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
             $this->adminOperateLog();
             $this->eloqM = 'App\\Models\\' . $this->eloqM; // 当前的eloquent
@@ -148,48 +147,6 @@ class BackEndApiMainController extends Controller
         $datas['log_uuid'] = $this->log_uuid;
         $logData = json_encode($datas, JSON_UNESCAPED_UNICODE);
         Log::channel('apibyqueue')->info($logData);
-    }
-
-    /**
-     * @param  bool    $success
-     * @param  mixed   $data
-     * @param  string  $code
-     * @param  mixed   $message
-     * @param  string  $placeholder
-     * @param  mixed   $substituted
-     * @return JsonResponse
-     */
-    public function msgOut(
-        $success = false,
-        $data = [],
-        $code = '',
-        $message = '',
-        $placeholder = '',
-        $substituted = ''
-    ): JsonResponse {
-        /*if ($this->currentAuth->user())
-        {
-        $data['access_token']=$this->currentAuth->user()->remember_token;
-        }*/
-        $defaultSuccessCode = '200';
-        $defaultErrorCode = '404';
-        if ($success === true) {
-            $code = $code === '' ? $defaultSuccessCode : $code;
-        } else {
-            $code = $code === '' ? $defaultErrorCode : $code;
-        }
-        if ($placeholder === '' || $substituted === '') {
-            $message = $message === '' ? __('codes-map.' . $code) : $message;
-        } else {
-            $message = $message === '' ? __('codes-map.' . $code, [$placeholder => $substituted]) : $message;
-        }
-        $datas = [
-            'success' => $success,
-            'code' => $code,
-            'data' => $data,
-            'message' => $message,
-        ];
-        return response()->json($datas);
     }
 
     public function modelWithNameSpace($eloqM = null)

@@ -53,12 +53,12 @@ class BackendAuthLoginAction
         $seconds = $this->limiter()->availableIn(
         $this->throttleKey($request)
         );
-        return $contll->msgOut(false, [], '100005');
+        return msgOut(false, [], '100005');
         }
          */
 
         if (!$token = $contll->currentAuth->attempt($credentials)) {
-            return $contll->msgOut(false, [], '100002');
+            return msgOut(false, [], '100002');
         }
         if ($request->hasSession()) {
             $request->session()->regenerate();
@@ -84,6 +84,6 @@ class BackendAuthLoginAction
             'token_type' => 'Bearer',
             'expires_at' => $expireAt,
         ];
-        return $contll->msgOut(true, $data);
+        return msgOut(true, $data);
     }
 }

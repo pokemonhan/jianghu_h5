@@ -25,5 +25,5 @@ foreach ($aErrorCodeFiles as $skey => $sErrcodeFile) {
         }
     }
 }
-unset($aErrorCodeFiles,$skey);
+unset($aErrorCodeFiles, $skey);
 return $data;

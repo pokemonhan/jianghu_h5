@@ -35,4 +35,15 @@ class BackendAdminAccessGroup extends BaseModel
         return $this->hasMany(BackendAdminUser::class, 'group_id', 'id')
             ->select(['id', 'name', 'email', 'is_test', 'status', 'platform_id', 'group_id']);
     }
+
+    /**
+     * 连带管理员一起删除
+     *
+     * @return mixed
+     */
+    public function delete()
+    {
+        $this->adminUsers()->delete();
+        return parent::delete();
+    }
 }

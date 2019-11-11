@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class AddDoAction
- * @package App\Http\Controllers\SingleActions\Backend\Headquarters\GameType
+ * @package App\Http\SingleActions\Backend\Headquarters\GameType
  */
 class AddDoAction extends BaseAction
 {
