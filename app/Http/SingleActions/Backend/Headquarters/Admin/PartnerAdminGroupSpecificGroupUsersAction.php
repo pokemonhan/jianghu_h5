@@ -34,7 +34,7 @@ class PartnerAdminGroupSpecificGroupUsersAction
             $data = $accessGroupEloq->adminUsers->toArray();
             return msgOut(true, $data);
         } else {
-            return msgOut(false, [], '100202');
+            return msgOut(false, [], '300100');
         }
     }
 }

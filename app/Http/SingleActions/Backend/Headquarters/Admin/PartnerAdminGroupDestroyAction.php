@@ -36,7 +36,7 @@ class PartnerAdminGroupDestroyAction
             ['group_name', '=', $inputDatas['group_name']],
         ])->first();
         if ($datas === null) {
-            return msgOut(false, [], '100201');
+            return msgOut(false, [], '300100');
         }
         try {
             $datas->delete();

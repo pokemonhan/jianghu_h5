@@ -49,7 +49,7 @@ class PartnerAdminGroupEditAction
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
         } else {
-            return msgOut(false, [], '100200');
+            return msgOut(false, [], '300100');
         }
     }
 
