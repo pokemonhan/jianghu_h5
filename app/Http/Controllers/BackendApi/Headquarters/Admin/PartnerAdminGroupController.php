@@ -53,7 +53,7 @@ class PartnerAdminGroupController extends BackEndApiMainController
     public function edit(PartnerAdminGroupEditRequest $request, PartnerAdminGroupEditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**

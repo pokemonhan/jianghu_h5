@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BackendApi;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
+use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use App\Models\SystemPlatform;
 use Illuminate\Http\JsonResponse;
@@ -22,9 +23,8 @@ class BackEndApiMainController extends Controller
     public $inputs;
     public $partnerAdmin; //当前的商户用户
     protected $currentOptRoute; //目前路由
-    protected $fullMenuLists; //所有的菜单
-    public $currentPlatformEloq; //当前商户存在的平台
     public $currentPartnerAccessGroup; //当前商户的权限组
+    public $adminAccessGroupDetail = []; //当前商户的权限
     protected $partnerMenulists; //目前所有的菜单为前端展示用的
     protected $eloqM = ''; // 当前的eloquent
     protected $currentRouteName; //当前的route name;
@@ -50,22 +50,21 @@ class BackEndApiMainController extends Controller
             if ($this->partnerAdmin !== null) {
                 //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
                 $this->currentPartnerAccessGroup = new BackendAdminAccessGroup();
-                $this->currentPlatformEloq = new SystemPlatform();
-                if ($this->partnerAdmin->platform) {
-                    $this->currentPlatformEloq = $this->partnerAdmin->platform; //获取目前账号用户属于平台的对象
-                    if ($this->partnerAdmin->accessGroup()->exists()) {
-                        $this->currentPartnerAccessGroup = $this->partnerAdmin->accessGroup;
-                    }
-                    $this->menuAccess();
-                    $this->routeAccessCheck();
-                    if ($this->routeAccessable === false) {
-                        return msgOut($this->routeAccessable, [], '100001');
-                    }
+                if ($this->partnerAdmin->accessGroup()->exists()) {
+                    $this->currentPartnerAccessGroup = $this->partnerAdmin->accessGroup;
+                    //############################可以放入modelfitter############################
+                    $this->adminAccessGroupDetail = $this->currentPartnerAccessGroup->detail->pluck('menu_id')->toArray();
+                    //############################可以放入modelfitter############################
                 }
+                $this->menuAccess();
+                $this->routeAccessCheck();
+                if ($this->routeAccessable === false) {
+                    return msgOut($this->routeAccessable, [], '100001');
+                }
+                
             }
             $this->inputs = Request::all(); //获取所有相关的传参数据
-            //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
-            $this->adminOperateLog();
+            $this->adminOperateLog(); //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
             $this->eloqM = 'App\\Models\\' . $this->eloqM; // 当前的eloquent
             return $next($request);
         });
@@ -101,8 +100,7 @@ class BackEndApiMainController extends Controller
     private function menuAccess()
     {
         $partnerEloq = new BackendSystemMenu();
-        $this->fullMenuLists = $partnerEloq->forStar(); //所有的菜单
-        $this->partnerMenulists = $partnerEloq->menuLists($this->currentPartnerAccessGroup); //目前所有的菜单为前端展示用的
+        $this->partnerMenulists = $partnerEloq->getUserMenuDatas($this->currentPartnerAccessGroup, $this->adminAccessGroupDetail); //目前所有的菜单为前端展示用的
     }
 
     /**
@@ -112,29 +110,25 @@ class BackEndApiMainController extends Controller
     {
         $this->currentOptRoute = Route::getCurrentRoute();
         $this->currentRouteName = $this->currentOptRoute->action['as']; //当前的route name;
-        //$partnerAdREloq = SystemRoutesBackend::where('route_name',$this->currentRouteName)->first()->parentRoute->menu;
         $partnerAdREloq = SystemRoutesBackend::where('route_name', $this->currentRouteName)->first();
         if ($partnerAdREloq !== null) {
-            $partnerMenuEloq = $partnerAdREloq->menu;
-            //set if it is accissable or not
-            if (!empty($this->currentPartnerAccessGroup->role)) {
-                $this->accessGroupCheck($partnerMenuEloq);
+            if ($partnerAdREloq->menu) {
+                $this->accessGroupCheck($partnerAdREloq->menu);
             }
         }
     }
 
     private function accessGroupCheck($partnerMenuEloq)
-    {
-        if ($this->currentPartnerAccessGroup->role === '*') {
+    { 
+        if (in_array($partnerMenuEloq->id, $this->adminAccessGroupDetail)) {
             $this->routeAccessable = true;
-        } else {
-            $currentRouteGroup = json_decode($this->currentPartnerAccessGroup->role, true);
-            if (in_array($partnerMenuEloq->id, $currentRouteGroup)) {
-                $this->routeAccessable = true;
-            } elseif (in_array($this->currentRouteName, Config::get('routelistexclude'))) {
-                $this->routeAccessable = true;
-            }
         }
+
+        //##############################有疑问的#################################
+        //  elseif (in_array($this->currentRouteName, Config::get('routelistexclude'))) {
+        //     $this->routeAccessable = true;
+        // }
+        //##############################有疑问的#################################
     }
     /**
      *记录后台管理员操作日志

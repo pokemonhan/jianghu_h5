@@ -2,10 +2,12 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
-use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
+use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -27,21 +29,39 @@ class PartnerAdminGroupEditAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param BackEndApiMainController $contll     Controller.
+     * @param array                    $inputDatas 传递的参数.
      * @return JsonResponse
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
+        if ((int) $id === 1) {
+            return msgOut(false, [], '300101');
+        }
+
         $datas = $this->model::find($id);
         if ($datas !== null) {
             DB::beginTransaction();
-            $datas->group_name = $inputDatas['group_name'];
-            $datas->role = $inputDatas['role'];
             try {
+                $datas->group_name = $inputDatas['group_name'];
                 $datas->save();
-                //更新管理员组菜单缓存
-                $this->updateGroupMenu($datas);
+
+                BackendAdminAccessGroupDetail::where('group_id', $id)->delete();
+
+                //只提取当前登录管理员也拥有的权限
+                $role = Arr::wrap(json_decode($inputDatas['role'], true));
+                $role = array_intersect($contll->adminAccessGroupDetail, $role);
+
+                //添加AdminGroupDetails数据
+                $data['group_id'] = $id;
+                foreach ($role as $roleId) {
+                    $data['menu_id'] = $roleId;
+                    $groupDetailEloq = new BackendAdminAccessGroupDetail();
+                    $groupDetailEloq->fill($data);
+                    $groupDetailEloq->save();
+                }
+
                 DB::commit();
                 return msgOut(true, $datas->toArray());
             } catch (Exception $e) {
@@ -51,18 +71,5 @@ class PartnerAdminGroupEditAction
         } else {
             return msgOut(false, [], '300100');
         }
-    }
-
-    /**
-     * 更新管理员组菜单缓存
-     *
-     * @param BackendAdminAccessGroup $accessGroupEloq BackendAdminAccessGroup.
-     * @return void
-     */
-    public function updateGroupMenu(BackendAdminAccessGroup $accessGroupEloq): void
-    {
-        $role = json_decode($accessGroupEloq->role); //[1,2,3,4,5]
-        $backendSystemMenuEloq = new BackendSystemMenu();
-        $backendSystemMenuEloq->createMenuDatas($accessGroupEloq->id, $role);
     }
 }

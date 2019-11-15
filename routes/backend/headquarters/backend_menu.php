@@ -11,7 +11,7 @@ Route::group(['prefix' => 'menu', 'namespace' => 'DeveloperUsage\Backend'], stat
     $namePrefix = 'headquarters-api.menu.';
     $controller = 'MenuController@';
     //获取商户用户的所有菜单
-    Route::match(['get', 'options'], 'get-all-menu', ['as' => $namePrefix . 'get-all-menu', 'uses' => $controller . 'getAllMenu']);
+    // Route::match(['get', 'options'], 'get-all-menu', ['as' => $namePrefix . 'get-all-menu', 'uses' => $controller . 'getAllMenu']);
     //获取当前商户用户的菜单
     Route::match(
         ['get', 'options'],

@@ -23,10 +23,10 @@ class MenuController extends BackEndApiMainController
      * Gets all menu.
      * @return JsonResponse
      */
-    public function getAllMenu()
+    /*public function getAllMenu()
     {
         return msgOut(true, $this->fullMenuLists);
-    }
+    }*/
 
     /**
      * @return JsonResponse

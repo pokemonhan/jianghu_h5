@@ -32,8 +32,8 @@ class PartnerAdminGroupDestroyAction
     {
         $id = $inputDatas['id'];
         $datas = $this->model->where([
-            ['id', '=', $id],
-            ['group_name', '=', $inputDatas['group_name']],
+            ['id', $id],
+            ['group_name', $inputDatas['group_name']],
         ])->first();
         if ($datas === null) {
             return msgOut(false, [], '300100');
