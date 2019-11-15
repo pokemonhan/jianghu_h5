@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Admin;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Admin\PartnerAdminGroupCreateRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\PartnerAdminGroupDestroyRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\PartnerAdminGroupEditRequest;
