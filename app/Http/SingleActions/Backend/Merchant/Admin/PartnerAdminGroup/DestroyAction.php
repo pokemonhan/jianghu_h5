@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
 
 use App\Models\Admin\MerchantAdminAccessGroup;
 use Exception;
@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * Class for partner admin group destroy action.
  */
-class PartnerAdminGroupDestroyAction
+class DestroyAction
 {
     /**
      * @var MerchantAdminAccessGroup

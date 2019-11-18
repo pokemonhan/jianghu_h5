@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  * Class for backend auth logout action.
  */
-class BackendAuthLogoutAction
+class LogoutAction
 {
     use AuthenticatesUsers;
 

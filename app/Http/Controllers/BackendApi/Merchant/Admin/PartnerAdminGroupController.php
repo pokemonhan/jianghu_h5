@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Admin;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroupCreateRequest;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroupDestroyRequest;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroupEditRequest;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroupSpecificGroupUsersRequest;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroupCreateAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroupDestroyAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroupEditAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroupIndexAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroupSpecificGroupUsersAction;
+use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\CreateRequest;
+use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\DestroyRequest;
+use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\EditRequest;
+use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\SpecificGroupUsersRequest;
+use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\CreateAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\DestroyAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\EditAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\IndexAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\SpecificGroupUsersAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -22,10 +22,10 @@ class PartnerAdminGroupController extends MerchantApiMainController
     /**
      * Display a listing of the resource.
      *
-     * @param PartnerAdminGroupIndexAction $action Action.
+     * @param IndexAction $action Action.
      * @return JsonResponse
      */
-    public function index(PartnerAdminGroupIndexAction $action): JsonResponse
+    public function index(IndexAction $action): JsonResponse
     {
         return $action->execute($this);
     }
@@ -33,11 +33,11 @@ class PartnerAdminGroupController extends MerchantApiMainController
     /**
      * Show the form for creating a new resource.
      *
-     * @param PartnerAdminGroupCreateRequest $request Request.
-     * @param PartnerAdminGroupCreateAction  $action  Action.
+     * @param CreateRequest $request Request.
+     * @param CreateAction  $action  Action.
      * @return JsonResponse
      */
-    public function create(PartnerAdminGroupCreateRequest $request, PartnerAdminGroupCreateAction $action): JsonResponse
+    public function create(CreateRequest $request, CreateAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($this, $inputDatas);
@@ -46,11 +46,11 @@ class PartnerAdminGroupController extends MerchantApiMainController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param PartnerAdminGroupEditRequest $request Request.
-     * @param PartnerAdminGroupEditAction  $action  Action.
+     * @param EditRequest $request Request.
+     * @param EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(PartnerAdminGroupEditRequest $request, PartnerAdminGroupEditAction $action): JsonResponse
+    public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($this, $inputDatas);
@@ -58,13 +58,13 @@ class PartnerAdminGroupController extends MerchantApiMainController
 
     /**
      * 删除组管理员角色
-     * @param PartnerAdminGroupDestroyRequest $request Request.
-     * @param PartnerAdminGroupDestroyAction  $action  Action.
+     * @param DestroyRequest $request Request.
+     * @param DestroyAction  $action  Action.
      * @return JsonResponse
      */
     public function destroy(
-        PartnerAdminGroupDestroyRequest $request,
-        PartnerAdminGroupDestroyAction $action
+        DestroyRequest $request,
+        DestroyAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
@@ -72,13 +72,13 @@ class PartnerAdminGroupController extends MerchantApiMainController
 
     /**
      * 获取管理员角色
-     * @param PartnerAdminGroupSpecificGroupUsersRequest $request Request.
-     * @param PartnerAdminGroupSpecificGroupUsersAction  $action  Action.
+     * @param SpecificGroupUsersRequest $request Request.
+     * @param SpecificGroupUsersAction  $action  Action.
      * @return JsonResponse
      */
     public function specificGroupUsers(
-        PartnerAdminGroupSpecificGroupUsersRequest $request,
-        PartnerAdminGroupSpecificGroupUsersAction $action
+        SpecificGroupUsersRequest $request,
+        SpecificGroupUsersAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

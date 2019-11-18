@@ -14,7 +14,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 /**
  * Class for backend auth login action.
  */
-class BackendAuthLoginAction
+class LoginAction
 {
     use AuthenticatesUsers;
 

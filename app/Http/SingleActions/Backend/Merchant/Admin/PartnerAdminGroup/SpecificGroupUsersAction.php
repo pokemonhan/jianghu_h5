@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
 
 use App\Models\Admin\MerchantAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * Class for partner admin group specific group users action.
  */
-class PartnerAdminGroupSpecificGroupUsersAction
+class SpecificGroupUsersAction
 {
     /**
      * @var MerchantAdminAccessGroup

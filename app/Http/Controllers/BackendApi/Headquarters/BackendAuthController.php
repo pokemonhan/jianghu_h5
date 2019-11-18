@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\SingleActions\Common\Backend\BackendAuthLoginAction;
-use App\Http\SingleActions\Common\Backend\BackendAuthLogoutAction;
+use App\Http\SingleActions\Common\Backend\LoginAction;
+use App\Http\SingleActions\Common\Backend\LogoutAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -16,22 +16,22 @@ class BackendAuthController extends BackEndApiMainController
     /**
      * Login user and create token
      *
-     * @param Request                $request Request.
-     * @param BackendAuthLoginAction $action  Action.
+     * @param Request     $request Request.
+     * @param LoginAction $action  Action.
      * @return JsonResponse
      */
-    public function login(Request $request, BackendAuthLoginAction $action): JsonResponse
+    public function login(Request $request, LoginAction $action): JsonResponse
     {
         return $action->execute($this, $request);
     }
 
     /**
      * Logout user (Revoke the token)
-     * @param Request                 $request Request.
-     * @param BackendAuthLogoutAction $action  Action.
+     * @param Request      $request Request.
+     * @param LogoutAction $action  Action.
      * @return JsonResponse
      */
-    public function logout(Request $request, BackendAuthLogoutAction $action): JsonResponse
+    public function logout(Request $request, LogoutAction $action): JsonResponse
     {
         return $action->execute($this, $request);
     }

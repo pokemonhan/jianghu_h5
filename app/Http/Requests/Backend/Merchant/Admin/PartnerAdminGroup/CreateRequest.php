@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Merchant\Admin;
+namespace App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for partner admin group specific group users request.
+ * Class for partner admin group create request.
  */
-class PartnerAdminGroupSpecificGroupUsersRequest extends BaseFormRequest
+class CreateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,8 @@ class PartnerAdminGroupSpecificGroupUsersRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|numeric|exists:backend_admin_access_groups,id',
+            'group_name' => 'required|string',
+            'role' => 'required',
         ];
     }
 

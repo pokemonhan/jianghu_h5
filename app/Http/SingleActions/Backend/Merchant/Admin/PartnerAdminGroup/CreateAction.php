@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class for partner admin group create action.
  */
-class PartnerAdminGroupCreateAction
+class CreateAction
 {
     /**
      * @var MerchantAdminAccessGroup

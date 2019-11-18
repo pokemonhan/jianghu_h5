@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
@@ -10,7 +10,7 @@ use App\ModelFilters\Admin\MerchantAdminUserFilter;
 /**
  * Class for partner admin group index action.
  */
-class PartnerAdminGroupIndexAction
+class IndexAction
 {
     /**
      * @var object MerchantAdminAccessGroup
