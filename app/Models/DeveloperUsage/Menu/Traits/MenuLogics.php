@@ -3,6 +3,7 @@
 namespace App\Models\DeveloperUsage\Menu\Traits;
 
 use App\Models\Admin\BackendAdminAccessGroup;
+use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Support\Facades\Cache;
 
@@ -21,13 +22,39 @@ trait MenuLogics
      */
     public function getUserMenuDatas(BackendAdminAccessGroup $accessGroupEloq, array $adminAccessGroupDetail)
     {
-        $redisKey = $accessGroupEloq->id;
+        $frontKey = 'headquarters';
+        return $this->getParentMenu($frontKey, $accessGroupEloq, $adminAccessGroupDetail);
+    }
+
+    /**
+     * @param MerchantAdminAccessGroup $accessGroupEloq        MerchantAdminAccessGroup.
+     * @param array                    $adminAccessGroupDetail 用户拥有的菜单权限.
+     * @return array|mixed
+     */
+    public function getMerchantMenuDatas(MerchantAdminAccessGroup $accessGroupEloq, array $adminAccessGroupDetail)
+    {
+        $frontKey = 'merchant';
+        return $this->getParentMenu($frontKey, $accessGroupEloq, $adminAccessGroupDetail);
+    }
+
+    /**
+     * Gets the parent menu.
+     *
+     * @param string $frontKey               缓存前缀.
+     * @param object $accessGroupEloq        管理员组Eloq.
+     * @param array  $adminAccessGroupDetail 管理员组权限.
+     *
+     * @return array
+     */
+    private function getParentMenu(string $frontKey, object $accessGroupEloq, array $adminAccessGroupDetail)
+    {
+        $redisKey = $frontKey.$accessGroupEloq->id;
         if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
-            $parent_menu = Cache::tags([$this->redisFirstTag])->get($redisKey);
+            $parentMenu = Cache::tags([$this->redisFirstTag])->get($redisKey);
         } else {
-            $parent_menu = self::createMenuDatas($accessGroupEloq->id, $adminAccessGroupDetail);
+            $parentMenu = self::createMenuDatas($accessGroupEloq->id, $adminAccessGroupDetail);
         }
-        return $parent_menu;
+        return $parentMenu;
     }
 
     /**
