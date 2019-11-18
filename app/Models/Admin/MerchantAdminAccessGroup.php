@@ -16,4 +16,21 @@ class MerchantAdminAccessGroup extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * 管理员组权限
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detail()
+    {
+        return $this->hasMany(MerchantAdminAccessGroupsHasBackendSystemMenu::class, 'group_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function adminUsers()
+    {
+        return $this->hasMany(MerchantAdminUser::class, 'group_id', 'id');
+    }
 }
