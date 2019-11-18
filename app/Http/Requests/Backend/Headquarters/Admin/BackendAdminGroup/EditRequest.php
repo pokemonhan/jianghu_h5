@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\Admin;
+namespace App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for partner admin group specific group users request.
+ * Class for partner admin group edit request.
  */
-class PartnerAdminGroupSpecificGroupUsersRequest extends BaseFormRequest
+class EditRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,6 +28,8 @@ class PartnerAdminGroupSpecificGroupUsersRequest extends BaseFormRequest
     {
         return [
             'id' => 'required|numeric|exists:backend_admin_access_groups,id',
+            'group_name' => 'required',
+            'role' => 'required',
         ];
     }
 

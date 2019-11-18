@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\Admin;
+namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for partner admin group create request.
+ * Class for menu delete request.
  */
-class MerchantDoAddRequest extends BaseFormRequest
+class DeleteRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,10 +27,8 @@ class MerchantDoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:merchant_admin_users', //名称
-            'email' => 'required|email|unique:merchant_admin_users', //邮箱
-            'password' => 'required|string', //密码
-            'role' => 'required|string', //权限
+            'toDelete' => 'required|array',
+            'toDelete.*' => 'int',
         ];
     }
 

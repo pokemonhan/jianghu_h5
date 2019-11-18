@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\BackendApi\Headquarters\Admin;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
-use App\Http\Requests\Backend\Headquarters\Admin\PartnerAdminGroupCreateRequest;
-use App\Http\Requests\Backend\Headquarters\Admin\PartnerAdminGroupDestroyRequest;
-use App\Http\Requests\Backend\Headquarters\Admin\PartnerAdminGroupEditRequest;
-use App\Http\Requests\Backend\Headquarters\Admin\PartnerAdminGroupSpecificGroupUsersRequest;
-use App\Http\SingleActions\Backend\Headquarters\Admin\PartnerAdminGroupCreateAction;
-use App\Http\SingleActions\Backend\Headquarters\Admin\PartnerAdminGroupDestroyAction;
-use App\Http\SingleActions\Backend\Headquarters\Admin\PartnerAdminGroupEditAction;
-use App\Http\SingleActions\Backend\Headquarters\Admin\PartnerAdminGroupIndexAction;
-use App\Http\SingleActions\Backend\Headquarters\Admin\PartnerAdminGroupSpecificGroupUsersAction;
+use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\CreateRequest;
+use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\DestroyRequest;
+use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\EditRequest;
+use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\SpecificGroupUsersRequest;
+use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup\CreateAction;
+use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup\DestroyAction;
+use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup\EditAction;
+use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup\IndexAction;
+use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup\SpecificGroupUsersAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -22,10 +22,10 @@ class BackendAdminGroupController extends BackEndApiMainController
     /**
      * Display a listing of the resource.
      *
-     * @param PartnerAdminGroupIndexAction $action Action.
+     * @param IndexAction $action Action.
      * @return JsonResponse
      */
-    public function index(PartnerAdminGroupIndexAction $action): JsonResponse
+    public function index(IndexAction $action): JsonResponse
     {
         return $action->execute();
     }
@@ -33,11 +33,11 @@ class BackendAdminGroupController extends BackEndApiMainController
     /**
      * Show the form for creating a new resource.
      *
-     * @param PartnerAdminGroupCreateRequest $request Request.
-     * @param PartnerAdminGroupCreateAction  $action  Action.
+     * @param CreateRequest $request Request.
+     * @param CreateAction  $action  Action.
      * @return JsonResponse
      */
-    public function create(PartnerAdminGroupCreateRequest $request, PartnerAdminGroupCreateAction $action): JsonResponse
+    public function create(CreateRequest $request, CreateAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($this, $inputDatas);
@@ -46,11 +46,11 @@ class BackendAdminGroupController extends BackEndApiMainController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param PartnerAdminGroupEditRequest $request Request.
-     * @param PartnerAdminGroupEditAction  $action  Action.
+     * @param EditRequest $request Request.
+     * @param EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(PartnerAdminGroupEditRequest $request, PartnerAdminGroupEditAction $action): JsonResponse
+    public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($this, $inputDatas);
@@ -58,13 +58,13 @@ class BackendAdminGroupController extends BackEndApiMainController
 
     /**
      * 删除组管理员角色
-     * @param PartnerAdminGroupDestroyRequest $request Request.
-     * @param PartnerAdminGroupDestroyAction  $action  Action.
+     * @param DestroyRequest $request Request.
+     * @param DestroyAction  $action  Action.
      * @return JsonResponse
      */
     public function destroy(
-        PartnerAdminGroupDestroyRequest $request,
-        PartnerAdminGroupDestroyAction $action
+        DestroyRequest $request,
+        DestroyAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
@@ -72,13 +72,13 @@ class BackendAdminGroupController extends BackEndApiMainController
 
     /**
      * 获取管理员角色
-     * @param PartnerAdminGroupSpecificGroupUsersRequest $request Request.
-     * @param PartnerAdminGroupSpecificGroupUsersAction  $action  Action.
+     * @param SpecificGroupUsersRequest $request Request.
+     * @param SpecificGroupUsersAction  $action  Action.
      * @return JsonResponse
      */
     public function specificGroupUsers(
-        PartnerAdminGroupSpecificGroupUsersRequest $request,
-        PartnerAdminGroupSpecificGroupUsersAction $action
+        SpecificGroupUsersRequest $request,
+        SpecificGroupUsersAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

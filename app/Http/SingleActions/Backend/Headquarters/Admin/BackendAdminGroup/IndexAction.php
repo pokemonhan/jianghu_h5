@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Admin;
+namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Models\Admin\BackendAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * Class for partner admin group index action.
  */
-class PartnerAdminGroupIndexAction
+class IndexAction
 {
     /**
      * @var BackendAdminAccessGroup

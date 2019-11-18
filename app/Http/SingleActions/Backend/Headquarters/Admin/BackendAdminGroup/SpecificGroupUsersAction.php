@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Admin;
+namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Models\Admin\BackendAdminAccessGroup;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class for partner admin group destroy action.
+ * Class for partner admin group specific group users action.
  */
-class PartnerAdminGroupDestroyAction
+class SpecificGroupUsersAction
 {
     /**
      * @var BackendAdminAccessGroup
@@ -30,19 +29,12 @@ class PartnerAdminGroupDestroyAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $id = $inputDatas['id'];
-        $datas = $this->model->where([
-            ['id', $id],
-            ['group_name', $inputDatas['group_name']],
-        ])->first();
-        if ($datas === null) {
+        $accessGroupEloq = $this->model::find($inputDatas['id']);
+        if ($accessGroupEloq !== null) {
+            $data = $accessGroupEloq->adminUsers->toArray();
+            return msgOut(true, $data);
+        } else {
             return msgOut(false, [], '300100');
-        }
-        try {
-            $datas->delete();
-            return msgOut(true);
-        } catch (Exception $e) {
-            return msgOut(false, [], $e->getCode(), $e->getMessage());
         }
     }
 }

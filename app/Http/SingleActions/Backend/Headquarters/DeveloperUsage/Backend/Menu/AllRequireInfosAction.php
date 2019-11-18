@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Class for menu all require infos action.
  */
-class MenuAllRequireInfosAction
+class AllRequireInfosAction
 {
     /**
      * @param array $inputDatas 传递的参数.

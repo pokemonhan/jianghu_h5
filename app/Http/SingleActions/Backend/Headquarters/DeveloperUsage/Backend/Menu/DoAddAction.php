@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * Class for menu do add action.
  */
-class MenuDoAddAction
+class DoAddAction
 {
     /**
      * @var BackendSystemMenu

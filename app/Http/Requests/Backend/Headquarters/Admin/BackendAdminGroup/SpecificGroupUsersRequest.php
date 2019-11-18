@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\Admin;
+namespace App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for partner admin group destroy request.
+ * Class for partner admin group specific group users request.
  */
-class PartnerAdminGroupDestroyRequest extends BaseFormRequest
+class SpecificGroupUsersRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +28,6 @@ class PartnerAdminGroupDestroyRequest extends BaseFormRequest
     {
         return [
             'id' => 'required|numeric|exists:backend_admin_access_groups,id',
-            'group_name' => 'required|exists:backend_admin_access_groups,group_name',
         ];
     }
 

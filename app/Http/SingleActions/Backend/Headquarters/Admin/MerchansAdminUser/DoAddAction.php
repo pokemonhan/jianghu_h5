@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Admin;
+namespace App\Http\SingleActions\Backend\Headquarters\Admin\MerchansAdminUser;
 
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Admin\MerchantAdminAccessGroup;
@@ -13,7 +13,7 @@ use Exception;
 /**
  * Class for merchant admin user do add action.
  */
-class MerchantAdminUserDoAddAction
+class DoAddAction
 {
     /**
      * @param array $inputDatas 传递的参数.

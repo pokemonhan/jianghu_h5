@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
+namespace App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for menu delete request.
+ * Class for partner admin group create request.
  */
-class MenuDeleteRequest extends BaseFormRequest
+class CreateRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,8 +27,8 @@ class MenuDeleteRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'toDelete' => 'required|array',
-            'toDelete.*' => 'int',
+            'group_name' => 'required|unique:backend_admin_access_groups',
+            'role' => 'required',
         ];
     }
 

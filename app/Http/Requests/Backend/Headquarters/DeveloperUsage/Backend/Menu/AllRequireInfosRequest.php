@@ -7,7 +7,7 @@ use App\Http\Requests\BaseFormRequest;
 /**
  * Class for menu all require infos request.
  */
-class MenuAllRequireInfosRequest extends BaseFormRequest
+class AllRequireInfosRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

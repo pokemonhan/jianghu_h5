@@ -3,12 +3,13 @@
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class for menu change parent action.
+ * Class for menu delete action.
  */
-class MenuChangeParentAction
+class DeleteAction
 {
     /**
      * @var BackendSystemMenu
@@ -29,11 +30,19 @@ class MenuChangeParentAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $parseDatas = json_decode($inputDatas['dragResult'], true);
-        $itemProcess = [];
-        if (!empty($parseDatas)) {
-            $itemProcess = $this->model->changeParent($parseDatas);
-            return msgOut(true, $itemProcess);
+        $toDelete = $inputDatas['toDelete'];
+        if (!empty($toDelete)) {
+            try {
+                $datas = $this->model->find($toDelete)->each(static function ($product) {
+                    $data[] = $product->toArray();
+                    $product->delete();
+                    return $data;
+                });
+                $this->model->refreshStar();
+                return msgOut(true, $datas);
+            } catch (Exception $e) {
+                return msgOut(false, [], '0002', $e->getMessage());
+            }
         } else {
             return msgOut(false);
         }

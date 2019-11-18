@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Admin;
+namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class for partner admin group edit action.
  */
-class PartnerAdminGroupEditAction
+class EditAction
 {
     /**
      * @var BackendAdminAccessGroup
