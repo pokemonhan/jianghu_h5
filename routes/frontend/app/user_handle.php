@@ -7,11 +7,7 @@
  */
 
 Route::match(['post', 'options'], 'login', ['as' => 'web-api.login', 'uses' => 'FrontendAuthController@login']);
-// Route::match(
-//     ['post', 'options'],
-//     'register',
-//     ['as' => 'web-api.register', 'uses' => 'FrontendAuthController@register']
-// );
+
 //管理总代用户与玩家
 Route::group(['prefix' => 'user'], static function () {
     $namePrefix = 'web-api.FrontendAuthController.';
