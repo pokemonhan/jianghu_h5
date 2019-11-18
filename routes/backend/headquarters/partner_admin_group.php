@@ -7,9 +7,9 @@
  */
 
 //管理员角色相关
-Route::group(['prefix' => 'partner-admin-group', 'namespace' => 'Admin'], static function () {
-    $namePrefix = 'headquarters-api.partner-admin-group.';
-    $controller = 'PartnerAdminGroupController@';
+Route::group(['prefix' => 'backend-admin-group', 'namespace' => 'Admin'], static function () {
+    $namePrefix = 'headquarters-api.backend-admin-group.';
+    $controller = 'BackendAdminGroupController@';
     //添加管理员角色
     Route::match(['post', 'options'], 'create', ['as' => $namePrefix . 'create', 'uses' => $controller . 'create']);
     //获取管理员角色

@@ -31,7 +31,7 @@ class MenuController extends BackEndApiMainController
     /**
      * @return JsonResponse
      */
-    public function currentPartnerMenu()
+    public function currentAdminMenu()
     {
         return msgOut(true, $this->partnerMenulists);
     }
