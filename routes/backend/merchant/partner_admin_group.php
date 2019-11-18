@@ -3,7 +3,7 @@
 //管理员角色相关
 Route::group(['prefix' => 'merchant-admin-group', 'namespace' => 'Admin'], static function () {
     $namePrefix = 'merchant-api.merchant-admin-group.';
-    $controller = 'PartnerAdminGroupController@';
+    $controller = 'MerchantAdminGroupController@';
     //添加管理员角色
     Route::match(['post', 'options'], 'create', ['as' => $namePrefix . 'create', 'uses' => $controller . 'create']);
     //获取管理员角色

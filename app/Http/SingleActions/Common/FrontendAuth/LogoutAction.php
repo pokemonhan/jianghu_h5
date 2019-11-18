@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Common\Frontend;
+namespace App\Http\SingleActions\Common\FrontendAuth;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 /**
  * Class for frontend auth logout action.
  */
-class FrontendAuthLogoutAction
+class LogoutAction
 {
     use AuthenticatesUsers;
     /**

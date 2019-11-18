@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Common\Backend;
+namespace App\Http\SingleActions\Common\MerchantAuth;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use Exception;
@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
- * Class for merchant auth login action.
+ * Class for login action.
  */
-class MerchantAuthLoginAction
+class LoginAction
 {
     use AuthenticatesUsers;
 

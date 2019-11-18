@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\FrontendApi\App;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\SingleActions\Common\Frontend\FrontendAuthLoginAction;
-use App\Http\SingleActions\Common\Frontend\FrontendAuthLogoutAction;
+use App\Http\SingleActions\Common\FrontendAuth\LoginAction;
+use App\Http\SingleActions\Common\FrontendAuth\LogoutAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -21,21 +21,21 @@ class FrontendAuthController extends FrontendApiMainController
 
     /**
      * Login user and create token
-     * @param FrontendAuthLoginAction $action  验证登录.
-     * @param Request                 $request 请求.
+     * @param LoginAction $action  验证登录.
+     * @param Request     $request 请求.
      * @return JsonResponse [string]  access_token
      */
-    public function login(FrontendAuthLoginAction $action, Request $request): JsonResponse
+    public function login(LoginAction $action, Request $request): JsonResponse
     {
         return $action->execute($this, $request);
     }
 
     /**
-     * @param Request                  $request 请求.
-     * @param FrontendAuthLogoutAction $action  用户退出.
+     * @param Request      $request 请求.
+     * @param LogoutAction $action  用户退出.
      * @return JsonResponse
      */
-    public function logout(Request $request, FrontendAuthLogoutAction $action): JsonResponse
+    public function logout(Request $request, LogoutAction $action): JsonResponse
     {
         return $action->execute($this, $request);
     }

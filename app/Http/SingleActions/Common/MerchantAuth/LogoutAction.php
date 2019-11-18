@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Common\Backend;
+namespace App\Http\SingleActions\Common\MerchantAuth;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -9,9 +9,9 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 /**
- * Class for backend auth logout action.
+ * Class for logout action.
  */
-class MerchantAuthLogoutAction
+class LogoutAction
 {
     use AuthenticatesUsers;
 

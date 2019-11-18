@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Common\Frontend;
+namespace App\Http\SingleActions\Common\FrontendAuth;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use Exception;
@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class FrontendAuthLoginAction
+class LoginAction
 {
     use AuthenticatesUsers;
 

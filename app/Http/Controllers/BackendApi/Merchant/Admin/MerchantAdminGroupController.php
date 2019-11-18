@@ -17,7 +17,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 管理员角色组
  */
-class PartnerAdminGroupController extends MerchantApiMainController
+class MerchantAdminGroupController extends MerchantApiMainController
 {
     /**
      * Display a listing of the resource.
