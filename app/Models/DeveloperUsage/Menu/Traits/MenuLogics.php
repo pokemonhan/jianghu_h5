@@ -3,6 +3,8 @@
 namespace App\Models\DeveloperUsage\Menu\Traits;
 
 use App\Models\Admin\BackendAdminAccessGroup;
+use App\Models\Admin\MerchantAdminAccessGroup;
+use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -14,94 +16,91 @@ use Illuminate\Support\Facades\Cache;
 trait MenuLogics
 {
     /**
-     * @param  BackendAdminAccessGroup  $accessGroupEloq
-     * @return array
-     * TODO : 由于快速开发 后续需要弄缓存与异常处理
-     */
-    public function menuLists(BackendAdminAccessGroup $accessGroupEloq): array
-    {
-        $parent_menu = [];
-        $role = $accessGroupEloq->role;
-        if ($role == '*') {
-            $parent_menu = $this->forStar();
-        } else {
-            $parent_menu = $this->getUserMenuDatas($accessGroupEloq);
-        }
-        return $parent_menu;
-    }
-
-    /**
-     * @return array
-     */
-    public function forStar(): array
-    {
-        $redisKey = '*';
-        if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
-            $parent_menu = Cache::tags([$this->redisFirstTag])->get($redisKey);
-        } else {
-            $parent_menu = self::createMenuDatas();
-        }
-        return $parent_menu;
-    }
-
-    /**
-     * @param  BackendAdminAccessGroup  $accessGroupEloq
+     * @param BackendAdminAccessGroup $accessGroupEloq        BackendAdminAccessGroup.
+     * @param array                   $adminAccessGroupDetail 用户拥有的菜单权限.
      * @return array|mixed
      */
-    public function getUserMenuDatas(BackendAdminAccessGroup $accessGroupEloq)
+    public function getUserMenuDatas(BackendAdminAccessGroup $accessGroupEloq, array $adminAccessGroupDetail)
     {
-        $redisKey = $accessGroupEloq->id;
-        if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
-            $parent_menu = Cache::tags([$this->redisFirstTag])->get($redisKey);
-        } else {
-            $role = json_decode($accessGroupEloq->role); //[1,2,3,4,5]
-            $menuLists = self::whereIn('id', $role)->get();
-            $parent_menu = self::createMenuDatas($accessGroupEloq->id, $role);
-        }
-        return $parent_menu;
+        $frontKey = 'headquarters';
+        return $this->getParentMenu($frontKey, $accessGroupEloq, $adminAccessGroupDetail);
     }
 
     /**
-     * @param  string  $redisKey
-     * @param  mixed   $role
+     * @param MerchantAdminAccessGroup $accessGroupEloq        MerchantAdminAccessGroup.
+     * @param array                    $adminAccessGroupDetail 用户拥有的菜单权限.
+     * @return array|mixed
+     */
+    public function getMerchantMenuDatas(MerchantAdminAccessGroup $accessGroupEloq, array $adminAccessGroupDetail)
+    {
+        $frontKey = 'merchant';
+        return $this->getParentMenu($frontKey, $accessGroupEloq, $adminAccessGroupDetail);
+    }
+
+    /**
+     * Gets the parent menu.
+     *
+     * @param string $frontKey               缓存前缀.
+     * @param object $accessGroupEloq        管理员组Eloq.
+     * @param array  $adminAccessGroupDetail 管理员组权限.
+     *
      * @return array
      */
-    public function createMenuDatas($redisKey = '*', $role = '*'): array
+    private function getParentMenu(string $frontKey, object $accessGroupEloq, array $adminAccessGroupDetail)
+    {
+        $redisKey = $frontKey.$accessGroupEloq->id;
+        if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
+            $parentMenu = Cache::tags([$this->redisFirstTag])->get($redisKey);
+        } else {
+            $parentMenu = self::createMenuDatas($accessGroupEloq->id, $adminAccessGroupDetail);
+        }
+        return $parentMenu;
+    }
+
+    /**
+     * @param string $redisKey               RedisKey.
+     * @param array  $adminAccessGroupDetail 管理员组权限.
+     * @return array
+     */
+    public function createMenuDatas(string $redisKey, array $adminAccessGroupDetail): array
     {
         $menuForFE = [];
-        $menuLists = self::getFirstLevelList($role);
-        foreach ($menuLists as $key => $firstMenu) {
-            if ($firstMenu->pid === 0) {
-                $menuForFE[$firstMenu->id] = $firstMenu->toArray();
-                if ($firstMenu->childs()->exists()) {
-                    $firstChilds = $role == '*' ?
-                    $firstMenu->childs->sortBy('sort') :
-                    $firstMenu->childs->whereIn('id', $role)->sortBy('sort');
-                    foreach ($firstChilds as $secondMenu) {
-                        $menuForFE[$firstMenu->id]['child'][$secondMenu->id] = $secondMenu->toArray();
-                        if ($secondMenu->childs()->exists()) {
-                            $secondChilds = $role == '*' ?
-                            $secondMenu->childs->sortBy('sort') :
-                            $secondMenu->childs->whereIn('id', $role)->sortBy('sort');
-                            foreach ($secondChilds as $thirdMenu) {
-                                $menuForFE[$firstMenu->id]['child']
-                                [$secondMenu->id]['child'][$thirdMenu->id] = $thirdMenu->toArray();
-                            }
-                        }
-                    }
-                }
+        $menuLists = self::getFirstLevelList($adminAccessGroupDetail);
+        foreach ($menuLists as $firstMenu) {
+            $menuForFE[$firstMenu->id] = $firstMenu->toArray();
+            if ($firstMenu->childs()->exists()) {
+                $menuForFE = $this->getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
             }
         }
-        //            $hourToStore = 24;
-        //            $expiresAt = Carbon::now()->addHours($hourToStore)->diffInMinutes();
-        //            Cache::put('ms_menus', $parent_menu, $expiresAt);
         Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
-//        Cache::forever($redisKey, $menuForFE);
         return $menuForFE;
     }
 
     /**
-     * @return bool
+     * Gets menu childs.
+     * @param array             $adminAccessGroupDetail 管理员组权限.
+     * @param BackendSystemMenu $firstMenu              BackendSystemMenu.
+     * @param array             $menuForFE              整理后的管理员组权限.
+     *
+     * @return array
+     */
+    private function getMenuChilds(array $adminAccessGroupDetail, BackendSystemMenu $firstMenu, array $menuForFE)
+    {
+        $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
+        foreach ($firstChilds as $secondMenu) {
+            $menuForFE[$firstMenu->id]['child'][$secondMenu->id] = $secondMenu->toArray();
+            if ($secondMenu->childs()->exists()) {
+                $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
+                foreach ($secondChilds as $thirdMenu) {
+                    $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id] = $thirdMenu->toArray();
+                }
+            }
+        }
+        return $menuForFE;
+    }
+
+    /**
+     * @return boolean
      */
     public function refreshStar(): bool
     {
@@ -110,30 +109,26 @@ trait MenuLogics
     }
 
     /**
-     * @param  string  $role
+     * @param array $adminAccessGroupDetail 管理员组权限.
      * @return mixed
      */
-    public static function getFirstLevelList($role = '*')
+    public static function getFirstLevelList(array $adminAccessGroupDetail)
     {
-        if ($role == '*') {
-            return self::where('pid', 0)->orderBy('sort')->get();
-        } else {
-            return self::where('pid', 0)
-                ->whereIn('id', $role)
-                ->orderBy('sort')->get();
-        }
+        return self::where('pid', 0)
+            ->whereIn('id', $adminAccessGroupDetail)
+            ->orderBy('sort')
+            ->get();
     }
 
     /**
-     * [changeParent description]
-     * @param  array $parseDatas
+     * @param array $parseDatas 修改的数据.
      * @return array $itemProcess
      */
-    public function changeParent($parseDatas): array
+    public function changeParent(array $parseDatas): array
     {
         $atLeastOne = false;
         $itemProcess = [];
-        foreach ($parseDatas as $key => $value) {
+        foreach ($parseDatas as $value) {
             $menuEloq = self::find($value['currentId']);
             $menuEloq->pid = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
             $menuEloq->sort = $value['currentSort'];

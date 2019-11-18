@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\Backend;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
- * Class for backend auth login action.
+ * Class for merchant auth login action.
  */
-class BackendAuthLoginAction
+class MerchantAuthLoginAction
 {
     use AuthenticatesUsers;
 
@@ -30,11 +30,11 @@ class BackendAuthLoginAction
 
     /**
      * Login user and create token
-     * @param BackEndApiMainController $contll  Controller.
-     * @param Request                  $request Request.
+     * @param MerchantApiMainController $contll  Controller.
+     * @param Request                   $request Request.
      * @return JsonResponse
      */
-    public function execute(BackEndApiMainController $contll, Request $request): JsonResponse
+    public function execute(MerchantApiMainController $contll, Request $request): JsonResponse
     {
         $request->validate([
             'email' => 'required|string|email',

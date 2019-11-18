@@ -53,6 +53,11 @@ class Kernel extends HttpKernel
             'bindings',
             'cors',
         ],
+        'merchant-api' => [
+            'throttle:500,1',
+            'bindings',
+            'cors',
+        ],
     ];
 
     /**
@@ -80,8 +85,8 @@ class Kernel extends HttpKernel
      * The priority-sorted list of middleware.
      *
      * This forces non-global middleware to always be in the given order.
-     *
-     * @var array
+     * 
+     * @var array 
      */
     protected $middlewarePriority = [
         \Illuminate\Session\Middleware\StartSession::class,

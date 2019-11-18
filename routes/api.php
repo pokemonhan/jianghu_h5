@@ -36,6 +36,27 @@ Route::group([
 });
 
 Route::group([
+    'middleware' => ['merchant-api'],
+    'namespace' => 'BackendApi\Merchant',
+    'prefix' => 'merchant-api',
+], static function () {
+        Route::match(['post', 'options'], 'login', ['as' => 'merchant-api.login', 'uses' => 'MerchantAuthController@login']);
+});
+
+Route::group([
+    'middleware' => ['merchant-api'],
+    'namespace' => 'BackendApi\Merchant',
+    'prefix' => 'merchant-api',
+], static function () {
+    $sRouteDir = base_path().'/routes/backend/merchant/';
+    $aRouteFiles = glob($sRouteDir.'*.php');
+    foreach ($aRouteFiles as $sRouteFile) {
+        include $sRouteFile;
+    }
+    unset($aRouteFiles);
+});
+
+Route::group([
     'middleware' => ['frontend-api'],
     'namespace' => 'FrontendApi\App',
     'prefix' => 'app-api',

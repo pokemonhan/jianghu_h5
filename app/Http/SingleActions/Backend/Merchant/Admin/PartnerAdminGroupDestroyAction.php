@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Admin;
+namespace App\Http\SingleActions\Backend\Merchant\Admin;
 
-use App\Models\Admin\BackendAdminAccessGroup;
+use App\Models\Admin\MerchantAdminAccessGroup;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -12,16 +12,16 @@ use Illuminate\Http\JsonResponse;
 class PartnerAdminGroupDestroyAction
 {
     /**
-     * @var BackendAdminAccessGroup
+     * @var MerchantAdminAccessGroup
      */
     protected $model;
 
     /**
-     * @param BackendAdminAccessGroup $backendAdminAccessGroup BackendAdminAccessGroup.
+     * @param MerchantAdminAccessGroup $merchantAdminAccessGroup MerchantAdminAccessGroup.
      */
-    public function __construct(BackendAdminAccessGroup $backendAdminAccessGroup)
+    public function __construct(MerchantAdminAccessGroup $merchantAdminAccessGroup)
     {
-        $this->model = $backendAdminAccessGroup;
+        $this->model = $merchantAdminAccessGroup;
     }
 
     /**
@@ -31,15 +31,15 @@ class PartnerAdminGroupDestroyAction
     public function execute(array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
-        $datas = $this->model->where([
+        $adminGroupELoq = $this->model->where([
             ['id', $id],
             ['group_name', $inputDatas['group_name']],
         ])->first();
-        if ($datas === null) {
+        if ($adminGroupELoq === null) {
             return msgOut(false, [], '300100');
         }
         try {
-            $datas->delete();
+            $adminGroupELoq->delete();
             return msgOut(true);
         } catch (Exception $e) {
             return msgOut(false, [], $e->getCode(), $e->getMessage());

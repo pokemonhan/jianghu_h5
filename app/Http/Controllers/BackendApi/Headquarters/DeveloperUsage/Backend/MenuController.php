@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuAllRequireInfosRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDeleteRequest;
@@ -23,10 +23,10 @@ class MenuController extends BackEndApiMainController
      * Gets all menu.
      * @return JsonResponse
      */
-    public function getAllMenu()
+    /*public function getAllMenu()
     {
         return msgOut(true, $this->fullMenuLists);
-    }
+    }*/
 
     /**
      * @return JsonResponse

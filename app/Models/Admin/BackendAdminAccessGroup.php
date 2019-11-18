@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Models\BaseModel;
+use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 
 /**
  * Class for backend admin access group.
@@ -45,5 +46,14 @@ class BackendAdminAccessGroup extends BaseModel
     {
         $this->adminUsers()->delete();
         return parent::delete();
+    }
+
+    /**
+     * 管理员组权限
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function detail()
+    {
+        return $this->hasMany(BackendAdminAccessGroupDetail::class, 'group_id', 'id');
     }
 }

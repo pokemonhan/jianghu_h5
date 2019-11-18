@@ -2,6 +2,7 @@
 
 use App\Models\User\FrontendUser;
 use App\Models\Admin\BackendAdminUser;
+use App\Models\Admin\MerchantAdminUser;
 
 return [
 
@@ -56,6 +57,10 @@ return [
             'driver' => 'jwt',
             'provider' => 'admins',
         ],
+        'merchant' => [
+            'driver' => 'jwt',
+            'provider' => 'merchants',
+        ],
     ],
 
     /*
@@ -89,6 +94,10 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+        'merchants' => [
+            'driver' => 'eloquent',
+            'model' => MerchantAdminUser::class,
+        ],
     ],
 
     /*

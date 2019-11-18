@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Admin;
+namespace App\Http\SingleActions\Backend\Merchant\Admin;
 
-use App\Models\Admin\BackendAdminAccessGroup;
+use App\Models\Admin\MerchantAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,16 +11,16 @@ use Illuminate\Http\JsonResponse;
 class PartnerAdminGroupSpecificGroupUsersAction
 {
     /**
-     * @var BackendAdminAccessGroup
+     * @var MerchantAdminAccessGroup
      */
     protected $model;
 
     /**
-     * @param BackendAdminAccessGroup $backendAdminAccessGroup BackendAdminAccessGroup.
+     * @param MerchantAdminAccessGroup $merchantAdminAccessGroup MerchantAdminAccessGroup.
      */
-    public function __construct(BackendAdminAccessGroup $backendAdminAccessGroup)
+    public function __construct(MerchantAdminAccessGroup $merchantAdminAccessGroup)
     {
-        $this->model = $backendAdminAccessGroup;
+        $this->model = $merchantAdminAccessGroup;
     }
 
     /**

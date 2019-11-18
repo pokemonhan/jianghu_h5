@@ -50,7 +50,7 @@ class MenuEditAction
             if ($menuEloq->save()) {
                 return msgOut(true, $data);
             } else {
-                return msgOut(false, [], '100801');
+                return msgOut(false, [], '300000');
             }
         } else {
             return msgOut(false);
