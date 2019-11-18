@@ -65,6 +65,15 @@ class MerchantAdminUser extends Authenticatable implements JWTSubject
      */
     public function platform()
     {
-        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
+        return $this->hasOne(SystemPlatform::class, 'sign', 'platform_sign');
+    }
+
+    /**
+     * 角色组
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function accessGroup()
+    {
+        return $this->hasOne(MerchantAdminAccessGroup::class, 'id', 'group_id');
     }
 }
