@@ -12,7 +12,7 @@ class MenuController extends MerchantApiMainController
     /**
      * @return JsonResponse
      */
-    public function currentPartnerMenu(): JsonResponse
+    public function currentAdminMenu(): JsonResponse
     {
         return msgOut(true, $this->partnerMenulists);
     }

@@ -11,16 +11,6 @@
 |
 */
 
-//Route::middleware('auth:api')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-Route::group([
-    'middleware' => ['backend-api'],
-    'namespace' => 'BackendApi\Headquarters',
-    'prefix' => 'headquarters-api',
-], static function () {
-        Route::match(['post', 'options'], 'login', ['as' => 'headquarters-api.login', 'uses' => 'BackendAuthController@login']);
-});
 
 Route::group([
     'middleware' => ['backend-api'],
@@ -33,14 +23,6 @@ Route::group([
         include $sRouteFile;
     }
     unset($aRouteFiles);
-});
-
-Route::group([
-    'middleware' => ['merchant-api'],
-    'namespace' => 'BackendApi\Merchant',
-    'prefix' => 'merchant-api',
-], static function () {
-        Route::match(['post', 'options'], 'login', ['as' => 'merchant-api.login', 'uses' => 'MerchantAuthController@login']);
 });
 
 Route::group([

@@ -9,6 +9,6 @@ Route::group(['prefix' => 'menu'], static function () {
     Route::match(
         ['get', 'options'],
         'current-admin-menu',
-        ['as' => $namePrefix . 'current-admin-menu', 'uses' => $controller . 'currentPartnerMenu'],
+        ['as' => $namePrefix . 'current-admin-menu', 'uses' => $controller . 'currentAdminMenu'],
     );
 });

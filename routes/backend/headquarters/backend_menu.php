@@ -14,7 +14,7 @@ Route::group(['prefix' => 'menu', 'namespace' => 'DeveloperUsage\Backend'], stat
     Route::match(
         ['get', 'options'],
         'current-admin-menu',
-        ['as' => $namePrefix . 'current-admin-menu', 'uses' => $controller . 'currentPartnerMenu'],
+        ['as' => $namePrefix . 'current-admin-menu', 'uses' => $controller . 'currentAdminMenu'],
     );
     //所有菜单需要参数 【父级，路由名，可编辑菜单信息】
     Route::match(['post', 'options'], '/', ['as' => $namePrefix . 'all-require-infos', 'uses' => $controller . 'allRequireInfos']);

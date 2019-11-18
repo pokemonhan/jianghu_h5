@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDoAddRequest;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuAllRequireInfosRequest;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDeleteRequest;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuEditRequest;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDoAddAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuAllRequireInfosAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuChangeParentAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuDeleteAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\MenuEditAction;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditRequest;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -31,41 +31,41 @@ class MenuController extends BackEndApiMainController
     /**
      * @return JsonResponse
      */
-    public function currentPartnerMenu()
+    public function currentAdminMenu()
     {
         return msgOut(true, $this->partnerMenulists);
     }
 
     /**
-     * @param MenuAllRequireInfosRequest $request Request.
-     * @param MenuAllRequireInfosAction  $action  Action.
+     * @param AllRequireInfosRequest $request Request.
+     * @param AllRequireInfosAction  $action  Action.
      * @return JsonResponse
      */
     public function allRequireInfos(
-        MenuAllRequireInfosRequest $request,
-        MenuAllRequireInfosAction $action
+        AllRequireInfosRequest $request,
+        AllRequireInfosAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
     }
 
     /**
-     * @param MenuDoAddRequest $request Request.
-     * @param MenuDoAddAction  $action  Action.
+     * @param DoAddRequest $request Request.
+     * @param DoAddAction  $action  Action.
      * @return JsonResponse
      */
-    public function doAdd(MenuDoAddRequest $request, MenuDoAddAction $action): JsonResponse
+    public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
     }
 
     /**
-     * @param MenuDeleteRequest $request Request.
-     * @param MenuDeleteAction  $action  Action.
+     * @param DeleteRequest $request Request.
+     * @param DeleteAction  $action  Action.
      * @return JsonResponse
      */
-    public function delete(MenuDeleteRequest $request, MenuDeleteAction $action): JsonResponse
+    public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
@@ -76,21 +76,21 @@ class MenuController extends BackEndApiMainController
      * (?!\.) - don't allow . at start
      * (?!.*?\.\.) - don't allow 2 consecutive dots
      * (?!.*\.$) - don't allow . at end
-     * @param MenuEditRequest $request Request.
-     * @param MenuEditAction  $action  Action.
+     * @param EditRequest $request Request.
+     * @param EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(MenuEditRequest $request, MenuEditAction $action): JsonResponse
+    public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
     }
 
     /**
-     * @param MenuChangeParentAction $action Action.
+     * @param ChangeParentAction $action Action.
      * @return JsonResponse
      */
-    public function changeParent(MenuChangeParentAction $action): JsonResponse
+    public function changeParent(ChangeParentAction $action): JsonResponse
     {
         return $action->execute($this->inputs);
     }
