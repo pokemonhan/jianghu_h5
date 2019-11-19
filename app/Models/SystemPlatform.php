@@ -11,6 +11,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class SystemPlatform extends BaseModel
 {
     /**
+     * @var array
+     */
+    protected $guarded = ['id'];
+    
+    /**
      * @return HasMany
      */
     public function adminUsers(): HasMany

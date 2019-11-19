@@ -21,6 +21,6 @@ class MerchansAdminUserController extends BackEndApiMainController
     public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 }

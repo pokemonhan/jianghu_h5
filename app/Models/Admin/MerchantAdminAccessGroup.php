@@ -9,7 +9,9 @@ use App\Models\BaseModel;
  */
 class MerchantAdminAccessGroup extends BaseModel
 {
-
+    public const IS_SUPER = 1;
+    public const NO_SUPER = 0;
+    
     /**
      * The attributes that are mass assignable.
      *
