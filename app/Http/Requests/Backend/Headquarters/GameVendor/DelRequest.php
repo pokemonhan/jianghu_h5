@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\GameType;
+namespace App\Http\Requests\Backend\Headquarters\GameVendor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class DelValidate
- * @package App\Http\Requests\Backend\Headquarters\GameType
+ * Class DelRequest
+ * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
-class DelValidate extends FormRequest
+class DelRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,7 @@ class DelValidate extends FormRequest
     {
         if ($this->isMethod('post')) {
             return [
-                'id' => 'required|exists:games_types,id',
+                'id' => 'required|exists:games_vendors,id',
             ];
         }
         return [];

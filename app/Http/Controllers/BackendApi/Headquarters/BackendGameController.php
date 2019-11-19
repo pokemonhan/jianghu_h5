@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\DelDoAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\EditDoAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\IndexDoAction;
-use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\EditRequest;
+use App\Http\Requests\Backend\Headquarters\Game\AddRequest;
+use App\Http\Requests\Backend\Headquarters\Game\DelRequest;
+use App\Http\Requests\Backend\Headquarters\Game\EditRequest;
+use App\Http\SingleActions\Backend\Headquarters\Game\AddDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\DelDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\EditDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\IndexDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class BackendGameTypeController
+ * Class BackendGameController
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendGameTypeController extends BackEndApiMainController
+class BackendGameController extends BackEndApiMainController
 {
     /**
      * @param AddDoAction $action  Action.
      * @param AddRequest  $request Request.
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function addDo(AddDoAction $action, AddRequest $request) :JsonResponse

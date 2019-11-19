@@ -5,10 +5,10 @@ namespace App\Http\Requests\Backend\Headquarters\GameType;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class AddValidate
+ * Class AddRequest
  * @package App\Http\Requests\Backend\Headquarters\GameType
  */
-class AddValidate extends FormRequest
+class AddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

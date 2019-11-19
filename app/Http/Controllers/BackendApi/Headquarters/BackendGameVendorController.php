@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\DelDoAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\EditDoAction;
-use App\Http\SingleActions\Backend\Headquarters\GameType\IndexDoAction;
-use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\EditRequest;
+use App\Http\SingleActions\Backend\Headquarters\GameVendor\AddDoAction;
+use App\Http\SingleActions\Backend\Headquarters\GameVendor\DelDoAction;
+use App\Http\SingleActions\Backend\Headquarters\GameVendor\EditDoAction;
+use App\Http\SingleActions\Backend\Headquarters\GameVendor\IndexDoAction;
+use App\Http\Requests\Backend\Headquarters\GameVendor\AddRequest;
+use App\Http\Requests\Backend\Headquarters\GameVendor\DelRequest;
+use App\Http\Requests\Backend\Headquarters\GameVendor\EditRequest;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class BackendGameTypeController
+ * Class BackendGameVendorController
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendGameTypeController extends BackEndApiMainController
+class BackendGameVendorController extends BackEndApiMainController
 {
     /**
      * @param AddDoAction $action  Action.

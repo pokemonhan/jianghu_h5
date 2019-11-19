@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\GameType;
+namespace App\Http\SingleActions\Backend\Headquarters\FinanceVendor;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
  * Class EditDoAction
- * @package App\Http\SingleActions\Backend\Headquarters\GameType
+ * @package App\Http\SingleActions\Backend\Headquarters\FinanceVendor
  */
 class EditDoAction extends BaseAction
 {
@@ -22,9 +22,10 @@ class EditDoAction extends BaseAction
         $model = $this->model->find($inputDatas['id']);
         $model->name = $inputDatas['name'];
         $model->sign = $inputDatas['sign'];
+        $model->whitelist_ips = $inputDatas['whitelist_ips'];
         if ($model->save()) {
             return msgOut(true, [], '200', '修改成功');
         }
-        throw new \Exception('300403');
+        throw new \Exception('300601');
     }
 }
