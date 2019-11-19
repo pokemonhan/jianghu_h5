@@ -6,7 +6,7 @@ use App\Models\Admin\BackendAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class for partner admin group specific group users action.
+ * Class for specific group users action.
  */
 class SpecificGroupUsersAction
 {

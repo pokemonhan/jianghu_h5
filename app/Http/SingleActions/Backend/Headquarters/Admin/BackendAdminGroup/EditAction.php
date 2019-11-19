@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for partner admin group edit action.
+ * Class for edit action.
  */
 class EditAction
 {

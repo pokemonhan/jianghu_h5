@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for partner admin group create action.
+ * Class for create action.
  */
 class CreateAction
 {
@@ -55,14 +55,14 @@ class CreateAction
                 'group_name' => $inputDatas['group_name'],
                 'platform_sign' => $platformSign,
             ];
-            $objPartnerAdminGroup = $this->model;
-            $objPartnerAdminGroup->fill($groupData);
-            $objPartnerAdminGroup->save();
+            $adminGroup = $this->model;
+            $adminGroup->fill($groupData);
+            $adminGroup->save();
 
             //只提取当前登录管理员也拥有的权限,添加AdminGroupDetails权限数据
             $role = Arr::wrap(json_decode($inputDatas['role'], true));
             $role = array_intersect($role, $contll->adminAccessGroupDetail);
-            $data['group_id'] = $objPartnerAdminGroup->id;
+            $data['group_id'] = $adminGroup->id;
             foreach ($role as $roleId) {
                 $data['menu_id'] = $roleId;
                 $groupDetailEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();

@@ -2,7 +2,7 @@
 
 //菜单相关
 Route::group(['prefix' => 'menu'], static function () {
-    $namePrefix = 'headquarters-api.menu.';
+    $namePrefix = 'merchant-api.menu.';
     $controller = 'MenuController@';
 
     //获取当前商户的菜单

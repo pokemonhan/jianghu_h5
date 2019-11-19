@@ -33,7 +33,7 @@ class MenuController extends BackEndApiMainController
      */
     public function currentAdminMenu()
     {
-        return msgOut(true, $this->partnerMenulists);
+        return msgOut(true, $this->menuLists);
     }
 
     /**

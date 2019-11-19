@@ -7,7 +7,7 @@ use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class for partner admin group destroy action.
+ * Class for destroy action.
  */
 class DestroyAction
 {

@@ -23,7 +23,7 @@ class LogoutAction
      */
     public function execute(BackEndApiMainController $contll, Request $request): JsonResponse
     {
-        $throtleKey = Str::lower($contll->partnerAdmin->email . '|' . $request->ip());
+        $throtleKey = Str::lower($contll->currentAdmin->email . '|' . $request->ip());
         if ($request->hasSession()) {
             $request->session()->invalidate();
         }

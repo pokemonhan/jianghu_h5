@@ -13,7 +13,7 @@ class SystemPlatform extends BaseModel
     /**
      * @return HasMany
      */
-    public function partnerAdminUsers(): HasMany
+    public function adminUsers(): HasMany
     {
         return $this->hasMany(BackendAdminUser::class, 'platform_id', 'id');
     }

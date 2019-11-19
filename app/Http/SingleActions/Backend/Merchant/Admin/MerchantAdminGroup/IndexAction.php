@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
@@ -8,7 +8,7 @@ use Illuminate\Http\JsonResponse;
 use App\ModelFilters\Admin\MerchantAdminUserFilter;
 
 /**
- * Class for partner admin group index action.
+ * Class for index action.
  */
 class IndexAction
 {
