@@ -6,7 +6,7 @@ use App\Models\Admin\BackendAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class for partner admin group index action.
+ * Class for index action.
  */
 class IndexAction
 {

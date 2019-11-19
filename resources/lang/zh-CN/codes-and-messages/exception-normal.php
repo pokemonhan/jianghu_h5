@@ -9,7 +9,7 @@
 return [
     //MenuController
     '300000' => '编辑保存有误',
-    //PartnerAdminGroupController
+    //BackendAdminGroupController
     '300100' => '角色组不存在',
     '300101' => '超级管理员组不可修改',
     '300102' => '角色组已存在',

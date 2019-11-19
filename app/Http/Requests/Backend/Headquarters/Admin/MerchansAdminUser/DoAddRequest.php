@@ -5,7 +5,7 @@ namespace App\Http\Requests\Backend\Headquarters\Admin\MerchansAdminUser;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for partner admin group create request.
+ * Class for do add request.
  */
 class DoAddRequest extends BaseFormRequest
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
@@ -11,7 +11,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for partner admin group edit action.
+ * Class for edit action.
  */
 class EditAction
 {

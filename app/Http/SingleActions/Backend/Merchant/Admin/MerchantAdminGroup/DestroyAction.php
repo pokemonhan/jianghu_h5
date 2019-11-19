@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup;
+namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Models\Admin\MerchantAdminAccessGroup;
+use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class for partner admin group specific group users action.
+ * Class for destroy action.
  */
-class SpecificGroupUsersAction
+class DestroyAction
 {
     /**
      * @var MerchantAdminAccessGroup
@@ -29,12 +30,19 @@ class SpecificGroupUsersAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $accessGroupEloq = $this->model::find($inputDatas['id']);
-        if ($accessGroupEloq !== null) {
-            $data = $accessGroupEloq->adminUsers->toArray();
-            return msgOut(true, $data);
-        } else {
+        $id = $inputDatas['id'];
+        $adminGroupELoq = $this->model->where([
+            ['id', $id],
+            ['group_name', $inputDatas['group_name']],
+        ])->first();
+        if ($adminGroupELoq === null) {
             return msgOut(false, [], '300100');
+        }
+        try {
+            $adminGroupELoq->delete();
+            return msgOut(true);
+        } catch (Exception $e) {
+            return msgOut(false, [], $e->getCode(), $e->getMessage());
         }
     }
 }

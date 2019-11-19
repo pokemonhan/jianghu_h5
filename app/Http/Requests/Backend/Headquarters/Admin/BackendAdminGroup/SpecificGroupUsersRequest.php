@@ -5,7 +5,7 @@ namespace App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for partner admin group specific group users request.
+ * Class for specific group users request.
  */
 class SpecificGroupUsersRequest extends BaseFormRequest
 {

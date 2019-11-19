@@ -3,15 +3,15 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Admin;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\CreateRequest;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\DestroyRequest;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\EditRequest;
-use App\Http\Requests\Backend\Merchant\Admin\PartnerAdminGroup\SpecificGroupUsersRequest;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\CreateAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\DestroyAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\EditAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\IndexAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\PartnerAdminGroup\SpecificGroupUsersAction;
+use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\CreateRequest;
+use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\DestroyRequest;
+use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\EditRequest;
+use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\SpecificGroupUsersRequest;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup\CreateAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup\DestroyAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup\EditAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup\IndexAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup\SpecificGroupUsersAction;
 use Illuminate\Http\JsonResponse;
 
 /**

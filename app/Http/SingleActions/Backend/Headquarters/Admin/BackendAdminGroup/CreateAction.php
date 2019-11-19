@@ -12,7 +12,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for partner admin group create action.
+ * Class for create action.
  */
 class CreateAction
 {
@@ -44,12 +44,12 @@ class CreateAction
             $role = array_intersect($contll->adminAccessGroupDetail, $role);
 
             //添加AdminGroup数据
-            $objPartnerAdminGroup = $this->model;
-            $objPartnerAdminGroup->fill(['group_name' => $inputDatas['group_name']]);
-            $objPartnerAdminGroup->save();
+            $objAdminGroup = $this->model;
+            $objAdminGroup->fill(['group_name' => $inputDatas['group_name']]);
+            $objAdminGroup->save();
 
             //添加AdminGroupDetails数据
-            $data['group_id'] = $objPartnerAdminGroup->id;
+            $data['group_id'] = $objAdminGroup->id;
             foreach ($role as $roleId) {
                 $data['menu_id'] = $roleId;
                 $groupDetailEloq = new BackendAdminAccessGroupDetail();
@@ -57,8 +57,8 @@ class CreateAction
                 $groupDetailEloq->save();
             }
 
-            $partnerMenuObj = new BackendSystemMenu();
-            $partnerMenuObj->createMenuDatas($objPartnerAdminGroup->id, $role);
+            $menuEloq = new BackendSystemMenu();
+            $menuEloq->createMenuDatas($objAdminGroup->id, $role);
 
             DB::commit();
             return msgOut(true, $data);
