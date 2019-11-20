@@ -17,7 +17,7 @@ class AddDoAction extends BaseAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
-        if (!is_null($inputDatas['whitelist_ips'])) {
+        if (isset($inputDatas['whitelist_ips'])) {
             $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
         }
         $this->model->fill($inputDatas);

@@ -18,7 +18,7 @@ class EditDoAction extends BaseAction
     public function execute(array $inputDatas) :JsonResponse
     {
         $model = $this->model->find($inputDatas['id']);
-        if (!is_null($inputDatas['whitelist_ips'])) {
+        if (isset($inputDatas['whitelist_ips'])) {
             $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
         }
         $model->fill($inputDatas);
