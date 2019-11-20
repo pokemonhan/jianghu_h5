@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceVendor;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class AddDoAction
@@ -12,16 +11,18 @@ use Illuminate\Http\Request;
 class AddDoAction extends BaseAction
 {
     /**
-     * @param Request $request Request.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request):JsonResponse
+    public function execute(array $inputDatas):JsonResponse
     {
-        $inputDatas = $request->all();
-        $this->model->name = $inputDatas['name'];
-        $this->model->sign = $inputDatas['sign'];
-        $this->model->whitelist_ips = json_encode(json_decode($inputDatas['whitelist_ips'], true));
+        $this->model->fill($inputDatas, static function () use ($inputDatas) {
+            if (!is_null($inputDatas['whitelist_ips'])) {
+                $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
+            }
+            return $inputDatas;
+        });
         if ($this->model->save()) {
             return msgOut(true, [], '200', '添加成功');
         }

@@ -31,6 +31,7 @@ class AddDoRequest extends FormRequest
             return [
                 'name' => 'required|unique:system_finance_vendors,name',
                 'sign' => ['required', 'unique:system_finance_vendors,sign', 'regex:/\w+/'],
+                'whitelist_ips' => 'array|nullable',
             ];
         }
         return [];
@@ -47,6 +48,7 @@ class AddDoRequest extends FormRequest
             'sign.required' => '请填写厂商标记',
             'sign.unique' => '厂商标记已存在',
             'sign.regex' => '厂商标记只能包含数字,字母,下划线',
+            'whitelist_ips.array' => 'ip白名单为数组格式',
         ];
     }
 }

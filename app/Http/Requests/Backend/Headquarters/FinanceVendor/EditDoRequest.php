@@ -32,6 +32,7 @@ class EditDoRequest extends FormRequest
                 'id' => 'required|exists:system_finance_vendors,id',
                 'name' => 'required|unique:system_finance_vendors,name,'.$this->input('id'),
                 'sign' => ['required', 'unique:system_finance_vendors,sign,'.$this->input('id'), 'regex:/\w+/'],
+                'whitelist_ips' => 'array|nullable',
             ];
         }
         return [];
@@ -50,6 +51,7 @@ class EditDoRequest extends FormRequest
             'sign.required' => '请填写厂商标记',
             'sign.unique' => '厂商标记已存在',
             'sign.regex' => '厂商标记只能包含数字,字母,下划线',
+            'whitelist_ips.array' => 'ip白名单为数组格式',
         ];
     }
 }

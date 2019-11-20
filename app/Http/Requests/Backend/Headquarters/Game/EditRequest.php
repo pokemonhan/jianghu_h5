@@ -46,6 +46,12 @@ class EditRequest extends FormRequest
                 'get_station_order_url' => 'required|url',
                 'test_get_station_order_url' => 'url',
                 'status' => 'required|in:0,1',
+                'app_id' => 'string|nullable',
+                'authorization_code' => 'string|nullable',
+                'merchant_code' => 'string|nullable',
+                'merchant_secret' => 'string|nullable',
+                'public_key' => 'string|nullable',
+                'private_key' => 'string|nullable',
             ];
         }
         return [];

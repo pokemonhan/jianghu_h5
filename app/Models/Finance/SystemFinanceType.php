@@ -2,13 +2,13 @@
 
 namespace App\Models\Finance;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
 /**
  * Class SystemFinanceType
  * @package App\Models\Finance
  */
-class SystemFinanceType extends Model
+class SystemFinanceType extends BaseModel
 {
     /**
      * @var array

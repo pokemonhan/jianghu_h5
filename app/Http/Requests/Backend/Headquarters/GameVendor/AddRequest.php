@@ -31,6 +31,7 @@ class AddRequest extends FormRequest
             return [
                 'name' => 'required|unique:games_vendors,name',
                 'sign' => ['required','regex:/\w+/','unique:games_vendors,sign'],
+                'whitelist_ips' => 'array|nullable',
             ];
         }
         return [];
@@ -47,6 +48,7 @@ class AddRequest extends FormRequest
             'sign.required' => '请填写游戏厂商标记',
             'sign.regex' => '游戏厂商标记只能包含数字,字母,下划线',
             'sign.unique' => '游戏厂商标记已存在',
+            'whitelist_ips.array' => 'ip白名单为数组格式',
         ];
     }
 }

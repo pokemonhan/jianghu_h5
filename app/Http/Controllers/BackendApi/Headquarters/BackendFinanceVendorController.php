@@ -26,7 +26,8 @@ class BackendFinanceVendorController extends Controller
      */
     public function addDo(AddDoAction $action, AddDoRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -46,7 +47,8 @@ class BackendFinanceVendorController extends Controller
      */
     public function editDo(EditDoAction $action, EditDoRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
     /**
      * @param DelDoAction  $action  Action.
@@ -56,6 +58,7 @@ class BackendFinanceVendorController extends Controller
      */
     public function delDo(DelDoAction $action, DelDoRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

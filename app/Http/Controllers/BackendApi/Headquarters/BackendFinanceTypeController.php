@@ -25,7 +25,8 @@ class BackendFinanceTypeController extends BackEndApiMainController
      */
     public function addDo(AddDoAction $action, AddDoRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -46,7 +47,8 @@ class BackendFinanceTypeController extends BackEndApiMainController
      */
     public function editDo(EditDoAction $action, EditDoRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
     /**
      * @param DelDoAction  $action  Action.
@@ -56,6 +58,7 @@ class BackendFinanceTypeController extends BackEndApiMainController
      */
     public function delDo(DelDoAction $action, DelDoRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

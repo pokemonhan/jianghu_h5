@@ -25,7 +25,8 @@ class BackendGameController extends BackEndApiMainController
      */
     public function addDo(AddDoAction $action, AddRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -36,7 +37,8 @@ class BackendGameController extends BackEndApiMainController
      */
     public function editDo(EditDoAction $action, EditRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -57,6 +59,7 @@ class BackendGameController extends BackEndApiMainController
      */
     public function delDo(DelDoAction $action, DelRequest $request) :JsonResponse
     {
-        return $action->execute($request);
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class EditDoAction
@@ -12,16 +11,14 @@ use Illuminate\Http\Request;
 class EditDoAction extends BaseAction
 {
     /**
-     * @param Request $request Request.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request) :JsonResponse
+    public function execute(array $inputDatas) :JsonResponse
     {
-        $inputDatas = $request->all();
         $model = $this->model->find($inputDatas['id']);
-        $model->name = $inputDatas['name'];
-        $model->sign = $inputDatas['sign'];
+        $model->fill($inputDatas);
         if ($model->save()) {
             return msgOut(true, [], '200', '修改成功');
         }
