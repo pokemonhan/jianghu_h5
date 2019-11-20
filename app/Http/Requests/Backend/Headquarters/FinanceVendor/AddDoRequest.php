@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\Backend\Headquarters\FinanceVendor;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class AddDoRequest
  * @package App\Http\Requests\Backend\Headquarters\FinanceVendor
  */
-class AddDoRequest extends FormRequest
+class AddDoRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
      */
-    public function authorize()
+    public function authorize():bool
     {
         return true;
     }
@@ -25,13 +25,14 @@ class AddDoRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         if ($this->isMethod('post')) {
             return [
                 'name' => 'required|unique:system_finance_vendors,name',
                 'sign' => ['required', 'unique:system_finance_vendors,sign', 'regex:/\w+/'],
-                'whitelist_ips' => 'array|nullable',
+                'whitelist_ips' => 'array',
+                'whitelist_ips.*' => 'ip',
             ];
         }
         return [];
@@ -40,7 +41,7 @@ class AddDoRequest extends FormRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages():array
     {
         return [
             'name.required' => '请填写厂商名称',
@@ -49,6 +50,16 @@ class AddDoRequest extends FormRequest
             'sign.unique' => '厂商标记已存在',
             'sign.regex' => '厂商标记只能包含数字,字母,下划线',
             'whitelist_ips.array' => 'ip白名单为数组格式',
+            'whitelist_ips.*.ip' => 'ip格式不正确',
+        ];
+    }
+    /**
+     * @return array
+     */
+    public function filters(): array
+    {
+        return [
+            'whitelist_ips' => 'cast:array',
         ];
     }
 }

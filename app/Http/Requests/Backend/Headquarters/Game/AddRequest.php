@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\Backend\Headquarters\Game;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class AddRequest
  * @package App\Http\Requests\Backend\Headquarters\Game
  */
-class AddRequest extends FormRequest
+class AddRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
      */
-    public function authorize()
+    public function authorize():bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class AddRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         if ($this->isMethod('post')) {
             return [
@@ -46,11 +46,11 @@ class AddRequest extends FormRequest
                 'test_get_station_order_url' => 'url',
                 'status' => 'required|in:0,1',
                 'app_id' => 'string|nullable',
-                'authorization_code' => 'string|nullable',
-                'merchant_code' => 'string|nullable',
-                'merchant_secret' => 'string|nullable',
-                'public_key' => 'string|nullable',
-                'private_key' => 'string|nullable',
+                'authorization_code' => 'string',
+                'merchant_code' => 'string',
+                'merchant_secret' => 'string',
+                'public_key' => 'string',
+                'private_key' => 'string',
             ];
         }
         return [];
@@ -59,7 +59,7 @@ class AddRequest extends FormRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages():array
     {
         return [
             'type_id.required' => '请选择所属分类',

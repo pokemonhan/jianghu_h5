@@ -17,12 +17,10 @@ class AddDoAction extends BaseAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
-        $this->model->fill($inputDatas, static function () use ($inputDatas) {
-            if (!is_null($inputDatas['whitelist_ips'])) {
-                $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
-            }
-            return $inputDatas;
-        });
+        if (!is_null($inputDatas['whitelist_ips'])) {
+            $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
+        }
+        $this->model->fill($inputDatas);
         if ($this->model->save()) {
             return msgOut(true, [], '200', '添加成功');
         }

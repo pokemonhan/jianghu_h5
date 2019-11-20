@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests\Backend\Headquarters\GameVendor;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class AddRequest
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
-class AddRequest extends FormRequest
+class AddRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,7 +31,8 @@ class AddRequest extends FormRequest
             return [
                 'name' => 'required|unique:games_vendors,name',
                 'sign' => ['required','regex:/\w+/','unique:games_vendors,sign'],
-                'whitelist_ips' => 'array|nullable',
+                'whitelist_ips' => 'array',
+                'whitelist_ips.*' => 'ip',
             ];
         }
         return [];
@@ -49,6 +50,17 @@ class AddRequest extends FormRequest
             'sign.regex' => '游戏厂商标记只能包含数字,字母,下划线',
             'sign.unique' => '游戏厂商标记已存在',
             'whitelist_ips.array' => 'ip白名单为数组格式',
+            'whitelist_ips.*.ip' => 'ip格式不正确',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function filters(): array
+    {
+        return [
+            'whitelist_ips' => 'cast:array',
         ];
     }
 }

@@ -18,12 +18,10 @@ class EditDoAction extends BaseAction
     public function execute(array $inputDatas) :JsonResponse
     {
         $model = $this->model->find($inputDatas['id']);
-        $model->fill($inputDatas, static function () use ($inputDatas) {
-            if (!is_null($inputDatas['whitelist_ips'])) {
-                $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
-            }
-            return $inputDatas;
-        });
+        if (!is_null($inputDatas['whitelist_ips'])) {
+            $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
+        }
+        $model->fill($inputDatas);
         if ($model->save()) {
             return msgOut(true, [], '200', '修改成功');
         }

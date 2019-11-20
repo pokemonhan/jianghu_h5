@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\Backend\Headquarters\GameVendor;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class DelRequest
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
-class DelRequest extends FormRequest
+class DelRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
      */
-    public function authorize()
+    public function authorize():bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class DelRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         if ($this->isMethod('post')) {
             return [
@@ -38,7 +38,7 @@ class DelRequest extends FormRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages():array
     {
         return [
             'id.required' => 'ID不存在',

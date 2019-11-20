@@ -2,13 +2,13 @@
 
 namespace App\Http\Requests\Backend\Headquarters\GameVendor;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class EditRequest
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
-class EditRequest extends FormRequest
+class EditRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,8 @@ class EditRequest extends FormRequest
                 'id' => 'required|exists:games_vendors,id',
                 'name' => 'required|unique:games_vendors,name,'.$this->input('id'),
                 'sign' => ['required','regex:/\w+/','unique:games_vendors,sign,'.$this->input('id')],
-                'whitelist_ips' => 'array|nullable',
+                'whitelist_ips' => 'array',
+                'whitelist_ips.*' => 'ip',
             ];
         }
     }
@@ -49,6 +50,17 @@ class EditRequest extends FormRequest
             'sign.regex' => '游戏厂商标记只能包含数字,字母,下划线',
             'sign.unique' => '游戏厂商标记已存在',
             'whitelist_ips.array' => 'ip白名单为数组格式',
+            'whitelist_ips.*.ip' => 'ip格式不正确',
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function filters(): array
+    {
+        return [
+            'whitelist_ips' => 'cast:array',
         ];
     }
 }

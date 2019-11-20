@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\Backend\Headquarters\FinanceType;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class AddDoRequest
  * @package App\Http\Requests\Backend\Headquarters\FinanceType
  */
-class AddDoRequest extends FormRequest
+class AddDoRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
      */
-    public function authorize()
+    public function authorize():bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class AddDoRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules() :array
     {
         if ($this->isMethod('post')) {
             return [
@@ -41,7 +41,7 @@ class AddDoRequest extends FormRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages():array
     {
         return [
             'name.required' => '请填写分类名称',

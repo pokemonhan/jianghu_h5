@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\Backend\Headquarters\Game;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class EditRequest
  * @package App\Http\Requests\Backend\Headquarters\Game
  */
-class EditRequest extends FormRequest
+class EditRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
      */
-    public function authorize()
+    public function authorize():bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class EditRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         if ($this->isMethod('post')) {
             return [
@@ -60,7 +60,7 @@ class EditRequest extends FormRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages():array
     {
         return [
             'id.required' => 'ID不存在',
