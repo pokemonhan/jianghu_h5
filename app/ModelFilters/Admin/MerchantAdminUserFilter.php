@@ -1,4 +1,5 @@
-<?php namespace App\ModelFilters\Admin;
+<?php
+namespace App\ModelFilters\Admin;
 
 use EloquentFilter\ModelFilter;
 
@@ -16,22 +17,23 @@ class MerchantAdminUserFilter extends ModelFilter
     public $relations = [];
 
     /**
-     * @param string $platformSign PlatformSign.
+     *
+     * @param string $platform 平台标识.
      *
      * @return \App\Models\Admin\MerchantAdminUser
      */
-    public function platform(string $platformSign)
+    public function platform(string $platform)
     {
-        return $this->where('platform_sign', $platformSign);
+        return $this->where('platform_sign', $platform);
     }
 
     /**
-     * @param string $groupName GroupName.
+     * @param string $string 搜索的字符串.
      *
      * @return \App\Models\Admin\MerchantAdminUser
      */
-    public function groupName(string $groupName)
+    public function searchNameEmail(string $string)
     {
-        return $this->where('group_name', $groupName);
+        return $this->where('name', 'like', '%'.$string.'%')->orWhere('email', 'like', '%'.$string.'%');
     }
 }

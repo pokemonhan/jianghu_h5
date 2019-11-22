@@ -3,14 +3,13 @@
 namespace App\Models\Admin;
 
 use App\Models\SystemPlatform;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
+use App\Models\BaseAuthModel;
 
 /**
  * Class for backend admin user.
  */
-class BackendAdminUser extends Authenticatable implements JWTSubject
+class BackendAdminUser extends BaseAuthModel
 {
     use Notifiable;
 
