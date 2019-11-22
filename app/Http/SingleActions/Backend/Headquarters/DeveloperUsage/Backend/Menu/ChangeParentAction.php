@@ -26,6 +26,7 @@ class ChangeParentAction
     /**
      * @param array $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
@@ -35,7 +36,7 @@ class ChangeParentAction
             $itemProcess = $this->model->changeParent($parseDatas);
             return msgOut(true, $itemProcess);
         } else {
-            return msgOut(false);
+            throw new \Exception('300001');
         }
     }
 }

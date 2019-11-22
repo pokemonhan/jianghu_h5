@@ -30,16 +30,17 @@ class UpdateAdminGroupAction
      * @param MerchantApiMainController $contll     Controller.
      * @param array                     $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
     {
         //验证管理员
         $AdminUserEloq = $this->model->find($inputDatas['id']);
         if ($AdminUserEloq === null) {
-            return msgOut(false, [], '300701');
+            throw new \Exception('300701');
         }
         if ($AdminUserEloq->accessGroup->is_super === 1) {
-            return msgOut(false, [], '300702');
+            throw new \Exception('300702');
         }
         //更改的权限组是否合法
         $filterArr = [
@@ -48,7 +49,7 @@ class UpdateAdminGroupAction
         ];
         $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)->pluck('id')->toArray();
         if (!in_array($inputDatas['group_id'], $platformAdminGroupId)) {
-            return msgOut(false, [], '300700');
+            throw new \Exception('300700');
         }
         //更改组
         $AdminUserEloq->group_id = $inputDatas['group_id'];

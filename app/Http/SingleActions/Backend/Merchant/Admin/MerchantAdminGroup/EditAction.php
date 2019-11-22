@@ -32,13 +32,14 @@ class EditAction
      * @param MerchantApiMainController $contll     Controller.
      * @param array                     $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
     {
         $adminGroupELoq = $this->model::find($inputDatas['id']);
         if ($adminGroupELoq !== null) {
             if ($adminGroupELoq->is_super === 1) {
-                return msgOut(false, [], '300101');
+                throw new \Exception('300101');
             }
             DB::beginTransaction();
             try {
@@ -67,7 +68,7 @@ class EditAction
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
         } else {
-            return msgOut(false, [], '300100');
+            throw new \Exception('300100');
         }
     }
 }

@@ -26,6 +26,7 @@ class EditAction
     /**
      * @param array $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
@@ -50,10 +51,10 @@ class EditAction
             if ($menuEloq->save()) {
                 return msgOut(true, $data);
             } else {
-                return msgOut(false, [], '300000');
+                throw new \Exception('300000');
             }
         } else {
-            return msgOut(false);
+            throw new \Exception('300000');
         }
     }
 }

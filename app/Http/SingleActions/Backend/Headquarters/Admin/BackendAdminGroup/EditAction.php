@@ -32,12 +32,13 @@ class EditAction
      * @param BackEndApiMainController $contll     Controller.
      * @param array                    $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
         if ((int) $id === 1) {
-            return msgOut(false, [], '300101');
+            throw new \Exception('300101');
         }
 
         $datas = $this->model::find($id);
@@ -69,7 +70,7 @@ class EditAction
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
         } else {
-            return msgOut(false, [], '300100');
+            throw new \Exception('300100');
         }
     }
 }

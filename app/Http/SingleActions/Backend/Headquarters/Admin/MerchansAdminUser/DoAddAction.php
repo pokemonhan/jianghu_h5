@@ -21,6 +21,7 @@ class DoAddAction
      * @param BackEndApiMainController $contll     Controller.
      * @param array                    $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
@@ -69,7 +70,7 @@ class DoAddAction
             return msgOut(true, ['name' => $inputDatas['username']]);
         } catch (Exception $e) {
             DB::rollback();
-            return msgOut(false);
+            throw new \Exception('300705');
         }
     }
 }

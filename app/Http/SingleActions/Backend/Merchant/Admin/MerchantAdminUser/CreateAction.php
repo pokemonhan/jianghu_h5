@@ -18,6 +18,7 @@ class CreateAction
      * @param MerchantApiMainController $contll     Controller.
      * @param array                     $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
     {
@@ -28,7 +29,7 @@ class CreateAction
         ];
         $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)->pluck('id')->toArray();
         if (!in_array($inputDatas['group_id'], $platformAdminGroupId)) {
-            return msgOut(false, [], '300700');
+            throw new \Exception('300700');
         }
         //生成用户数据
         $inputDatas['password'] = bcrypt($inputDatas['password']);
