@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Models\Admin\BackendAdminUser;
+use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -11,10 +11,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class SystemPlatform extends BaseModel
 {
     /**
+     * @var array
+     */
+    protected $guarded = ['id'];
+    
+    /**
      * @return HasMany
      */
     public function adminUsers(): HasMany
     {
-        return $this->hasMany(BackendAdminUser::class, 'platform_id', 'id');
+        return $this->hasMany(MerchantAdminUser::class, 'platform_sign', 'sign');
     }
 }

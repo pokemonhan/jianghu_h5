@@ -5,7 +5,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
-use App\ModelFilters\Admin\MerchantAdminUserFilter;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
@@ -43,7 +43,7 @@ class CreateAction
             'platform' => $platformSign,
             'groupName' => $inputDatas['group_name'],
         ];
-        $nameIsExists = $this->model::filter($filterArr, MerchantAdminUserFilter::class)->exists();
+        $nameIsExists = $this->model::filter($filterArr, MerchantAdminAccessGroupFilter::class)->exists();
         if ($nameIsExists === true) {
             return msgOut(false, [], '300102');
         }

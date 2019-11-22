@@ -41,7 +41,7 @@ class CreateAction
         try {
             //只提取当前登录管理员也拥有的权限
             $role = Arr::wrap(json_decode($inputDatas['role'], true));
-            $role = array_intersect($contll->adminAccessGroupDetail, $role);
+            $role = array_intersect($role, $contll->adminAccessGroupDetail);
 
             //添加AdminGroup数据
             $objAdminGroup = $this->model;

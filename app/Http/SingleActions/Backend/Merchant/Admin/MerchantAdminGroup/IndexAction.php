@@ -5,7 +5,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
-use App\ModelFilters\Admin\MerchantAdminUserFilter;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 
 /**
  * Class for index action.
@@ -32,7 +32,7 @@ class IndexAction
     public function execute(MerchantApiMainController $contll): JsonResponse
     {
         $platform = ['platform' => $contll->currentPlatformEloq->sign];
-        $data = $this->model::filter($platform, MerchantAdminUserFilter::class)->get()->toArray();
+        $data = $this->model::filter($platform, MerchantAdminAccessGroupFilter::class)->get()->toArray();
         
         return msgOut(true, $data);
     }
