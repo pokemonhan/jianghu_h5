@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\GameType;
+namespace App\Http\SingleActions\Backend\Headquarters\FinanceVendor;
 
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class EditDoAction
- * @package App\Http\SingleActions\Backend\Headquarters\GameType
+ * @package App\Http\SingleActions\Backend\Headquarters\FinanceVendor
  */
 class EditDoAction extends BaseAction
 {
@@ -18,10 +18,13 @@ class EditDoAction extends BaseAction
     public function execute(array $inputDatas) :JsonResponse
     {
         $model = $this->model->find($inputDatas['id']);
+        if (isset($inputDatas['whitelist_ips'])) {
+            $inputDatas['whitelist_ips'] = json_encode($inputDatas['whitelist_ips']);
+        }
         $model->fill($inputDatas);
         if ($model->save()) {
             return msgOut(true, [], '200', '修改成功');
         }
-        throw new \Exception('300403');
+        throw new \Exception('300601');
     }
 }

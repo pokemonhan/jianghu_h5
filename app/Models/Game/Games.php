@@ -5,10 +5,10 @@ namespace App\Models\Game;
 use App\Models\BaseModel;
 
 /**
- * Class GamesType
+ * Class Games
  * @package App\Models\Game
  */
-class GamesType extends BaseModel
+class Games extends BaseModel
 {
     /**
      * @var array

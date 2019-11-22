@@ -2,20 +2,20 @@
 
 namespace App\Http\Requests\Backend\Headquarters\GameType;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class AddValidate
+ * Class AddRequest
  * @package App\Http\Requests\Backend\Headquarters\GameType
  */
-class AddValidate extends FormRequest
+class AddRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
      */
-    public function authorize()
+    public function authorize():bool
     {
         return true;
     }
@@ -25,7 +25,7 @@ class AddValidate extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules():array
     {
         if ($this->isMethod('post')) {
             return [
@@ -39,7 +39,7 @@ class AddValidate extends FormRequest
     /**
      * @return array
      */
-    public function messages()
+    public function messages():array
     {
         return [
             'name.required' => '请填写游戏种类名称',

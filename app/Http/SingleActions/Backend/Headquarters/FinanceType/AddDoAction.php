@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\GameType;
+namespace App\Http\SingleActions\Backend\Headquarters\FinanceType;
 
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class AddDoAction
- * @package App\Http\SingleActions\Backend\Headquarters\GameType
+ * @package App\Http\SingleActions\Backend\Headquarters\FinanceType
  */
 class AddDoAction extends BaseAction
 {
     /**
      * @param array $inputDatas InputDatas.
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(array $inputDatas) :JsonResponse
@@ -21,6 +21,6 @@ class AddDoAction extends BaseAction
         if ($this->model->save()) {
             return msgOut(true, [], '200', '添加成功');
         }
-        throw new \Exception('300402');
+        throw new \Exception('300500');
     }
 }

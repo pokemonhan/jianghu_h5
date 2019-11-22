@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\GameType;
+namespace App\Http\SingleActions\Backend\Headquarters\GameVendor;
 
 use App\Models\Game\Games;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class DelDoAction
- * @package App\Http\SingleActions\Backend\Headquarters\GameType
+ * @package App\Http\SingleActions\Backend\Headquarters\GameVendor
  */
 class DelDoAction extends BaseAction
 {
@@ -19,11 +19,11 @@ class DelDoAction extends BaseAction
     public function execute(array $inputDatas) :JsonResponse
     {
         if (!Games::where('vendor_id', $inputDatas['id'])->get()->isEmpty()) {
-            throw new \Exception('300400');
+            throw new \Exception('300300');
         }
         if ($this->model->where('id', $inputDatas['id'])->delete()) {
             return msgOut(true, [], '200', '删除成功');
         }
-        throw new \Exception('300401');
+        throw new \Exception('300301');
     }
 }

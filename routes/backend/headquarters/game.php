@@ -4,8 +4,28 @@
 Route::group(['prefix' => 'game-type'], static function () {
     $namePrefix = 'headquarters-api.game-type.';
     $controller = 'BackendGameTypeController@';
-    Route::match(['post','options'], 'add-do', ['as' => $namePrefix.'add-to', 'uses' => $controller.'addDo']);
-    Route::match(['post','options'], 'edit-do', ['as' => $namePrefix.'edit-to', 'uses' => $controller.'editDo']);
-    Route::match(['get','options'], 'index-do', ['as' => $namePrefix.'index-to', 'uses' => $controller.'indexDo']);
-    Route::match(['post','options'], 'del-do', ['as' => $namePrefix.'del-to', 'uses' => $controller.'delDo']);
+    Route::match(['post','options'], 'add-do', ['as' => $namePrefix.'add-do', 'uses' => $controller.'addDo']);
+    Route::match(['post','options'], 'edit-do', ['as' => $namePrefix.'edit-do', 'uses' => $controller.'editDo']);
+    Route::match(['get','options'], 'index-do', ['as' => $namePrefix.'index-do', 'uses' => $controller.'indexDo']);
+    Route::match(['post','options'], 'del-do', ['as' => $namePrefix.'del-do', 'uses' => $controller.'delDo']);
+});
+
+//游戏厂商
+Route::group(['prefix' => 'game-vendor'], static function () {
+    $namePrefix = 'headquarters-api.game-vendor.';
+    $controller = 'BackendGameVendorController@';
+    Route::match(['post','options'], 'add-do', ['as' => $namePrefix.'add-do', 'uses' => $controller.'addDo']);
+    Route::match(['post','options'], 'edit-do', ['as' => $namePrefix.'edit-do', 'uses' => $controller.'editDo']);
+    Route::match(['get','options'], 'index-do', ['as' => $namePrefix.'index-do', 'uses' => $controller.'indexDo']);
+    Route::match(['post','options'], 'del-do', ['as' => $namePrefix.'del-do', 'uses' => $controller.'delDo']);
+});
+
+//游戏管理
+Route::group(['prefix' => 'game'], static function () {
+    $namePrefix = 'headquarters-api.game.';
+    $controller = 'BackendGameController@';
+    Route::match(['post','options'], 'add-do', ['as' => $namePrefix.'add-do', 'uses' => $controller.'addDo']);
+    Route::match(['post','options'], 'edit-do', ['as' => $namePrefix.'edit-do', 'uses' => $controller.'editDo']);
+    Route::match(['get','options'], 'index-do', ['as' => $namePrefix.'index-do', 'uses' => $controller.'indexDo']);
+    Route::match(['post','options'], 'del-do', ['as' => $namePrefix.'del-do', 'uses' => $controller.'delDo']);
 });
