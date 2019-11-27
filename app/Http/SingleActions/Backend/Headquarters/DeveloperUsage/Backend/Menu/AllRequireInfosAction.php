@@ -44,9 +44,9 @@ class AllRequireInfosAction
     private function getRouteInfo(array $routeCollection, array $inputDatas)
     {
         $type = [
-            1 => 'backend-api',
-            2 => 'web-api',
-            3 => 'mobile-api',
+            1 => 'headquarters-api',
+            2 => 'merchant-api',
+            3 => 'app-api',
         ];
         $routeEndKey = $type[$inputDatas['type']] ?? $type[1];
 //      firstlevelmenus = BackendSystemMenu::getFirstLevelList();
