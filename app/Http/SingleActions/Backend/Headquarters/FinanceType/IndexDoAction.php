@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceType;
 
+use App\Models\Finance\SystemFinanceType;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,14 +12,17 @@ use Illuminate\Http\JsonResponse;
 class IndexDoAction extends BaseAction
 {
     /**
+     * @var object $model
+     */
+    protected $model;
+    /**
      * @param array $inputDatas InputDatas.
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(array $inputDatas) :JsonResponse
     {
-//        $outputDatas = $this->model::filter($inputDatas, SystemFinanceTypeFilter::class)->get();
-//        return msgOut(true, $outputDatas, '200', '获取成功');
-        return msgOut(true, $inputDatas);
+        $outputDatas = $this->model::filter($inputDatas, SystemFinanceType::class)->get();
+        return msgOut(true, $outputDatas, '200', '获取成功');
     }
 }
