@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
+namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu;
 
-use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
+use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
@@ -12,16 +12,16 @@ use Illuminate\Http\JsonResponse;
 class DeleteAction
 {
     /**
-     * @var BackendSystemMenu
+     * @var MerchantSystemMenu
      */
     protected $model;
 
     /**
-     * @param BackendSystemMenu $backendSystemMenu Model.
+     * @param MerchantSystemMenu $merchantSystemMenu Model.
      */
-    public function __construct(BackendSystemMenu $backendSystemMenu)
+    public function __construct(MerchantSystemMenu $merchantSystemMenu)
     {
-        $this->model = $backendSystemMenu;
+        $this->model = $merchantSystemMenu;
     }
 
     /**

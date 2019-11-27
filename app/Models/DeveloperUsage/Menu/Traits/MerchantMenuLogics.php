@@ -2,7 +2,7 @@
 
 namespace App\Models\DeveloperUsage\Menu\Traits;
 
-use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
+use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Cache;
  * Date: 5/23/2019
  * Time: 10:02 PM
  */
-trait MenuLogics
+trait MerchantMenuLogics
 {
     /**
      * @return array
      */
     public function forStar(): array
     {
-        $redisKey = '1';
+        $redisKey = '*';
         if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
             $parent_menu = Cache::tags([$this->redisFirstTag])->get($redisKey);
         } else {
@@ -51,8 +51,9 @@ trait MenuLogics
     public function createMenuDatas(string $redisKey, array $adminAccessGroupDetail = []): array
     {
         $menuForFE = [];
-        if ($redisKey === 1) {
+        if ($redisKey === '*') {
             $menuLists = self::getAllFirstLevelList();
+            $adminAccessGroupDetail = $this->pluck('id')->toArray();
         } else {
             $menuLists = self::getFirstLevelList($adminAccessGroupDetail);
         }
@@ -68,13 +69,13 @@ trait MenuLogics
 
     /**
      * Gets menu childs.
-     * @param array             $adminAccessGroupDetail 管理员组权限.
-     * @param BackendSystemMenu $firstMenu              BackendSystemMenu.
-     * @param array             $menuForFE              整理后的管理员组权限.
+     * @param array              $adminAccessGroupDetail 管理员组权限.
+     * @param MerchantSystemMenu $firstMenu              BackendSystemMenu.
+     * @param array              $menuForFE              整理后的管理员组权限.
      *
      * @return array
      */
-    private function getMenuChilds(array $adminAccessGroupDetail, BackendSystemMenu $firstMenu, array $menuForFE)
+    private function getMenuChilds(array $adminAccessGroupDetail, MerchantSystemMenu $firstMenu, array $menuForFE)
     {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
         foreach ($firstChilds as $secondMenu) {
@@ -126,15 +127,17 @@ trait MenuLogics
         $itemProcess = [];
         foreach ($parseDatas as $value) {
             $menuEloq = self::find($value['currentId']);
-            $menuEloq->pid = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
-            $menuEloq->sort = $value['currentSort'];
-            if ($menuEloq->save()) {
-                $pass['pass'] = $value['currentText'];
-                $itemProcess[] = $pass;
-                $atLeastOne = true;
-            } else {
-                $fail['fail'] = $value['currentText'];
-                $itemProcess[] = $fail;
+            if ($menuEloq !== null) {
+                $menuEloq->pid = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
+                $menuEloq->sort = $value['currentSort'];
+                if ($menuEloq->save()) {
+                    $pass['pass'] = $value['currentText'];
+                    $itemProcess[] = $pass;
+                    $atLeastOne = true;
+                } else {
+                    $fail['fail'] = $value['currentText'];
+                    $itemProcess[] = $fail;
+                }
             }
         }
         if ($atLeastOne === true && isset($menuEloq)) {

@@ -16,7 +16,7 @@ if (!function_exists('configure')) {
      */
     function configure(?string $sysKey = null, ?string $default = null)
     {
-        if (is_null($sysKey)) {
+        if (!isset($sysKey)) {
             return app('Configure');
         } else {
             return app('Configure')->get($sysKey, $default);

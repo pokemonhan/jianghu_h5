@@ -27,7 +27,7 @@ class SpecificGroupUsersRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|numeric|exists:backend_admin_access_groups,id',
+            'id' => 'required|numeric|exists:merchant_admin_access_groups',
         ];
     }
 

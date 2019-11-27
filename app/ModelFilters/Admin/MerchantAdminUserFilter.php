@@ -34,6 +34,6 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function searchNameEmail(string $string)
     {
-        return $this->where('name', 'like', '%'.$string.'%')->orWhere('email', 'like', '%'.$string.'%');
+        return $this->whereLike('name', $string)->orWhere('email', 'like', '%'.$string.'%');
     }
 }

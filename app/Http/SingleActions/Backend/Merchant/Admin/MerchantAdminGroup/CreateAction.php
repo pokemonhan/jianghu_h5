@@ -34,6 +34,7 @@ class CreateAction
      * @param MerchantApiMainController $contll     Controller.
      * @param array                     $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
     {
@@ -45,7 +46,7 @@ class CreateAction
         ];
         $nameIsExists = $this->model::filter($filterArr, MerchantAdminAccessGroupFilter::class)->exists();
         if ($nameIsExists === true) {
-            return msgOut(false, [], '300102');
+            throw new \Exception('300102');
         }
 
         DB::beginTransaction();

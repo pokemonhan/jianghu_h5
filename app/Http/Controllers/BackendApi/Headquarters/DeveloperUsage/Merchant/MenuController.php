@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
+namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Merchant;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddRequest;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosRequest;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteRequest;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditRequest;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteAction;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditAction;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DoAddRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DeleteRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\EditRequest;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DoAddAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\ChangeParentAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DeleteAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\EditAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\GetAllMenuAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -21,32 +20,12 @@ class MenuController extends BackEndApiMainController
 {
     /**
      * Gets all menu.
+     * @param GetAllMenuAction $action Action.
      * @return JsonResponse
      */
-    public function getAllMenu()
+    public function getAllMenu(GetAllMenuAction $action)
     {
-        return msgOut(true, $this->fullMenuLists);
-    }
-
-    /**
-     * @return JsonResponse
-     */
-    public function currentAdminMenu()
-    {
-        return msgOut(true, $this->menuLists);
-    }
-
-    /**
-     * @param AllRequireInfosRequest $request Request.
-     * @param AllRequireInfosAction  $action  Action.
-     * @return JsonResponse
-     */
-    public function allRequireInfos(
-        AllRequireInfosRequest $request,
-        AllRequireInfosAction $action
-    ): JsonResponse {
-        $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute();
     }
 
     /**

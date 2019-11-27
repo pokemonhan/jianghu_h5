@@ -34,16 +34,17 @@ class DeleteAdminAction
      * @param MerchantApiMainController $contll     Controller.
      * @param array                     $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
     {
         $adminEloq = $this->model->find($inputDatas['id']);
         if ($adminEloq !== null) {
             if ($adminEloq->platform_sign !== $contll->currentPlatformEloq->sign) {
-                return msgOut(false, [], '300703');
+                throw new \Exception('300703');
             }
             if ($adminEloq->accessGroup->is_super === MerchantAdminAccessGroup::IS_SUPER) {
-                return msgOut(false, [], '300704');
+                throw new \Exception('300704');
             }
             if ($adminEloq->remember_token !== null) {
                 try {
@@ -60,7 +61,7 @@ class DeleteAdminAction
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
         } else {
-            return msgOut(false, [], '300701');
+            throw new \Exception('300701');
         }
     }
 }

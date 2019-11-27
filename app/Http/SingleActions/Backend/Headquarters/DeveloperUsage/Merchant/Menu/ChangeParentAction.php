@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
+namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu;
 
-use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
+use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,16 +11,16 @@ use Illuminate\Http\JsonResponse;
 class ChangeParentAction
 {
     /**
-     * @var BackendSystemMenu
+     * @var MerchantSystemMenu
      */
     protected $model;
 
     /**
-     * @param BackendSystemMenu $backendSystemMenu Model.
+     * @param MerchantSystemMenu $merchantSystemMenu Model.
      */
-    public function __construct(BackendSystemMenu $backendSystemMenu)
+    public function __construct(MerchantSystemMenu $merchantSystemMenu)
     {
-        $this->model = $backendSystemMenu;
+        $this->model = $merchantSystemMenu;
     }
 
     /**
@@ -30,7 +30,7 @@ class ChangeParentAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $parseDatas = json_decode($inputDatas['dragResult'], true);
+        $parseDatas = json_decode($inputDatas['drag_result'], true);
         $itemProcess = [];
         if (!empty($parseDatas)) {
             $itemProcess = $this->model->changeParent($parseDatas);

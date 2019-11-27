@@ -33,6 +33,7 @@ class LoginAction
      * @param BackEndApiMainController $contll  Controller.
      * @param Request                  $request Request.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(BackEndApiMainController $contll, Request $request): JsonResponse
     {
@@ -58,7 +59,7 @@ class LoginAction
          */
 
         if (!$token = $contll->currentAuth->attempt($credentials)) {
-            return msgOut(false, [], '100002');
+            throw new \Exception('100002');
         }
         if ($request->hasSession()) {
             $request->session()->regenerate();

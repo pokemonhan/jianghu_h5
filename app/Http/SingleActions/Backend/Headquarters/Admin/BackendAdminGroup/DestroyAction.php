@@ -27,6 +27,7 @@ class DestroyAction
     /**
      * @param array $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
@@ -36,7 +37,7 @@ class DestroyAction
             ['group_name', $inputDatas['group_name']],
         ])->first();
         if ($datas === null) {
-            return msgOut(false, [], '300100');
+            throw new \Exception('300100');
         }
         try {
             $datas->delete();
