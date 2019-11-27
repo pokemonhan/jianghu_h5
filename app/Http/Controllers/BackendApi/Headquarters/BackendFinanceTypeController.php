@@ -54,7 +54,7 @@ class BackendFinanceTypeController extends BackEndApiMainController
         return $action->execute($this, $inputDatas);
     }
     /**
-     * @param DelDoAction  $action  Action1.
+     * @param DelDoAction  $action  Action.
      * @param DelDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
