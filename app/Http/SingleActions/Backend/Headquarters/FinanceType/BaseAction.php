@@ -17,9 +17,10 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     * @param SystemFinanceType $systemFinanceType SystemFinanceType.
      */
-    public function __construct()
+    public function __construct(SystemFinanceType $systemFinanceType)
     {
-        $this->model = new SystemFinanceType();
+        $this->model = $systemFinanceType;
     }
 }

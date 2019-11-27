@@ -17,9 +17,10 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     * @param GamesVendor $gamesVendor GamesVendor.
      */
-    public function __construct()
+    public function __construct(GamesVendor $gamesVendor)
     {
-        $this->model = new GamesVendor();
+        $this->model = $gamesVendor;
     }
 }

@@ -28,4 +28,9 @@ Route::group(['prefix' => 'game'], static function () {
     Route::match(['post','options'], 'edit-do', ['as' => $namePrefix.'edit-do', 'uses' => $controller.'editDo']);
     Route::match(['get','options'], 'index-do', ['as' => $namePrefix.'index-do', 'uses' => $controller.'indexDo']);
     Route::match(['post','options'], 'del-do', ['as' => $namePrefix.'del-do', 'uses' => $controller.'delDo']);
+    Route::match(
+        ['get','options'],
+        'get-search-condition',
+        ['as' => $namePrefix.'get-search-condition', 'uses' => $controller.'getSearchCondition'],
+    );
 });

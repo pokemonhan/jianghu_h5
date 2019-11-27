@@ -5,9 +5,11 @@ namespace App\Http\Controllers\BackendApi\Headquarters;
 use App\Http\Requests\Backend\Headquarters\Game\AddRequest;
 use App\Http\Requests\Backend\Headquarters\Game\DelRequest;
 use App\Http\Requests\Backend\Headquarters\Game\EditRequest;
+use App\Http\Requests\Backend\Headquarters\Game\IndexDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\Game\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\EditDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\GetSearchConditionAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\IndexDoAction;
 use Illuminate\Http\JsonResponse;
 
@@ -26,7 +28,7 @@ class BackendGameController extends BackEndApiMainController
     public function addDo(AddDoAction $action, AddRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
@@ -38,17 +40,19 @@ class BackendGameController extends BackEndApiMainController
     public function editDo(EditDoAction $action, EditRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
-     * @param IndexDoAction $action Action.
+     * @param IndexDoAction  $action  Action.
+     * @param IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action) :JsonResponse
+    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
-        return $action->execute();
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -61,5 +65,15 @@ class BackendGameController extends BackEndApiMainController
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
+    }
+
+    /**
+     * @param GetSearchConditionAction $action Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function getSearchCondition(GetSearchConditionAction $action):JsonResponse
+    {
+        return $action->execute();
     }
 }

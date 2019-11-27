@@ -11,12 +11,14 @@ use Illuminate\Http\JsonResponse;
 class IndexDoAction extends BaseAction
 {
     /**
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute() :JsonResponse
+    public function execute(array $inputDatas) :JsonResponse
     {
-        $outputDatas = $this->model->get();
-        return msgOut(true, $outputDatas, '200', '获取成功');
+//        $outputDatas = $this->model::filter($inputDatas, GamesTypeFilter::class)->get();
+//        return msgOut(true, $outputDatas, '200', '获取成功');
+        return msgOut(true, $inputDatas);
     }
 }

@@ -27,14 +27,12 @@ class EditRequest extends BaseFormRequest
      */
     public function rules():array
     {
-        if ($this->isMethod('post')) {
-            return [
-                'id' => 'required|exists:games_types,id',
-                'name' => 'required|unique:games_types,name,'.$this->input('id'),
-                'sign' => ['required','regex:/\w+/','unique:games_types,sign,'.$this->input('id')],
-            ];
-        }
-        return [];
+        return [
+            'id' => 'required|exists:games_types,id',
+            'name' => 'required|unique:games_types,name,'.$this->input('id'),
+            'sign' => ['required','regex:/\w+/','unique:games_types,sign,'.$this->input('id')],
+            'status' => 'required|in:0,1',
+        ];
     }
 
     /**
@@ -50,6 +48,8 @@ class EditRequest extends BaseFormRequest
             'sign.required' => '请填写游戏种类标记',
             'sign.regex' => '游戏种类标记只能包含数字,字母,下划线',
             'sign.unique' => '游戏种类标记已存在',
+            'status.required' => '请选择状态',
+            'status.in' => '所选择状态不存在',
         ];
     }
 }
