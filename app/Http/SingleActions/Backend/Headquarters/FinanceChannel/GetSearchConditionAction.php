@@ -21,11 +21,11 @@ class GetSearchConditionAction extends BaseAction
         $channels = $this->model->select(['id', 'type_id', 'vendor_id', 'name'])->get();
         $types = SystemFinanceType::select(['id', 'name'])->get();
         $vendors = SystemFinanceVendor::select(['id', 'name'])->get();
-        $searchConditions = [
+        $data = [
             'channels' => $channels,
             'vendors' => $vendors,
             'types' => $types,
         ];
-        return msgOut(true, $searchConditions, '200');
+        return msgOut(true, $data, '200');
     }
 }

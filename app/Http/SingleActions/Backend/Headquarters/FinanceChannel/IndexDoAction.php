@@ -25,6 +25,6 @@ class IndexDoAction extends BaseAction
     public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
         $outputDatas = $this->model::filter($inputDatas, SystemFinanceChannelFilter::class)->paginate($contll->pageSize);
-        return msgOut(true, $outputDatas, '200');
+        return msgOut(true, $outputDatas);
     }
 }

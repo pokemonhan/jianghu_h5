@@ -18,7 +18,7 @@ class StatusDoAction extends BaseAction
     public function execute(array $inputDatas) :JsonResponse
     {
         if ($this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']])) {
-            return msgOut(true, [], '200');
+            return msgOut(true);
         } else {
             throw new \Exception('300604');
         }
