@@ -8,6 +8,7 @@ Route::group(['prefix' => 'game-type'], static function () {
     Route::match(['post','options'], 'edit-do', ['as' => $namePrefix.'edit-do', 'uses' => $controller.'editDo']);
     Route::match(['get','options'], 'index-do', ['as' => $namePrefix.'index-do', 'uses' => $controller.'indexDo']);
     Route::match(['post','options'], 'del-do', ['as' => $namePrefix.'del-do', 'uses' => $controller.'delDo']);
+    Route::match(['post','options'], 'status-do', ['as' => $namePrefix.'status-do', 'uses' => $controller.'statusDo']);
 });
 
 //游戏厂商
@@ -18,6 +19,7 @@ Route::group(['prefix' => 'game-vendor'], static function () {
     Route::match(['post','options'], 'edit-do', ['as' => $namePrefix.'edit-do', 'uses' => $controller.'editDo']);
     Route::match(['get','options'], 'index-do', ['as' => $namePrefix.'index-do', 'uses' => $controller.'indexDo']);
     Route::match(['post','options'], 'del-do', ['as' => $namePrefix.'del-do', 'uses' => $controller.'delDo']);
+    Route::match(['post','options'], 'status-do', ['as' => $namePrefix.'status-do', 'uses' => $controller.'statusDo']);
 });
 
 //游戏管理
@@ -33,4 +35,5 @@ Route::group(['prefix' => 'game'], static function () {
         'get-search-condition',
         ['as' => $namePrefix.'get-search-condition', 'uses' => $controller.'getSearchCondition'],
     );
+    Route::match(['post','options'], 'status-do', ['as' => $namePrefix.'status-do', 'uses' => $controller.'statusDo']);
 });

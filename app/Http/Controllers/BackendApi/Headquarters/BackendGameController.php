@@ -6,11 +6,13 @@ use App\Http\Requests\Backend\Headquarters\Game\AddRequest;
 use App\Http\Requests\Backend\Headquarters\Game\DelRequest;
 use App\Http\Requests\Backend\Headquarters\Game\EditRequest;
 use App\Http\Requests\Backend\Headquarters\Game\IndexDoRequest;
+use App\Http\Requests\Backend\Headquarters\Game\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\Game\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\GetSearchConditionAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\IndexDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -52,7 +54,7 @@ class BackendGameController extends BackEndApiMainController
     public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
@@ -75,5 +77,17 @@ class BackendGameController extends BackEndApiMainController
     public function getSearchCondition(GetSearchConditionAction $action):JsonResponse
     {
         return $action->execute();
+    }
+
+    /**
+     * @param StatusDoAction  $action  Action.
+     * @param StatusDoRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

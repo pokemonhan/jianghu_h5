@@ -6,11 +6,13 @@ use App\Http\Requests\Backend\Headquarters\FinanceChannel\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceChannel\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceChannel\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceChannel\IndexDoRequest;
+use App\Http\Requests\Backend\Headquarters\FinanceChannel\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\FinanceChannel\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceChannel\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceChannel\IndexDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceChannel\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceChannel\GetSearchConditionAction;
+use App\Http\SingleActions\Backend\Headquarters\FinanceChannel\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -52,7 +54,7 @@ class BackendFinanceChannelController extends BackEndApiMainController
     public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
@@ -75,5 +77,17 @@ class BackendFinanceChannelController extends BackEndApiMainController
     public function getSearchCondition(GetSearchConditionAction $action):JsonResponse
     {
         return $action->execute();
+    }
+
+    /**
+     * @param StatusDoAction  $action  Action.
+     * @param StatusDoRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

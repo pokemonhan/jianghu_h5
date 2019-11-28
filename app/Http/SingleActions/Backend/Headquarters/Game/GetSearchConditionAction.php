@@ -19,17 +19,13 @@ class GetSearchConditionAction extends BaseAction
     public function execute() :JsonResponse
     {
         $games = $this->model->select(['id', 'type_id', 'vendor_id', 'name'])->get();
-        $vendors = (new GamesVendor())->select(['id', 'name'])->get();
-        $types = (new GamesType())->select(['id', 'name'])->get();
-        return msgOut(
-            true,
-            [
-               'games' => $games,
-               'vendors' => $vendors,
-               'types' => $types,
-            ],
-            '200',
-            '获取成功',
-        );
+        $vendors = GamesVendor::select(['id', 'name'])->get();
+        $types = GamesType::select(['id', 'name'])->get();
+        $searchConditions = [
+            'games' => $games,
+            'vendors' => $vendors,
+            'types' => $types,
+        ];
+        return msgOut(true, $searchConditions, '200');
     }
 }
