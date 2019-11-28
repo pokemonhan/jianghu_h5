@@ -21,11 +21,11 @@ class GetSearchConditionAction extends BaseAction
         $games = $this->model->select(['id', 'type_id', 'vendor_id', 'name'])->get();
         $vendors = GamesVendor::select(['id', 'name'])->get();
         $types = GamesType::select(['id', 'name'])->get();
-        $searchConditions = [
+        $datas = [
             'games' => $games,
             'vendors' => $vendors,
             'types' => $types,
         ];
-        return msgOut(true, $searchConditions);
+        return msgOut(true, $datas);
     }
 }
