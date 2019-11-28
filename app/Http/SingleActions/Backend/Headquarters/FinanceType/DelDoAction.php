@@ -19,7 +19,8 @@ class DelDoAction extends BaseAction
     {
         if ($this->model->where('id', $inputDatas['id'])->delete()) {
             return msgOut(true, [], '200', '删除成功');
+        } else {
+            throw new \Exception('300502');
         }
-        throw new \Exception('300502');
     }
 }

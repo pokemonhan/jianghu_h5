@@ -33,6 +33,7 @@ class AddDoRequest extends BaseFormRequest
                 'sign' => ['required', 'unique:system_finance_types,sign', 'regex:/\w+/'],
                 'is_online' => 'required|in:0,1',
                 'direction' => 'required|in:0,1',
+                'status' => 'required|in:0,1',
             ];
         }
         return [];
@@ -53,6 +54,8 @@ class AddDoRequest extends BaseFormRequest
             'is_online.in' => '是否是线上金流不正确',
             'direction.required' => '请选择金流方向',
             'direction.in' => '金流方向不正确',
+            'status.required' => '请选择状态',
+            'status.in' => '所选择状态不存在',
         ];
     }
 }

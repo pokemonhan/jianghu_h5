@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
-use App\Models\Game\Games;
+use App\Models\Game\Game;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -18,12 +18,13 @@ class DelDoAction extends BaseAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
-        if (!Games::where('vendor_id', $inputDatas['id'])->get()->isEmpty()) {
+        if (!Game::where('vendor_id', $inputDatas['id'])->get()->isEmpty()) {
             throw new \Exception('300400');
         }
         if ($this->model->where('id', $inputDatas['id'])->delete()) {
             return msgOut(true, [], '200', '删除成功');
+        } else {
+            throw new \Exception('300401');
         }
-        throw new \Exception('300401');
     }
 }

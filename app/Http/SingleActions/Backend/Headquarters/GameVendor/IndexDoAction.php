@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameVendor;
 
+use App\ModelFilters\Game\GamesVendorFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,12 +12,17 @@ use Illuminate\Http\JsonResponse;
 class IndexDoAction extends BaseAction
 {
     /**
+     * @var object $model
+     */
+    protected $model;
+    /**
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute() :JsonResponse
+    public function execute(array $inputDatas) :JsonResponse
     {
-        $outputDatas = $this->model->get();
+        $outputDatas = $this->model::filter($inputDatas, GamesVendorFilter::class)->get();
         return msgOut(true, $outputDatas, '200', '获取成功');
     }
 }

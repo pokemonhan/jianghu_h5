@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Headquarters\FinanceVendor\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceVendor\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceVendor\EditDoRequest;
-use App\Http\Requests\Backend\Headquarters\FinanceVendor\AddDoRequest;
+use App\Http\Requests\Backend\Headquarters\FinanceVendor\IndexDoRequest;
+use App\Http\SingleActions\Backend\Headquarters\FinanceVendor\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceVendor\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceVendor\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceVendor\IndexDoAction;
-use App\Http\SingleActions\Backend\Headquarters\FinanceVendor\AddDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class BackendFinanceVendorController
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendFinanceVendorController extends Controller
+class BackendFinanceVendorController extends BackEndApiMainController
 {
     /**
      * @param AddDoAction  $action  Action.
@@ -27,17 +27,19 @@ class BackendFinanceVendorController extends Controller
     public function addDo(AddDoAction $action, AddDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
-     * @param IndexDoAction $action Action.
+     * @param IndexDoAction  $action  Action.
+     * @param IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action) :JsonResponse
+    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
-        return $action->execute();
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
     /**
      * @param EditDoAction  $action  Action.
@@ -48,7 +50,7 @@ class BackendFinanceVendorController extends Controller
     public function editDo(EditDoAction $action, EditDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
     /**
      * @param DelDoAction  $action  Action.

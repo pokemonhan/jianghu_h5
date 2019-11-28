@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Requests\Backend\Headquarters\GameType\IndexDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameType\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameType\EditDoAction;
@@ -26,7 +27,7 @@ class BackendGameTypeController extends BackEndApiMainController
     public function addDo(AddDoAction $action, AddRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
@@ -38,17 +39,19 @@ class BackendGameTypeController extends BackEndApiMainController
     public function editDo(EditDoAction $action, EditRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
-     * @param IndexDoAction $action Action.
+     * @param IndexDoAction  $action  Action.
+     * @param IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action) :JsonResponse
+    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
-        return $action->execute();
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**

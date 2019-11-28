@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BackendApi\Headquarters;
 use App\Http\Requests\Backend\Headquarters\FinanceType\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\DelDoRequest;
+use App\Http\Requests\Backend\Headquarters\FinanceType\IndexDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\IndexDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\EditDoAction;
@@ -26,17 +27,19 @@ class BackendFinanceTypeController extends BackEndApiMainController
     public function addDo(AddDoAction $action, AddDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
-     * @param IndexDoAction $action Action.
+     * @param IndexDoAction  $action  Action.
+     * @param IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action) :JsonResponse
+    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
-        return $action->execute();
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -48,7 +51,7 @@ class BackendFinanceTypeController extends BackEndApiMainController
     public function editDo(EditDoAction $action, EditDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
     /**
      * @param DelDoAction  $action  Action.

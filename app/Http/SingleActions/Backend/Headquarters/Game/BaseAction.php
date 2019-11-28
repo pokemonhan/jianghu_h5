@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game;
 
-use App\Models\Game\Games;
+use App\Models\Game\Game;
 
 /**
  * Class BaseAction
@@ -11,15 +11,16 @@ use App\Models\Game\Games;
 class BaseAction
 {
     /**
-     * @var Games Model.
+     * @var Game Model.
      */
     protected $model;
 
     /**
      * BaseAction constructor.
+     * @param Game $game Game.
      */
-    public function __construct()
+    public function __construct(Game $game)
     {
-        $this->model = new Games();
+        $this->model = $game;
     }
 }
