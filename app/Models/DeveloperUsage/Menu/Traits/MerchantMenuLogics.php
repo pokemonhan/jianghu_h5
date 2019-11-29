@@ -47,11 +47,11 @@ trait MerchantMenuLogics
     }
 
     /**
-     * @param string $redisKey               RedisKey.
-     * @param array  $adminAccessGroupDetail 管理员组权限.
+     * @param string|integer $redisKey               RedisKey.
+     * @param array          $adminAccessGroupDetail 管理员组权限.
      * @return array
      */
-    public function createMenuDatas(string $redisKey, array $adminAccessGroupDetail = []): array
+    public function createMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
     {
         $menuForFE = [];
         if ($redisKey === self::ALL_MENU_REDIS_KEY) {

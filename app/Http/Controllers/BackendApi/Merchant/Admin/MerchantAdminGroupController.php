@@ -27,7 +27,7 @@ class MerchantAdminGroupController extends MerchantApiMainController
      */
     public function index(IndexAction $action): JsonResponse
     {
-        return $action->execute($this);
+        return $action->execute();
     }
 
     /**

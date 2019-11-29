@@ -40,7 +40,7 @@ class DestroyAction
             throw new \Exception('300100');
         }
         try {
-            $datas->delete();
+            $datas->delete(); //管理员关联外键一起删除
             return msgOut(true);
         } catch (Exception $e) {
             return msgOut(false, [], $e->getCode(), $e->getMessage());

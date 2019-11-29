@@ -16,7 +16,7 @@ class BackendSystemMenu extends BaseModel
     /**
      * @var string
      */
-    public const ALL_MENU_REDIS_KEY = '*';
+    public const ALL_MENU_REDIS_KEY = '1';
 
     /**
      * @var string

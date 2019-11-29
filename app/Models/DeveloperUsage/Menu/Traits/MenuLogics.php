@@ -18,7 +18,8 @@ trait MenuLogics
      */
     public function forStar(): array
     {
-        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
+        $adminAccessGroupDetail = $this->find(self::ALL_MENU_REDIS_KEY)->pluck('id')->toArray();
+        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY, $adminAccessGroupDetail);
     }
 
     /**

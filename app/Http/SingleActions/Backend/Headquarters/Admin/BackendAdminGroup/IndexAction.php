@@ -29,7 +29,7 @@ class IndexAction
      */
     public function execute(): JsonResponse
     {
-        $data = $this->model::all()->toArray();
+        $data = $this->model->get()->toArray();
         return msgOut(true, $data);
     }
 }
