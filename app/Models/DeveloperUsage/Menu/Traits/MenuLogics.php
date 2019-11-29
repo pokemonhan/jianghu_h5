@@ -18,13 +18,7 @@ trait MenuLogics
      */
     public function forStar(): array
     {
-        $redisKey = '1';
-        if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
-            $parent_menu = Cache::tags([$this->redisFirstTag])->get($redisKey);
-        } else {
-            $parent_menu = self::createMenuDatas($redisKey);
-        }
-        return $parent_menu;
+        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
     }
 
     /**
@@ -34,24 +28,33 @@ trait MenuLogics
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
     {
-        $redisKey = $accessGroupId;
-        if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
-            $parentMenu = Cache::tags([$this->redisFirstTag])->get($redisKey);
-        } else {
-            $parentMenu = self::createMenuDatas($accessGroupId, $adminAccessGroupDetail);
-        }
-        return $parentMenu;
+        return $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
     }
 
     /**
-     * @param string $redisKey               RedisKey.
-     * @param array  $adminAccessGroupDetail 管理员组权限.
+     * @param string|integer $redisKey               RedisKey.
+     * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
      * @return array
      */
-    public function createMenuDatas(string $redisKey, array $adminAccessGroupDetail = []): array
+    public function getMenuDatas($redisKey, array $adminAccessGroupDetail = [])
+    {
+        if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
+            $menuData = Cache::tags([$this->redisFirstTag])->get($redisKey);
+        } else {
+            $menuData = self::createMenuDatas($redisKey, $adminAccessGroupDetail);
+        }
+        return $menuData;
+    }
+
+    /**
+     * @param string|integer $redisKey               RedisKey.
+     * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
+     * @return array
+     */
+    public function createMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
     {
         $menuForFE = [];
-        if ($redisKey === 1) {
+        if ($redisKey === self::ALL_MENU_REDIS_KEY) {
             $menuLists = self::getAllFirstLevelList();
         } else {
             $menuLists = self::getFirstLevelList($adminAccessGroupDetail);

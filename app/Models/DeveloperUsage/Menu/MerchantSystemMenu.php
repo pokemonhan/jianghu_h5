@@ -16,6 +16,11 @@ class MerchantSystemMenu extends BaseModel
     /**
      * @var string
      */
+    public const ALL_MENU_REDIS_KEY = '*';
+
+    /**
+     * @var string
+     */
     protected $redisFirstTag = 'merchant_menu';
 
     /**

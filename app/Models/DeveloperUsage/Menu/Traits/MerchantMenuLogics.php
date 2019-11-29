@@ -18,13 +18,7 @@ trait MerchantMenuLogics
      */
     public function forStar(): array
     {
-        $redisKey = '*';
-        if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
-            $parent_menu = Cache::tags([$this->redisFirstTag])->get($redisKey);
-        } else {
-            $parent_menu = self::createMenuDatas($redisKey);
-        }
-        return $parent_menu;
+        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
     }
 
     /**
@@ -34,13 +28,22 @@ trait MerchantMenuLogics
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
     {
-        $redisKey = $accessGroupId;
+        return $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
+    }
+
+    /**
+     * @param string|integer $redisKey               RedisKey.
+     * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
+     * @return array
+     */
+    public function getMenuDatas($redisKey, array $adminAccessGroupDetail = [])
+    {
         if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
-            $parentMenu = Cache::tags([$this->redisFirstTag])->get($redisKey);
+            $menuData = Cache::tags([$this->redisFirstTag])->get($redisKey);
         } else {
-            $parentMenu = self::createMenuDatas($accessGroupId, $adminAccessGroupDetail);
+            $menuData = self::createMenuDatas($redisKey, $adminAccessGroupDetail);
         }
-        return $parentMenu;
+        return $menuData;
     }
 
     /**
@@ -51,7 +54,7 @@ trait MerchantMenuLogics
     public function createMenuDatas(string $redisKey, array $adminAccessGroupDetail = []): array
     {
         $menuForFE = [];
-        if ($redisKey === '*') {
+        if ($redisKey === self::ALL_MENU_REDIS_KEY) {
             $menuLists = self::getAllFirstLevelList();
             $adminAccessGroupDetail = $this->pluck('id')->toArray();
         } else {
