@@ -32,8 +32,8 @@ class DoAddAction
             $platformData = [
                 'name' => $inputDatas['platform_name'],
                 'sign' => $inputDatas['platform_sign'],
-                'admin_id' => $contll->currentAdmin->id,
-                'last_admin_id' => $contll->currentAdmin->id,
+                'author_id' => $contll->currentAdmin->id,
+                'last_editor_id' => $contll->currentAdmin->id,
             ];
             $platformEloq->fill($platformData);
             $platformEloq->save();

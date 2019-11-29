@@ -5,6 +5,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
+use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
@@ -40,20 +41,16 @@ class EditAction
         if ((int) $id === 1) {
             throw new \Exception('300101');
         }
-
         $datas = $this->model::find($id);
         if ($datas !== null) {
             DB::beginTransaction();
             try {
                 $datas->group_name = $inputDatas['group_name'];
                 $datas->save();
-
-                BackendAdminAccessGroupDetail::where('group_id', $id)->delete();
-
                 //只提取当前登录管理员也拥有的权限
+                BackendAdminAccessGroupDetail::where('group_id', $id)->delete();
                 $role = Arr::wrap(json_decode($inputDatas['role'], true));
                 $role = array_intersect($contll->adminAccessGroupDetail, $role);
-
                 //添加AdminGroupDetails数据
                 $data['group_id'] = $id;
                 foreach ($role as $roleId) {
@@ -62,8 +59,10 @@ class EditAction
                     $groupDetailEloq->fill($data);
                     $groupDetailEloq->save();
                 }
-
                 DB::commit();
+                //更新管理员组菜单权限缓存
+                $backendSystemMenu = new BackendSystemMenu();
+                $backendSystemMenu->createMenuDatas($id, $role);
                 return msgOut(true, $datas->toArray());
             } catch (Exception $e) {
                 DB::rollBack();
