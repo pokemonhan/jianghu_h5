@@ -6,22 +6,26 @@ use App\Http\Requests\Backend\Headquarters\Game\AddRequest;
 use App\Http\Requests\Backend\Headquarters\Game\DelRequest;
 use App\Http\Requests\Backend\Headquarters\Game\EditRequest;
 use App\Http\Requests\Backend\Headquarters\Game\IndexDoRequest;
+use App\Http\Requests\Backend\Headquarters\Game\OptEditDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\Game\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\GetSearchConditionAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\IndexDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\OptEditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
+ * 游戏控制器
  * Class BackendGameController
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
 class BackendGameController extends BackEndApiMainController
 {
     /**
+     * 添加游戏
      * @param AddDoAction $action  Action.
      * @param AddRequest  $request Request.
      * @return JsonResponse
@@ -34,6 +38,7 @@ class BackendGameController extends BackEndApiMainController
     }
 
     /**
+     * 开发 编辑游戏
      * @param EditDoAction $action  Action.
      * @param EditRequest  $request Request.
      * @return JsonResponse
@@ -46,6 +51,19 @@ class BackendGameController extends BackEndApiMainController
     }
 
     /**
+     * 运营 编辑游戏
+     * @param OptEditDoAction  $action  Action.
+     * @param OptEditDoRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function optEditDo(OptEditDoAction $action, OptEditDoRequest $request) :JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($this, $inputDatas);
+    }
+    /**
+     * 游戏列表
      * @param IndexDoAction  $action  Action.
      * @param IndexDoRequest $request Request.
      * @return JsonResponse
@@ -58,6 +76,7 @@ class BackendGameController extends BackEndApiMainController
     }
 
     /**
+     * 游戏删除
      * @param DelDoAction $action  Action.
      * @param DelRequest  $request Request.
      * @return JsonResponse
@@ -70,6 +89,7 @@ class BackendGameController extends BackEndApiMainController
     }
 
     /**
+     * 获取查询条件
      * @param GetSearchConditionAction $action Action.
      * @return JsonResponse
      * @throws \Exception Exception.
@@ -80,6 +100,7 @@ class BackendGameController extends BackEndApiMainController
     }
 
     /**
+     * 改变状态
      * @param StatusDoAction  $action  Action.
      * @param StatusDoRequest $request Request.
      * @return JsonResponse
