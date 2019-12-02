@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\BackendApi\Headquarters\Admin;
+namespace App\Http\Controllers\BackendApi\Headquarters\Merchant;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
-use App\Http\Requests\Backend\Headquarters\Admin\MerchansAdminUser\DoAddRequest;
-use App\Http\SingleActions\Backend\Headquarters\Admin\MerchansAdminUser\DoAddAction;
+use App\Http\Requests\Backend\Headquarters\Merchant\MerchansAdminUser\DoAddRequest;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\MerchansAdminUser\DetailAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\MerchansAdminUser\DoAddAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -12,6 +13,11 @@ use Illuminate\Http\JsonResponse;
  */
 class MerchansAdminUserController extends BackEndApiMainController
 {
+    public function detail(DetailAction $action)
+    {
+        return $action->execute();
+    }
+
     /**
      * 添加运营商
      * @param DoAddRequest $request Request.

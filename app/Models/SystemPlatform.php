@@ -22,4 +22,9 @@ class SystemPlatform extends BaseModel
     {
         return $this->hasMany(MerchantAdminUser::class, 'platform_sign', 'sign');
     }
+
+    public function owner()
+    {
+        return $this->hasOne(MerchantAdminUser::class, 'id', 'owner_id');
+    }
 }
