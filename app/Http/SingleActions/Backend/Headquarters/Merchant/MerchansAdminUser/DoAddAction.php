@@ -70,7 +70,7 @@ class DoAddAction
 
     /**
      * Creates a platform domain.
-     * @param array $inputDatas    接收的参数.
+     * @param array  $inputDatas   接收的参数.
      * @param string $platformSign 平台标识.
      * @return void
      */
