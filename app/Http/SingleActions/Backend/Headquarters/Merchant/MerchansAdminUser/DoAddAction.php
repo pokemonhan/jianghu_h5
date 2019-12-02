@@ -29,6 +29,8 @@ class DoAddAction
         try {
             //生成平台
             $platformEloq = $this->createPlatform($inputDatas, $contll->currentAdmin->id);
+            //生成域名
+            $this->createPlatformDomain($inputDatas, $platformEloq->sign);
             //生成超级管理员组
             $adminGroupEloq = $this->createAdminGroup($platformEloq->sign);
             //生成管理员组权限
@@ -48,8 +50,8 @@ class DoAddAction
 
     /**
      * Creates a platform.
-     * @param array   $inputDatas 接收的参数
-     * @param integer $adminId    管理员ID
+     * @param array   $inputDatas 接收的参数.
+     * @param integer $adminId    管理员ID.
      * @return SystemPlatform
      */
     private function createPlatform(array $inputDatas, int $adminId)
@@ -66,6 +68,19 @@ class DoAddAction
         return $platformEloq;
     }
 
+    /**
+     * Creates a platform domain.
+     * @param array $inputDatas 接收的参数.
+     * @param string $platformSign 平台标识.
+     * @return void
+     */
+    private function createPlatformDomain($inputDatas, $platformSign)
+    {
+        // $domains = $inputDatas['domains'];
+        // foreach ($domains as $domain) {
+        //     # co
+        // }
+    }
     /**
      * Creates an admin group.
      * @param string $platformSign 平台标识.
@@ -86,8 +101,8 @@ class DoAddAction
 
     /**
      * Creates a group role.
-     * @param array   $inputDatas   接收的参数
-     * @param integer $adminGroupId 管理员角色组ID
+     * @param array   $inputDatas   接收的参数.
+     * @param integer $adminGroupId 管理员角色组ID.
      * @return void
      */
     private function createGroupRole(array $inputDatas, int $adminGroupId)
@@ -106,8 +121,8 @@ class DoAddAction
 
     /**
      * Creates an admin user.
-     * @param array   $inputDatas   接收的参数
-     * @param integer $adminGroupId 管理员角色组ID
+     * @param array   $inputDatas   接收的参数.
+     * @param integer $adminGroupId 管理员角色组ID.
      * @return MerchantAdminUser
      */
     private function createAdminUser(array $inputDatas, int $adminGroupId)
@@ -123,7 +138,7 @@ class DoAddAction
 
     /**
      * @param SystemPlatform $platformEloq 平台eloq.
-     * @param integer        $adminUserId  平台所属超级管理员ID
+     * @param integer        $adminUserId  平台所属超级管理员ID.
      */
     private function editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId)
     {
