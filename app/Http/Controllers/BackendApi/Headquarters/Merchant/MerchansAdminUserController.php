@@ -13,7 +13,12 @@ use Illuminate\Http\JsonResponse;
  */
 class MerchansAdminUserController extends BackEndApiMainController
 {
-    public function detail(DetailAction $action)
+    /**
+     *
+     * @param DetailAction $action Action.
+     * @return JsonResponse
+     */
+    public function detail(DetailAction $action): JsonResponse
     {
         return $action->execute();
     }
