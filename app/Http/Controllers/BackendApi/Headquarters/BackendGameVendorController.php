@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Requests\Backend\Headquarters\GameVendor\StatusDoRequest;
 use App\Http\Requests\Backend\Headquarters\GameVendor\IndexDoRequest;
+use App\Http\SingleActions\Backend\Headquarters\GameVendor\StatusDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\EditDoAction;
@@ -51,7 +53,7 @@ class BackendGameVendorController extends BackEndApiMainController
     public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
@@ -61,6 +63,18 @@ class BackendGameVendorController extends BackEndApiMainController
      * @throws \Exception Exception.
      */
     public function delDo(DelDoAction $action, DelRequest $request) :JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * @param StatusDoAction  $action  Action.
+     * @param StatusDoRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

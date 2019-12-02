@@ -23,7 +23,7 @@ class EditDoAction extends BaseAction
         $inputDatas['last_editor_id'] = $contll->currentAdmin->id;
         $model->fill($inputDatas);
         if ($model->save()) {
-            return msgOut(true, [], '200', '修改成功');
+            return msgOut(true);
         } else {
             throw new \Exception('300501');
         }

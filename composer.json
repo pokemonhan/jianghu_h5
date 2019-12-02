@@ -16,7 +16,7 @@
         "genealabs/laravel-model-caching": "*",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^6.4",
-        "laravel/tinker": "^1.0",
+        "laravel/tinker": "^2.0.",
         "moontoast/math": "^1.1",
         "orangehill/iseed": "^2.6",
         "overtrue/laravel-lang": "~3.0",
@@ -25,7 +25,7 @@
         "predis/predis": "^1.1",
         "tucker-eric/eloquentfilter": "^2.0",
         "tymon/jwt-auth": "1.0.0-rc.5",
-        "waavi/sanitizer": "1.0.13"
+        "waavi/sanitizer": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

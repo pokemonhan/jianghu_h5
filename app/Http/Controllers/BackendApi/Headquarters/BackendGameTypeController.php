@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
 use App\Http\Requests\Backend\Headquarters\GameType\IndexDoRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameType\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameType\EditDoAction;
@@ -10,6 +11,7 @@ use App\Http\SingleActions\Backend\Headquarters\GameType\IndexDoAction;
 use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
 use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
 use App\Http\Requests\Backend\Headquarters\GameType\EditRequest;
+use App\Http\SingleActions\Backend\Headquarters\GameType\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -51,7 +53,7 @@ class BackendGameTypeController extends BackEndApiMainController
     public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
@@ -61,6 +63,18 @@ class BackendGameTypeController extends BackEndApiMainController
      * @throws \Exception Exception.
      */
     public function delDo(DelDoAction $action, DelRequest $request) :JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * @param StatusDoAction  $action  Action.
+     * @param StatusDoRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

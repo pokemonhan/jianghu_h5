@@ -6,10 +6,12 @@ use App\Http\Requests\Backend\Headquarters\FinanceType\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\IndexDoRequest;
+use App\Http\Requests\Backend\Headquarters\FinanceType\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\IndexDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\DelDoAction;
+use App\Http\SingleActions\Backend\Headquarters\FinanceType\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -39,7 +41,7 @@ class BackendFinanceTypeController extends BackEndApiMainController
     public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 
     /**
@@ -60,6 +62,18 @@ class BackendFinanceTypeController extends BackEndApiMainController
      * @throws \Exception Exception.
      */
     public function delDo(DelDoAction $action, DelDoRequest $request) :JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * @param StatusDoAction  $action  Action.
+     * @param StatusDoRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

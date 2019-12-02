@@ -27,34 +27,31 @@ class EditRequest extends BaseFormRequest
      */
     public function rules():array
     {
-        if ($this->isMethod('post')) {
-            return [
-                'id' => 'required|exists:games,id',
-                'type_id' => 'required|exists:games_types,id',
-                'vendor_id' => 'required|exists:games_vendors,id',
-                'name' => 'required|unique:games,name,'.$this->input('id'),
-                'sign' => ['required','unique:games,sign,'.$this->input('id'),'regex:/\w+/'],
-                'request_mode' => 'required|integer|in:1,2',
-                'conver_url' => 'required|url',
-                'test_conver_url' => 'url',
-                'check_balance_url' => 'required|url',
-                'test_check_balance_url' => 'url',
-                'check_order_url' => 'required|url',
-                'test_check_order_url' => 'url',
-                'in_game_url' => 'required|url',
-                'test_in_game_url' => 'url',
-                'get_station_order_url' => 'required|url',
-                'test_get_station_order_url' => 'url',
-                'status' => 'required|in:0,1',
-                'app_id' => 'string|nullable',
-                'authorization_code' => 'string|nullable',
-                'merchant_code' => 'string|nullable',
-                'merchant_secret' => 'string|nullable',
-                'public_key' => 'string|nullable',
-                'private_key' => 'string|nullable',
-            ];
-        }
-        return [];
+        return [
+            'id' => 'required|exists:games,id',
+            'type_id' => 'required|exists:games_types,id',
+            'vendor_id' => 'required|exists:games_vendors,id',
+            'name' => 'required|unique:games,name,'.$this->get('id'),
+            'sign' => ['required','unique:games,sign,'.$this->get('id'),'regex:/\w+/'],
+            'request_mode' => 'required|integer|in:1,2',
+            'conver_url' => 'required|url',
+            'test_conver_url' => 'url',
+            'check_balance_url' => 'required|url',
+            'test_check_balance_url' => 'url',
+            'check_order_url' => 'required|url',
+            'test_check_order_url' => 'url',
+            'in_game_url' => 'required|url',
+            'test_in_game_url' => 'url',
+            'get_station_order_url' => 'required|url',
+            'test_get_station_order_url' => 'url',
+            'status' => 'required|in:0,1',
+            'app_id' => 'string',
+            'authorization_code' => 'string',
+            'merchant_code' => 'string',
+            'merchant_secret' => 'string',
+            'public_key' => 'string',
+            'private_key' => 'string',
+        ];
     }
 
     /**
@@ -94,6 +91,12 @@ class EditRequest extends BaseFormRequest
             'test_get_station_order_url.url' => '测试获取注单地址格式不正确',
             'status.required' => '请选择状态',
             'status.in' => '所选状态不正确',
+            'app_id.string' => '终端号格式错误',
+            'authorization_code.string' => '授权码格式错误',
+            'merchant_code.string' => '商户号格式错误',
+            'merchant_secret.string' => '商户密钥格式错误',
+            'public_key.string' => '第三方公钥格式错误',
+            'private_key.string' => '第三方私钥格式错误',
         ];
     }
 }

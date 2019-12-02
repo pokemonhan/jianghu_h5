@@ -1,0 +1,14 @@
+<?php
+namespace DummyNamespace;
+
+class DummyClass
+{
+   /**
+     * @param array $inputDatas InputDatas.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+   public function execute(array $inputDatas) :JsonResponse
+   {
+   }
+}

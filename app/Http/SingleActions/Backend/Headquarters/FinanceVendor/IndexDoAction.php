@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceVendor;
 
+use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\ModelFilters\Finance\SystemFinanceVendorFilter;
 use Illuminate\Http\JsonResponse;
 
@@ -16,13 +17,14 @@ class IndexDoAction extends BaseAction
      */
     protected $model;
     /**
-     * @param array $inputDatas InputDatas.
+     * @param BackEndApiMainController $contll     Contll.
+     * @param array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
-        $outputDatas = $this->model::filter($inputDatas, SystemFinanceVendorFilter::class)->get();
-        return msgOut(true, $outputDatas, '200', '获取成功');
+        $outputDatas = $this->model::filter($inputDatas, SystemFinanceVendorFilter::class)->paginate($contll->pageSize);
+        return msgOut(true, $outputDatas);
     }
 }

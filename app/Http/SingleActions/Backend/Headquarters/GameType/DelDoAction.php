@@ -22,7 +22,7 @@ class DelDoAction extends BaseAction
             throw new \Exception('300400');
         }
         if ($this->model->where('id', $inputDatas['id'])->delete()) {
-            return msgOut(true, [], '200', '删除成功');
+            return msgOut(true);
         } else {
             throw new \Exception('300401');
         }
