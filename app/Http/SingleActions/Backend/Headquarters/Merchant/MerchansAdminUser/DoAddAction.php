@@ -68,19 +68,19 @@ class DoAddAction
         return $platformEloq;
     }
 
-    /**
-     * Creates a platform domain.
-     * @param array  $inputDatas   接收的参数.
-     * @param string $platformSign 平台标识.
-     * @return void
-     */
-    private function createPlatformDomain(array $inputDatas, string $platformSign)
-    {
-        // $domains = $inputDatas['domains'];
-        // foreach ($domains as $domain) {
-        //     # co
-        // }
-    }
+    // /**
+    //  * Creates a platform domain.
+    //  * @param array  $inputDatas   接收的参数.
+    //  * @param string $platformSign 平台标识.
+    //  * @return void
+    //  */
+    // private function createPlatformDomain(array $inputDatas, string $platformSign)
+    // {
+    //     // $domains = $inputDatas['domains'];
+    //     // foreach ($domains as $domain) {
+    //     //     # co
+    //     // }
+    // }
     /**
      * Creates an admin group.
      * @param string $platformSign 平台标识.
