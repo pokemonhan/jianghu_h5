@@ -10,7 +10,13 @@ use App\Models\BaseModel;
  */
 class SystemBank extends BaseModel
 {
+	/**
+	 * @var integer
+	 */
     public const STATUS_OPEN = 1;
+	/**
+	 * @var integer
+	 */
     public const STATUS_CLOSE = 0;
     
     /**
