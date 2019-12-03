@@ -106,14 +106,13 @@ class DoAddAction
      */
     private function createBanks(string $platformSign)
     {
-        $filterArr = ['status' => SystemBank::STATUS_OPEN];
-        $systemBank = SystemBank::filter($filterArr, SystemBankFilter::class)->get();
+        $systemBank = SystemBank::pluck('id')->toArray();
         $addData = [
             'platform_sign' => $platformSign,
             'status' => SystemPlatformBank::STATUS_CLOSE,
         ];
-        foreach ($systemBank as $bank) {
-            $addData['bank_id'] = $bank->id;
+        foreach ($systemBank as $bankId) {
+            $addData['bank_id'] = $bankId;
             $systemPlatformBank = new SystemPlatformBank();
             $systemPlatformBank->fill($addData);
             $systemPlatformBank->save();
