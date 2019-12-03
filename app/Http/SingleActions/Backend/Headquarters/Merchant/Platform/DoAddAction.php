@@ -79,8 +79,9 @@ class DoAddAction
 
     /**
      * Creates a platform domain.
-     * @param array  $inputDatas   接收的参数.
-     * @param string $platformSign 平台标识.
+     * @param array   $inputDatas   接收的参数.
+     * @param string  $platformSign 平台标识.
+     * @param integer $adminId      平台标识.
      * @return void
      */
     private function createPlatformDomain(array $inputDatas, string $platformSign, int $adminId)
@@ -99,6 +100,9 @@ class DoAddAction
         }
     }
     
+    /**
+     * @param string $platformSign 平台标识.
+     */
     private function createBanks(string $platformSign)
     {
         $filterArr = ['status' => SystemBank::STATUS_OPEN];
