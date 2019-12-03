@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Merchant\MerchansAdminUser;
+namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\ModelFilters\Finance\SystemBankFilter;

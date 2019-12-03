@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\Merchant\MerchansAdminUser;
+namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Requests\BaseFormRequest;
 
