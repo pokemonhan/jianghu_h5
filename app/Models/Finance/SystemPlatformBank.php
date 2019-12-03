@@ -10,8 +10,8 @@ use App\Models\BaseModel;
  */
 class SystemPlatformBank extends BaseModel
 {
-    const STATUS_OPEN = 1;
-    const STATUS_CLOSE = 0;
+    static const STATUS_OPEN = 1;
+    static const STATUS_CLOSE = 0;
     
     /**
      * @var array
