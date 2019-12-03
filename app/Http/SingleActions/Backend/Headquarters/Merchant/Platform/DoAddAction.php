@@ -17,7 +17,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for merchant admin user do add action.
+ * Class for merchant admin user do add action .
  */
 class DoAddAction
 {

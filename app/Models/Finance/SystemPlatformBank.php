@@ -5,7 +5,7 @@ namespace App\Models\Finance;
 use App\Models\BaseModel;
 
 /**
- * Class SystemPlatformBank
+ * Class  SystemPlatformBank
  * @package App\Models\Finance
  */
 class SystemPlatformBank extends BaseModel
