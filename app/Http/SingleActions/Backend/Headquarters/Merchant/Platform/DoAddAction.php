@@ -102,6 +102,7 @@ class DoAddAction
     
     /**
      * @param string $platformSign 平台标识.
+     * @return void
      */
     private function createBanks(string $platformSign)
     {
