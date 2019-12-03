@@ -32,12 +32,13 @@ class DoAddRequest extends BaseFormRequest
             'password' => 'required|string', //密码
             'platform_name' => 'required|unique:system_platforms,name', //平台名称
             'platform_sign' => 'required|unique:system_platforms,sign', //平台标识
-            'agenty_method' => 'required|string', //代理方式
+            'agency_method' => 'required|string', //代理方式
             'domains' => 'required|array', //域名
+            'domains.*' => 'unique:system_domains,domain', //域名
             'role' => 'required|string', //权限
             'status' => 'required|integer|in:0,1', //开启状态
             'start_time' => 'required|date_format:Y-m-d H:i:s', //开始时间
-            'end_time ' => 'required|date_format:Y-m-d H:i:s', //结束时间
+            'end_time' => 'required|date_format:Y-m-d H:i:s', //结束时间
         ];
     }
 

@@ -3,9 +3,13 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\MerchansAdminUser;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\ModelFilters\Finance\SystemBankFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Admin\MerchantAdminUser;
+use App\Models\Finance\SystemBank;
+use App\Models\Finance\SystemPlatformBank;
+use App\Models\Systems\SystemDomain;
 use App\Models\SystemPlatform;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -29,8 +33,10 @@ class DoAddAction
         try {
             //生成平台
             $platformEloq = $this->createPlatform($inputDatas, $contll->currentAdmin->id);
-            //生成域名
-            $this->createPlatformDomain($inputDatas, $platformEloq->sign);
+            //平台绑定域名
+            $this->createPlatformDomain($inputDatas, $platformEloq->sign, $contll->currentAdmin->id);
+            //生成平台银行配置
+            $this->createBanks($platformEloq->sign);
             //生成超级管理员组
             $adminGroupEloq = $this->createAdminGroup($platformEloq->sign);
             //生成管理员组权限
@@ -60,27 +66,55 @@ class DoAddAction
         $platformData = [
             'name' => $inputDatas['platform_name'],
             'sign' => $inputDatas['platform_sign'],
+            'agency_method' => $inputDatas['agency_method'],
             'author_id' => $adminId,
             'last_editor_id' => $adminId,
+            'start_time' => $inputDatas['start_time'],
+            'end_time' => $inputDatas['end_time'],
         ];
         $platformEloq->fill($platformData);
         $platformEloq->save();
         return $platformEloq;
     }
 
-    // /**
-    //  * Creates a platform domain.
-    //  * @param array  $inputDatas   接收的参数.
-    //  * @param string $platformSign 平台标识.
-    //  * @return void
-    //  */
-    // private function createPlatformDomain(array $inputDatas, string $platformSign)
-    // {
-    //     // $domains = $inputDatas['domains'];
-    //     // foreach ($domains as $domain) {
-    //     //     # co
-    //     // }
-    // }
+    /**
+     * Creates a platform domain.
+     * @param array  $inputDatas   接收的参数.
+     * @param string $platformSign 平台标识.
+     * @return void
+     */
+    private function createPlatformDomain(array $inputDatas, string $platformSign, int $adminId)
+    {
+        $domains = $inputDatas['domains'];
+        $addData = [
+            'plarform_sign' => $platformSign,
+            'admin_id' => $adminId,
+            'status' => SystemDomain::STATUS_OPEN,
+        ];
+        foreach ($domains as $domain) {
+            $systemDomainELoq = new SystemDomain();
+            $addData['domain'] = $domain;
+            $systemDomainELoq->fill($addData);
+            $systemDomainELoq->save();
+        }
+    }
+    
+    private function createBanks(string $platformSign)
+    {
+        $filterArr = ['status' => SystemBank::STATUS_OPEN];
+        $systemBank = SystemBank::filter($filterArr, SystemBankFilter::class)->get();
+        $addData = [
+            'platform_sign' => $platformSign,
+            'status' => SystemPlatformBank::STATUS_CLOSE,
+        ];
+        foreach ($systemBank as $bank) {
+            $addData['bank_id'] = $bank->id;
+            $systemPlatformBank = new SystemPlatformBank();
+            $systemPlatformBank->fill($addData);
+            $systemPlatformBank->save();
+        }
+    }
+
     /**
      * Creates an admin group.
      * @param string $platformSign 平台标识.
