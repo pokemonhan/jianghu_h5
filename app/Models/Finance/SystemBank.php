@@ -10,8 +10,8 @@ use App\Models\BaseModel;
  */
 class SystemBank extends BaseModel
 {
-    const STATUS_OPEN = 1;
-    const STATUS_CLOSE = 0;
+    public const STATUS_OPEN = 1;
+    public const STATUS_CLOSE = 0;
     
     /**
      * @var array
