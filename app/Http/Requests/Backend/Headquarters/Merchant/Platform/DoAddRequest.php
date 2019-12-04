@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\Merchant\MerchansAdminUser;
+namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Requests\BaseFormRequest;
 
@@ -20,7 +20,7 @@ class DoAddRequest extends BaseFormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the request .
      *
      * @return array
      */

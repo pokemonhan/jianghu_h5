@@ -5,13 +5,13 @@ namespace App\Models\Finance;
 use App\Models\BaseModel;
 
 /**
- * Class SystemPlatformBank
+ * Class  SystemPlatformBank
  * @package App\Models\Finance
  */
 class SystemPlatformBank extends BaseModel
 {
-    const STATUS_OPEN = 1;
-    const STATUS_CLOSE = 0;
+    public static const STATUS_OPEN = 1;
+    public static const STATUS_CLOSE = 0;
     
     /**
      * @var array
