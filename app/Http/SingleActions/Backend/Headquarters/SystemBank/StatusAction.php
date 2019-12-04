@@ -24,7 +24,8 @@ class StatusAction extends BaseAction
                 'status' => $inputDatas['status'],
                 'last_editor_id' => $contll->currentAdmin->id,
             ],
-        )) {
+        )
+        ) {
             return msgOut(true);
         } else {
             throw new \Exception('300904');
