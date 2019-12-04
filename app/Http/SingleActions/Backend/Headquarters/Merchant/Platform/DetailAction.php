@@ -12,7 +12,7 @@ class DetailAction
 {
     /**
      * Comment
-     * @var SystemPlatform
+     * @var object SystemPlatform
      */
     protected $model;
 
