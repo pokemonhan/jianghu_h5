@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Merchant\MerchansAdminUser;
+namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
-use App\ModelFilters\Finance\SystemBankFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Admin\MerchantAdminUser;
@@ -17,7 +16,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for merchant admin user do add action.
+ * Class for merchant admin user do add action .
  */
 class DoAddAction
 {
@@ -79,8 +78,9 @@ class DoAddAction
 
     /**
      * Creates a platform domain.
-     * @param array  $inputDatas   接收的参数.
-     * @param string $platformSign 平台标识.
+     * @param array   $inputDatas   接收的参数.
+     * @param string  $platformSign 平台标识.
+     * @param integer $adminId      平台标识.
      * @return void
      */
     private function createPlatformDomain(array $inputDatas, string $platformSign, int $adminId)
@@ -99,16 +99,19 @@ class DoAddAction
         }
     }
     
+    /**
+     * @param string $platformSign 平台标识.
+     * @return void
+     */
     private function createBanks(string $platformSign)
     {
-        $filterArr = ['status' => SystemBank::STATUS_OPEN];
-        $systemBank = SystemBank::filter($filterArr, SystemBankFilter::class)->get();
+        $systemBank = SystemBank::pluck('id')->toArray();
         $addData = [
             'platform_sign' => $platformSign,
             'status' => SystemPlatformBank::STATUS_CLOSE,
         ];
-        foreach ($systemBank as $bank) {
-            $addData['bank_id'] = $bank->id;
+        foreach ($systemBank as $bankId) {
+            $addData['bank_id'] = $bankId;
             $systemPlatformBank = new SystemPlatformBank();
             $systemPlatformBank->fill($addData);
             $systemPlatformBank->save();
