@@ -25,12 +25,11 @@ class SwitchAction
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
      * @param array                    $inputDatas 接收的参数.
      * @throws \Exception
      * @return JsonResponse
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $platformEloq = $this->model::find($inputDatas['id']);
         if ($platformEloq !== null) {

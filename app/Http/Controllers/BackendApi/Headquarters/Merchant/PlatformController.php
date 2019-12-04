@@ -45,6 +45,6 @@ class PlatformController extends BackEndApiMainController
     public function switch(SwitchRequest $request, SwitchAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 }
