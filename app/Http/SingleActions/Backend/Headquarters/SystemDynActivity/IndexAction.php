@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class IndexAction extends BaseAction
 {
+
     /**
      * @var object $model
      */

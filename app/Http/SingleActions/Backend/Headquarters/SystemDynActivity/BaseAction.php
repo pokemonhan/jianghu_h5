@@ -9,6 +9,7 @@ use App\Models\Activity\SystemDynActivity;
  */
 class BaseAction
 {
+
     /**
      * @var SystemDynActivity $model
      */
