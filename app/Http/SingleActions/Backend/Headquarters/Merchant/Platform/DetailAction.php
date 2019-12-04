@@ -13,7 +13,8 @@ class DetailAction
     /**
      * @var SystemPlatform
      */
-    private $model;
+
+    protected $model;
 
     /**
      * @param SystemPlatform $systemPlatform 代理商平台.
