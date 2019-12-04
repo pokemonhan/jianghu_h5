@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 
@@ -25,7 +24,7 @@ class SwitchAction
     }
 
     /**
-     * @param array                    $inputDatas 接收的参数.
+     * @param array $inputDatas 接收的参数.
      * @throws \Exception
      * @return JsonResponse
      */
