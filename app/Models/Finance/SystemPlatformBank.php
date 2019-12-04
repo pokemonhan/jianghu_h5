@@ -12,13 +12,13 @@ class SystemPlatformBank extends BaseModel
 {
 
     /**
-     * 开启状态
+     * 状态开启
      * @var integer
      */
     public const STATUS_OPEN = 1;
 
     /**
-     * 关闭状态
+     * 状态关闭
      * @var integer
      */
     public const STATUS_CLOSE = 0;
