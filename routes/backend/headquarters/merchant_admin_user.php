@@ -12,5 +12,5 @@ Route::group(
         Route::match(['post', 'options'], 'do-add', ['as' => $namePrefix . 'do-add', 'uses' => $controller . 'doAdd']);
         //运营商状态开关
         Route::match(['post', 'options'], 'switch', ['as' => $namePrefix . 'switch', 'uses' => $controller . 'switch']);
-    }
+    },
 );
