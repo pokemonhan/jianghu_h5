@@ -36,7 +36,7 @@ class FrontendUser extends BaseAuthModel
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','fund_password',
     ];
 
     /**
@@ -72,5 +72,23 @@ class FrontendUser extends BaseAuthModel
     public function parent(): HasOne
     {
         return $this->hasOne($this, 'id', 'parent_id');
+    }
+
+    /**
+     *  用户账户
+     * @return HasOne
+     */
+    public function account(): HasOne
+    {
+        return $this->hasOne(FrontendUsersAccount::class,'user_id','id');
+    }
+
+    /**
+     *  specific info
+     * @return HasOne
+     */
+    public function specificInfo(): HasOne
+    {
+        return $this->hasOne(FrontendUsersSpecificInfo::class,'user_id','id');
     }
 }
