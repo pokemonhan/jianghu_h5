@@ -23,7 +23,7 @@ class AssignGamesAction
             $tmpData['game_sign'] = $game_sign;
             $data[] = $tmpData;
         }
-        if (GamesPlatform::insert($data)) {
+        if (GamesPlatform::insert($data) === true) {
             return msgOut(true);
         } else {
             throw new \Exception('302000');
