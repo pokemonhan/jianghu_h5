@@ -77,6 +77,6 @@ class BackendGameVendorController extends BackEndApiMainController
     public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 }

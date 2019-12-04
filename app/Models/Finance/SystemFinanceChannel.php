@@ -11,53 +11,35 @@ use App\Models\BaseModel;
  */
 class SystemFinanceChannel extends BaseModel
 {
+
     /**
      * @var array
      */
     protected $guarded = ['id'];
     /**
-     * @var array
-     */
-    protected $appends = ['last_editor_name', 'author_name'];
-
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function lastEditor()
-    {
-        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id')->select('id', 'name');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function author()
-    {
-        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-    }
-
-    /**
+     * @param integer $value Value.
      * @return string|null
      */
-    public function getLastEditorNameAttribute()
+    public function getLastEditorIdAttribute(int $value)
     {
-        if (!isset($this->lastEditor)) {
-            return null;
+        if (isset($value) && $value !== 0) {
+            return BackendAdminUser::find($value)->name;
         } else {
-            return $this->lastEditor->name;
+            return null;
         }
     }
 
+
     /**
+     * @param integer $value Value.
      * @return string|null
      */
-    public function getAuthorNameAttribute()
+    public function getAuthorIdAttribute(int $value)
     {
-        if (!isset($this->author)) {
-            return null;
+        if (isset($value) && $value !== 0) {
+            return BackendAdminUser::find($value)->name;
         } else {
-            return $this->author->name;
+            return null;
         }
     }
 }

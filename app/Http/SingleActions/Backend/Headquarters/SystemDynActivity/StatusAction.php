@@ -1,22 +1,21 @@
 <?php
-
-namespace App\Http\SingleActions\Backend\Headquarters\SystemBank;
+namespace App\Http\SingleActions\Backend\Headquarters\SystemDynActivity;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class StatusAction
- * @package App\Http\SingleActions\Backend\Headquarters\SystemBank
+ * @package App\Http\SingleActions\Backend\Headquarters\SystemDynActivity
  */
 class StatusAction extends BaseAction
 {
-    /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
+   /**
+    * @param BackEndApiMainController $contll     Contll.
+    * @param array                    $inputDatas InputDatas.
+    * @return JsonResponse
+    * @throws \Exception Exception.
+    */
     public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
         if ($this->model->where('id', $inputDatas['id'])->update(
@@ -27,7 +26,7 @@ class StatusAction extends BaseAction
         )) {
             return msgOut(true);
         } else {
-            throw new \Exception('300904');
+            throw new \Exception('301000');
         }
     }
 }
