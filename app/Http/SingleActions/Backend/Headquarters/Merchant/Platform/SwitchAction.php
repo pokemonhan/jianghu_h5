@@ -10,7 +10,9 @@ use Illuminate\Http\JsonResponse;
  */
 class SwitchAction
 {
+
     /**
+     * 代理商平台model.
      * @var SystemPlatform
      */
     private $model;
