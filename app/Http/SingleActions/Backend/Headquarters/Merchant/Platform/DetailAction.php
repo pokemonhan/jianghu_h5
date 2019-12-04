@@ -11,9 +11,9 @@ use Illuminate\Http\JsonResponse;
 class DetailAction
 {
     /**
+     * Comment
      * @var SystemPlatform
      */
-
     protected $model;
 
     /**
