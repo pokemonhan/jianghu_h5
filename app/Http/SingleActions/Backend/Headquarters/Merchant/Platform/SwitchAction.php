@@ -25,7 +25,7 @@ class SwitchAction
 
     /**
      * @param array $inputDatas 接收的参数.
-     * @throws \Exception
+     * @throws \Exception Exception.
      * @return JsonResponse
      */
     public function execute(array $inputDatas): JsonResponse
