@@ -43,11 +43,11 @@ class DoAddRequest extends BaseFormRequest
     }
 
     /*public function messages()
-{
-return [
-'lottery_sign.required' => 'lottery_sign is required!',
-'trace_issues.required' => 'trace_issues is required!',
-'balls.required' => 'balls is required!'
-];
-}*/
+    {
+    return [
+    'lottery_sign.required' => 'lottery_sign is required!',
+    'trace_issues.required' => 'trace_issues is required!',
+    'balls.required' => 'balls is required!'
+    ];
+    }*/
 }

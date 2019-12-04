@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 
@@ -11,10 +10,12 @@ use Illuminate\Http\JsonResponse;
  */
 class SwitchAction
 {
+
     /**
+     * 代理商平台model.
      * @var SystemPlatform
      */
-    private $model;
+    protected $model;
 
     /**
      * @param SystemPlatform $systemPlatform 代理商平台.
@@ -25,12 +26,11 @@ class SwitchAction
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 接收的参数.
-     * @throws \Exception
+     * @param array $inputDatas 接收的参数.
+     * @throws \Exception Exception.
      * @return JsonResponse
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $platformEloq = $this->model::find($inputDatas['id']);
         if ($platformEloq !== null) {

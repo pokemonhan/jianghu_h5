@@ -10,10 +10,12 @@ use Illuminate\Http\JsonResponse;
  */
 class DetailAction
 {
+    
     /**
+     * Comment
      * @var SystemPlatform
      */
-    private $model;
+    protected $model;
 
     /**
      * @param SystemPlatform $systemPlatform 代理商平台.

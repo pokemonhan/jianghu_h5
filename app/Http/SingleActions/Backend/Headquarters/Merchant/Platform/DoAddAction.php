@@ -31,19 +31,19 @@ class DoAddAction
         DB::beginTransaction();
         try {
             //生成平台
-            $platformEloq = $this->createPlatform($inputDatas, $contll->currentAdmin->id);
+            $platformEloq = $this->_createPlatform($inputDatas, $contll->currentAdmin->id);
             //平台绑定域名
-            $this->createPlatformDomain($inputDatas, $platformEloq->sign, $contll->currentAdmin->id);
+            $this->_createPlatformDomain($inputDatas, $platformEloq->sign, $contll->currentAdmin->id);
             //生成平台银行配置
-            $this->createBanks($platformEloq->sign);
+            $this->_createBanks($platformEloq->sign);
             //生成超级管理员组
-            $adminGroupEloq = $this->createAdminGroup($platformEloq->sign);
+            $adminGroupEloq = $this->_createAdminGroup($platformEloq->sign);
             //生成管理员组权限
-            $this->createGroupRole($inputDatas, $adminGroupEloq->id);
+            $this->_createGroupRole($inputDatas, $adminGroupEloq->id);
             //生成运营商帐号
-            $adminUser = $this->createAdminUser($inputDatas, $adminGroupEloq->id);
+            $adminUser = $this->_createAdminUser($inputDatas, $adminGroupEloq->id);
             //插入平台所属人id
-            $this->editPlatformOwner($platformEloq, $adminUser->id);
+            $this->_editPlatformOwner($platformEloq, $adminUser->id);
             //完成
             DB::commit();
             return msgOut(true, ['platform_name' => $inputDatas['platform_name']]);
@@ -59,7 +59,7 @@ class DoAddAction
      * @param integer $adminId    管理员ID.
      * @return SystemPlatform
      */
-    private function createPlatform(array $inputDatas, int $adminId)
+    private function _createPlatform(array $inputDatas, int $adminId)
     {
         $platformEloq = new SystemPlatform();
         $platformData = [
@@ -83,7 +83,7 @@ class DoAddAction
      * @param integer $adminId      平台标识.
      * @return void
      */
-    private function createPlatformDomain(array $inputDatas, string $platformSign, int $adminId)
+    private function _createPlatformDomain(array $inputDatas, string $platformSign, int $adminId)
     {
         $domains = $inputDatas['domains'];
         $addData = [
@@ -103,7 +103,7 @@ class DoAddAction
      * @param string $platformSign 平台标识.
      * @return void
      */
-    private function createBanks(string $platformSign)
+    private function _createBanks(string $platformSign)
     {
         $systemBank = SystemBank::pluck('id')->toArray();
         $addData = [
@@ -123,7 +123,7 @@ class DoAddAction
      * @param string $platformSign 平台标识.
      * @return MerchantAdminAccessGroup
      */
-    private function createAdminGroup(string $platformSign)
+    private function _createAdminGroup(string $platformSign)
     {
         $adminGroupEloq = new MerchantAdminAccessGroup();
         $adminGroupData = [
@@ -142,7 +142,7 @@ class DoAddAction
      * @param integer $adminGroupId 管理员角色组ID.
      * @return void
      */
-    private function createGroupRole(array $inputDatas, int $adminGroupId)
+    private function _createGroupRole(array $inputDatas, int $adminGroupId)
     {
         $role = Arr::wrap(json_decode($inputDatas['role'], true));
         foreach ($role as $menuId) {
@@ -162,7 +162,7 @@ class DoAddAction
      * @param integer $adminGroupId 管理员角色组ID.
      * @return MerchantAdminUser
      */
-    private function createAdminUser(array $inputDatas, int $adminGroupId)
+    private function _createAdminUser(array $inputDatas, int $adminGroupId)
     {
         $adminData = [
             'name' => $inputDatas['username'],
@@ -178,7 +178,7 @@ class DoAddAction
      * @param integer        $adminUserId  平台所属超级管理员ID.
      * @return void
      */
-    private function editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId)
+    private function _editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId)
     {
         $platformEloq->owner_id = $adminUserId;
         $platformEloq->save();

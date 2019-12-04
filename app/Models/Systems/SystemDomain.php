@@ -9,8 +9,17 @@ use App\Models\BaseModel;
  */
 class SystemDomain extends BaseModel
 {
-    const STATUS_OPEN = 1;
-    const STATUS_CLOSE = 0;
+    /**
+     * 状态开启
+     * @var integer
+     */
+    public const STATUS_OPEN = 1;
+
+    /**
+     * 状态关闭
+     * @var integer
+     */
+    public const STATUS_CLOSE = 0;
 
     /**
      * @var array $guarded
