@@ -11,17 +11,17 @@ use App\Models\BaseModel;
 class SystemPlatformBank extends BaseModel
 {
 
-	/**
-	 * 开启状态
-	 * @var integer
-	 */
-    const STATUS_OPEN = 1;
+    /**
+     * 开启状态
+     * @var integer
+     */
+    public const STATUS_OPEN = 1;
 
     /**
      * 关闭状态
      * @var integer
      */
-    const STATUS_CLOSE = 0;
+    public const STATUS_CLOSE = 0;
     
     /**
      * @var array
