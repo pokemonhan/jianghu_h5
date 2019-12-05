@@ -15,7 +15,7 @@ class FrontendRichListController extends FrontendApiMainController
     /**
      * 今日富豪榜.
      * @param RichListAction $action Action.
-     * @return \Illuminate\Http\JsonResponse.
+     * @return JsonResponse.
      * @throws \Exception Exception.
      */
     public function richList(RichListAction $action): JsonResponse

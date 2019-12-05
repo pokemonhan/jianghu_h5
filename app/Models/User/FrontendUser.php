@@ -80,7 +80,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function account(): HasOne
     {
-        return $this->hasOne(FrontendUsersAccount::class,'user_id','id');
+        return $this->hasOne(FrontendUsersAccount::class, 'user_id', 'id');
     }
 
     /**
@@ -89,6 +89,6 @@ class FrontendUser extends BaseAuthModel
      */
     public function specificInfo(): HasOne
     {
-        return $this->hasOne(FrontendUsersSpecificInfo::class,'user_id','id');
+        return $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', "id");
     }
 }
