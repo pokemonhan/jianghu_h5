@@ -4,7 +4,6 @@ namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Models\Systems\SystemDomain;
 use Illuminate\Http\JsonResponse;
-use App\ModelFilters\System\SystemDomainFilter;
 
 /**
  * Class for merchant admin user do add action.
@@ -15,7 +14,7 @@ class DomainAddAction
     /**
      * @var SystemDomain
      */
-    private $model;
+    protected $model;
 
     /**
      * @param SystemDomain $systemDomain 域名.

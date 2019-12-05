@@ -11,10 +11,11 @@ use App\ModelFilters\System\SystemDomainFilter;
  */
 class DomainDetailAction
 {
+
     /**
      * @var SystemDomain
      */
-    private $model;
+    protected $model;
 
     /**
      * @param SystemDomain $systemDomain 域名.

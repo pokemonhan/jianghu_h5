@@ -10,6 +10,7 @@ use EloquentFilter\ModelFilter;
  */
 class SystemDomainFilter extends ModelFilter
 {
+
     /**
     * Related Models that have ModelFilters as well as the method on the ModelFilter
     * As [relationMethod => [input_key1, input_key2]].
@@ -18,7 +19,12 @@ class SystemDomainFilter extends ModelFilter
     */
     public $relations = [];
 
-    public function sign($sign)
+    /**
+     *
+     * @param string $sign 标识.
+     * @return $this
+     */
+    public function sign(string $sign)
     {
         return $this->where('platform_sign', $sign);
     }
