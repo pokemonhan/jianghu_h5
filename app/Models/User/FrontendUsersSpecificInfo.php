@@ -2,13 +2,13 @@
 
 namespace App\Models\User;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseAuthModel;
 
 /**
  * Class FrontendUsersSpecificInfo
  * @package App\Models\User
  */
-class FrontendUsersSpecificInfo extends Model
+class FrontendUsersSpecificInfo extends BaseAuthModel
 {
 
     /**
