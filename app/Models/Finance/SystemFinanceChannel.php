@@ -22,7 +22,7 @@ class SystemFinanceChannel extends BaseModel
      */
     public function getLastEditorIdAttribute(int $value)
     {
-        if (isset($value) && $value !== 0) {
+        if (!empty($value)) {
             return BackendAdminUser::find($value)->name;
         } else {
             return null;
