@@ -16,7 +16,8 @@ class SystemDynActivitySeeder extends Seeder
      */
     public function run()
     {
-        SystemDynActivity::insert([
+        SystemDynActivity::insert(
+            [
             [
                 'name' => '幸运转盘',
                 'sign' => 'TURNTABLE',
@@ -29,6 +30,7 @@ class SystemDynActivitySeeder extends Seeder
                 'last_editor_id' => 0,
                 'status' => 1,
             ],
-        ]);
+            ],
+        );
     }
 }
