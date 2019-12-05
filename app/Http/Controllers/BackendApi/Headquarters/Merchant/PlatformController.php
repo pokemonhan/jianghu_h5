@@ -7,6 +7,8 @@ use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGamesReques
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDetailRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainAddRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignGamesRequest;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGamesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignGamesAction;
@@ -14,6 +16,8 @@ use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\GetSearchDataOfAssignGameAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SwitchAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainDetailAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainAddAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignGamesAction;
 use Illuminate\Http\JsonResponse;
 
@@ -23,7 +27,8 @@ use Illuminate\Http\JsonResponse;
 class PlatformController extends BackEndApiMainController
 {
     /**
-     * 运营商列表
+     *
+     * 运营商平台列表
      * @param DetailAction $action Action.
      * @return JsonResponse
      */
@@ -33,7 +38,7 @@ class PlatformController extends BackEndApiMainController
     }
 
     /**
-     * 添加运营商
+     * 添加运营商平台
      * @param DoAddRequest $request Request.
      * @param DoAddAction  $action  Action.
      * @return JsonResponse
@@ -47,6 +52,7 @@ class PlatformController extends BackEndApiMainController
 
 
     /**
+     * 运营商平台开关
      * @param SwitchRequest $request Request.
      * @param SwitchAction  $action  Action.
      * @return JsonResponse
@@ -56,6 +62,30 @@ class PlatformController extends BackEndApiMainController
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
+    }
+
+    /**
+     * 运营商域名列表
+     * @param DomainDetailRequest $request Request.
+     * @param DomainDetailAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function domainDetail(DomainDetailRequest $request, DomainDetailAction $action): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 添加运营商域名
+     * @param DomainAddRequest $request Request.
+     * @param DomainAddAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($this, $inputDatas);
     }
 
     /**

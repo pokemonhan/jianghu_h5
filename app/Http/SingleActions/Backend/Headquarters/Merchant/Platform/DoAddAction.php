@@ -87,7 +87,7 @@ class DoAddAction
     {
         $domains = $inputDatas['domains'];
         $addData = [
-            'plarform_sign' => $platformSign,
+            'platform_sign' => $platformSign,
             'admin_id' => $adminId,
             'status' => SystemDomain::STATUS_OPEN,
         ];
