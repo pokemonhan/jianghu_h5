@@ -2,6 +2,7 @@
 
 namespace App\ModelFilters\Game;
 
+use App\Models\Platform\GamesPlatform;
 use EloquentFilter\ModelFilter;
 
 /**
@@ -10,6 +11,7 @@ use EloquentFilter\ModelFilter;
  */
 class GameFilter extends ModelFilter
 {
+
     /**
     * Related Models that have ModelFilters as well as the method on the ModelFilter
     * As [relationMethod => [input_key1, input_key2]].
@@ -22,7 +24,7 @@ class GameFilter extends ModelFilter
      * @param integer $game_id Game_id.
      * @return GameFilter
      */
-    public function Game(int $game_id)
+    public function game(int $game_id)
     {
         return $this->where('id', $game_id);
     }
@@ -43,5 +45,25 @@ class GameFilter extends ModelFilter
     public function type(int $type_id)
     {
         return $this->where('type_id', $type_id);
+    }
+
+    /**
+     * @param string $unassign_platform_sign Unassign_platform_sign.
+     * @return GameFilter|\Illuminate\Database\Query\Builder
+     */
+    public function unassignPlatformSign(string $unassign_platform_sign)
+    {
+        $assignedGames = GamesPlatform::where('platform_sign', $unassign_platform_sign)->get()->pluck('game_sign')->toArray();
+        return $this->whereNotIn('sign', $assignedGames);
+    }
+
+    /**
+     * @param string $assigned_platform_sign Assigned_platform_sign.
+     * @return GameFilter|\Illuminate\Database\Query\Builder
+     */
+    public function assignedPlatformSign(string $assigned_platform_sign)
+    {
+        $assignedGames = GamesPlatform::where('platform_sign', $assigned_platform_sign)->get()->pluck('game_sign')->toArray();
+        return $this->whereIn('sign', $assignedGames);
     }
 }

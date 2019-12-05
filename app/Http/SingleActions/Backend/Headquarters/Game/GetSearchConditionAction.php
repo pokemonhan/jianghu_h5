@@ -12,10 +12,10 @@ use Illuminate\Http\JsonResponse;
  */
 class GetSearchConditionAction extends BaseAction
 {
-   /**
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
+    /**
+      * @return JsonResponse
+      * @throws \Exception Exception.
+      */
     public function execute() :JsonResponse
     {
         $games = $this->model->select(['id', 'type_id', 'vendor_id', 'name'])->get();

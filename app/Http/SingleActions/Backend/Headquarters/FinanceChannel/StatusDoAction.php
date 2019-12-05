@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceChannel;
 
+use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -10,14 +11,21 @@ use Illuminate\Http\JsonResponse;
  */
 class StatusDoAction extends BaseAction
 {
-   /**
-     * @param array $inputDatas InputDatas.
+    /**
+     * @param BackEndApiMainController $contll     Contll.
+     * @param array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
-        if ($this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']])) {
+        if ($this->model->where('id', $inputDatas['id'])->update(
+            [
+                'status' => $inputDatas['status'],
+                'last_editor_id' => $contll->currentAdmin->id,
+            ],
+        )
+        ) {
             return msgOut(true);
         } else {
             throw new \Exception('300804');

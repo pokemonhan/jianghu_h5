@@ -81,6 +81,6 @@ class BackendSystemBankController extends BackEndApiMainController
     public function status(StatusAction $action, StatusRequest $request):JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute($this, $inputDatas);
     }
 }
