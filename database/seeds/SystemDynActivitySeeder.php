@@ -16,19 +16,21 @@ class SystemDynActivitySeeder extends Seeder
      */
     public function run()
     {
-        SystemDynActivity::insert([
+        SystemDynActivity::insert(
             [
-                'name' => '幸运转盘',
-                'sign' => 'TURNTABLE',
-                'last_editor_id' => 0,
-                'status' => 1,
+                [
+                    'name' => '幸运转盘',
+                    'sign' => 'TURNTABLE',
+                    'last_editor_id' => 0,
+                    'status' => 1,
+                ],
+                [
+                    'name' => '抢红包',
+                    'sign' => 'RED',
+                    'last_editor_id' => 0,
+                    'status' => 1,
+                ],
             ],
-            [
-                'name' => '抢红包',
-                'sign' => 'RED',
-                'last_editor_id' => 0,
-                'status' => 1,
-            ],
-        ]);
+        );
     }
 }
