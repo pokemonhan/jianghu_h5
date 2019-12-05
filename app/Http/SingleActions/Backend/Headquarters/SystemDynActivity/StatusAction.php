@@ -1,13 +1,12 @@
 <?php
-
-namespace App\Http\SingleActions\Backend\Headquarters\SystemBank;
+namespace App\Http\SingleActions\Backend\Headquarters\SystemDynActivity;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class StatusAction
- * @package App\Http\SingleActions\Backend\Headquarters\SystemBank
+ * @package App\Http\SingleActions\Backend\Headquarters\SystemDynActivity
  */
 class StatusAction extends BaseAction
 {
@@ -28,7 +27,7 @@ class StatusAction extends BaseAction
         ) {
             return msgOut(true);
         } else {
-            throw new \Exception('300904');
+            throw new \Exception('301000');
         }
     }
 }

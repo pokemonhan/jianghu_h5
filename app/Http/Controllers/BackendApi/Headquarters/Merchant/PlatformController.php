@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\BackendApi\Headquarters\Merchant;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGamesRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignGamesRequest;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGamesAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignGamesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DoAddAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\GetSearchDataOfAssignGameAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SwitchAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignGamesAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -16,7 +23,7 @@ use Illuminate\Http\JsonResponse;
 class PlatformController extends BackEndApiMainController
 {
     /**
-     *
+     * 运营商列表
      * @param DetailAction $action Action.
      * @return JsonResponse
      */
@@ -30,6 +37,7 @@ class PlatformController extends BackEndApiMainController
      * @param DoAddRequest $request Request.
      * @param DoAddAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
     {
@@ -37,14 +45,66 @@ class PlatformController extends BackEndApiMainController
         return $action->execute($this, $inputDatas);
     }
 
+
     /**
      * @param SwitchRequest $request Request.
      * @param SwitchAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exceotion.
      */
     public function switch(SwitchRequest $request, SwitchAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
+    }
+
+    /**
+     * 为运营商分配游戏
+     * @param AssignGamesAction  $action  Action.
+     * @param AssignGamesRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function assignGames(AssignGamesAction $action, AssignGamesRequest $request) :JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 已分配给运营商的游戏
+     * @param AssignedGamesAction  $action  Action.
+     * @param AssignedGamesRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function assignedGames(AssignedGamesAction $action, AssignedGamesRequest $request):JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($this, $inputDatas);
+    }
+
+    /**
+     * 未分配给运营商的游戏列表
+     * @param UnassignGamesAction  $action  Action.
+     * @param UnassignGamesRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function unassignGames(UnassignGamesAction $action, UnassignGamesRequest $request) :JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($this, $inputDatas);
+    }
+
+    /**
+     * 获取分配游戏的查询条件
+     * @param GetSearchDataOfAssignGameAction $action Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function getSearchDataOfAssignGame(GetSearchDataOfAssignGameAction $action):JsonResponse
+    {
+        return $action->execute();
     }
 }

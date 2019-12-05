@@ -11,65 +11,36 @@ use App\Models\BaseModel;
  */
 class GamesVendor extends BaseModel
 {
+
     /**
      * @var array
      */
     protected $guarded = ['id'];
 
     /**
-     * @var array
-     */
-    protected $appends = ['last_editor_name', 'author_name'];
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function lastEditor()
-    {
-        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id')->select('id', 'name');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function author()
-    {
-        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-    }
-
-    /**
+     * @param integer $value Value.
      * @return string|null
      */
-    public function getLastEditorNameAttribute()
+    public function getLastEditorIdAttribute(int $value)
     {
-        if (!isset($this->lastEditor)) {
-            return null;
+        if (!empty($value)) {
+            return BackendAdminUser::find($value)->name;
         } else {
-            return $this->lastEditor->name;
+            return null;
         }
     }
 
-    /**
-     * @return string|null
-     */
-    public function getAuthorNameAttribute()
-    {
-        if (!isset($this->author)) {
-            return null;
-        } else {
-            return $this->author->name;
-        }
-    }
 
     /**
-     * @param mixed $value Value.
-     * @return false|string
+     * @param integer $value Value.
+     * @return string|null
      */
-    public function setWhitelistIpsAttribute($value)
+    public function getAuthorIdAttribute(int $value)
     {
-        if (isset($value)) {
-            return json_encode($value);
+        if (!empty($value)) {
+            return BackendAdminUser::find($value)->name;
         } else {
-            return '';
+            return null;
         }
     }
 }
