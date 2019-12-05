@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class FrontendUsersAccount extends BaseAuthModel
 {
+
     /**
      * @var array $guarded
      */

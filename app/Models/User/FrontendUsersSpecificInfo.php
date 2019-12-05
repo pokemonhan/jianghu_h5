@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FrontendUsersSpecificInfo extends Model
 {
+
     /**
      * @var array $guarded
      */
