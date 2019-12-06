@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SystemRoutesMobile extends Model
 {
+
     /**
      * @var array
      */

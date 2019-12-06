@@ -13,6 +13,7 @@ use App\Models\BaseAuthModel;
  */
 class FrontendUser extends BaseAuthModel
 {
+
     use Notifiable;
 
     /**
@@ -26,6 +27,7 @@ class FrontendUser extends BaseAuthModel
     // 没用到  暂时注释
     // const TYPE_USER = 3;
     public const FROZEN_TYPE_NO_WITHDRAWAL = 3;
+
     /**
      * @var array $guarded
      */
@@ -36,7 +38,7 @@ class FrontendUser extends BaseAuthModel
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','fund_password',
+        'password', 'remember_token', 'fund_password',
     ];
 
     /**
@@ -47,14 +49,6 @@ class FrontendUser extends BaseAuthModel
         'register_time' => 'datetime',
         'last_login_time' => 'datetime',
     ];
-
-    /**
-     * @return HasOne
-     */
-//    public function platform()
-//    {
-//        return $this->hasOne(SystemPlatform::class, 'platform_id', 'platform_id');
-//    }
 
     /**
      * 找子级
@@ -89,6 +83,6 @@ class FrontendUser extends BaseAuthModel
      */
     public function specificInfo(): HasOne
     {
-        return $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', "id");
+        return $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', 'id');
     }
 }
