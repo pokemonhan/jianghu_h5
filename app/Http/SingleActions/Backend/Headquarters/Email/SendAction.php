@@ -30,7 +30,7 @@ class SendAction extends BaseAction
             if ((int) $inputDatas['is_timing'] === (int) SystemEmail::IS_TIMING_NO) {
                 event(
                     new SystemEmailEvent(
-                        $this->model->max('id'),
+                        $this->model->id,
                         $inputDatas['receiver_type'],
                         $receivers,
                     ),
