@@ -17,12 +17,12 @@ class SystemEmailEventListener
 {
 
     /**
-     * @var $systemEmail
+     * @var SystemEmail
      */
     private $_systemEmail;
 
     /**
-     * @var $systemEmailMember
+     * @var SystemEmailReceiver
      */
     private $_systemEmailReceiver;
 
