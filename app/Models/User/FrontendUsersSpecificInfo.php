@@ -35,7 +35,7 @@ class FrontendUsersSpecificInfo extends BaseAuthModel
      * 隐藏手机号中间四位 ****
      * @return string
      */
-    public function getMobileHiddenAttribute()
+    public function getMobileHiddenAttribute(): string
     {
         return substr_replace($this->attributes['mobile'], '****', 3, 4);
     }
