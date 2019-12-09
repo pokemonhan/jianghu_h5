@@ -17,25 +17,25 @@ class SystemEmailEvent
 
     /**
      * 邮件id
-     * @var $emailId
+     * @var integer
      */
     public $emailId;
 
     /**
      * 接收者类型
-     * @var $receiverType
+     * @var integer
      */
     public $receiverType;
 
     /**
      * 接收者
-     * @var $receivers
+     * @var array
      */
     public $receivers;
 
     /**
      * 平台标识
-     * @var $platformSign
+     * @var string
      */
     public $platformSign;
     /**
