@@ -50,6 +50,7 @@ class SystemEmailEventListener
         $tmpData['email_id'] = $event->emailId;
         $tmpData['receiver_type'] = $event->receiverType;
         $tmpData['platform_sign'] = $event->platformSign;
+        $data = [];
         foreach ($receiverIds as $receiverId) {
             $tmpData['receiver_id'] = $receiverId;
             $data[] = $tmpData;
