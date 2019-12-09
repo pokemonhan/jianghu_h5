@@ -67,4 +67,7 @@ return [
     '301000' => '活动,状态改变失败',
     //PlatformController
     '302000' => '分配游戏失败!',
+    '302001' => '游戏移除失败!',
+    //BackendSystemEmailController
+    '303000' => '邮件保存失败!',
 ];
