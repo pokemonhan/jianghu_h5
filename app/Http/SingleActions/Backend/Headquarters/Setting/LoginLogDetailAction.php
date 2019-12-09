@@ -31,7 +31,6 @@ class LoginLogDetailAction
      * @param BackEndApiMainController $contll     Contll.
      * @param array                    $inputDatas 接收的参数.
      * @return JsonResponse
-     * @throws \Exception Exception.
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
