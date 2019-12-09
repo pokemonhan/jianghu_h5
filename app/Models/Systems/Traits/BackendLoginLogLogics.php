@@ -2,16 +2,18 @@
 
 namespace App\Models\Systems\Traits;
 
+use Illuminate\Http\Request;
+
 trait BackendLoginLogLogics
 {
     /**
      * 插入管理员登录记录
      * @param object  $user    管理员Eloq.
-     * @param array   $request 接收的参数.
+     * @param Request $request 接收的参数.
      * @param integer $type    总后台1  代理后台2.
      * @return void
      */
-    public function insertData(object $user, array $request, int $type)
+    public function insertData(object $user, Request $request, int $type)
     {
         $addData = [
             'name' => $user->name,
