@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Common\Backend;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Models\Systems\BackendLoginLog;
 use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
@@ -21,12 +22,12 @@ class LoginAction
     /**
      * @var integer
      */
-    private $maxAttempts;
+    protected $maxAttempts;
 
     /**
      * @var integer
      */
-    private $decayMinutes;
+    protected $decayMinutes;
 
     /**
      * Login user and create token
@@ -37,28 +38,18 @@ class LoginAction
      */
     public function execute(BackEndApiMainController $contll, Request $request): JsonResponse
     {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean',
-        ]);
+        $request->validate(
+            [
+                'email' => 'required|string|email',
+                'password' => 'required|string',
+                'remember_me' => 'boolean',
+            ],
+        );
         $credentials = request(['email', 'password']);
         $this->maxAttempts = 1; //1 times
         $this->decayMinutes = 1; //1 minutes
-        // If the class is using the ThrottlesLogins trait, we can automatically throttle
-        // the login attempts for this application. We'll key this by the username and
-        // the IP address of the client making these requests into this application.
-        /*
-        if ($this->hasTooManyLoginAttempts($request)) {
-        $this->fireLockoutEvent($request);
-        $seconds = $this->limiter()->availableIn(
-        $this->throttleKey($request)
-        );
-        return msgOut(false, [], '100005');
-        }
-         */
-
-        if (!$token = $contll->currentAuth->attempt($credentials)) {
+        $token = $contll->currentAuth->attempt($credentials);
+        if (!$token) {
             throw new \Exception('100002');
         }
         if ($request->hasSession()) {
@@ -80,6 +71,10 @@ class LoginAction
         }
         $user->remember_token = $token;
         $user->save();
+
+        $backendLoginLog = new BackendLoginLog();
+        $backendLoginLog->insertData($user, $request, BackendLoginLog::TYPE_HEADQUARTERS);
+
         $data = [
             'access_token' => $token,
             'token_type' => 'Bearer',
