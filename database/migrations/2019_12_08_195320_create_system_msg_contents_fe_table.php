@@ -26,7 +26,7 @@ class CreateSystemMsgContentsFeTable extends Migration
             $table->timestamp('end_time')->nullable()->default(null)->comment('结束时间');
             $table->text('pic_path')->nullable()->default(null)->comment('图片路径');
             $table->text('describe')->nullable()->default(null)->comment('描述');
-            $table->unsignedTinyInteger('status')->comment('1显示 0关闭');
+            $table->tinyInteger('status')->comment('1显示 0关闭');
             $table->unsignedTinyInteger('top')->nullable()->default('0')->comment('1置顶 0取消置顶');
             $table->nullableTimestamps();
         });
