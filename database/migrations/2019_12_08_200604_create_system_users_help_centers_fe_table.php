@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateSystemUsersHelpCentersFeTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('system_users_help_centers_fe', function (Blueprint $table) {
+            $table->increments('id');
+            $table->collation = 'utf8mb4_0900_ai_ci';
+            $table->integer('pid')->comment('上级id');
+            $table->string('title', 128)->nullable()->default(null)->comment('标题');
+            $table->text('content')->nullable()->default(null)->comment('内容');
+            $table->tinyInteger('status')->default('0')->comment('开启状态 0关闭 1开启');
+            $table->nullableTimestamps();
+        });
+        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_users_help_centers_fe` comment '前台帮助中心'");
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('system_users_help_centers_fe');
+    }
+}
