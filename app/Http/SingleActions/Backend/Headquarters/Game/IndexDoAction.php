@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
  */
 class IndexDoAction extends BaseAction
 {
+
     /**
      * @var object $model
      */
@@ -24,7 +25,7 @@ class IndexDoAction extends BaseAction
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
-        $outputDatas = $this->model::filter($inputDatas, GameFilter::class)->paginate($contll->pageSize);
+        $outputDatas = $this->model::filter($inputDatas, GameFilter::class)->paginate($contll->inputs['pageSize']);
         return msgOut(true, $outputDatas);
     }
 }
