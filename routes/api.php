@@ -12,41 +12,49 @@
 */
 
 
-Route::group([
+Route::group(
+    [
     'middleware' => ['backend-api'],
-    'namespace' => 'BackendApi\Headquarters',
     'prefix' => 'headquarters-api',
-], static function () {
-    $sRouteDir = base_path().'/routes/backend/headquarters/';
-    $aRouteFiles = glob($sRouteDir.'*.php');
-    foreach ($aRouteFiles as $sRouteFile) {
-        include $sRouteFile;
-    }
-    unset($aRouteFiles);
-});
+    ],
+    static function () {
+        $sRouteDir = base_path().'/routes/backend/headquarters/';
+        $aRouteFiles = glob($sRouteDir.'*.php');
+        foreach ($aRouteFiles as $sRouteFile) {
+            include $sRouteFile;
+        }
+        unset($aRouteFiles);
+    },
+);
 
-Route::group([
+Route::group(
+    [
     'middleware' => ['merchant-api'],
     'namespace' => 'BackendApi\Merchant',
     'prefix' => 'merchant-api',
-], static function () {
-    $sRouteDir = base_path().'/routes/backend/merchant/';
-    $aRouteFiles = glob($sRouteDir.'*.php');
-    foreach ($aRouteFiles as $sRouteFile) {
-        include $sRouteFile;
-    }
-    unset($aRouteFiles);
-});
+    ],
+    static function () {
+        $sRouteDir = base_path().'/routes/backend/merchant/';
+        $aRouteFiles = glob($sRouteDir.'*.php');
+        foreach ($aRouteFiles as $sRouteFile) {
+            include $sRouteFile;
+        }
+        unset($aRouteFiles);
+    },
+);
 
-Route::group([
+Route::group(
+    [
     'middleware' => ['frontend-api'],
     'namespace' => 'FrontendApi\App',
     'prefix' => 'app-api',
-], static function () {
-    $sRouteDir = base_path().'/routes/frontend/app/';
-    $aRouteFiles = glob($sRouteDir.'*.php');
-    foreach ($aRouteFiles as $sRouteFile) {
-        include $sRouteFile;
-    }
-    unset($aRouteFiles);
-});
+    ],
+    static function () {
+        $sRouteDir = base_path().'/routes/frontend/app/';
+        $aRouteFiles = glob($sRouteDir.'*.php');
+        foreach ($aRouteFiles as $sRouteFile) {
+            include $sRouteFile;
+        }
+        unset($aRouteFiles);
+    },
+);
