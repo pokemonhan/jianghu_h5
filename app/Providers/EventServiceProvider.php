@@ -2,13 +2,19 @@
 
 namespace App\Providers;
 
+use App\Events\SystemEmailEvent;
+use App\Listeners\SystemEmailEventListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
+/**
+ * Class EventServiceProvider
+ * @package App\Providers
+ */
 class EventServiceProvider extends ServiceProvider
 {
+
     /**
      * The event listener mappings for the application.
      *
@@ -18,9 +24,8 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-
-        'App\Events\SystemEmailEvent' => [
-            'App\Listeners\SystemEmailEventListener',
+        SystemEmailEvent::class => [
+            SystemEmailEventListener::class,
         ],
     ];
 
@@ -32,7 +37,5 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        //
     }
 }
