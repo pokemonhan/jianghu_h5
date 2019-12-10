@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackendApi\Headquarters\Merchant;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGameCancelRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DoAddRequest;
@@ -10,6 +11,7 @@ use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDetailRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainAddRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignGamesRequest;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGameCancelAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGamesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignGamesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DetailAction;
@@ -85,7 +87,7 @@ class PlatformController extends BackEndApiMainController
     public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -136,5 +138,18 @@ class PlatformController extends BackEndApiMainController
     public function getSearchDataOfAssignGame(GetSearchDataOfAssignGameAction $action):JsonResponse
     {
         return $action->execute();
+    }
+
+    /**
+     * 取消已分配的游戏
+     * @param AssignedGameCancelAction  $action  Action.
+     * @param AssignedGameCancelRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function assignedGameCancel(AssignedGameCancelAction $action, AssignedGameCancelRequest $request):JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }
