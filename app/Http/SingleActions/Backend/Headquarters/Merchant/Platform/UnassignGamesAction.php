@@ -21,7 +21,9 @@ class UnassignGamesAction
     public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
         $inputDatas['unassign_platform_sign'] = $inputDatas['platform_sign'];
-        $outputDatas = Game::filter($inputDatas, GameFilter::class)->select(['id', 'name', 'sign', 'vendor_id'])->paginate($contll->pageSize);
+        $outputDatas = Game::filter($inputDatas, GameFilter::class)->select(
+            ['id', 'name', 'sign', 'vendor_id'],
+        )->paginate($contll->inputs['pageSize']);
         return msgOut(true, $outputDatas);
     }
 }
