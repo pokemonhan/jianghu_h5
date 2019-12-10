@@ -40,7 +40,6 @@ Route::group([
 
 Route::group([
     'middleware' => ['frontend-api'],
-    'namespace' => 'FrontendApi\App',
     'prefix' => 'app-api',
 ], static function () {
     $sRouteDir = base_path().'/routes/frontend/app/';

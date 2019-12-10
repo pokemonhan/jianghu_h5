@@ -38,7 +38,7 @@ class FrontendUser extends BaseAuthModel
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'fund_password',
+        'password', 'remember_token', 'fund_password', 'mobile',
     ];
 
     /**
@@ -84,5 +84,21 @@ class FrontendUser extends BaseAuthModel
     public function specificInfo(): HasOne
     {
         return $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', 'id');
+    }
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['mobile_hidden'];
+
+    /**
+     * 隐藏手机号中间四位 ****
+     * @return string
+     */
+    public function getMobileHiddenAttribute(): string
+    {
+        return substr_replace($this->attributes['mobile'], '****', 3, 4);
     }
 }

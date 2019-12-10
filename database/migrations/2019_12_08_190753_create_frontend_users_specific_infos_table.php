@@ -17,7 +17,6 @@ class CreateFrontendUsersSpecificInfosTable extends Migration
             $table->increments('id');
             $table->collation = 'utf8mb4_0900_ai_ci';
             $table->string('nickname', 16)->nullable()->default(null)->comment('昵称');
-            $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
             $table->string('email', 32)->nullable()->default(null)->comment('邮箱');
             $table->string('zip_code', 6)->nullable()->default(null)->comment('邮编');
             $table->string('address', 128)->nullable()->default(null)->comment('地址');

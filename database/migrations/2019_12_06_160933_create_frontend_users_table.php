@@ -17,6 +17,7 @@ class CreateFrontendUsersTable extends Migration
             $table->increments('id');
             $table->collation = 'utf8mb4_0900_ai_ci';
             $table->string('username', 64)->nullable()->default(null)->comment('用户名');
+            $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
             $table->integer('top_id')->nullable()->default('0')->comment('最上级id');
             $table->integer('parent_id')->nullable()->default('0')->comment('上级id');
             $table->integer('platform_id')->nullable()->default(null)->comment('平台id');
