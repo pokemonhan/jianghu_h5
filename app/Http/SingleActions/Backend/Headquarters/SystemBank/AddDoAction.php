@@ -14,24 +14,32 @@ use Illuminate\Support\Facades\DB;
  */
 class AddDoAction extends BaseAction
 {
-   /**
-    * @param BackEndApiMainController $contll     Contll.
-    * @param array                    $inputDatas InputDatas.
-    * @return JsonResponse
-    * @throws \Exception Exception.
-    */
+    /**
+     * @param BackEndApiMainController $contll     Contll.
+     * @param array                    $inputDatas InputDatas.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
     public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
-        $inputDatas['author_id'] = $contll->currentAdmin->id;
-        DB::beginTransaction();
-        $this->model->fill($inputDatas);
-        if ($this->model->save()) {
-            $lastId = $this->model->max('id');
-            $platforms = SystemPlatform::select('sign as platform_sign')->get()->toArray();
-            foreach ($platforms as &$platform) {
-                $platform['bank_id'] = $lastId;
+        $flag = false;
+        try {
+            $inputDatas['author_id'] = $contll->currentAdmin->id;
+            DB::beginTransaction();
+            $this->model->fill($inputDatas);
+            if ($this->model->save()) {
+                $lastId = $this->model->id;
+                $platforms = SystemPlatform::select('sign as platform_sign')->get()->toArray();
+                foreach ($platforms as &$platform) {
+                    $platform['bank_id'] = $lastId;
+                }
+                SystemPlatformBank::insert($platforms);
+                $flag = true;
             }
-            SystemPlatformBank::insert($platforms);
+        } catch (\Exception $exception) {
+            $flag = false;
+        }
+        if ($flag) {
             DB::commit();
             return msgOut(true);
         } else {

@@ -10,7 +10,8 @@ return [
     'formatters' => [
         SymfonyException\UnprocessableEntityHttpException::class => Formatters\UnprocessableEntityHttpExceptionFormatter::class,
         SymfonyException\HttpException::class => Formatters\HttpExceptionFormatter::class,
-        \Illuminate\Validation\ValidationException::class  => Formatters\ValidationException::class,
+        \Illuminate\Validation\ValidationException::class  => Formatters\ValidationExceptionFormatter::class,
+        PDOException::class => Formatters\PDOExceptionFormatter::class,
         Exception::class => Formatters\ExceptionFormatter::class,
     ],
     'response_factory' =>ResponseFactory::class,

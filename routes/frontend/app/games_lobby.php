@@ -6,6 +6,6 @@ use App\Http\Controllers\FrontendApi\App\GamesLobby\FrontendRichListController;
 Route::group(
     ['prefix' => 'games-lobby'],
     static function () {
-        Route::match(['get', 'options'], 'rich-list', [FrontendRichListController::class, 'richList'])->name('games-lobby.rich-list');
+        Route::match(['get', 'options'], 'rich-list', [FrontendRichListController::class, 'richList'])->name('app-api.games-lobby.rich-list');
     },
 );
