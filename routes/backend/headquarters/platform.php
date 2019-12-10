@@ -16,5 +16,23 @@ Route::group(
         Route::match(['post', 'options'], 'domain-detail', ['as' => $namePrefix . 'domain-detail', 'uses' => $controller . 'domainDetail']);
         //添加运营商域名
         Route::match(['post', 'options'], 'domain-add', ['as' => $namePrefix . 'domain-add', 'uses' => $controller . 'domainAdd']);
+        //删除已分配的游戏
+        Route::match(
+            ['post', 'options'],
+            'assigned-game-cancel',
+            ['as' => $namePrefix . 'assigned-game-cancel', 'uses' => $controller . 'assignedGameCancel'],
+        );
+        //分配游戏
+        Route::match(['post', 'options'], 'assign-games', ['as' => $namePrefix . 'assign-games', 'uses' => $controller . 'assignGames']);
+        //已分配的游戏
+        Route::match(['get', 'options'], 'assigned-games', ['as' => $namePrefix . 'assigned-games', 'uses' => $controller . 'assignedGames']);
+        //未分配的游戏
+        Route::match(['get', 'options'], 'unassign-games', ['as' => $namePrefix . 'unassign-games', 'uses' => $controller . 'unassignGames']);
+        //获取分配游戏接口的查询条件
+        Route::match(
+            ['get', 'options'],
+            'get-search-data-of-assign-game',
+            ['as' => $namePrefix . 'get-search-data-of-assign-game', 'uses' => $controller . 'getSearchDataOfAssignGame'],
+        );
     },
 );
