@@ -16,10 +16,11 @@ class SettingController extends BackEndApiMainController
      * @param LoginLogDetailRequest $request Request.
      * @param LoginLogDetailAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function loginLogDetail(LoginLogDetailRequest $request, LoginLogDetailAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 }
