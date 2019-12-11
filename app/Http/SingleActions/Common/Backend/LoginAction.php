@@ -4,7 +4,6 @@ namespace App\Http\SingleActions\Common\Backend;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Systems\BackendLoginLog;
-use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -66,7 +65,7 @@ class LoginAction
             try {
                 JWTAuth::setToken($user->remember_token);
                 JWTAuth::invalidate();
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 Log::info($e->getMessage());
             }
         }

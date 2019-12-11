@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Models\Admin\MerchantAdminAccessGroup;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -45,7 +44,7 @@ class DestroyAction
         try {
             $adminGroupELoq->delete();
             return msgOut(true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return msgOut(false, [], $e->getCode(), $e->getMessage());
         }
     }

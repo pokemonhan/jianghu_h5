@@ -5,7 +5,6 @@ namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Admin\MerchantAdminAccessGroup;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -59,7 +58,7 @@ class DeleteAdminAction
             try {
                 $adminEloq->delete();
                 return msgOut(true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
         } else {

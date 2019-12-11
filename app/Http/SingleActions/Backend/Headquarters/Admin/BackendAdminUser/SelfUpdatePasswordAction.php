@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
 use App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminUserController;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +36,7 @@ class SelfUpdatePasswordAction
                     'expires_at' => $expireAt,
                 ];
                 return msgOut(true, $data);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
         }

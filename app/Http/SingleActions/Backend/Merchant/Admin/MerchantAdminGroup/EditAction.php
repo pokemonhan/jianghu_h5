@@ -5,7 +5,6 @@ namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -64,7 +63,7 @@ class EditAction
 
                 DB::commit();
                 return msgOut(true, $adminGroupELoq->toArray());
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 DB::rollBack();
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
