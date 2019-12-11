@@ -2,13 +2,11 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\SystemBank;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\ModelFilters\Finance\SystemBankFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class IndexAction
- *
  * @package App\Http\SingleActions\Backend\Headquarters\SystemBank
  */
 class IndexAction extends BaseAction
@@ -19,14 +17,13 @@ class IndexAction extends BaseAction
      */
     protected $model;
     /**
-     * @param  BackEndApiMainController $contll     Contll.
-     * @param  array                    $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas) :JsonResponse
     {
-        $outputDatas = $this->model::filter($inputDatas, SystemBankFilter::class)->paginate($contll->inputs['pageSize']);
+        $outputDatas = $this->model::filter($inputDatas, SystemBankFilter::class)->paginate($this->model::getPageSize());
         return msgOut(true, $outputDatas);
     }
 }

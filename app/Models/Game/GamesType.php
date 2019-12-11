@@ -7,7 +7,6 @@ use App\Models\BaseModel;
 
 /**
  * Class GamesType
- *
  * @package App\Models\Game
  */
 class GamesType extends BaseModel
@@ -19,29 +18,18 @@ class GamesType extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @param  integer $value Value.
-     * @return string|null
+     * @return mixed
      */
-    public function getLastEditorIdAttribute(int $value)
+    public function lastEditor()
     {
-        if (!empty($value)) {
-            return BackendAdminUser::find($value)->name;
-        } else {
-            return null;
-        }
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
-
     /**
-     * @param  integer $value Value.
-     * @return string|null
+     * @return mixed
      */
-    public function getAuthorIdAttribute(int $value)
+    public function author()
     {
-        if (!empty($value)) {
-            return BackendAdminUser::find($value)->name;
-        } else {
-            return null;
-        }
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Setting;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\ModelFilters\System\BackendLoginLogFilter;
 use App\Models\Systems\BackendLoginLog;
 use Illuminate\Http\JsonResponse;
@@ -15,7 +14,6 @@ class LoginLogDetailAction
 
     /**
      * Comment
-     *
      * @var BackendLoginLog
      */
     protected $model;
@@ -29,14 +27,13 @@ class LoginLogDetailAction
     }
 
     /**
-     * @param  BackEndApiMainController $contll     Contll.
-     * @param  array                    $inputDatas 接收的参数.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $data = $this->model::filter($inputDatas, BackendLoginLogFilter::class)->paginate($contll->inputs['pageSize']);
+        $data = $this->model::filter($inputDatas, BackendLoginLogFilter::class)->paginate($this->model::getPageSize());
         return msgOut(true, $data);
     }
 }

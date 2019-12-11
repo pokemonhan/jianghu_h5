@@ -47,7 +47,7 @@ class BackendSystemBankController extends BackEndApiMainController
     public function index(IndexAction $action, IndexRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
