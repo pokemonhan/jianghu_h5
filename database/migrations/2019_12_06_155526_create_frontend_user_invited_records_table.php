@@ -13,15 +13,18 @@ class CreateFrontendUserInvitedRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('frontend_user_invited_records', function (Blueprint $table) {
-            $table->increments('id');
-            $table->collation = 'utf8mb4_0900_ai_ci';
-            $table->integer('user_id')->comment('用户id （frontend_users表id）');
-            $table->string('username', 64)->nullable()->default(null)->comment('用户名');
-            $table->integer('invite_code')->default('0')->comment('邀请码');
-            $table->char('ip', 15)->nullable()->default(null)->comment('IP地址');
-            $table->nullableTimestamps();
-        });
+        Schema::create(
+            'frontend_user_invited_records',
+            static function (Blueprint $table) {
+                $table->increments('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
+                $table->integer('user_id')->comment('用户id （frontend_users表id）');
+                $table->string('username', 64)->nullable()->default(null)->comment('用户名');
+                $table->integer('invite_code')->default('0')->comment('邀请码');
+                $table->char('ip', 15)->nullable()->default(null)->comment('IP地址');
+                $table->nullableTimestamps();
+            },
+        );
         \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_user_invited_records` comment '用户邀请记录'");
     }
 
