@@ -12,7 +12,9 @@ use Illuminate\Support\Carbon;
 class RefreshAction
 {
 
+
     /**
+     * @param FrontendApiMainController $frontend Frontend.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

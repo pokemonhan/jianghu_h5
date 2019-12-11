@@ -3,7 +3,6 @@
 namespace App\Models\User;
 
 use App\Models\Systems\SystemPlatform;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
@@ -115,8 +114,8 @@ class FrontendUser extends BaseAuthModel
      * get platform
      * @return HasOne
      */
-    public function platform(): BelongsTo
+    public function platform(): HasOne
     {
-        return $this->belongsTo(SystemPlatform::class);
+        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
     }
 }
