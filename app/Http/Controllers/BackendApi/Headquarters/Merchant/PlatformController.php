@@ -119,7 +119,7 @@ class PlatformController extends BackEndApiMainController
     public function assignedGames(AssignedGamesAction $action, AssignedGamesRequest $request):JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -133,7 +133,7 @@ class PlatformController extends BackEndApiMainController
     public function unassignGames(UnassignGamesAction $action, UnassignGamesRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
