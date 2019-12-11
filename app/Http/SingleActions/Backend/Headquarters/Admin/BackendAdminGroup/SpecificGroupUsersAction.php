@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class SpecificGroupUsersAction
 {
+
     /**
      * @var BackendAdminAccessGroup
      */
@@ -24,7 +25,7 @@ class SpecificGroupUsersAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

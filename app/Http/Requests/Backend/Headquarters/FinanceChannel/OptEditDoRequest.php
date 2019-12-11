@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class OptEditDoRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\FinanceChannel
  */
 class OptEditDoRequest extends BaseFormRequest

@@ -22,8 +22,8 @@ trait MerchantMenuLogics
     }
 
     /**
-     * @param integer $accessGroupId          管理员组id.
-     * @param array   $adminAccessGroupDetail 用户拥有的菜单权限.
+     * @param  integer $accessGroupId          管理员组id.
+     * @param  array   $adminAccessGroupDetail 用户拥有的菜单权限.
      * @return array|mixed
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
@@ -32,8 +32,8 @@ trait MerchantMenuLogics
     }
 
     /**
-     * @param string|integer $redisKey               RedisKey.
-     * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
+     * @param  string|integer $redisKey               RedisKey.
+     * @param  array          $adminAccessGroupDetail 管理员拥有的菜单权限.
      * @return array
      */
     public function getMenuDatas($redisKey, array $adminAccessGroupDetail = [])
@@ -47,8 +47,8 @@ trait MerchantMenuLogics
     }
 
     /**
-     * @param string|integer $redisKey               RedisKey.
-     * @param array          $adminAccessGroupDetail 管理员组权限.
+     * @param  string|integer $redisKey               RedisKey.
+     * @param  array          $adminAccessGroupDetail 管理员组权限.
      * @return array
      */
     public function createMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
@@ -72,6 +72,7 @@ trait MerchantMenuLogics
 
     /**
      * Gets menu childs.
+     *
      * @param array              $adminAccessGroupDetail 管理员组权限.
      * @param MerchantSystemMenu $firstMenu              BackendSystemMenu.
      * @param array              $menuForFE              整理后的管理员组权限.
@@ -112,7 +113,7 @@ trait MerchantMenuLogics
     }
 
     /**
-     * @param array $adminAccessGroupDetail 管理员组权限.
+     * @param  array $adminAccessGroupDetail 管理员组权限.
      * @return mixed
      */
     public static function getFirstLevelList(array $adminAccessGroupDetail)
@@ -121,7 +122,7 @@ trait MerchantMenuLogics
     }
 
     /**
-     * @param array $parseDatas 修改的数据.
+     * @param  array $parseDatas 修改的数据.
      * @return array $itemProcess
      */
     public function changeParent(array $parseDatas): array

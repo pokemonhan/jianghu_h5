@@ -21,8 +21,8 @@ use Illuminate\Support\Facades\DB;
 class DoAddAction
 {
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 传递的参数.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -55,8 +55,9 @@ class DoAddAction
 
     /**
      * Creates a platform.
-     * @param array   $inputDatas 接收的参数.
-     * @param integer $adminId    管理员ID.
+     *
+     * @param  array   $inputDatas 接收的参数.
+     * @param  integer $adminId    管理员ID.
      * @return SystemPlatform
      */
     private function _createPlatform(array $inputDatas, int $adminId)
@@ -78,9 +79,10 @@ class DoAddAction
 
     /**
      * Creates a platform domain.
-     * @param array   $inputDatas   接收的参数.
-     * @param string  $platformSign 平台标识.
-     * @param integer $adminId      平台标识.
+     *
+     * @param  array   $inputDatas   接收的参数.
+     * @param  string  $platformSign 平台标识.
+     * @param  integer $adminId      平台标识.
      * @return void
      */
     private function _createPlatformDomain(array $inputDatas, string $platformSign, int $adminId)
@@ -100,7 +102,7 @@ class DoAddAction
     }
     
     /**
-     * @param string $platformSign 平台标识.
+     * @param  string $platformSign 平台标识.
      * @return void
      */
     private function _createBanks(string $platformSign)
@@ -120,7 +122,8 @@ class DoAddAction
 
     /**
      * Creates an admin group.
-     * @param string $platformSign 平台标识.
+     *
+     * @param  string $platformSign 平台标识.
      * @return MerchantAdminAccessGroup
      */
     private function _createAdminGroup(string $platformSign)
@@ -138,8 +141,9 @@ class DoAddAction
 
     /**
      * Creates a group role.
-     * @param array   $inputDatas   接收的参数.
-     * @param integer $adminGroupId 管理员角色组ID.
+     *
+     * @param  array   $inputDatas   接收的参数.
+     * @param  integer $adminGroupId 管理员角色组ID.
      * @return void
      */
     private function _createGroupRole(array $inputDatas, int $adminGroupId)
@@ -158,8 +162,9 @@ class DoAddAction
 
     /**
      * Creates an admin user.
-     * @param array   $inputDatas   接收的参数.
-     * @param integer $adminGroupId 管理员角色组ID.
+     *
+     * @param  array   $inputDatas   接收的参数.
+     * @param  integer $adminGroupId 管理员角色组ID.
      * @return MerchantAdminUser
      */
     private function _createAdminUser(array $inputDatas, int $adminGroupId)
@@ -174,8 +179,8 @@ class DoAddAction
     }
 
     /**
-     * @param SystemPlatform $platformEloq 平台eloq.
-     * @param integer        $adminUserId  平台所属超级管理员ID.
+     * @param  SystemPlatform $platformEloq 平台eloq.
+     * @param  integer        $adminUserId  平台所属超级管理员ID.
      * @return void
      */
     private function _editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId)

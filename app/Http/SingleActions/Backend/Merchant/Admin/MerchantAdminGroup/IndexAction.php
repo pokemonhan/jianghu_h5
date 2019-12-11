@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class IndexAction
 {
+
     /**
      * @var object MerchantAdminAccessGroup
      */
@@ -29,7 +30,7 @@ class IndexAction
     public function execute(): JsonResponse
     {
         $data = $this->model->get()->toArray();
-        
+
         return msgOut(true, $data);
     }
 }

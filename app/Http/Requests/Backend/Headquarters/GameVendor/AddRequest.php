@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class AddRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
 class AddRequest extends BaseFormRequest

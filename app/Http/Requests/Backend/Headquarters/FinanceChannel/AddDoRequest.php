@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class AddDoRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\FinanceChannel
  */
 class AddDoRequest extends BaseFormRequest
@@ -22,6 +23,7 @@ class AddDoRequest extends BaseFormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
      * @return array
      */
     public function rules():array

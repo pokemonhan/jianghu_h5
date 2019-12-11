@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 
 /**
  * Class SendSystemEmailCommand
+ *
  * @package App\Console\Commands
  */
 class SendSystemEmailCommand extends Command
@@ -40,7 +41,8 @@ class SendSystemEmailCommand extends Command
 
     /**
      * Execute the console command.
-     * @param SystemEmail $systemEmail SystemEmail.
+     *
+     * @param  SystemEmail $systemEmail SystemEmail.
      * @return mixed
      */
     public function handle(SystemEmail $systemEmail)

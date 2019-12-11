@@ -13,40 +13,59 @@ use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+/**
+ * Class for login action.
+ */
 class LoginAction
 {
     use AuthenticatesUsers;
 
-    private $userAgent;
-    private $maxAttempts;
-    private $decayMinutes;
+    /**
+     * Agent
+     *
+     * @var object $userAgent
+     */
+    protected $userAgent;
+
+    /**
+     * @var integer
+     */
+    protected $maxAttempts;
+
+    /**
+     * @var integer
+     */
+    protected $decayMinutes;
 
     /**
      * Login user and create token
-     * @param  FrontendApiMainController  $contll
-     * @param  Request $request
+     *
+     * @param  FrontendApiMainController $contll  Controller.
+     * @param  Request                   $request Request.
      * @return JsonResponse
+     * @throws Exception Exception.
      */
     public function execute(FrontendApiMainController $contll, Request $request): JsonResponse
     {
         $this->userAgent = $contll->userAgent;
-        $request->validate([
+        $request->validate(
+            [
             'username' => 'required|string|alpha_dash',
             'password' => 'required|string',
             'remember_me' => 'boolean',
-        ]);
+            ],
+        );
         $credentials = request(['username', 'password']);
         $this->maxAttempts = 1; //1 times
         $this->decayMinutes = 1; //1 minutes
-
-        if (!$token = $contll->currentAuth->attempt($credentials)) {
+        $token = $contll->currentAuth->attempt($credentials);
+        if (!$token) {
             throw new Exception('100002');
         }
         if ($contll->currentAuth->user()->frozen_type === 1) {
             throw new Exception('100014');
         }
-        if ($request->hasSession())
-        {
+        if ($request->hasSession()) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
         }
@@ -77,6 +96,10 @@ class LoginAction
         return msgOut(true, $data);
     }
 
+    /**
+     * @param  Request $request Request.
+     * @return string|null
+     */
     protected function throttleKey(Request $request):  ? string
     {
         if ($this->userAgent->isDesktop()) {
@@ -87,6 +110,10 @@ class LoginAction
             '|' . $request->ip();
         }
     }
+
+    /**
+     * @return string
+     */
     protected function username() : string
     {
         return 'username';
