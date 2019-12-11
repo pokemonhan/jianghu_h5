@@ -23,6 +23,7 @@ class AddDoAction extends BaseAction
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
     {
+        
         $flag = false;
         try {
             $inputDatas['author_id'] = $contll->currentAdmin->id;
@@ -31,10 +32,12 @@ class AddDoAction extends BaseAction
             if ($this->model->save()) {
                 $lastId = $this->model->id;
                 $platforms = SystemPlatform::select('sign as platform_sign')->get()->toArray();
-                foreach ($platforms as &$platform) {
+                $data = [];
+                foreach ($platforms as $platform) {
                     $platform['bank_id'] = $lastId;
+                    $data[] = $platform;
                 }
-                SystemPlatformBank::insert($platforms);
+                SystemPlatformBank::insert($data);
                 $flag = true;
             }
         } catch (\Exception $exception) {
