@@ -2,15 +2,26 @@
 
 namespace App\Lib\ErrorsHandler;
 
-use Exception;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class ResponseFactory
+ *
+ * @package App\Lib\ErrorsHandler
+ */
 class ResponseFactory
 {
-    public static function make(Exception $e)
+    /**
+     * package the result
+     *
+     * @return JsonResponse
+     */
+    public static function make(): JsonResponse
     {
-        return new JsonResponse([
-            'status' => false
-        ]);
+        return new JsonResponse(
+            [
+            'status' => false,
+            ],
+        );
     }
 }

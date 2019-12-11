@@ -13,6 +13,7 @@ class SwitchAction
 
     /**
      * 代理商平台model.
+     *
      * @var SystemPlatform
      */
     protected $model;
@@ -26,7 +27,7 @@ class SwitchAction
     }
 
     /**
-     * @param array $inputDatas 接收的参数.
+     * @param  array $inputDatas 接收的参数.
      * @throws \Exception Exception.
      * @return JsonResponse
      */

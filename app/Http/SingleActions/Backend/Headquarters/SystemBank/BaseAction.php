@@ -6,10 +6,12 @@ use App\Models\Finance\SystemBank;
 
 /**
  * Class BaseAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\SystemBank
  */
 class BaseAction
 {
+
     /**
      * @var SystemBank $model
      */
@@ -17,6 +19,7 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     *
      * @param SystemBank $systemBank SystemBank.
      */
     public function __construct(SystemBank $systemBank)

@@ -10,11 +10,12 @@ use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
  */
 class SystemRoutesMerchant extends BaseModel
 {
+
     /**
      * @var array
      */
     protected $guarded = ['id'];
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

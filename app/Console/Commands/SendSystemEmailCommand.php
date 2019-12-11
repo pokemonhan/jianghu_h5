@@ -9,6 +9,7 @@ use Illuminate\Console\Command;
 
 /**
  * Class SendSystemEmailCommand
+ *
  * @package App\Console\Commands
  */
 class SendSystemEmailCommand extends Command

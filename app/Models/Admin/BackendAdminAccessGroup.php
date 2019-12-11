@@ -10,11 +10,12 @@ use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
  */
 class BackendAdminAccessGroup extends BaseModel
 {
+
     /**
      * @var array
      */
     protected $guarded = ['id'];
-    
+
     /**
      * Gets the table columns.
      *
@@ -50,6 +51,7 @@ class BackendAdminAccessGroup extends BaseModel
 
     /**
      * 管理员组权限
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function detail()

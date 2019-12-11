@@ -7,21 +7,22 @@ use EloquentFilter\ModelFilter;
 
 /**
  * Class GameFilter
+ *
  * @package App\ModelFilters\Game
  */
 class GameFilter extends ModelFilter
 {
 
     /**
-    * Related Models that have ModelFilters as well as the method on the ModelFilter
-    * As [relationMethod => [input_key1, input_key2]].
-    *
-    * @var array
-    */
+     * Related Models that have ModelFilters as well as the method on the ModelFilter
+     * As [relationMethod => [input_key1, input_key2]].
+     *
+     * @var array
+     */
     public $relations = [];
 
     /**
-     * @param integer $game_id Game_id.
+     * @param  integer $game_id Game_id.
      * @return GameFilter
      */
     public function game(int $game_id)
@@ -30,7 +31,7 @@ class GameFilter extends ModelFilter
     }
 
     /**
-     * @param integer $vendor_id Vendor_id.
+     * @param  integer $vendor_id Vendor_id.
      * @return GameFilter
      */
     public function vendor(int $vendor_id)
@@ -39,7 +40,7 @@ class GameFilter extends ModelFilter
     }
 
     /**
-     * @param integer $type_id Type_id.
+     * @param  integer $type_id Type_id.
      * @return GameFilter
      */
     public function type(int $type_id)
@@ -48,7 +49,7 @@ class GameFilter extends ModelFilter
     }
 
     /**
-     * @param string $unassign_platform_sign Unassign_platform_sign.
+     * @param  string $unassign_platform_sign Unassign_platform_sign.
      * @return GameFilter|\Illuminate\Database\Query\Builder
      */
     public function unassignPlatformSign(string $unassign_platform_sign)
@@ -58,7 +59,7 @@ class GameFilter extends ModelFilter
     }
 
     /**
-     * @param string $assigned_platform_sign Assigned_platform_sign.
+     * @param  string $assigned_platform_sign Assigned_platform_sign.
      * @return GameFilter|\Illuminate\Database\Query\Builder
      */
     public function assignedPlatformSign(string $assigned_platform_sign)

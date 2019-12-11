@@ -8,13 +8,15 @@ use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 
 /**
  * Class FrontendRichListController
+ *
  * @package App\Http\Controllers\FrontendApi\App\GamesLobby
  */
 class FrontendRichListController extends FrontendApiMainController
 {
     /**
      * 今日富豪榜.
-     * @param RichListAction $action Action.
+     *
+     * @param  RichListAction $action Action.
      * @return JsonResponse.
      * @throws \Exception Exception.
      */

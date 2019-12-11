@@ -6,21 +6,22 @@ use EloquentFilter\ModelFilter;
 
 /**
  * Class SystemBankFilter
+ *
  * @package App\ModelFilters\Finance
  */
 class SystemDynActivityFilter extends ModelFilter
 {
 
     /**
-    * Related Models that have ModelFilters as well as the method on the ModelFilter
-    * As [relationMethod => [input_key1, input_key2]].
-    *
-    * @var array
-    */
+     * Related Models that have ModelFilters as well as the method on the ModelFilter
+     * As [relationMethod => [input_key1, input_key2]].
+     *
+     * @var array
+     */
     public $relations = [];
 
     /**
-     * @param integer $status Status.
+     * @param  integer $status Status.
      * @return object
      */
     public function status(int $status) :object
@@ -29,7 +30,7 @@ class SystemDynActivityFilter extends ModelFilter
     }
 
     /**
-     * @param string $name Name.
+     * @param  string $name Name.
      * @return object
      */
     public function name(string $name) :object

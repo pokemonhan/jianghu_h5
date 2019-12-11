@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
  */
 class SearchAdminAction
 {
+
     /**
      * @var object
      */
@@ -26,8 +27,8 @@ class SearchAdminAction
     }
 
     /**
-     * @param MerchantApiMainController $contll     Controller.
-     * @param array                     $inputDatas 接收的参数.
+     * @param  MerchantApiMainController $contll     Controller.
+     * @param  array                     $inputDatas 接收的参数.
      * @return JsonResponse
      */
     public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse

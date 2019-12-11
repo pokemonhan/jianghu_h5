@@ -63,7 +63,7 @@ trait MenuLogics
         foreach ($menuLists as $firstMenu) {
             $menuForFE[$firstMenu->id] = $firstMenu->toArray();
             if ($firstMenu->childs()->exists()) {
-                $menuForFE = $this->getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
+                $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
             }
         }
         Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
@@ -78,7 +78,7 @@ trait MenuLogics
      *
      * @return array
      */
-    private function getMenuChilds(array $adminAccessGroupDetail, BackendSystemMenu $firstMenu, array $menuForFE)
+    private function _getMenuChilds(array $adminAccessGroupDetail, BackendSystemMenu $firstMenu, array $menuForFE)
     {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
         foreach ($firstChilds as $secondMenu) {

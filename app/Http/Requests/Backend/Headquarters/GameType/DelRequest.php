@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class DelRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\GameType
  */
 class DelRequest extends BaseFormRequest

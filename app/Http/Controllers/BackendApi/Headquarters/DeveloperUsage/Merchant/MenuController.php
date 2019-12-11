@@ -20,7 +20,8 @@ class MenuController extends BackEndApiMainController
 {
     /**
      * Gets all menu.
-     * @param GetAllMenuAction $action Action.
+     *
+     * @param  GetAllMenuAction $action Action.
      * @return JsonResponse
      */
     public function getAllMenu(GetAllMenuAction $action)
@@ -29,8 +30,8 @@ class MenuController extends BackEndApiMainController
     }
 
     /**
-     * @param DoAddRequest $request Request.
-     * @param DoAddAction  $action  Action.
+     * @param  DoAddRequest $request Request.
+     * @param  DoAddAction  $action  Action.
      * @return JsonResponse
      */
     public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
@@ -40,8 +41,8 @@ class MenuController extends BackEndApiMainController
     }
 
     /**
-     * @param DeleteRequest $request Request.
-     * @param DeleteAction  $action  Action.
+     * @param  DeleteRequest $request Request.
+     * @param  DeleteAction  $action  Action.
      * @return JsonResponse
      */
     public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
@@ -55,8 +56,9 @@ class MenuController extends BackEndApiMainController
      * (?!\.) - don't allow . at start
      * (?!.*?\.\.) - don't allow 2 consecutive dots
      * (?!.*\.$) - don't allow . at end
-     * @param EditRequest $request Request.
-     * @param EditAction  $action  Action.
+     *
+     * @param  EditRequest $request Request.
+     * @param  EditAction  $action  Action.
      * @return JsonResponse
      */
     public function edit(EditRequest $request, EditAction $action): JsonResponse
@@ -66,7 +68,7 @@ class MenuController extends BackEndApiMainController
     }
 
     /**
-     * @param ChangeParentAction $action Action.
+     * @param  ChangeParentAction $action Action.
      * @return JsonResponse
      */
     public function changeParent(ChangeParentAction $action): JsonResponse
