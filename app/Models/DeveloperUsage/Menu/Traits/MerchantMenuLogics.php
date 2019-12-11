@@ -63,7 +63,7 @@ trait MerchantMenuLogics
         foreach ($menuLists as $firstMenu) {
             $menuForFE[$firstMenu->id] = $firstMenu->toArray();
             if ($firstMenu->childs()->exists()) {
-                $menuForFE = $this->getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
+                $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
             }
         }
         Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
@@ -79,7 +79,7 @@ trait MerchantMenuLogics
      *
      * @return array
      */
-    private function getMenuChilds(array $adminAccessGroupDetail, MerchantSystemMenu $firstMenu, array $menuForFE)
+    private function _getMenuChilds(array $adminAccessGroupDetail, MerchantSystemMenu $firstMenu, array $menuForFE)
     {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
         foreach ($firstChilds as $secondMenu) {
