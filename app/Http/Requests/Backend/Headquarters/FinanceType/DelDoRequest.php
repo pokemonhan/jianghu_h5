@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class DelDoRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\FinanceType
  */
 class DelDoRequest extends BaseFormRequest

@@ -18,29 +18,31 @@ class GamesVendor extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @param integer $value Value.
-     * @return string|null
+     * @return mixed
      */
-    public function getLastEditorIdAttribute(int $value)
+    public function lastEditor()
     {
-        if (!empty($value)) {
-            return BackendAdminUser::find($value)->name;
-        } else {
-            return null;
-        }
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
+    /**
+     * @return mixed
+     */
+    public function author()
+    {
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+    }
 
     /**
-     * @param integer $value Value.
-     * @return string|null
+     * @param array $value Value.
+     * @return false|string
      */
-    public function getAuthorIdAttribute(int $value)
+    public function setWhitelistIpsAttribute(array $value)
     {
         if (!empty($value)) {
-            return BackendAdminUser::find($value)->name;
+            return json_encode($value);
         } else {
-            return null;
+            return '';
         }
     }
 }

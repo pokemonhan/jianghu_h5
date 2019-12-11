@@ -17,14 +17,16 @@ use Illuminate\Http\JsonResponse;
 /**
  * 系统银行控制器
  * Class BackendSystemBankController
+ *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
 class BackendSystemBankController extends BackEndApiMainController
 {
     /**
      * 系统银行添加
-     * @param AddDoAction  $action  Action.
-     * @param AddDoRequest $request Request.
+     *
+     * @param  AddDoAction  $action  Action.
+     * @param  AddDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -36,21 +38,23 @@ class BackendSystemBankController extends BackEndApiMainController
 
     /**
      * 系统银行卡列表
-     * @param IndexAction  $action  Action.
-     * @param IndexRequest $request Request.
+     *
+     * @param  IndexAction  $action  Action.
+     * @param  IndexRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function index(IndexAction $action, IndexRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
      * 编辑银行卡
-     * @param EditAction  $action  Action.
-     * @param EditRequest $request Request.
+     *
+     * @param  EditAction  $action  Action.
+     * @param  EditRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -61,8 +65,8 @@ class BackendSystemBankController extends BackEndApiMainController
     }
 
     /**
-     * @param DelDoAction  $action  Action.
-     * @param DelDoRequest $request Request.
+     * @param  DelDoAction  $action  Action.
+     * @param  DelDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -73,8 +77,8 @@ class BackendSystemBankController extends BackEndApiMainController
     }
 
     /**
-     * @param StatusAction  $action  Action.
-     * @param StatusRequest $request Request.
+     * @param  StatusAction  $action  Action.
+     * @param  StatusRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

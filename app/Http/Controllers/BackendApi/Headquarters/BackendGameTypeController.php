@@ -16,13 +16,14 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class BackendGameTypeController
+ *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
 class BackendGameTypeController extends BackEndApiMainController
 {
     /**
-     * @param AddDoAction $action  Action.
-     * @param AddRequest  $request Request.
+     * @param  AddDoAction $action  Action.
+     * @param  AddRequest  $request Request.
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
@@ -33,8 +34,8 @@ class BackendGameTypeController extends BackEndApiMainController
     }
 
     /**
-     * @param EditDoAction $action  Action.
-     * @param EditRequest  $request Request.
+     * @param  EditDoAction $action  Action.
+     * @param  EditRequest  $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -45,20 +46,20 @@ class BackendGameTypeController extends BackEndApiMainController
     }
 
     /**
-     * @param IndexDoAction  $action  Action.
-     * @param IndexDoRequest $request Request.
+     * @param  IndexDoAction  $action  Action.
+     * @param  IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
-     * @param DelDoAction $action  Action.
-     * @param DelRequest  $request Request.
+     * @param  DelDoAction $action  Action.
+     * @param  DelRequest  $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -69,8 +70,8 @@ class BackendGameTypeController extends BackEndApiMainController
     }
 
     /**
-     * @param StatusDoAction  $action  Action.
-     * @param StatusDoRequest $request Request.
+     * @param  StatusDoAction  $action  Action.
+     * @param  StatusDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

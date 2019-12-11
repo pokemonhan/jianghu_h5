@@ -6,12 +6,13 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class DelDoAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Game
  */
 class DelDoAction extends BaseAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param  array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

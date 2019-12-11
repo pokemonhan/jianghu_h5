@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 class AllRequireInfosAction
 {
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      */
     public function execute(array $inputDatas): JsonResponse
@@ -20,9 +20,9 @@ class AllRequireInfosAction
         $routeCollection = Route::getRoutes()->get();
 
         if ((int) $inputDatas['type'] === 0) {
-            $routeInfo = $this->getAllRouteInfo($routeCollection);
+            $routeInfo = $this->_getAllRouteInfo($routeCollection);
         } else {
-            $routeInfo = $this->getRouteInfo($routeCollection, $inputDatas);
+            $routeInfo = $this->_getRouteInfo($routeCollection, $inputDatas);
         }
 
         //$data['firstlevelmenus'] = $firstlevelmenus;
@@ -41,7 +41,7 @@ class AllRequireInfosAction
      *
      * @return array
      */
-    private function getRouteInfo(array $routeCollection, array $inputDatas)
+    private function _getRouteInfo(array $routeCollection, array $inputDatas): array
     {
         $type = [
             1 => 'headquarters-api',
@@ -49,10 +49,10 @@ class AllRequireInfosAction
             3 => 'app-api',
         ];
         $routeEndKey = $type[$inputDatas['type']] ?? $type[1];
-//      firstlevelmenus = BackendSystemMenu::getFirstLevelList();
+        //      firstlevelmenus = BackendSystemMenu::getFirstLevelList();
 
-//      editMenu = BackendSystemMenu::all();
-//      $routeMatchingName = $editMenu->where('route', '!=', '#')->keyBy('route')->toArray();
+        //      editMenu = BackendSystemMenu::all();
+        //      $routeMatchingName = $editMenu->where('route', '!=', '#')->keyBy('route')->toArray();
         $registeredRoute = SystemRoutesBackend::pluck('route_name');
 
         $routeInfo = [];
@@ -66,10 +66,10 @@ class AllRequireInfosAction
                 $routeShortData[$dataKey]['controller'] = $route->action['controller'];
                 $routeShortData[$dataKey]['route_name'] = $route->action['as'];
                 $routeInfo[] = $routeShortData[$dataKey];
-//              $routeInfo[$r->action['as']] = $r->uri;
+                //              $routeInfo[$r->action['as']] = $r->uri;
             }
         }
-        
+
         return $routeInfo;
     }
 
@@ -80,7 +80,7 @@ class AllRequireInfosAction
      *
      * @return array
      */
-    private function getAllRouteInfo(array $routeCollection)
+    private function _getAllRouteInfo(array $routeCollection)
     {
         $routeInfo = [];
         foreach ($routeCollection as $dataKey => $route) {

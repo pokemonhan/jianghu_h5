@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 
 /**
  * Class AssignGamesRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\Merchant\Platform
  */
 class AssignGamesRequest extends BaseFormRequest

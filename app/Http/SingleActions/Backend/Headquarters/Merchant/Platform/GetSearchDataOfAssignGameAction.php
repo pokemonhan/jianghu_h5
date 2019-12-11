@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class GetSearchDataOfAssignGameAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Merchant\Platform
  */
 class GetSearchDataOfAssignGameAction

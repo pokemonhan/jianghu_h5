@@ -9,6 +9,7 @@ use App\Models\BaseAuthModel;
 
 /**
  * Class FrontendUser
+ *
  * @package App\Models\User
  */
 class FrontendUser extends BaseAuthModel
@@ -35,6 +36,7 @@ class FrontendUser extends BaseAuthModel
 
     /**
      * The attributes that should be hidden for arrays.
+     *
      * @var array
      */
     protected $hidden = [
@@ -43,6 +45,7 @@ class FrontendUser extends BaseAuthModel
 
     /**
      * The attributes that should be cast to native types.
+     *
      * @var array
      */
     protected $casts = [
@@ -52,6 +55,7 @@ class FrontendUser extends BaseAuthModel
 
     /**
      * 找子级
+     *
      * @return HasMany
      */
     public function children(): HasMany
@@ -61,6 +65,7 @@ class FrontendUser extends BaseAuthModel
 
     /**
      * 用户上级
+     *
      * @return HasOne
      */
     public function parent(): HasOne
@@ -70,6 +75,7 @@ class FrontendUser extends BaseAuthModel
 
     /**
      *  用户账户
+     *
      * @return HasOne
      */
     public function account(): HasOne
@@ -79,6 +85,7 @@ class FrontendUser extends BaseAuthModel
 
     /**
      *  specific info
+     *
      * @return HasOne
      */
     public function specificInfo(): HasOne

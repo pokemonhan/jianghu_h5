@@ -10,10 +10,12 @@ use Illuminate\Http\Request;
 
 /**
  * Class FrontendAuthController
+ *
  * @package App\Http\Controllers\FrontendApi
  */
 class FrontendAuthController extends FrontendApiMainController
 {
+
     /**
      * @var string $eloqM
      */
@@ -21,8 +23,9 @@ class FrontendAuthController extends FrontendApiMainController
 
     /**
      * Login user and create token
-     * @param LoginAction $action  验证登录.
-     * @param Request     $request 请求.
+     *
+     * @param  LoginAction $action  验证登录.
+     * @param  Request     $request 请求.
      * @return JsonResponse [string]  access_token
      */
     public function login(LoginAction $action, Request $request): JsonResponse
@@ -31,8 +34,8 @@ class FrontendAuthController extends FrontendApiMainController
     }
 
     /**
-     * @param Request      $request 请求.
-     * @param LogoutAction $action  用户退出.
+     * @param  Request      $request 请求.
+     * @param  LogoutAction $action  用户退出.
      * @return JsonResponse
      */
     public function logout(Request $request, LogoutAction $action): JsonResponse

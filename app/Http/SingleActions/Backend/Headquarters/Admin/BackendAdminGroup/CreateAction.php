@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
  */
 class CreateAction
 {
+
     /**
      * @var BackendAdminAccessGroup
      */
@@ -31,8 +32,9 @@ class CreateAction
 
     /**
      * Show the form for creating a new resource.
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 传递的参数.
+     *
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse

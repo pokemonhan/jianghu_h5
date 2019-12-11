@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class IndexRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\SystemBank
  */
 class IndexRequest extends BaseFormRequest

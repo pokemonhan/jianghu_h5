@@ -6,6 +6,7 @@ use App\Models\BaseAuthModel;
 
 /**
  * Class FrontendUsersSpecificInfo
+ *
  * @package App\Models\User
  */
 class FrontendUsersSpecificInfo extends BaseAuthModel
@@ -18,6 +19,7 @@ class FrontendUsersSpecificInfo extends BaseAuthModel
 
     /**
      * The attributes that should be hidden for arrays.
+     *
      * @var array
      */
     protected $hidden = [
@@ -33,6 +35,7 @@ class FrontendUsersSpecificInfo extends BaseAuthModel
 
     /**
      * 隐藏手机号中间四位 ****
+     *
      * @return string
      */
     public function getMobileHiddenAttribute(): string

@@ -8,13 +8,14 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class SendAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Email
  */
 class SendAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

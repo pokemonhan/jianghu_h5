@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class RegisterValidate
+ *
  * @package App\Http\Requests\Frontend\H5
  */
 class RegisterValidate extends FormRequest

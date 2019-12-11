@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class IndexAction
 {
+
     /**
      * @var BackendAdminAccessGroup
      */
@@ -25,6 +26,7 @@ class IndexAction
 
     /**
      * Display a listing of the resource.
+     *
      * @return JsonResponse
      */
     public function execute(): JsonResponse

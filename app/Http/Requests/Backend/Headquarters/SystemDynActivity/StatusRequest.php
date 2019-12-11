@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class StatusRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\SystemDynActivity
  */
 class StatusRequest extends BaseFormRequest

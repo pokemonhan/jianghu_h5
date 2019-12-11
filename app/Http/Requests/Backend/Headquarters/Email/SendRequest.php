@@ -8,6 +8,7 @@ use App\Models\Email\SystemEmailReceiver;
 
 /**
  * Class SendRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\Email
  */
 class SendRequest extends BaseFormRequest

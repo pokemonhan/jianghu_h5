@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 
 /**
  * Class GameTypePlatform
+ *
  * @package App\Models\Game
  */
 class GameTypePlatform extends BaseModel

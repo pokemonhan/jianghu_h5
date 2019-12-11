@@ -16,48 +16,36 @@ class Game extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
-    /**
-     * @param integer $value Value.
-     * @return string|null
-     */
-    public function getLastEditorIdAttribute(int $value)
-    {
-        if (!empty($value)) {
-            return BackendAdminUser::find($value)->name;
-        } else {
-            return null;
-        }
-    }
-
 
     /**
-     * @param integer $value Value.
-     * @return string|null
+     * @return mixed
      */
-    public function getAuthorIdAttribute(int $value)
+    public function lastEditor()
     {
-        if (!empty($value)) {
-            return BackendAdminUser::find($value)->name;
-        } else {
-            return null;
-        }
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
-     * @param integer $value Value.
-     * @return string|null
+     * @return mixed
      */
-    public function getVendorIdAttribute(int $value)
+    public function author()
     {
-        return GamesVendor::find($value)->name;
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 
     /**
-     * @param integer $value Value.
-     * @return string|null
+     * @return mixed
      */
-    public function getTypeIdAttribute(int $value)
+    public function vendor()
     {
-        return GamesType::find($value)->name;
+        return $this->belongsTo(GamesVendor::class, 'vendor_id', 'id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function type()
+    {
+        return $this->belongsTo(GamesType::class, 'type_id', 'id');
     }
 }
