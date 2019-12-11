@@ -37,7 +37,7 @@ class DestroyAction
             [
             ['id', $id],
             ['group_name', $inputDatas['group_name']],
-            ]
+            ],
         )->first();
         if ($datas === null) {
             throw new \Exception('300100');
