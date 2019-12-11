@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateBackendAdminAccessGroupsTable
@@ -28,7 +29,7 @@ class CreateBackendAdminAccessGroupsTable extends Migration
                 $table->timestamp('updated_at')->useCurrent();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `backend_admin_access_groups` comment '后台角色组'");
+        DB::statement("ALTER TABLE `backend_admin_access_groups` comment '后台角色组'");
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateUsersSalaryReportsTable
@@ -40,7 +41,7 @@ class CreateUsersSalaryReportsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `users_salary_reports` comment '用户日工资记录'");
+        DB::statement("ALTER TABLE `users_salary_reports` comment '用户日工资记录'");
     }
 
     /**

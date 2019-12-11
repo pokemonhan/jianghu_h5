@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemFinanceChannelsTable
@@ -35,7 +36,7 @@ class CreateSystemFinanceChannelsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_finance_channels` comment '金流渠道表'");
+        DB::statement("ALTER TABLE `system_finance_channels` comment '金流渠道表'");
     }
 
     /**

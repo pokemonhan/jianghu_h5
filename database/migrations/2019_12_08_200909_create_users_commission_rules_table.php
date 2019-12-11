@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateUsersCommissionRulesTable
@@ -30,7 +31,7 @@ class CreateUsersCommissionRulesTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `users_commission_rules` comment '佣金返点规则'");
+        DB::statement("ALTER TABLE `users_commission_rules` comment '佣金返点规则'");
     }
 
     /**

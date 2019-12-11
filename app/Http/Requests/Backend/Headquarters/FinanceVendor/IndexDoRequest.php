@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class IndexDoRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\FinanceVendor
  */
 class IndexDoRequest extends BaseFormRequest

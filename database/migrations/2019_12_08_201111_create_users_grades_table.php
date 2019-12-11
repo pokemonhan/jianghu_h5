@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateUsersGradesTable
@@ -34,7 +35,7 @@ class CreateUsersGradesTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `users_grades` comment '用户等级'");
+        DB::statement("ALTER TABLE `users_grades` comment '用户等级'");
     }
 
     /**

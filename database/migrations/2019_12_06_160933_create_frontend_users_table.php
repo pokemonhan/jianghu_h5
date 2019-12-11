@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateFrontendUsersTable
@@ -47,7 +48,7 @@ class CreateFrontendUsersTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_users` comment '前台用户'");
+        DB::statement("ALTER TABLE `frontend_users` comment '前台用户'");
     }
 
     /**

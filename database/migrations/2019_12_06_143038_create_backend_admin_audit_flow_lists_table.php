@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateBackendAdminAuditFlowListsTable
@@ -32,7 +33,7 @@ class CreateBackendAdminAuditFlowListsTable extends Migration
                 $table->timestamp('updated_at')->nullable()->default(null)->comment('audited_at');
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `backend_admin_audit_flow_lists` comment '审核流程表'");
+        DB::statement("ALTER TABLE `backend_admin_audit_flow_lists` comment '审核流程表'");
     }
 
     /**

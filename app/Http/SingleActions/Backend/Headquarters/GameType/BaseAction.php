@@ -6,10 +6,12 @@ use App\Models\Game\GamesType;
 
 /**
  * Class BaseAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\GameType
  */
 class BaseAction
 {
+
     /**
      * @var GamesType Model.
      */
@@ -17,6 +19,7 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     *
      * @param GamesType $gamesType GamesType.
      */
     public function __construct(GamesType $gamesType)

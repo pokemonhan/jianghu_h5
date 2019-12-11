@@ -31,8 +31,9 @@ class LoginAction
 
     /**
      * Login user and create token
-     * @param BackEndApiMainController $contll  Controller.
-     * @param Request                  $request Request.
+     *
+     * @param  BackEndApiMainController $contll  Controller.
+     * @param  Request                  $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

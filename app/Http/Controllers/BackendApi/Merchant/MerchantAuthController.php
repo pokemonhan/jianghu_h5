@@ -16,8 +16,8 @@ class MerchantAuthController extends MerchantApiMainController
     /**
      * Login user and create token
      *
-     * @param Request     $request Request.
-     * @param LoginAction $action  Action.
+     * @param  Request     $request Request.
+     * @param  LoginAction $action  Action.
      * @return JsonResponse
      */
     public function login(Request $request, LoginAction $action): JsonResponse
@@ -27,8 +27,9 @@ class MerchantAuthController extends MerchantApiMainController
 
     /**
      * Logout user (Revoke the token)
-     * @param Request      $request Request.
-     * @param LogoutAction $action  Action.
+     *
+     * @param  Request      $request Request.
+     * @param  LogoutAction $action  Action.
      * @return JsonResponse
      */
     public function logout(Request $request, LogoutAction $action): JsonResponse

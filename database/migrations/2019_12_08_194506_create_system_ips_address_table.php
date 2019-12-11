@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemIpsAddressTable
@@ -29,7 +30,7 @@ class CreateSystemIpsAddressTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_ips_address` comment 'ip所属地区'");
+        DB::statement("ALTER TABLE `system_ips_address` comment 'ip所属地区'");
     }
 
     /**

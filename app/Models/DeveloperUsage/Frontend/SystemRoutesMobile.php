@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class SystemRoutesMobile
+ *
  * @package App\Models\DeveloperUsage\Frontend
  */
 class SystemRoutesMobile extends Model

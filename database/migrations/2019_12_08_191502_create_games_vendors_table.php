@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateGamesVendorsTable
@@ -31,7 +32,7 @@ class CreateGamesVendorsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `games_vendors` comment '游戏厂商表'");
+        DB::statement("ALTER TABLE `games_vendors` comment '游戏厂商表'");
     }
 
     /**

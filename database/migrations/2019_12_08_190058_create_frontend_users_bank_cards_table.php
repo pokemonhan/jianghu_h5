@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateFrontendUsersBankCardsTable
@@ -36,7 +37,7 @@ class CreateFrontendUsersBankCardsTable extends Migration
                 $table->timestamp('updated_at')->nullable();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_users_bank_cards` comment '用户银行卡'");
+        DB::statement("ALTER TABLE `frontend_users_bank_cards` comment '用户银行卡'");
     }
 
     /**

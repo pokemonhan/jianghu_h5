@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateBackendAdminAuditPasswordsListsTable
@@ -29,7 +30,7 @@ class CreateBackendAdminAuditPasswordsListsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `backend_admin_audit_passwords_lists` comment '审核流水表'");
+        DB::statement("ALTER TABLE `backend_admin_audit_passwords_lists` comment '审核流水表'");
     }
 
     /**

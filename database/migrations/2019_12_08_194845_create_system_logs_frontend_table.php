@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemLogsFrontendTable
@@ -55,7 +56,7 @@ class CreateSystemLogsFrontendTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_logs_frontend` comment '前台操作日志'");
+        DB::statement("ALTER TABLE `system_logs_frontend` comment '前台操作日志'");
     }
 
     /**

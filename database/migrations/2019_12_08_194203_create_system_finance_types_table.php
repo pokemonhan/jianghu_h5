@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemFinanceTypesTable
@@ -32,7 +33,7 @@ class CreateSystemFinanceTypesTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_finance_types` comment '金流类型表'");
+        DB::statement("ALTER TABLE `system_finance_types` comment '金流类型表'");
     }
 
     /**

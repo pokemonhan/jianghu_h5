@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class EditDoRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\FinanceVendor
  */
 class EditDoRequest extends BaseFormRequest

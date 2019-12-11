@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemDomainsTable
@@ -28,7 +29,7 @@ class CreateSystemDomainsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_domains` comment '代理商域名管理 changes from backend_domains'");
+        DB::statement("ALTER TABLE `system_domains` comment '代理商域名管理 changes from backend_domains'");
     }
 
     /**

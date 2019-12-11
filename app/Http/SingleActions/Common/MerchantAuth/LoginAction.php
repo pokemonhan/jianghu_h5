@@ -31,8 +31,9 @@ class LoginAction
 
     /**
      * Login user and create token
-     * @param MerchantApiMainController $contll  Controller.
-     * @param Request                   $request Request.
+     *
+     * @param  MerchantApiMainController $contll  Controller.
+     * @param  Request                   $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

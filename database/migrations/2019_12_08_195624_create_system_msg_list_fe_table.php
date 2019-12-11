@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemMsgListFeTable
@@ -27,7 +28,7 @@ class CreateSystemMsgListFeTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_msg_list_fe` comment '站内信'");
+        DB::statement("ALTER TABLE `system_msg_list_fe` comment '站内信'");
     }
 
     /**

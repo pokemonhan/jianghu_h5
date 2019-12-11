@@ -13,8 +13,9 @@ class SettingController extends BackEndApiMainController
 {
     /**
      * 管理员登录日志
-     * @param LoginLogDetailRequest $request Request.
-     * @param LoginLogDetailAction  $action  Action.
+     *
+     * @param  LoginLogDetailRequest $request Request.
+     * @param  LoginLogDetailAction  $action  Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

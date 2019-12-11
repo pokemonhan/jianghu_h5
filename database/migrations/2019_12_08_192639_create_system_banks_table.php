@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemBanksTable
@@ -29,7 +30,7 @@ class CreateSystemBanksTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_banks` comment '出入款账户配置表'");
+        DB::statement("ALTER TABLE `system_banks` comment '出入款账户配置表'");
     }
 
     /**

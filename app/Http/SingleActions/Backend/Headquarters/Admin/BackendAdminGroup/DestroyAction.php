@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DestroyAction
 {
+
     /**
      * @var BackendAdminAccessGroup
      */
@@ -25,17 +26,19 @@ class DestroyAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
-        $datas = $this->model->where([
+        $datas = $this->model->where(
+            [
             ['id', $id],
             ['group_name', $inputDatas['group_name']],
-        ])->first();
+            ],
+        )->first();
         if ($datas === null) {
             throw new \Exception('300100');
         }

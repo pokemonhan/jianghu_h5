@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemFePageBannersTable
@@ -36,7 +37,7 @@ class CreateSystemFePageBannersTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_fe_page_banners` comment '前端轮播图'");
+        DB::statement("ALTER TABLE `system_fe_page_banners` comment '前端轮播图'");
     }
 
     /**

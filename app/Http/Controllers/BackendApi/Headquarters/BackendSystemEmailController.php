@@ -9,14 +9,16 @@ use Illuminate\Http\JsonResponse;
 /**
  * 总控的邮件系统控制器
  * Class BackendSystemEmailController
+ *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
 class BackendSystemEmailController extends BackEndApiMainController
 {
     /**
      * 发送邮件
-     * @param SendAction  $action  Action.
-     * @param SendRequest $request Request.
+     *
+     * @param  SendAction  $action  Action.
+     * @param  SendRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class AddDoAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\GameType
  */
 class AddDoAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas InputDatas.
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
@@ -45,7 +46,7 @@ class AddDoAction extends BaseAction
     }
 
     /**
-     * @param integer $typeId TypeId.
+     * @param  integer $typeId TypeId.
      * @return array
      */
     private function _getFormatDataForTypePlatform(int $typeId):array

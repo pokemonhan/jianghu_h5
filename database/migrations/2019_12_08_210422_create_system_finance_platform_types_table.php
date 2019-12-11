@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemFinancePlatformTypesTable
@@ -30,7 +31,7 @@ class CreateSystemFinancePlatformTypesTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_finance_platform_types` comment '平台与金流类型关联表'");
+        DB::statement("ALTER TABLE `system_finance_platform_types` comment '平台与金流类型关联表'");
     }
 
     /**

@@ -8,11 +8,12 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class GetSearchConditionAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\FinanceChannel
  */
 class GetSearchConditionAction extends BaseAction
 {
-   /**
+    /**
      * @return JsonResponse
      * @throws \Exception Exception.
      */

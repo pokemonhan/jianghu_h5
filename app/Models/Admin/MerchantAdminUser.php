@@ -40,6 +40,7 @@ class MerchantAdminUser extends BaseAuthModel
 
     /**
      * 平台
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function platform()
@@ -49,6 +50,7 @@ class MerchantAdminUser extends BaseAuthModel
 
     /**
      * 角色组
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function accessGroup()

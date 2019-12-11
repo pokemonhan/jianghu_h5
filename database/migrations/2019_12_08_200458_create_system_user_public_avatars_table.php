@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemUserPublicAvatarsTable
@@ -25,7 +26,7 @@ class CreateSystemUserPublicAvatarsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_user_public_avatars` comment '用户公共头像'");
+        DB::statement("ALTER TABLE `system_user_public_avatars` comment '用户公共头像'");
     }
 
     /**

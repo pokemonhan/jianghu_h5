@@ -6,6 +6,7 @@ use App\Models\BaseAuthModel;
 
 /**
  * Class FrontendUsersSpecificInfo
+ *
  * @package App\Models\User
  */
 class FrontendUsersSpecificInfo extends BaseAuthModel

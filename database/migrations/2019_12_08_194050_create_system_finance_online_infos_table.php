@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateSystemFinanceOnlineInfosTable
@@ -46,7 +47,7 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `system_finance_online_infos` comment '线上金流详情表'");
+        DB::statement("ALTER TABLE `system_finance_online_infos` comment '线上金流详情表'");
     }
 
     /**

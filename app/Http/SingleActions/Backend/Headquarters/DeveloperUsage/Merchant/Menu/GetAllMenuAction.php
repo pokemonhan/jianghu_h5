@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class GetAllMenuAction
 {
+
     /**
      * @var MerchantSystemMenu
      */

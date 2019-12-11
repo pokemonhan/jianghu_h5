@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateUsersLoginGameLogsTable
@@ -29,7 +30,7 @@ class CreateUsersLoginGameLogsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `users_login_game_logs` comment '用户登陆游戏记录'");
+        DB::statement("ALTER TABLE `users_login_game_logs` comment '用户登陆游戏记录'");
     }
 
     /**

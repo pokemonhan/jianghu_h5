@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateFrontendUsersPrivacyFlowsTable
@@ -29,7 +30,7 @@ class CreateFrontendUsersPrivacyFlowsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_users_privacy_flows` comment '用户权限变动记录'");
+        DB::statement("ALTER TABLE `frontend_users_privacy_flows` comment '用户权限变动记录'");
     }
 
     /**

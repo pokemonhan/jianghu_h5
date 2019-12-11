@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateFrontendUsersSpecificInfosTable
@@ -32,7 +33,7 @@ class CreateFrontendUsersSpecificInfosTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_users_specific_infos` comment '用户信息拓展表'");
+        DB::statement("ALTER TABLE `frontend_users_specific_infos` comment '用户信息拓展表'");
     }
 
     /**

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateUsersRechargeOrdersTable
@@ -37,7 +38,7 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `users_recharge_orders` comment '用户入款订单表'");
+        DB::statement("ALTER TABLE `users_recharge_orders` comment '用户入款订单表'");
     }
 
     /**

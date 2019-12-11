@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class AssignedGameCancelRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\Merchant\Platform
  */
 class AssignedGameCancelRequest extends BaseFormRequest

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateFrontendUsersAccountsTypesTable
@@ -31,7 +32,7 @@ class CreateFrontendUsersAccountsTypesTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_users_accounts_types` comment '帐变类型'");
+        DB::statement("ALTER TABLE `frontend_users_accounts_types` comment '帐变类型'");
     }
 
     /**

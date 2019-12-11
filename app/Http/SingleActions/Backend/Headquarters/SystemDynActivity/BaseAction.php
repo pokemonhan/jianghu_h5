@@ -5,6 +5,7 @@ use App\Models\Activity\SystemDynActivity;
 
 /**
  * Class BaseAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\SystemDynActivity
  */
 class BaseAction
@@ -17,6 +18,7 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     *
      * @param SystemDynActivity $systemDynActivity SystemDynAction.
      */
     public function __construct(SystemDynActivity $systemDynActivity)

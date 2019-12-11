@@ -20,14 +20,16 @@ use Illuminate\Http\JsonResponse;
 /**
  * 金流通道控制器
  * Class BackendFinanceChannelController
+ *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
 class BackendFinanceChannelController extends BackEndApiMainController
 {
     /**
      * 金流通道添加
-     * @param AddDoAction  $action  Action.
-     * @param AddDoRequest $request Request.
+     *
+     * @param  AddDoAction  $action  Action.
+     * @param  AddDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -39,8 +41,9 @@ class BackendFinanceChannelController extends BackEndApiMainController
 
     /**
      * 开发 编辑金流通道
-     * @param EditDoAction  $action  Action.
-     * @param EditDoRequest $request Request.
+     *
+     * @param  EditDoAction  $action  Action.
+     * @param  EditDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -52,8 +55,9 @@ class BackendFinanceChannelController extends BackEndApiMainController
 
     /**
      * 运营 编辑金流通道
-     * @param OptEditDoAction  $action  Action.
-     * @param OptEditDoRequest $request Request.
+     *
+     * @param  OptEditDoAction  $action  Action.
+     * @param  OptEditDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -64,8 +68,9 @@ class BackendFinanceChannelController extends BackEndApiMainController
     }
     /**
      * 金流通道列表
-     * @param IndexDoAction  $action  Action.
-     * @param IndexDoRequest $request Request.
+     *
+     * @param  IndexDoAction  $action  Action.
+     * @param  IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -77,8 +82,9 @@ class BackendFinanceChannelController extends BackEndApiMainController
 
     /**
      * 金流通道删除
-     * @param DelDoAction  $action  Action.
-     * @param DelDoRequest $request Request.
+     *
+     * @param  DelDoAction  $action  Action.
+     * @param  DelDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -90,7 +96,8 @@ class BackendFinanceChannelController extends BackEndApiMainController
 
     /**
      * 获取查询条件
-     * @param GetSearchConditionAction $action Action.
+     *
+     * @param  GetSearchConditionAction $action Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -101,8 +108,9 @@ class BackendFinanceChannelController extends BackEndApiMainController
 
     /**
      * 改变金流通道的状态
-     * @param StatusDoAction  $action  Action.
-     * @param StatusDoRequest $request Request.
+     *
+     * @param  StatusDoAction  $action  Action.
+     * @param  StatusDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

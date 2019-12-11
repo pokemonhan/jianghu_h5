@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateFrontendUsersAccountsTypesParamsTable
@@ -27,7 +28,7 @@ class CreateFrontendUsersAccountsTypesParamsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_users_accounts_types_params` comment '帐变类型所需字段'");
+        DB::statement("ALTER TABLE `frontend_users_accounts_types_params` comment '帐变类型所需字段'");
     }
 
     /**

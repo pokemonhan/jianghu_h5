@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class CreateFrontendUsersAccountsReportsParamsWithValuesTable
@@ -32,7 +33,7 @@ class CreateFrontendUsersAccountsReportsParamsWithValuesTable extends Migration
                 $table->timestamp('updated_at')->nullable();
             },
         );
-        \Illuminate\Support\Facades\DB::statement("ALTER TABLE `frontend_users_accounts_reports_params_with_values` comment '帐变类型需要的字段信息'");
+        DB::statement("ALTER TABLE `frontend_users_accounts_reports_params_with_values` comment '帐变类型需要的字段信息'");
     }
 
     /**
