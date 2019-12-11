@@ -34,7 +34,7 @@ class LogoutAction
         return response()->json(
             [
             'message' => 'Successfully logged out',
-            ]
+            ],
         );
     }
 }

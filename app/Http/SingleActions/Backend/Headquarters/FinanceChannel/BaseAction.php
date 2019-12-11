@@ -11,6 +11,7 @@ use App\Models\Finance\SystemFinanceChannel;
  */
 class BaseAction
 {
+
     /**
      * @var SystemFinanceChannel $model
      */

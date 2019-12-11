@@ -11,6 +11,7 @@ use App\Models\Game\Game;
  */
 class BaseAction
 {
+
     /**
      * @var Game Model.
      */

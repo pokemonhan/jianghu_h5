@@ -11,6 +11,7 @@ use App\Models\Finance\SystemBank;
  */
 class BaseAction
 {
+
     /**
      * @var SystemBank $model
      */

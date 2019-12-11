@@ -11,6 +11,7 @@ use App\Models\Finance\SystemFinanceType;
  */
 class BaseAction
 {
+
     /**
      * @var SystemFinanceType
      */

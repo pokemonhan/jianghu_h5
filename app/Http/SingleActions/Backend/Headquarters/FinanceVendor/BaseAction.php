@@ -11,6 +11,7 @@ use App\Models\Finance\SystemFinanceVendor;
  */
 class BaseAction
 {
+
     /**
      * @var SystemFinanceVendor
      */

@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
  */
 class UpdateAdminGroupAction
 {
+
     /**
      * @var object
      */
