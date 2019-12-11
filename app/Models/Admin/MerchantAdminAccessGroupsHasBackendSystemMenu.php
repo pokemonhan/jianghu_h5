@@ -9,6 +9,7 @@ use App\Models\BaseModel;
  */
 class MerchantAdminAccessGroupsHasBackendSystemMenu extends BaseModel
 {
+
     /**
      * The attributes that are mass assignable.
      *

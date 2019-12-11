@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
  */
 class EditAction
 {
+
     /**
      * @var MerchantAdminAccessGroup
      */
@@ -29,8 +30,8 @@ class EditAction
     }
 
     /**
-     * @param MerchantApiMainController $contll     Controller.
-     * @param array                     $inputDatas 传递的参数.
+     * @param  MerchantApiMainController $contll     Controller.
+     * @param  array                     $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

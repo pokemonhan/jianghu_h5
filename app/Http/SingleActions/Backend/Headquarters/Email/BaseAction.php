@@ -5,6 +5,7 @@ use App\Models\Email\SystemEmail;
 
 /**
  * Class BaseAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Email
  */
 class BaseAction
@@ -17,6 +18,7 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     *
      * @param SystemEmail $systemEmail SystemEmail.
      */
     public function __construct(SystemEmail $systemEmail)

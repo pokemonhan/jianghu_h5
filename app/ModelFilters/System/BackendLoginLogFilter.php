@@ -20,7 +20,8 @@ class BackendLoginLogFilter extends ModelFilter
 
     /**
      * 邮箱查询
-     * @param string $email 邮箱.
+     *
+     * @param  string $email 邮箱.
      * @return $this
      */
     public function email(string $email)
@@ -30,7 +31,8 @@ class BackendLoginLogFilter extends ModelFilter
 
     /**
      * 用户名查询
-     * @param string $name 用户名.
+     *
+     * @param  string $name 用户名.
      * @return $this
      */
     public function name(string $name)
@@ -40,7 +42,8 @@ class BackendLoginLogFilter extends ModelFilter
 
     /**
      * IP查询
-     * @param string $loginIp IP.
+     *
+     * @param  string $loginIp IP.
      * @return $this
      */
     public function loginIp(string $loginIp)
@@ -50,7 +53,8 @@ class BackendLoginLogFilter extends ModelFilter
 
     /**
      * 登录时间查询
-     * @param string $createAt 登录时间.
+     *
+     * @param  string $createAt 登录时间.
      * @return $this
      */
     public function createAt(string $createAt)

@@ -16,8 +16,9 @@ class LogoutAction
     use AuthenticatesUsers;
     /**
      * Login user and create token
-     * @param FrontendApiMainController $contll  Controller.
-     * @param Request                   $request Request.
+     *
+     * @param  FrontendApiMainController $contll  Controller.
+     * @param  Request                   $request Request.
      * @return JsonResponse
      */
     public function execute(FrontendApiMainController $contll, Request $request): JsonResponse

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class FrontendUsersAccount
+ *
  * @package App\Models\User
  */
 class FrontendUsersAccount extends BaseAuthModel
@@ -19,6 +20,7 @@ class FrontendUsersAccount extends BaseAuthModel
 
     /**
      * 用户信息
+     *
      * @return BelongsTo
      */
     public function frontendUser(): BelongsTo

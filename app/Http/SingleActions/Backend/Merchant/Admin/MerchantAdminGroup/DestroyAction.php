@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DestroyAction
 {
+
     /**
      * @var MerchantAdminAccessGroup
      */
@@ -25,17 +26,19 @@ class DestroyAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
-        $adminGroupELoq = $this->model->where([
+        $adminGroupELoq = $this->model->where(
+            [
             ['id', $id],
             ['group_name', $inputDatas['group_name']],
-        ])->first();
+            ],
+        )->first();
         if ($adminGroupELoq === null) {
             throw new \Exception('300100');
         }

@@ -62,6 +62,7 @@ class BackendAdminUser extends BaseAuthModel
 
     /**
      * 平台
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function platform()
@@ -71,6 +72,7 @@ class BackendAdminUser extends BaseAuthModel
 
     /**
      * 角色组
+     *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function accessGroup()
