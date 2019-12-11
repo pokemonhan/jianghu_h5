@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * Class CreateSystemLogsFrontendTable
+ */
 class CreateSystemLogsFrontendTable extends Migration
 {
     /**
@@ -23,7 +26,9 @@ class CreateSystemLogsFrontendTable extends Migration
                 $table->string('origin', 200)->nullable()->default(null)->comment('起源');
                 $table->enum('type', ['log', 'store', 'change', 'delete'])->comment('类型')->collation('utf8mb4_unicode_ci');
                 $table->enum('result', ['success', 'neutral', 'failure'])->comment('结果')->collation('utf8mb4_unicode_ci');
-                $table->enum('level', ['emergency', 'alert', 'critical', 'error', 'warning', 'notice', 'info', 'debug'])->comment('等级')->collation('utf8mb4_unicode_ci');
+                $table->enum('level', ['emergency', 'alert', 'critical', 'error', 'warning', 'notice', 'info', 'debug'])
+                    ->comment('等级')
+                    ->collation('utf8mb4_unicode_ci');
                 $table->string('token', 100)->nullable()->default(null)->comment('token');
                 $table->string('ip', 45)->nullable()->default(null)->comment('IP地址');
                 $table->string('ips', 200)->nullable()->default(null)->comment('IP地址');

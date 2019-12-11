@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * Class CreateBackendAdminUsersTable
+ */
 class CreateBackendAdminUsersTable extends Migration
 {
     /**
@@ -29,7 +32,7 @@ class CreateBackendAdminUsersTable extends Migration
                 $table->unsignedInteger('super_id')->nullable()->default(null)->comment('是否超管');
                 $table->decimal('chargeable_fund', 10, 2)->nullable()->default(null)->comment('后台管理员手中拥有的 可以充值的余额');
 
-                $table->index(["group_id"], 'fk_backend_admin_users_1_idx');
+                $table->index('group_id', 'fk_backend_admin_users_1_idx');
                 $table->nullableTimestamps();
 
 
