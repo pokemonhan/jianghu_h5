@@ -41,9 +41,8 @@ class SendSystemEmailCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @param  SystemEmail $systemEmail SystemEmail.
-     * @return mixed
+     * @param SystemEmail $systemEmail SystemEmail.
+     * @return void
      */
     public function handle(SystemEmail $systemEmail)
     {
