@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 use ReflectionClass;
 use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +17,32 @@ use Symfony\Component\Process\Exception\InvalidArgumentException;
 
 class Handler extends ExceptionHandler
 {
+    /**
+     * get error config
+     *
+     * @var array
+     */
     protected $config;
 
+    /**
+     * get error config for container
+     *
+     * @var object
+     */
     protected $container;
 
+    /**
+     * get error config debug
+     *
+     * @var string
+     */
     protected $debug;
 
+    /**
+     * error report response
+     *
+     * @var array
+     */
     protected $reportResponses = [];
     /**
      * A list of the exception types that are not reported.
@@ -121,7 +142,8 @@ class Handler extends ExceptionHandler
     /**
      * Report
      *
-     * @param   Exception $e
+     * @param Exception $e
+     * @return array
      * @throws  Exception
      * @returns void
      */
@@ -166,7 +188,7 @@ class Handler extends ExceptionHandler
     /**
      * Render
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Exception $e
      * @return Response
      * @throws ReflectionException
@@ -181,8 +203,8 @@ class Handler extends ExceptionHandler
                 );
             }
             /**
- * @var CorsService $cors
-*/
+             * @var CorsService $cors
+             */
             $cors = $this->container->make(CorsService::class);
             $cors->addActualRequestHeaders($response, $request);
         }
@@ -193,12 +215,12 @@ class Handler extends ExceptionHandler
     /**
      * Generate exception response
      *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param Exception $e
      * @return mixed
      * @throws ReflectionException
      */
-    private function generateExceptionResponse(\Illuminate\Http\Request $request, Exception $e)
+    private function generateExceptionResponse(Request $request, Exception $e)
     {
         $formatters = $this->config['formatters'];
         // :: notation will otherwise not work for PHP <= 5.6
@@ -212,11 +234,10 @@ class Handler extends ExceptionHandler
             if (!class_exists($formatter)
                 || !(new ReflectionClass($formatter))->isSubclassOf(new ReflectionClass(BaseFormatter::class))
             ) {
-                $data= array_merge($formatter,$request->all());
+                $data = array_merge($formatter, $request->all());
                 throw new InvalidArgumentException(
                     sprintf(
-                        '%s is not a valid formatter class.',
-                        $data
+                        '%s is not a valid formatter class.', json_encode($data, JSON_THROW_ON_ERROR, 512)
                     )
                 );
             }
@@ -231,7 +252,7 @@ class Handler extends ExceptionHandler
     /*
     * @returns array
     */
-    public function getReportResponses()
+    public function getReportResponses(): array
     {
         return $this->reportResponses;
     }
