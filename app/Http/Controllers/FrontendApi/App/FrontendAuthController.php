@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
  */
 class FrontendAuthController extends FrontendApiMainController
 {
+
     /**
      * @var string $eloqM
      */
