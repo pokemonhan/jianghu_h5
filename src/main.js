@@ -5,13 +5,16 @@ import App from './App'
 import router from './js/router'
 import store from './js/vuex'
 import tool from './js/tool'
+import animate from 'animate.css'
+import $ from 'jquery'
 
 Vue.config.productionTip = false;
+Vue.use(animate);
 window.all={};
 all.store=store;
 all.router=router;
 all.tool=tool;
-
+all.$=$;
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

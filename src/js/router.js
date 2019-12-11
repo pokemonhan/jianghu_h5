@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import homePage from '../pages/homePage'
-import gameList from '../pages/gameList'
-import login from '../pages/login'
-import register from '../pages/register'
-import findPassword from '../pages/findPassword'
+import activity from '../pages/activity'
+import activityDetail from '../pages/activityDetail'
+import mine from '../pages/mine'
+
 
 Vue.use(Router);
 
 export default new Router({
-    // base:'/dist',
-    // mode:"history",
+    mode:"history",
     routes: [
         { path: '/', component: homePage},
-        { path:'/gameList',component:gameList},
-        { path:'/login',component:login},
-        { path:'/register',component:register},
-        { path:'/findPassword',component:findPassword},
+        { path: '/activity', component: activity},
+        { path: '/activityDetail', component: activityDetail},
+        { path: '/mine', component: mine},
+
     ]
 })
