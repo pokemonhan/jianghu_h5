@@ -9,6 +9,7 @@ use Illuminate\Queue\SerializesModels;
 
 /**
  * Class SystemEmailEvent
+ *
  * @package App\Events
  */
 class SystemEmailEvent
@@ -17,29 +18,34 @@ class SystemEmailEvent
 
     /**
      * 邮件id
+     *
      * @var integer
      */
     public $emailId;
 
     /**
      * 接收者类型
+     *
      * @var integer
      */
     public $receiverType;
 
     /**
      * 接收者
+     *
      * @var array
      */
     public $receivers;
 
     /**
      * 平台标识
+     *
      * @var string
      */
     public $platformSign;
     /**
      * SystemEmailEvent constructor.
+     *
      * @param integer $emailId      EmailId.
      * @param integer $receiverType ReceiverType.
      * @param array   $receivers    Receivers.

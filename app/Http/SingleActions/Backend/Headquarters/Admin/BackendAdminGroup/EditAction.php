@@ -6,7 +6,6 @@ use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\DB;
  */
 class EditAction
 {
+
     /**
      * @var BackendAdminAccessGroup
      */
@@ -30,8 +30,8 @@ class EditAction
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 传递的参数.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -64,7 +64,7 @@ class EditAction
                 $backendSystemMenu = new BackendSystemMenu();
                 $backendSystemMenu->createMenuDatas($id, $role);
                 return msgOut(true, $datas->toArray());
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 DB::rollBack();
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }

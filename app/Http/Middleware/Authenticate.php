@@ -11,7 +11,7 @@ class Authenticate extends Middleware
     /**
      * @param \Illuminate\Http\Request $request Request
      * @param array $guards Guards
-     * @throws AuthenticationException
+     * @throws \Exception
      */
     protected function unauthenticated($request, array $guards)
     {

@@ -9,6 +9,7 @@ use App\Models\BaseModel;
  */
 class BackendAdminAccessGroupDetail extends BaseModel
 {
+
     /**
      * @var array
      */

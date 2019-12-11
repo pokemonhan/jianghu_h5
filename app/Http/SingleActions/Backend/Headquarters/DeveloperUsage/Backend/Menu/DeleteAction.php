@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DeleteAction
 {
+
     /**
      * @var BackendSystemMenu
      */
@@ -25,7 +25,7 @@ class DeleteAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -33,14 +33,16 @@ class DeleteAction
     {
         $toDelete = $inputDatas['toDelete'];
         try {
-            $datas = $this->model->find($toDelete)->each(static function ($product) {
-                $data[] = $product->toArray();
-                $product->delete();
-                return $data;
-            });
+            $datas = $this->model->find($toDelete)->each(
+                static function ($product) {
+                    $data[] = $product->toArray();
+                    $product->delete();
+                    return $data;
+                },
+            );
             $this->model->refreshStar();
             return msgOut(true, $datas);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new \Exception('300002');
         }
     }

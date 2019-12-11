@@ -29,9 +29,9 @@ use Illuminate\Http\JsonResponse;
 class PlatformController extends BackEndApiMainController
 {
     /**
-     *
      * 运营商平台列表
-     * @param DetailAction $action Action.
+     *
+     * @param  DetailAction $action Action.
      * @return JsonResponse
      */
     public function detail(DetailAction $action): JsonResponse
@@ -41,8 +41,9 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 添加运营商平台
-     * @param DoAddRequest $request Request.
-     * @param DoAddAction  $action  Action.
+     *
+     * @param  DoAddRequest $request Request.
+     * @param  DoAddAction  $action  Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -55,8 +56,9 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 运营商平台开关
-     * @param SwitchRequest $request Request.
-     * @param SwitchAction  $action  Action.
+     *
+     * @param  SwitchRequest $request Request.
+     * @param  SwitchAction  $action  Action.
      * @return JsonResponse
      * @throws \Exception Exceotion.
      */
@@ -68,8 +70,9 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 运营商域名列表
-     * @param DomainDetailRequest $request Request.
-     * @param DomainDetailAction  $action  Action.
+     *
+     * @param  DomainDetailRequest $request Request.
+     * @param  DomainDetailAction  $action  Action.
      * @return JsonResponse
      */
     public function domainDetail(DomainDetailRequest $request, DomainDetailAction $action): JsonResponse
@@ -80,8 +83,9 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 添加运营商域名
-     * @param DomainAddRequest $request Request.
-     * @param DomainAddAction  $action  Action.
+     *
+     * @param  DomainAddRequest $request Request.
+     * @param  DomainAddAction  $action  Action.
      * @return JsonResponse
      */
     public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
@@ -92,8 +96,9 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 为运营商分配游戏
-     * @param AssignGamesAction  $action  Action.
-     * @param AssignGamesRequest $request Request.
+     *
+     * @param  AssignGamesAction  $action  Action.
+     * @param  AssignGamesRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -105,33 +110,36 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 已分配给运营商的游戏
-     * @param AssignedGamesAction  $action  Action.
-     * @param AssignedGamesRequest $request Request.
+     *
+     * @param  AssignedGamesAction  $action  Action.
+     * @param  AssignedGamesRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function assignedGames(AssignedGamesAction $action, AssignedGamesRequest $request):JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
      * 未分配给运营商的游戏列表
-     * @param UnassignGamesAction  $action  Action.
-     * @param UnassignGamesRequest $request Request.
+     *
+     * @param  UnassignGamesAction  $action  Action.
+     * @param  UnassignGamesRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function unassignGames(UnassignGamesAction $action, UnassignGamesRequest $request) :JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        return $action->execute($inputDatas);
     }
 
     /**
      * 获取分配游戏的查询条件
-     * @param GetSearchDataOfAssignGameAction $action Action.
+     *
+     * @param  GetSearchDataOfAssignGameAction $action Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -142,8 +150,9 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 取消已分配的游戏
-     * @param AssignedGameCancelAction  $action  Action.
-     * @param AssignedGameCancelRequest $request Request.
+     *
+     * @param  AssignedGameCancelAction  $action  Action.
+     * @param  AssignedGameCancelRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

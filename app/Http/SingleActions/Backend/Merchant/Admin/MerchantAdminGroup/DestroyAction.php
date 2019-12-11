@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Models\Admin\MerchantAdminAccessGroup;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DestroyAction
 {
+
     /**
      * @var MerchantAdminAccessGroup
      */
@@ -25,24 +25,26 @@ class DestroyAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
-        $adminGroupELoq = $this->model->where([
+        $adminGroupELoq = $this->model->where(
+            [
             ['id', $id],
             ['group_name', $inputDatas['group_name']],
-        ])->first();
+            ],
+        )->first();
         if ($adminGroupELoq === null) {
             throw new \Exception('300100');
         }
         try {
             $adminGroupELoq->delete();
             return msgOut(true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return msgOut(false, [], $e->getCode(), $e->getMessage());
         }
     }

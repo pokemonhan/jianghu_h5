@@ -6,7 +6,6 @@ use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\DB;
  */
 class CreateAction
 {
+
     /**
      * @var MerchantAdminAccessGroup
      */
@@ -31,8 +31,9 @@ class CreateAction
 
     /**
      * Show the form for creating a new resource.
-     * @param MerchantApiMainController $contll     Controller.
-     * @param array                     $inputDatas 传递的参数.
+     *
+     * @param  MerchantApiMainController $contll     Controller.
+     * @param  array                     $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -73,7 +74,7 @@ class CreateAction
 
             DB::commit();
             return msgOut(true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return msgOut(false, [], $e->getCode(), $e->getMessage());
         }

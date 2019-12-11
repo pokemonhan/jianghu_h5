@@ -5,7 +5,6 @@ namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Admin\MerchantAdminAccessGroup;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -16,6 +15,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  */
 class DeleteAdminAction
 {
+
     /**
      * @var object
      */
@@ -31,8 +31,9 @@ class DeleteAdminAction
 
     /**
      * 删除管理员
-     * @param MerchantApiMainController $contll     Controller.
-     * @param array                     $inputDatas 传递的参数.
+     *
+     * @param  MerchantApiMainController $contll     Controller.
+     * @param  array                     $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -57,7 +58,7 @@ class DeleteAdminAction
             try {
                 $adminEloq->delete();
                 return msgOut(true);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 return msgOut(false, [], $e->getCode(), $e->getMessage());
             }
         } else {

@@ -6,12 +6,13 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class AssignedGameCancelAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Merchant\Platform
  */
 class AssignedGameCancelAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param  array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

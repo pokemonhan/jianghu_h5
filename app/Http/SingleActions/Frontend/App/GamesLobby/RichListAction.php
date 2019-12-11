@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class RichListAction
+ *
  * @package App\Http\SingleActions\Frontend\App\GamesLobby
  */
 class RichListAction

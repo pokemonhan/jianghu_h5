@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 
 /**
  * Class SystemDynActivity
+ *
  * @package App\Models\Activity
  */
 class SystemDynActivity extends BaseModel
@@ -19,7 +20,7 @@ class SystemDynActivity extends BaseModel
 
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getLastEditorIdAttribute(int $value)

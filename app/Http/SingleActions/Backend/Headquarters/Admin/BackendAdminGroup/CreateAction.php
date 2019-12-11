@@ -6,7 +6,6 @@ use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\DB;
  */
 class CreateAction
 {
+
     /**
      * @var BackendAdminAccessGroup
      */
@@ -31,8 +31,9 @@ class CreateAction
 
     /**
      * Show the form for creating a new resource.
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 传递的参数.
+     *
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
@@ -62,7 +63,7 @@ class CreateAction
 
             DB::commit();
             return msgOut(true, $data);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return msgOut(false, [], $e->getCode(), $e->getMessage());
         }
