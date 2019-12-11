@@ -2,6 +2,8 @@
 
 namespace App\Models\User;
 
+use App\Models\Systems\SystemPlatform;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
@@ -107,5 +109,14 @@ class FrontendUser extends BaseAuthModel
     public function getMobileHiddenAttribute(): string
     {
         return substr_replace($this->attributes['mobile'], '****', 3, 4);
+    }
+
+    /**
+     * get platform
+     * @return HasOne
+     */
+    public function platform(): BelongsTo
+    {
+        return $this->belongsTo(SystemPlatform::class);
     }
 }

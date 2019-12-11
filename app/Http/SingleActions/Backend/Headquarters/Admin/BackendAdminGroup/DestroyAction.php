@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Models\Admin\BackendAdminAccessGroup;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -45,7 +44,7 @@ class DestroyAction
         try {
             $datas->delete(); //管理员关联外键一起删除
             return msgOut(true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return msgOut(false, [], $e->getCode(), $e->getMessage());
         }
     }

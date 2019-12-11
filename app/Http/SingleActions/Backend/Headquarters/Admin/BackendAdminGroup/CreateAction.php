@@ -6,7 +6,6 @@ use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -64,7 +63,7 @@ class CreateAction
 
             DB::commit();
             return msgOut(true, $data);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return msgOut(false, [], $e->getCode(), $e->getMessage());
         }

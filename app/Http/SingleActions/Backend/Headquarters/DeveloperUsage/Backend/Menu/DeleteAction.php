@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
-use Exception;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -43,7 +42,7 @@ class DeleteAction
             );
             $this->model->refreshStar();
             return msgOut(true, $datas);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             throw new \Exception('300002');
         }
     }

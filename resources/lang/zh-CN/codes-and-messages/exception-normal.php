@@ -65,6 +65,10 @@ return [
     '300904' => '系统银行,状态改变失败',
     //BackendSystemDynActivityController
     '301000' => '活动,状态改变失败',
+    //BackendAdminUserController
+    '301100' => '管理员不存在',
+    '301101' => '管理组不存在',
+    '301102' => '原密码不正确',
     //PlatformController
     '302000' => '分配游戏失败!',
     '302001' => '游戏移除失败!',

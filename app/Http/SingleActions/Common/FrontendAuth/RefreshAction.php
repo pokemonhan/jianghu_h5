@@ -14,10 +14,10 @@ class RefreshAction
 
     /**
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(): JsonResponse
+    public function execute(FrontendApiMainController $frontend): JsonResponse
     {
-        $frontend = new FrontendApiMainController();
         $token = $frontend->currentAuth->refresh();
         $expireInMinute = $frontend->currentAuth->factory()->getTTL();
         $expireAt = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');

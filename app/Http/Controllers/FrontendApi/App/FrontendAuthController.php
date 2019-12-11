@@ -51,6 +51,6 @@ class FrontendAuthController extends FrontendApiMainController
      */
     public function refreshToken(RefreshAction $action): JsonResponse
     {
-        return $action->execute();
+        return $action->execute($this);
     }
 }
