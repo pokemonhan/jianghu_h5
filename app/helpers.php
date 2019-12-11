@@ -19,7 +19,7 @@ if (!function_exists('configure')) {
         if (!isset($sysKey)) {
             return app('Configure');
         } else {
-            return app('Configure')->get($sysKey, $default);
+            return app('Configure')->getData($sysKey, $default);
         }
     }
 }
