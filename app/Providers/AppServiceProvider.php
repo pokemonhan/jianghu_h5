@@ -7,6 +7,11 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
+/**
+ * Class AppServiceProvider
+ *
+ * @package App\Providers
+ */
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -16,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //temporary empty
     }
 
     /**
@@ -31,7 +36,8 @@ class AppServiceProvider extends ServiceProvider
          * Relationships: Model::whereLike('message.type', ['text', 'sms'])->get();
          */
         Builder::macro(
-            'whereLike', function ($attributes, $terms) {
+            'whereLike',
+            function ($attributes, $terms) {
                 $this->where(
                     static function ($query) use ($attributes, $terms) {
                         foreach (Arr::wrap($attributes) as $attribute) {
@@ -44,23 +50,24 @@ class AppServiceProvider extends ServiceProvider
                                         [$relationName, $relationAttribute] = explode('.', $attribute);
                                         // Validating if the relationship exists on the current query
                                         $query->orWhereHas(
-                                            $relationName, function ($query) use ($relationAttribute, $term) {
-                                                $query->where($relationAttribute, 'LIKE', "%{$term}%");
-                                            }
+                                            $relationName,
+                                            static function ($query) use ($relationAttribute, $term) {
+                                                $query->where($relationAttribute, 'LIKE', '%'.$term.'%');
+                                            },
                                         );
                                     },
                                     // A fallback for when the string DOES not contain a relationship
                                     static function ($query) use ($attribute, $term) {
-                                        $query->orWhere($attribute, 'LIKE', "%{$term}%");
-                                    }
+                                        $query->orWhere($attribute, 'LIKE', '%'.$term.'%');
+                                    },
                                 );
                             }
                         }
-                    }
+                    },
                 );
                 // Return the $query, so you can call other methods like ->get(), ->first(), ->where(), etc
                 return $this;
-            }
+            },
         );
     }
 }
