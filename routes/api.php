@@ -30,7 +30,6 @@ Route::group(
 Route::group(
     [
     'middleware' => ['merchant-api'],
-    'namespace' => 'BackendApi\Merchant',
     'prefix' => 'merchant-api',
     ],
     static function () {

@@ -28,7 +28,7 @@ class SendAction extends BaseAction
         $inputDatas['platform_sign'] = '';
         $this->model->fill($inputDatas);
         if ($this->model->save()) {
-            if ((int) $inputDatas['is_timing'] === (int) SystemEmail::IS_TIMING_NO) {
+            if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_NO) {
                 event(
                     new SystemEmailEvent(
                         $this->model->id,
