@@ -16,6 +16,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  */
 class DeleteAdminAction
 {
+
     /**
      * @var object
      */

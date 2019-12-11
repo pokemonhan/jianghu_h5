@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
  */
 class EditAction
 {
+
     /**
      * @var MerchantAdminAccessGroup
      */

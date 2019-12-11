@@ -12,6 +12,7 @@ use Illuminate\Http\JsonResponse;
  */
 class SearchAdminAction
 {
+
     /**
      * @var object
      */

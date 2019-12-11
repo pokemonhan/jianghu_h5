@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DestroyAction
 {
+
     /**
      * @var MerchantAdminAccessGroup
      */
@@ -36,7 +37,7 @@ class DestroyAction
             [
             ['id', $id],
             ['group_name', $inputDatas['group_name']],
-            ]
+            ],
         )->first();
         if ($adminGroupELoq === null) {
             throw new \Exception('300100');
