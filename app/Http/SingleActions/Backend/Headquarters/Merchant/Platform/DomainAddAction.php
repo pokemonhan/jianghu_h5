@@ -25,7 +25,7 @@ class DomainAddAction
     }
 
     /**
-     * @param array $inputDatas 接收的参数.
+     * @param  array $inputDatas 接收的参数.
      * @return JsonResponse
      */
     public function execute(array $inputDatas): JsonResponse

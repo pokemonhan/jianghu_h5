@@ -6,6 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class StatusDoRequest
+ *
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
 class StatusDoRequest extends BaseFormRequest

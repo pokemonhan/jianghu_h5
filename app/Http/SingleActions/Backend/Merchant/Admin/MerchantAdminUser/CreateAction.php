@@ -15,8 +15,9 @@ class CreateAction
 {
     /**
      * Create api
-     * @param MerchantApiMainController $contll     Controller.
-     * @param array                     $inputDatas 接收的参数.
+     *
+     * @param  MerchantApiMainController $contll     Controller.
+     * @param  array                     $inputDatas 接收的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

@@ -25,6 +25,7 @@ class IndexAction
 
     /**
      * Display a listing of the resource.
+     *
      * @return JsonResponse
      */
     public function execute(): JsonResponse

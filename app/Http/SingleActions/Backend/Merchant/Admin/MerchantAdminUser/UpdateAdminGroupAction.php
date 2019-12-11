@@ -27,8 +27,9 @@ class UpdateAdminGroupAction
 
     /**
      * 修改管理员的归属组
-     * @param MerchantApiMainController $contll     Controller.
-     * @param array                     $inputDatas 传递的参数.
+     *
+     * @param  MerchantApiMainController $contll     Controller.
+     * @param  array                     $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

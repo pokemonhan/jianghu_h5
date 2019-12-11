@@ -7,13 +7,14 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class EditDoAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\FinanceChannel
  */
 class EditDoAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

@@ -7,13 +7,14 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class AddDoAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Game
  */
 class AddDoAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

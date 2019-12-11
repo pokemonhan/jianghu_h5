@@ -20,14 +20,16 @@ use Illuminate\Http\JsonResponse;
 /**
  * 游戏控制器
  * Class BackendGameController
+ *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
 class BackendGameController extends BackEndApiMainController
 {
     /**
      * 添加游戏
-     * @param AddDoAction $action  Action.
-     * @param AddRequest  $request Request.
+     *
+     * @param  AddDoAction $action  Action.
+     * @param  AddRequest  $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -39,8 +41,9 @@ class BackendGameController extends BackEndApiMainController
 
     /**
      * 开发 编辑游戏
-     * @param EditDoAction $action  Action.
-     * @param EditRequest  $request Request.
+     *
+     * @param  EditDoAction $action  Action.
+     * @param  EditRequest  $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -52,8 +55,9 @@ class BackendGameController extends BackEndApiMainController
 
     /**
      * 运营 编辑游戏
-     * @param OptEditDoAction  $action  Action.
-     * @param OptEditDoRequest $request Request.
+     *
+     * @param  OptEditDoAction  $action  Action.
+     * @param  OptEditDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -64,8 +68,9 @@ class BackendGameController extends BackEndApiMainController
     }
     /**
      * 游戏列表
-     * @param IndexDoAction  $action  Action.
-     * @param IndexDoRequest $request Request.
+     *
+     * @param  IndexDoAction  $action  Action.
+     * @param  IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -77,8 +82,9 @@ class BackendGameController extends BackEndApiMainController
 
     /**
      * 游戏删除
-     * @param DelDoAction $action  Action.
-     * @param DelRequest  $request Request.
+     *
+     * @param  DelDoAction $action  Action.
+     * @param  DelRequest  $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -90,7 +96,8 @@ class BackendGameController extends BackEndApiMainController
 
     /**
      * 获取查询条件
-     * @param GetSearchConditionAction $action Action.
+     *
+     * @param  GetSearchConditionAction $action Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -101,8 +108,9 @@ class BackendGameController extends BackEndApiMainController
 
     /**
      * 改变状态
-     * @param StatusDoAction  $action  Action.
-     * @param StatusDoRequest $request Request.
+     *
+     * @param  StatusDoAction  $action  Action.
+     * @param  StatusDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

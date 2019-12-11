@@ -15,6 +15,7 @@ class LoginLogDetailAction
 
     /**
      * Comment
+     *
      * @var BackendLoginLog
      */
     protected $model;
@@ -28,8 +29,8 @@ class LoginLogDetailAction
     }
 
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas 接收的参数.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas 接收的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

@@ -31,8 +31,9 @@ class DeleteAdminAction
 
     /**
      * 删除管理员
-     * @param MerchantApiMainController $contll     Controller.
-     * @param array                     $inputDatas 传递的参数.
+     *
+     * @param  MerchantApiMainController $contll     Controller.
+     * @param  array                     $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

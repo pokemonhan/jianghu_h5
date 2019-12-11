@@ -21,8 +21,9 @@ class MerchantAdminUserController extends MerchantApiMainController
 {
     /**
      * create api
-     * @param CreateRequest $request Request.
-     * @param CreateAction  $action  Action.
+     *
+     * @param  CreateRequest $request Request.
+     * @param  CreateAction  $action  Action.
      * @return JsonResponse
      */
     public function create(CreateRequest $request, CreateAction $action): JsonResponse
@@ -33,7 +34,8 @@ class MerchantAdminUserController extends MerchantApiMainController
 
     /**
      * 获取所有当前平台的商户管理员用户
-     * @param AllAdminsAction $action Action.
+     *
+     * @param  AllAdminsAction $action Action.
      * @return JsonResponse
      */
     public function allAdmins(AllAdminsAction $action): JsonResponse
@@ -43,8 +45,9 @@ class MerchantAdminUserController extends MerchantApiMainController
 
     /**
      * 修改管理员的归属组
-     * @param UpdateAdminGroupRequest $request Request.
-     * @param UpdateAdminGroupAction  $action  Action.
+     *
+     * @param  UpdateAdminGroupRequest $request Request.
+     * @param  UpdateAdminGroupAction  $action  Action.
      * @return JsonResponse
      */
     public function updateAdminGroup(
@@ -57,8 +60,9 @@ class MerchantAdminUserController extends MerchantApiMainController
 
     /**
      * 删除管理员
-     * @param DeleteAdminRequest $request Request.
-     * @param DeleteAdminAction  $action  Action.
+     *
+     * @param  DeleteAdminRequest $request Request.
+     * @param  DeleteAdminAction  $action  Action.
      * @return JsonResponse
      */
     public function deletePartnerAdmin(
@@ -70,8 +74,8 @@ class MerchantAdminUserController extends MerchantApiMainController
     }
 
     /**
-     * @param SearchAdminRequest $request Request.
-     * @param SearchAdminAction  $action  Action.
+     * @param  SearchAdminRequest $request Request.
+     * @param  SearchAdminAction  $action  Action.
      * @return JsonResponse
      */
     public function searchAdmin(

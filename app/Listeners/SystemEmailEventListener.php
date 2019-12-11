@@ -11,6 +11,7 @@ use App\Models\User\FrontendUser;
 
 /**
  * Class SystemEmailEventListener
+ *
  * @package App\Listeners
  */
 class SystemEmailEventListener
@@ -28,8 +29,9 @@ class SystemEmailEventListener
 
     /**
      * SystemEmailEventListener constructor.
-     * @param SystemEmail         $systemEmail         SystemEmail.
-     * @param SystemEmailReceiver $systemEmailReceiver SystemEmailReceiver.
+     *
+     * @param  SystemEmail         $systemEmail         SystemEmail.
+     * @param  SystemEmailReceiver $systemEmailReceiver SystemEmailReceiver.
      * @return void
      */
     public function __construct(SystemEmail $systemEmail, SystemEmailReceiver $systemEmailReceiver)
@@ -60,7 +62,7 @@ class SystemEmailEventListener
     }
 
     /**
-     * @param SystemEmailEvent $event Event.
+     * @param  SystemEmailEvent $event Event.
      * @return array
      */
     private function _getReceiverIds(SystemEmailEvent $event)

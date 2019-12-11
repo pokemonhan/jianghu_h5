@@ -9,13 +9,14 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class AssignedGamesAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Merchant\Platform
  */
 class AssignedGamesAction
 {
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

@@ -30,8 +30,8 @@ class EditAction
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 传递的参数.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

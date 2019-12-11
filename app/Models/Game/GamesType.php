@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 
 /**
  * Class GamesType
+ *
  * @package App\Models\Game
  */
 class GamesType extends BaseModel
@@ -18,7 +19,7 @@ class GamesType extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getLastEditorIdAttribute(int $value)
@@ -32,7 +33,7 @@ class GamesType extends BaseModel
 
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getAuthorIdAttribute(int $value)

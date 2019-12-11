@@ -6,6 +6,7 @@ use App\Models\Finance\SystemFinanceType;
 
 /**
  * Class BaseAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\FinanceType
  */
 class BaseAction
@@ -17,6 +18,7 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     *
      * @param SystemFinanceType $systemFinanceType SystemFinanceType.
      */
     public function __construct(SystemFinanceType $systemFinanceType)

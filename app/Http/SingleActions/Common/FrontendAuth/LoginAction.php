@@ -23,18 +23,21 @@ class LoginAction
 
     /**
      * Login user and create token
-     * @param  FrontendApiMainController  $contll
-     * @param  Request $request
+     *
+     * @param  FrontendApiMainController $contll
+     * @param  Request                   $request
      * @return JsonResponse
      */
     public function execute(FrontendApiMainController $contll, Request $request): JsonResponse
     {
         $this->userAgent = $contll->userAgent;
-        $request->validate([
+        $request->validate(
+            [
             'username' => 'required|string|alpha_dash',
             'password' => 'required|string',
             'remember_me' => 'boolean',
-        ]);
+            ]
+        );
         $credentials = request(['username', 'password']);
         $this->maxAttempts = 1; //1 times
         $this->decayMinutes = 1; //1 minutes
@@ -45,8 +48,7 @@ class LoginAction
         if ($contll->currentAuth->user()->frozen_type === 1) {
             throw new Exception('100014');
         }
-        if ($request->hasSession())
-        {
+        if ($request->hasSession()) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
         }

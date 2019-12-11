@@ -8,6 +8,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class IndexDoAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\Game
  */
 class IndexDoAction extends BaseAction
@@ -18,8 +19,8 @@ class IndexDoAction extends BaseAction
      */
     protected $model;
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

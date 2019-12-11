@@ -9,11 +9,10 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
-use Jenssegers\Agent\Agent;
 use ReflectionClass;
+use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Process\Exception\InvalidArgumentException;
 
 class Handler extends ExceptionHandler
 {
@@ -45,6 +44,7 @@ class Handler extends ExceptionHandler
 
     /**
      * ExceptionHandler constructor.
+     *
      * @param Container $container
      */
     public function __construct(Container $container)
@@ -55,74 +55,74 @@ class Handler extends ExceptionHandler
         $this->debug = $container['config']->get('app.debug');
     }
 
-//    /**
-//     * Report or log an exception.
-//     *
-//     * @param  \Exception  $exception
-//     * @return void
-//     */
-//    public function report(Exception $exception)
-//    {
-//        if ($this->shouldntReport($exception)) {
-//            return;
-//        }
-//        //###### sending errors to tg //Harris ############
-//        $appEnvironment = app()->environment();
-//        if ($appEnvironment == 'develop' || $appEnvironment == 'test-develop') {
-//            $agent = new Agent();
-//            $os = $agent->platform();
-//            $osVersion = $agent->version($os);
-//            $browser = $agent->browser();
-//            $bsVersion = $agent->version($browser);
-//            $robot = $agent->robot();
-//            if ($agent->isRobot()) {
-//                $type = 'robot';
-//            } elseif ($agent->isDesktop()) {
-//                $type = 'desktop';
-//            } elseif ($agent->isTablet()) {
-//                $type = 'tablet';
-//            } elseif ($agent->isMobile()) {
-//                $type = 'mobile';
-//            } elseif ($agent->isPhone()) {
-//                $type = 'phone';
-//            } else {
-//                $type = 'other';
-//            }
-//            $error = [
-//                'origin' => request()->headers->get('origin'),
-//                'ips' => json_encode(request()->ips(), JSON_THROW_ON_ERROR, 512),
-//                'user_agent' => request()->server('HTTP_USER_AGENT'),
-//                'lang' => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
-//                'device' => $agent->device(),
-//                'os' => $os,
-//                'browser' => $browser,
-//                'bs_version' => $bsVersion,
-//                'os_version' => $osVersion,
-//                'device_type' => $type,
-//                'robot' => $robot,
-//                'inputs' => Request::all(),
-//                'file' => $exception->getFile(),
-//                'line' => $exception->getLine(),
-//                'code' => $exception->getCode(),
-//                'message' => $exception->getMessage(),
-//                'previous' => $exception->getPrevious(),
-//                'TraceAsString' => $exception->getTraceAsString(),
-//            ];
-////            $telegram = new Telegram(config('telegram.token'), config('telegram.botusername'));
-////            $telegram->sendMessage(config('telegram.chats.'.$appEnvironment), e((string)json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512)));
-//        }
-//        Log::channel('daily')->error(
-//            $exception->getMessage(),
-//            array_merge($this->context(), ['exception' => $exception])
-//        );
-////        parent::report($exception);
-//    }
+    //    /**
+    //     * Report or log an exception.
+    //     *
+    //     * @param  \Exception  $exception
+    //     * @return void
+    //     */
+    //    public function report(Exception $exception)
+    //    {
+    //        if ($this->shouldntReport($exception)) {
+    //            return;
+    //        }
+    //        //###### sending errors to tg //Harris ############
+    //        $appEnvironment = app()->environment();
+    //        if ($appEnvironment == 'develop' || $appEnvironment == 'test-develop') {
+    //            $agent = new Agent();
+    //            $os = $agent->platform();
+    //            $osVersion = $agent->version($os);
+    //            $browser = $agent->browser();
+    //            $bsVersion = $agent->version($browser);
+    //            $robot = $agent->robot();
+    //            if ($agent->isRobot()) {
+    //                $type = 'robot';
+    //            } elseif ($agent->isDesktop()) {
+    //                $type = 'desktop';
+    //            } elseif ($agent->isTablet()) {
+    //                $type = 'tablet';
+    //            } elseif ($agent->isMobile()) {
+    //                $type = 'mobile';
+    //            } elseif ($agent->isPhone()) {
+    //                $type = 'phone';
+    //            } else {
+    //                $type = 'other';
+    //            }
+    //            $error = [
+    //                'origin' => request()->headers->get('origin'),
+    //                'ips' => json_encode(request()->ips(), JSON_THROW_ON_ERROR, 512),
+    //                'user_agent' => request()->server('HTTP_USER_AGENT'),
+    //                'lang' => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
+    //                'device' => $agent->device(),
+    //                'os' => $os,
+    //                'browser' => $browser,
+    //                'bs_version' => $bsVersion,
+    //                'os_version' => $osVersion,
+    //                'device_type' => $type,
+    //                'robot' => $robot,
+    //                'inputs' => Request::all(),
+    //                'file' => $exception->getFile(),
+    //                'line' => $exception->getLine(),
+    //                'code' => $exception->getCode(),
+    //                'message' => $exception->getMessage(),
+    //                'previous' => $exception->getPrevious(),
+    //                'TraceAsString' => $exception->getTraceAsString(),
+    //            ];
+    ////            $telegram = new Telegram(config('telegram.token'), config('telegram.botusername'));
+    ////            $telegram->sendMessage(config('telegram.chats.'.$appEnvironment), e((string)json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512)));
+    //        }
+    //        Log::channel('daily')->error(
+    //            $exception->getMessage(),
+    //            array_merge($this->context(), ['exception' => $exception])
+    //        );
+    ////        parent::report($exception);
+    //    }
 
     /**
      * Report
      *
-     * @param Exception $e
-     * @throws Exception
+     * @param   Exception $e
+     * @throws  Exception
      * @returns void
      */
     public function report(Exception $e)
@@ -140,10 +140,9 @@ class Handler extends ExceptionHandler
         foreach ($reporters as $key => $reporter) {
             $class = $reporter['class'] ?? null;
 
-            if (
-                is_null($class) ||
-                !class_exists($class) ||
-                !in_array(ReporterInterface::class, class_implements($class))
+            if (is_null($class)
+                || !class_exists($class)
+                || !in_array(ReporterInterface::class, class_implements($class))
             ) {
                 throw new InvalidArgumentException(
                     sprintf(
@@ -170,6 +169,7 @@ class Handler extends ExceptionHandler
      * @param \Illuminate\Http\Request $request
      * @param Exception $e
      * @return Response
+     * @throws ReflectionException
      */
     public function render($request, Exception $e)
     {
@@ -180,7 +180,9 @@ class Handler extends ExceptionHandler
                     'asm89/stack-cors has not been installed. Harris api-error needs it for adding CORS headers to response.'
                 );
             }
-            /** @var CorsService $cors */
+            /**
+ * @var CorsService $cors
+*/
             $cors = $this->container->make(CorsService::class);
             $cors->addActualRequestHeaders($response, $request);
         }
@@ -191,11 +193,12 @@ class Handler extends ExceptionHandler
     /**
      * Generate exception response
      *
-     * @param $request
+     * @param \Illuminate\Http\Request $request
      * @param Exception $e
      * @return mixed
+     * @throws ReflectionException
      */
-    private function generateExceptionResponse($request, Exception $e)
+    private function generateExceptionResponse(\Illuminate\Http\Request $request, Exception $e)
     {
         $formatters = $this->config['formatters'];
         // :: notation will otherwise not work for PHP <= 5.6
@@ -206,14 +209,14 @@ class Handler extends ExceptionHandler
             if (!($e instanceof $exceptionType)) {
                 continue;
             }
-            if (
-                !class_exists($formatter) ||
-                !(new ReflectionClass($formatter))->isSubclassOf(new ReflectionClass(BaseFormatter::class))
+            if (!class_exists($formatter)
+                || !(new ReflectionClass($formatter))->isSubclassOf(new ReflectionClass(BaseFormatter::class))
             ) {
+                $data= array_merge($formatter,$request->all());
                 throw new InvalidArgumentException(
                     sprintf(
                         '%s is not a valid formatter class.',
-                        $formatter
+                        $data
                     )
                 );
             }
@@ -246,6 +249,6 @@ class Handler extends ExceptionHandler
         } else {
             return redirect()->guest($exception->redirectTo() ?? route('login'));
         }
-//        return parent::render($request, $exception);
+        //        return parent::render($request, $exception);
     }
 }

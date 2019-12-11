@@ -24,7 +24,7 @@ class EditAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

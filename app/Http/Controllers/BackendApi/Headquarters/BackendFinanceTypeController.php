@@ -16,13 +16,14 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class BackendFinanceTypeController
+ *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
 class BackendFinanceTypeController extends BackEndApiMainController
 {
     /**
-     * @param AddDoAction  $action  Action.
-     * @param AddDoRequest $request Request.
+     * @param  AddDoAction  $action  Action.
+     * @param  AddDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -33,8 +34,8 @@ class BackendFinanceTypeController extends BackEndApiMainController
     }
 
     /**
-     * @param IndexDoAction  $action  Action.
-     * @param IndexDoRequest $request Request.
+     * @param  IndexDoAction  $action  Action.
+     * @param  IndexDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -45,8 +46,8 @@ class BackendFinanceTypeController extends BackEndApiMainController
     }
 
     /**
-     * @param EditDoAction  $action  Action.
-     * @param EditDoRequest $request Request.
+     * @param  EditDoAction  $action  Action.
+     * @param  EditDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -56,8 +57,8 @@ class BackendFinanceTypeController extends BackEndApiMainController
         return $action->execute($this, $inputDatas);
     }
     /**
-     * @param DelDoAction  $action  Action.
-     * @param DelDoRequest $request Request.
+     * @param  DelDoAction  $action  Action.
+     * @param  DelDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -68,8 +69,8 @@ class BackendFinanceTypeController extends BackEndApiMainController
     }
 
     /**
-     * @param StatusDoAction  $action  Action.
-     * @param StatusDoRequest $request Request.
+     * @param  StatusDoAction  $action  Action.
+     * @param  StatusDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

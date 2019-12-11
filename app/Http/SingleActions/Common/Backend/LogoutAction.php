@@ -17,8 +17,9 @@ class LogoutAction
 
     /**
      * Logout user (Revoke the token)
-     * @param BackEndApiMainController $contll  Controller.
-     * @param Request                  $request Request.
+     *
+     * @param  BackEndApiMainController $contll  Controller.
+     * @param  Request                  $request Request.
      * @return JsonResponse
      */
     public function execute(BackEndApiMainController $contll, Request $request): JsonResponse
@@ -30,8 +31,10 @@ class LogoutAction
         $this->limiter()->clear($throtleKey);
         $contll->currentAuth->logout();
         $contll->currentAuth->invalidate();
-        return response()->json([
+        return response()->json(
+            [
             'message' => 'Successfully logged out',
-        ]);
+            ]
+        );
     }
 }

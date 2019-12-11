@@ -24,7 +24,7 @@ class DoAddAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      */
     public function execute(array $inputDatas): JsonResponse

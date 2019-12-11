@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 
 /**
  * Class Game
+ *
  * @package App\Models\Game
  */
 class Game extends BaseModel
@@ -17,7 +18,7 @@ class Game extends BaseModel
      */
     protected $guarded = ['id'];
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getLastEditorIdAttribute(int $value)
@@ -31,7 +32,7 @@ class Game extends BaseModel
 
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getAuthorIdAttribute(int $value)
@@ -44,7 +45,7 @@ class Game extends BaseModel
     }
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getVendorIdAttribute(int $value)
@@ -53,7 +54,7 @@ class Game extends BaseModel
     }
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getTypeIdAttribute(int $value)

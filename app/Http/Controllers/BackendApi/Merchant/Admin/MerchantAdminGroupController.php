@@ -22,7 +22,7 @@ class MerchantAdminGroupController extends MerchantApiMainController
     /**
      * Display a listing of the resource.
      *
-     * @param IndexAction $action Action.
+     * @param  IndexAction $action Action.
      * @return JsonResponse
      */
     public function index(IndexAction $action): JsonResponse
@@ -33,8 +33,8 @@ class MerchantAdminGroupController extends MerchantApiMainController
     /**
      * Show the form for creating a new resource.
      *
-     * @param CreateRequest $request Request.
-     * @param CreateAction  $action  Action.
+     * @param  CreateRequest $request Request.
+     * @param  CreateAction  $action  Action.
      * @return JsonResponse
      */
     public function create(CreateRequest $request, CreateAction $action): JsonResponse
@@ -46,8 +46,8 @@ class MerchantAdminGroupController extends MerchantApiMainController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param EditRequest $request Request.
-     * @param EditAction  $action  Action.
+     * @param  EditRequest $request Request.
+     * @param  EditAction  $action  Action.
      * @return JsonResponse
      */
     public function edit(EditRequest $request, EditAction $action): JsonResponse
@@ -58,8 +58,9 @@ class MerchantAdminGroupController extends MerchantApiMainController
 
     /**
      * 删除组管理员角色
-     * @param DestroyRequest $request Request.
-     * @param DestroyAction  $action  Action.
+     *
+     * @param  DestroyRequest $request Request.
+     * @param  DestroyAction  $action  Action.
      * @return JsonResponse
      */
     public function destroy(
@@ -72,8 +73,9 @@ class MerchantAdminGroupController extends MerchantApiMainController
 
     /**
      * 获取管理员角色
-     * @param SpecificGroupUsersRequest $request Request.
-     * @param SpecificGroupUsersAction  $action  Action.
+     *
+     * @param  SpecificGroupUsersRequest $request Request.
+     * @param  SpecificGroupUsersAction  $action  Action.
      * @return JsonResponse
      */
     public function specificGroupUsers(

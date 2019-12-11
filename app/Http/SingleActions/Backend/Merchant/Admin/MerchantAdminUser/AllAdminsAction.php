@@ -12,9 +12,9 @@ use Illuminate\Http\JsonResponse;
 class AllAdminsAction
 {
     /**
-     *
      * 获取所有当前平台的商户管理员用户
-     * @param MerchantApiMainController $contll Controller.
+     *
+     * @param  MerchantApiMainController $contll Controller.
      * @return JsonResponse
      */
     public function execute(MerchantApiMainController $contll): JsonResponse

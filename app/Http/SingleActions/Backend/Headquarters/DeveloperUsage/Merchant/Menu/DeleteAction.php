@@ -25,7 +25,7 @@ class DeleteAction
     }
 
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -33,11 +33,13 @@ class DeleteAction
     {
         $toDelete = $inputDatas['toDelete'];
         try {
-            $datas = $this->model->find($toDelete)->each(static function ($product) {
-                $data[] = $product->toArray();
-                $product->delete();
-                return $data;
-            });
+            $datas = $this->model->find($toDelete)->each(
+                static function ($product) {
+                    $data[] = $product->toArray();
+                    $product->delete();
+                    return $data;
+                }
+            );
             $this->model->refreshStar();
             return msgOut(true, $datas);
         } catch (Exception $e) {

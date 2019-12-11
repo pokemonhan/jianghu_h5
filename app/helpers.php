@@ -10,8 +10,8 @@ use Illuminate\Http\JsonResponse;
 
 if (!function_exists('configure')) {
     /**
-     * @param string|null $sysKey  SysKey.
-     * @param string|null $default Default.
+     * @param  string|null $sysKey  SysKey.
+     * @param  string|null $default Default.
      * @return \Illuminate\Contracts\Foundation\Application|mixed
      */
     function configure(?string $sysKey = null, ?string $default = null)
@@ -26,12 +26,12 @@ if (!function_exists('configure')) {
 
 
 /**
- * @param boolean $success     Success.
- * @param mixed   $data        Data.
- * @param string  $code        Code.
- * @param string  $message     Message.
- * @param string  $placeholder Placeholder.
- * @param string  $substituted Substituted.
+ * @param  boolean $success     Success.
+ * @param  mixed   $data        Data.
+ * @param  string  $code        Code.
+ * @param  string  $message     Message.
+ * @param  string  $placeholder Placeholder.
+ * @param  string  $substituted Substituted.
  * @return JsonResponse
  * @throws Exception 异常.
  */

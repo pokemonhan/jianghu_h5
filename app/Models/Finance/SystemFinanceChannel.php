@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 
 /**
  * Class SystemFinanceChannel
+ *
  * @package App\Models\Finance
  */
 class SystemFinanceChannel extends BaseModel
@@ -17,7 +18,7 @@ class SystemFinanceChannel extends BaseModel
      */
     protected $guarded = ['id'];
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getLastEditorIdAttribute(int $value)
@@ -31,7 +32,7 @@ class SystemFinanceChannel extends BaseModel
 
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getAuthorIdAttribute(int $value)

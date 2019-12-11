@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 class AllRequireInfosAction
 {
     /**
-     * @param array $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      */
     public function execute(array $inputDatas): JsonResponse
@@ -49,10 +49,10 @@ class AllRequireInfosAction
             3 => 'app-api',
         ];
         $routeEndKey = $type[$inputDatas['type']] ?? $type[1];
-//      firstlevelmenus = BackendSystemMenu::getFirstLevelList();
+        //      firstlevelmenus = BackendSystemMenu::getFirstLevelList();
 
-//      editMenu = BackendSystemMenu::all();
-//      $routeMatchingName = $editMenu->where('route', '!=', '#')->keyBy('route')->toArray();
+        //      editMenu = BackendSystemMenu::all();
+        //      $routeMatchingName = $editMenu->where('route', '!=', '#')->keyBy('route')->toArray();
         $registeredRoute = SystemRoutesBackend::pluck('route_name');
 
         $routeInfo = [];
@@ -66,7 +66,7 @@ class AllRequireInfosAction
                 $routeShortData[$dataKey]['controller'] = $route->action['controller'];
                 $routeShortData[$dataKey]['route_name'] = $route->action['as'];
                 $routeInfo[] = $routeShortData[$dataKey];
-//              $routeInfo[$r->action['as']] = $r->uri;
+                //              $routeInfo[$r->action['as']] = $r->uri;
             }
         }
         

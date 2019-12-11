@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 
 /**
  * Class SystemFinanceType
+ *
  * @package App\Models\Finance
  */
 class SystemFinanceType extends BaseModel
@@ -17,7 +18,7 @@ class SystemFinanceType extends BaseModel
      */
     protected $guarded = ['id'];
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getLastEditorIdAttribute(int $value)
@@ -31,7 +32,7 @@ class SystemFinanceType extends BaseModel
 
 
     /**
-     * @param integer $value Value.
+     * @param  integer $value Value.
      * @return string|null
      */
     public function getAuthorIdAttribute(int $value)

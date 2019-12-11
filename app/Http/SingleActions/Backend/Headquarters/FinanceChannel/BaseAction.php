@@ -6,6 +6,7 @@ use App\Models\Finance\SystemFinanceChannel;
 
 /**
  * Class BaseAction
+ *
  * @package App\Http\SingleActions\Backend\Headquarters\FinanceChannel
  */
 class BaseAction
@@ -17,6 +18,7 @@ class BaseAction
 
     /**
      * BaseAction constructor.
+     *
      * @param SystemFinanceChannel $systemFinanceChannel SystemFinanceChannel.
      */
     public function __construct(SystemFinanceChannel $systemFinanceChannel)
