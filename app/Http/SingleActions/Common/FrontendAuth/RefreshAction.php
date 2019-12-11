@@ -14,6 +14,7 @@ class RefreshAction
 
     /**
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(): JsonResponse
     {

@@ -10,7 +10,6 @@ use App\Models\Finance\SystemBank;
 use App\Models\Finance\SystemPlatformBank;
 use App\Models\Systems\SystemDomain;
 use App\Models\SystemPlatform;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -47,7 +46,7 @@ class DoAddAction
             //完成
             DB::commit();
             return msgOut(true, ['platform_name' => $inputDatas['platform_name']]);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             throw new \Exception('300705');
         }

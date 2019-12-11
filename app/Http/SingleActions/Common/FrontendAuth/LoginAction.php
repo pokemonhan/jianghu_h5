@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Common\FrontendAuth;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,7 +42,7 @@ class LoginAction
      * @param  FrontendApiMainController $contll  Controller.
      * @param  Request                   $request Request.
      * @return JsonResponse
-     * @throws Exception Exception.
+     * @throws \Exception Exception.
      */
     public function execute(FrontendApiMainController $contll, Request $request): JsonResponse
     {
@@ -60,10 +59,10 @@ class LoginAction
         $this->decayMinutes = 1; //1 minutes
         $token = $contll->currentAuth->attempt($credentials);
         if (!$token) {
-            throw new Exception('100002');
+            throw new \Exception('100002');
         }
         if ($contll->currentAuth->user()->frozen_type === 1) {
-            throw new Exception('100014');
+            throw new \Exception('100014');
         }
         if ($request->hasSession()) {
             $request->session()->regenerate();

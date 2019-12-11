@@ -6,7 +6,6 @@ use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -75,7 +74,7 @@ class CreateAction
 
             DB::commit();
             return msgOut(true);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             return msgOut(false, [], $e->getCode(), $e->getMessage());
         }
