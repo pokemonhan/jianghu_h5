@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class SpecificGroupUsersAction
 {
+
     /**
      * @var BackendAdminAccessGroup
      */
