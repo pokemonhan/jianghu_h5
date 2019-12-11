@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DeleteAction
 {
+
     /**
      * @var BackendSystemMenu
      */
@@ -38,7 +39,7 @@ class DeleteAction
                     $data[] = $product->toArray();
                     $product->delete();
                     return $data;
-                }
+                },
             );
             $this->model->refreshStar();
             return msgOut(true, $datas);

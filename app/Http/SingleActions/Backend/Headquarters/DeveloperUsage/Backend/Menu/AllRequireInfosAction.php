@@ -20,9 +20,9 @@ class AllRequireInfosAction
         $routeCollection = Route::getRoutes()->get();
 
         if ((int) $inputDatas['type'] === 0) {
-            $routeInfo = $this->getAllRouteInfo($routeCollection);
+            $routeInfo = $this->_getAllRouteInfo($routeCollection);
         } else {
-            $routeInfo = $this->getRouteInfo($routeCollection, $inputDatas);
+            $routeInfo = $this->_getRouteInfo($routeCollection, $inputDatas);
         }
 
         //$data['firstlevelmenus'] = $firstlevelmenus;
@@ -41,7 +41,7 @@ class AllRequireInfosAction
      *
      * @return array
      */
-    private function getRouteInfo(array $routeCollection, array $inputDatas)
+    private function _getRouteInfo(array $routeCollection, array $inputDatas): array
     {
         $type = [
             1 => 'headquarters-api',
@@ -69,7 +69,7 @@ class AllRequireInfosAction
                 //              $routeInfo[$r->action['as']] = $r->uri;
             }
         }
-        
+
         return $routeInfo;
     }
 
@@ -80,7 +80,7 @@ class AllRequireInfosAction
      *
      * @return array
      */
-    private function getAllRouteInfo(array $routeCollection)
+    private function _getAllRouteInfo(array $routeCollection)
     {
         $routeInfo = [];
         foreach ($routeCollection as $dataKey => $route) {
