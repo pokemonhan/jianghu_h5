@@ -3,7 +3,6 @@
 namespace App\Models\Game;
 
 use App\Models\BaseModel;
-use EloquentFilter\Filterable;
 
 /**
  * Class GameTypePlatform
@@ -12,7 +11,7 @@ use EloquentFilter\Filterable;
  */
 class GameTypePlatform extends BaseModel
 {
-    use Filterable;
+
     /**
      * @var array
      */
@@ -38,20 +37,4 @@ class GameTypePlatform extends BaseModel
         return $this->belongsTo(GamesType::class, 'type_id', 'id');
     }
 
-    public function scopeFilter($query, array $input = [], $filter = null)
-    {
-        // Resolve the current Model's filter
-        if ($filter === null) {
-            $filter = $this->getModelFilterClass();
-        }
-//        echo $filter;
-        // Create the model filter instance
-        $modelFilter = new $filter($query, $input);
-
-        // Set the input that was used in the filter (this will exclude empty strings)
-        $this->filtered = $modelFilter->input();
-
-        // Return the filter query
-        return $modelFilter->handle();
-    }
 }
