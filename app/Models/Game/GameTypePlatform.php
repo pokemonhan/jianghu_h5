@@ -36,5 +36,4 @@ class GameTypePlatform extends BaseModel
     {
         return $this->belongsTo(GamesType::class, 'type_id', 'id');
     }
-
 }
