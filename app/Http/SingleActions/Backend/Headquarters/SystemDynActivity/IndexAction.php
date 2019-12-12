@@ -22,7 +22,8 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
-        $outputDatas = $this->model::filter($inputDatas, SystemDynActivityFilter::class)->paginate($this->model::getPageSize());
+        $pageSize = $this->model::getPageSize();
+        $outputDatas = $this->model::filter($inputDatas, SystemDynActivityFilter::class)->paginate($pageSize);
         return msgOut(true, $outputDatas);
     }
 }

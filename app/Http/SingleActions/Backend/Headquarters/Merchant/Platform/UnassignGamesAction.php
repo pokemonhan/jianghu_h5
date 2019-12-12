@@ -18,10 +18,11 @@ class UnassignGamesAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
+        $pageSize = Game::getPageSize();
         $inputDatas['unassign_platform_sign'] = $inputDatas['platform_sign'];
         $outputDatas = Game::filter($inputDatas, GameFilter::class)->select(
             ['id', 'name', 'sign', 'vendor_id'],
-        )->paginate(Game::getPageSize());
+        )->paginate($pageSize);
         return msgOut(true, $outputDatas);
     }
 }

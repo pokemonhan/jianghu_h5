@@ -5,6 +5,7 @@ namespace App\Http\Controllers\FrontendApi\App;
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\SingleActions\Common\FrontendAuth\LoginAction;
 use App\Http\SingleActions\Common\FrontendAuth\LogoutAction;
+use App\Http\SingleActions\Common\FrontendAuth\RefreshAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -41,5 +42,15 @@ class FrontendAuthController extends FrontendApiMainController
     public function logout(Request $request, LogoutAction $action): JsonResponse
     {
         return $action->execute($this, $request);
+    }
+
+    /**
+     * Refresh user token
+     * @param RefreshAction $action Refresh token.
+     * @return JsonResponse
+     */
+    public function refreshToken(RefreshAction $action): JsonResponse
+    {
+        return $action->execute($this);
     }
 }
