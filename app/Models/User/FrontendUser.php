@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
@@ -40,7 +41,7 @@ class FrontendUser extends BaseAuthModel
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'fund_password',
+        'password', 'remember_token', 'fund_password', 'mobile',
     ];
 
     /**
@@ -91,5 +92,30 @@ class FrontendUser extends BaseAuthModel
     public function specificInfo(): HasOne
     {
         return $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', 'id');
+    }
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['mobile_hidden'];
+
+    /**
+     * 隐藏手机号中间四位 ****
+     * @return string
+     */
+    public function getMobileHiddenAttribute(): string
+    {
+        return substr_replace($this->attributes['mobile'], '****', 3, 4);
+    }
+
+    /**
+     * get platform
+     * @return HasOne
+     */
+    public function platform(): HasOne
+    {
+        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
     }
 }
