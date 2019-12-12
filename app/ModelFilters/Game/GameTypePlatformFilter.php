@@ -30,7 +30,6 @@ class GameTypePlatformFilter extends ModelFilter
         return $this->where('status', $status);
     }
 
-    
     /**
      * @param  integer $platform_id PlatformId.
      * @return object
