@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\User\FrontendUsersSpecificInfo;
+use App\Models\User\FrontendUsersSpecificInfo;
 
 /**
  * Class FrontendUserSpecificInfoSeeder
@@ -24,7 +24,7 @@ class FrontendUserSpecificInfoSeeder extends Seeder
                     'address' => '朝歌',
                     'register_type' => 0,
                     'total_members' => 20,
-                    'user_id' => 1
+                    'user_id' => 1,
                 ],
                 [
                     'nickname' => 'test',
@@ -33,7 +33,7 @@ class FrontendUserSpecificInfoSeeder extends Seeder
                     'address' => 'test city',
                     'register_type' => 0,
                     'total_members' => 15,
-                    'user_id' => 2
+                    'user_id' => 2,
                 ],
             ],
         );

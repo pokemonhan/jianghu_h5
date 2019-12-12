@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\User\FrontendUsersAccount;
+use App\Models\User\FrontendUsersAccount;
 
 /**
  * Class FrontendUserAccountSeeder

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \App\Models\User\FrontendUser;
+use App\Models\User\FrontendUser;
 
 /**
  * Class FrontendUserSeeder
@@ -33,7 +33,7 @@ class FrontendUserSeeder extends Seeder
                     'level_deep' => 0,
                     'user_specific_id' => 1,
                     'status' => 1,
-                    'invite_code' => 123456
+                    'invite_code' => 123456,
                 ],
                 [
                     'username' => 'ling1',
@@ -51,7 +51,7 @@ class FrontendUserSeeder extends Seeder
                     'level_deep' => 0,
                     'user_specific_id' => 2,
                     'status' => 1,
-                    'invite_code' => 123456
+                    'invite_code' => 123456,
                 ],
             ],
         );
