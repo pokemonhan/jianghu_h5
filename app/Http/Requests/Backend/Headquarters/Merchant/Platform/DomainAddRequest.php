@@ -27,18 +27,24 @@ class DomainAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'platform_sign' => 'required|exists:system_platforms,sign', //平台ID
+            'platform_sign' => 'required|exists:system_platforms,sign', //平台标识
             'domain' => 'required|unique:system_domains', //域名
+            'type' => 'required|in:1,2,3', //类型 1.PC 2.H5 3.APP
             'status' => 'required|in:0,1', //状态 0关闭 1开启
         ];
     }
 
-    /*public function messages()
+    /**
+     * 返回信息
+     * @return array
+     */
+    public function messages()
     {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
+        return [
+            'platform_sign.required' => '缺少平台标识',
+            'platform_sign.exists' => '该平台不存在',
+            'domain.required' => '缺少域名',
+            'domain.unique' => '该域名已被绑定',
+        ];
+    }
 }

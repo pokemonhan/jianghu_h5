@@ -8,8 +8,8 @@ use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Finance\SystemBank;
 use App\Models\Finance\SystemPlatformBank;
-use App\Models\Systems\SystemDomain;
 use App\Models\SystemPlatform;
+use App\Models\Systems\SystemDomain;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +32,7 @@ class DoAddAction
             //生成平台
             $platformEloq = $this->_createPlatform($inputDatas, $contll->currentAdmin->id);
             //平台绑定域名
-            $this->_createPlatformDomain($inputDatas, $platformEloq->sign, $contll->currentAdmin->id);
+            $this->_createPlatformDomain($inputDatas['domains'], $platformEloq->sign, $contll->currentAdmin->id);
             //生成平台银行配置
             $this->_createBanks($platformEloq->sign);
             //生成超级管理员组
@@ -59,7 +59,7 @@ class DoAddAction
      * @param  integer $adminId    管理员ID.
      * @return SystemPlatform
      */
-    private function _createPlatform(array $inputDatas, int $adminId)
+    private function _createPlatform(array $inputDatas, int $adminId): SystemPlatform
     {
         $platformEloq = new SystemPlatform();
         $platformData = [
@@ -79,32 +79,24 @@ class DoAddAction
     /**
      * Creates a platform domain.
      *
-     * @param  array   $inputDatas   接收的参数.
+     * @param  array   $domains      添加的域名.
      * @param  string  $platformSign 平台标识.
      * @param  integer $adminId      平台标识.
      * @return void
      */
-    private function _createPlatformDomain(array $inputDatas, string $platformSign, int $adminId)
+    private function _createPlatformDomain(array $domains, string $platformSign, int $adminId): void
     {
-        $domains = $inputDatas['domains'];
-        $addData = [
-            'platform_sign' => $platformSign,
-            'admin_id' => $adminId,
-            'status' => SystemDomain::STATUS_OPEN,
-        ];
         foreach ($domains as $domain) {
             $systemDomainELoq = new SystemDomain();
-            $addData['domain'] = $domain;
-            $systemDomainELoq->fill($addData);
-            $systemDomainELoq->save();
+            $systemDomainELoq->insertAllTypeDomain($domain, $platformSign, $adminId);
         }
     }
-    
+
     /**
      * @param  string $platformSign 平台标识.
      * @return void
      */
-    private function _createBanks(string $platformSign)
+    private function _createBanks(string $platformSign): void
     {
         $systemBank = SystemBank::pluck('id')->toArray();
         $addData = [
@@ -125,7 +117,7 @@ class DoAddAction
      * @param  string $platformSign 平台标识.
      * @return MerchantAdminAccessGroup
      */
-    private function _createAdminGroup(string $platformSign)
+    private function _createAdminGroup(string $platformSign): MerchantAdminAccessGroup
     {
         $adminGroupEloq = new MerchantAdminAccessGroup();
         $adminGroupData = [
@@ -145,7 +137,7 @@ class DoAddAction
      * @param  integer $adminGroupId 管理员角色组ID.
      * @return void
      */
-    private function _createGroupRole(array $inputDatas, int $adminGroupId)
+    private function _createGroupRole(array $inputDatas, int $adminGroupId): void
     {
         $role = Arr::wrap(json_decode($inputDatas['role'], true));
         foreach ($role as $menuId) {
@@ -166,7 +158,7 @@ class DoAddAction
      * @param  integer $adminGroupId 管理员角色组ID.
      * @return MerchantAdminUser
      */
-    private function _createAdminUser(array $inputDatas, int $adminGroupId)
+    private function _createAdminUser(array $inputDatas, int $adminGroupId): MerchantAdminUser
     {
         $adminData = [
             'name' => $inputDatas['username'],
@@ -182,7 +174,7 @@ class DoAddAction
      * @param  integer        $adminUserId  平台所属超级管理员ID.
      * @return void
      */
-    private function _editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId)
+    private function _editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId): void
     {
         $platformEloq->owner_id = $adminUserId;
         $platformEloq->save();

@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DomainAddAction
 {
-    
+
     /**
      * @var SystemDomain
      */
@@ -26,13 +26,16 @@ class DomainAddAction
 
     /**
      * @param  array $inputDatas 接收的参数.
+     * @throws \Exception Exception.
      * @return JsonResponse
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $systemDomain = $this->model;
-        $systemDomain->fill($inputDatas);
-        $systemDomain->save();
-        return msgOut(true, ['domain' => $systemDomain->domain]);
+        $checkDomainPrefix = $this->model->checkDomainPrefix($inputDatas['domain'], $inputDatas['type']);
+        if ($checkDomainPrefix === false) {
+            throw new \Exception('302002');
+        }
+        $this->model->insertDomain($inputDatas);
+        return msgOut(true, ['domain' => $inputDatas['domain']]);
     }
 }
