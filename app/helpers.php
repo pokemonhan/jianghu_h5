@@ -16,11 +16,11 @@ if (!function_exists('configure')) {
      */
     function configure(?string $sysKey = null, ?string $default = null)
     {
-        if (!isset($sysKey)) {
-            return app('Configure');
-        } else {
-            return app('Configure')->getData($sysKey, $default);
+        $configure = app('Configure');
+        if (isset($sysKey)) {
+            $configure = $configure->getData($sysKey, $default);
         }
+        return $configure;
     }
 }
 
@@ -45,10 +45,9 @@ function msgOut(
 ): JsonResponse {
     $defaultSuccessCode = '200';
     $defaultErrorCode = '404';
-    if ($success === true) {
-        $code = $code === '' ? $defaultSuccessCode : $code;
-    } else {
-        $code = $code === '' ? $defaultErrorCode : $code;
+    $defaultCode = $success === true ? $defaultSuccessCode : $defaultErrorCode;
+    $code = $code === '' ? $defaultCode : $code;
+    if ($success === false) {
         throw new Exception($code);
     }
     if ($placeholder === '' || $substituted === '') {
