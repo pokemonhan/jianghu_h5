@@ -2,9 +2,6 @@
 
 namespace App\Models\Systems\Traits;
 
-use App\ModelFilters\System\SystemDomainFilter;
-use Illuminate\Http\Request;
-
 trait SystemDomainLogics
 {
 
@@ -15,7 +12,7 @@ trait SystemDomainLogics
      * @param  integer $adminId      管理员ID.
      * @return void
      */
-    public function insertAllTypeDomain($domain, $platformSign, $adminId)
+    public function insertAllTypeDomain(string $domain, string $platformSign, int $adminId)
     {
         $typePrefix = $this->typePrefix;
         foreach ($typePrefix as $type => $prefix) {
@@ -35,12 +32,11 @@ trait SystemDomainLogics
      * @param array $addData 数据.
      * @return void
      */
-    public function insertDomain($addData)
+    public function insertDomain(array $addData)
     {
-        $domainEloq = new self;
+        $domainEloq = new self();
         $domainEloq->fill($addData);
         $domainEloq->save();
-        $success = true;
     }
 
     /**
