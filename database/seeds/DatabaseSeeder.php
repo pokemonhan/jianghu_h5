@@ -14,6 +14,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call([SystemDynActivitySeeder::class]);
+        $this->call(
+            [
+                SystemDynActivitySeeder::class,
+                BackendAdminAccessGroupSeeder::class,
+                BackendAdminAccessGroupDetailSeeder::class,
+                BackendAdminUserSeeder::class,
+                BackendSystemMenuSeeder::class,
+                FrontendUserSeeder::class,
+                FrontendUserAccountSeeder::class,
+                FrontendUserAccountTypeSeeder::class,
+                FrontendUserAccountTypeParamSeeder::class,
+                FrontendUserSpecificInfoSeeder::class,
+                MerchantSystemMenuSeeder::class,
+                SystemRoutesMerchantSeeder::class,
+                SystemRoutesBackendSeeder::class,
+                SystemRoutesWebSeeder::class,
+            ],
+        );
     }
 }
