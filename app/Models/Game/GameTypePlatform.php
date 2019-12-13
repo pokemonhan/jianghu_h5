@@ -17,15 +17,23 @@ class GameTypePlatform extends BaseModel
      */
     protected $guarded = ['id'];
     /**
-     * @var string
+     * @var integer
      */
-    public const DEVICE_H5 = 'H5';
+    public const DEVICE_H5 = 2;
     /**
-     * @var string
+     * @var integer
      */
-    public const DEVICE_APP = 'APP';
+    public const DEVICE_APP = 3;
     /**
-     * @var string
+     * @var integer
      */
-    public const DEVICE_PC = 'PC';
+    public const DEVICE_PC = 1;
+
+    /**
+     * @return mixed
+     */
+    public function gameType()
+    {
+        return $this->belongsTo(GamesType::class, 'type_id', 'id');
+    }
 }

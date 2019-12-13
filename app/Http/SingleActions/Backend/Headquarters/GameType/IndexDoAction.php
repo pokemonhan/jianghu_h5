@@ -23,9 +23,10 @@ class IndexDoAction extends BaseAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
+        $pageSize = $this->model::getPageSize();
         $outputDatas = $this->model::with(
             ['lastEditor', 'author'],
-        )->filter($inputDatas, GamesTypeFilter::class)->paginate($this->model::getPageSize());
+        )->filter($inputDatas, GamesTypeFilter::class)->paginate($pageSize);
         return msgOut(true, $outputDatas);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models\Game;
 
+use App\ModelFilters\Game\GamesTypeFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
 
@@ -31,5 +32,13 @@ class GamesType extends BaseModel
     public function author()
     {
         return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function modelFilter()
+    {
+        return $this->provideFilter(GamesTypeFilter::class);
     }
 }
