@@ -10,7 +10,7 @@ use App\Models\BaseModel;
  */
 class GameVendorPlatform extends BaseModel
 {
-    
+
     /**
      * @var array
      */

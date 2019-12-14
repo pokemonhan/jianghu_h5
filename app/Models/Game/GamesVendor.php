@@ -42,9 +42,8 @@ class GamesVendor extends BaseModel
     {
         if (!empty($value)) {
             return json_encode($value);
-        } else {
-            return '';
         }
+        return '';
     }
 
     /**
