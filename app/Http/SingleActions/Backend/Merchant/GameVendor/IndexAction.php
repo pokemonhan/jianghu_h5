@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Merchant\GameVendor;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
