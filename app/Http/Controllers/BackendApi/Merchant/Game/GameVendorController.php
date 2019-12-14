@@ -11,6 +11,10 @@ use App\Http\SingleActions\Backend\Merchant\GameVendor\SortAction;
 use App\Http\SingleActions\Backend\Merchant\GameVendor\StatusAction;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class GameVendorController
+ * @package App\Http\Controllers\BackendApi\Merchant\Game
+ */
 class GameVendorController extends MerchantApiMainController
 {
     /**
@@ -18,7 +22,7 @@ class GameVendorController extends MerchantApiMainController
      * @param IndexAction  $action  Action.
      * @param IndexRequest $request Request.
      * @return JsonResponse
-     * @throws \Exception
+     * @throws \Exception Exception.
      */
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
