@@ -11,6 +11,11 @@ use Illuminate\Http\JsonResponse;
  */
 class IndexAction extends BaseAction
 {
+
+    /**
+     * @var object
+     */
+    protected $model;
    /**
     * @param MerchantApiMainController $contll     Contll.
     * @param array $inputDatas InputDatas.
