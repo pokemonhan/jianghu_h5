@@ -4,6 +4,10 @@ namespace App\Models\Game;
 
 use App\Models\BaseModel;
 
+/**
+ * Class GameVendorPlatform
+ * @package App\Models\Game
+ */
 class GameVendorPlatform extends BaseModel
 {
     /**
@@ -11,17 +15,9 @@ class GameVendorPlatform extends BaseModel
      */
     protected $guarded = ['id'];
 
-    /**
-     * @var integer
-     */
+
     public const DEVICE_H5 = 2;
-    /**
-     * @var integer
-     */
     public const DEVICE_APP = 3;
-    /**
-     * @var integer
-     */
     public const DEVICE_PC = 1;
 
     /**
