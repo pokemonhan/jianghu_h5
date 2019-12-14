@@ -10,18 +10,15 @@ use App\Models\Systems\Traits\SystemDomainLogics;
  */
 class SystemDomain extends BaseModel
 {
-
     use SystemDomainLogics;
 
     /**
      * 状态开启
-     * @var integer
      */
     public const STATUS_OPEN = 1;
 
     /**
      * 状态关闭
-     * @var integer
      */
     public const STATUS_CLOSE = 0;
 
@@ -56,9 +53,9 @@ class SystemDomain extends BaseModel
      * @var array
      */
     public $typePrefix = [
-        0 => '',
-        1 => 'www.',
-        2 => 'm.',
-        3 => 'app.',
+        0 => '',     //主域名不需要前缀
+        1 => 'www.', //PC域名
+        2 => 'm.',   //H5域名
+        3 => 'app.', //APP域名
     ];
 }

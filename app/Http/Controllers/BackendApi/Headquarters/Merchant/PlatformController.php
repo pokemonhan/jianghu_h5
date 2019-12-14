@@ -7,19 +7,21 @@ use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGameCancelR
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DoAddRequest;
-use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
-use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDetailRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainAddRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDetailRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\EditRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignGamesRequest;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGameCancelAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGamesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignGamesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DoAddAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainAddAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainDetailAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\GetSearchDataOfAssignGameAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SwitchAction;
-use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainDetailAction;
-use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainAddAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignGamesAction;
 use Illuminate\Http\JsonResponse;
 
@@ -40,6 +42,18 @@ class PlatformController extends BackEndApiMainController
     }
 
     /**
+     * 站点配置
+     * @param  EditRequest $request Request.
+     * @param  EditAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function edit(EditRequest $request, EditAction $action): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
      * 添加运营商平台
      *
      * @param  DoAddRequest $request Request.
@@ -52,7 +66,6 @@ class PlatformController extends BackEndApiMainController
         $inputDatas = $request->validated();
         return $action->execute($this, $inputDatas);
     }
-
 
     /**
      * 运营商平台开关
@@ -102,7 +115,7 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignGames(AssignGamesAction $action, AssignGamesRequest $request) :JsonResponse
+    public function assignGames(AssignGamesAction $action, AssignGamesRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
@@ -116,7 +129,7 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignedGames(AssignedGamesAction $action, AssignedGamesRequest $request):JsonResponse
+    public function assignedGames(AssignedGamesAction $action, AssignedGamesRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
@@ -130,7 +143,7 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function unassignGames(UnassignGamesAction $action, UnassignGamesRequest $request) :JsonResponse
+    public function unassignGames(UnassignGamesAction $action, UnassignGamesRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
@@ -143,7 +156,7 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function getSearchDataOfAssignGame(GetSearchDataOfAssignGameAction $action):JsonResponse
+    public function getSearchDataOfAssignGame(GetSearchDataOfAssignGameAction $action): JsonResponse
     {
         return $action->execute();
     }
@@ -156,7 +169,7 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignedGameCancel(AssignedGameCancelAction $action, AssignedGameCancelRequest $request):JsonResponse
+    public function assignedGameCancel(AssignedGameCancelAction $action, AssignedGameCancelRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

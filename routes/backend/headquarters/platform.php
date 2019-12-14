@@ -5,12 +5,14 @@ use App\Http\Controllers\BackendApi\Headquarters\Merchant\PlatformController;
 //运营商管理
 Route::group(
     ['prefix' => 'platform', 'namespace' => 'Merchant'],
-    static function () {
+    static function (): void {
         $namePrefix = 'headquarters-api.platform.';
         //运营商列表
         Route::match(['get', 'options'], 'detail', [PlatformController::class, 'detail'])->name($namePrefix . 'detail');
         //添加运营商
         Route::match(['post', 'options'], 'do-add', [PlatformController::class, 'doAdd'])->name($namePrefix . 'do-add');
+        //运营商站点配置（编辑）
+        Route::match(['post', 'options'], 'edit', [PlatformController::class, 'edit'])->name($namePrefix . 'edit');
         //运营商状态开关
         Route::match(['post', 'options'], 'switch', [PlatformController::class, 'switch'])->name($namePrefix . 'switch');
         //运营商域名列表
