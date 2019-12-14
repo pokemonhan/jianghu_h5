@@ -24,3 +24,4 @@ Route::group(
         Route::match(['post','options'], 'sort', [GameVendorController::class, 'sort'])->name($namePrefix . 'sort');
     },
 );
+
