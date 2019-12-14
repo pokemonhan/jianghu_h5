@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BackendApi\Merchant\Game\GameTypeController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameVendorController;
+
 //游戏种类
 Route::group(
     ['prefix' => 'game-type'],
