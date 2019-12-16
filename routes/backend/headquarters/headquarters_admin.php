@@ -6,7 +6,7 @@ use App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminUserControlle
 //登录
 Route::match(['post', 'options'], 'login', [BackendAuthController::class, 'login'])->name('headquarters-api.login');
 //退出登录
-Route::match(['get', 'options'], 'logout', [BackendAuthController::class, 'login'])->name('headquarters-api.logout');
+Route::match(['get', 'options'], 'logout', [BackendAuthController::class, 'logout'])->name('headquarters-api.logout');
 
 //管理员相关
 Route::group(
