@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Merchant\Game;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
@@ -24,15 +25,15 @@ class IndexAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(MerchantApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
     {
         $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
-        $inputDatas['device'] = GameVendorPlatform::DEVICE_APP;
+        $inputDatas['device']        = GameVendorPlatform::DEVICE_APP;
         $datas = $this->model::with(['games:id,name,sign', 'vendor'])
             ->filter($inputDatas, GamesPlatformFilter::class)
             ->withCacheCooldownSeconds(86400)
             ->get();
-        $result = msgOut(true, $datas);
+        $result                      = msgOut(true, $datas);
         return $result;
     }
 }
