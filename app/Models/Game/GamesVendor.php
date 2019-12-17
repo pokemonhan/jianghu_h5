@@ -43,7 +43,8 @@ class GamesVendor extends BaseModel
     public function setWhitelistIpsAttribute(array $value)
     {
         if (!empty($value)) {
-            return json_encode($value);
+            $value = json_encode($value);
+            return $value;
         }
         return '';
     }
