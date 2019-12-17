@@ -23,7 +23,8 @@ class GamesVendor extends BaseModel
      */
     public function lastEditor()
     {
-        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        return $object;
     }
 
     /**
@@ -31,7 +32,8 @@ class GamesVendor extends BaseModel
      */
     public function author()
     {
-        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        return $object;
     }
 
     /**
@@ -51,6 +53,7 @@ class GamesVendor extends BaseModel
      */
     public function modelFilter()
     {
-        return $this->provideFilter(GamesVendorFilter::class);
+        $object = $this->provideFilter(GamesVendorFilter::class);
+        return $object;
     }
 }
