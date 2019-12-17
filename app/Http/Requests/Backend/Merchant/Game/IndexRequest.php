@@ -4,6 +4,10 @@ namespace App\Http\Requests\Backend\Merchant\Game;
 
 use App\Http\Requests\BaseFormRequest;
 
+/**
+ * Class IndexRequest
+ * @package App\Http\Requests\Backend\Merchant\Game
+ */
 class IndexRequest extends BaseFormRequest
 {
     /**
@@ -19,7 +23,7 @@ class IndexRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
@@ -32,7 +36,7 @@ class IndexRequest extends BaseFormRequest
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function messages(): array
     {
