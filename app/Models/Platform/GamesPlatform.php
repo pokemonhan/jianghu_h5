@@ -38,6 +38,9 @@ class GamesPlatform extends BaseModel
         return $object;
     }
 
+    /**
+     * @return object
+     */
     public function type(): object
     {
         $object = $this->hasOneThrough(GamesType::class, Game::class, 'sign', 'id', 'game_sign', 'type_id');
