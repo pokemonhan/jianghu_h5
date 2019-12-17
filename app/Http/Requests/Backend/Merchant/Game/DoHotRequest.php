@@ -23,7 +23,7 @@ class DoHotRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array[string]
+     * @return mixed[]
      */
     public function rules(): array
     {
@@ -34,7 +34,7 @@ class DoHotRequest extends BaseFormRequest
     }
 
     /**
-     * @return array[string]
+     * @return mixed[]
      */
     public function messages(): array
     {
