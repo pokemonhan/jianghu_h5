@@ -16,6 +16,7 @@ class IndexAction extends BaseAction
      * @var object
      */
     protected $model;
+
     /**
      * @param MerchantApiMainController $contll     Contll.
      * @param array                     $inputDatas InputDatas.
@@ -24,7 +25,7 @@ class IndexAction extends BaseAction
      */
     public function execute(MerchantApiMainController $contll, array $inputDatas) :JsonResponse
     {
-        $inputDatas['platform_id'] = $contll->currentAdmin->id;
+        $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
         $pageSize = $this->model::getPageSize();
         $datas = $this->model::with('gameType')->filter($inputDatas, GameTypePlatformFilter::class)->paginate($pageSize);
         return msgOut(true, $datas);

@@ -37,4 +37,13 @@ class GamesTypeFilter extends ModelFilter
     {
         return $this->where('name', $name);
     }
+
+    /**
+     * @param integer $type_id
+     * @return object
+     */
+    public function type(int $type_id): object
+    {
+        return $this->where('games_types.id', $type_id);
+    }
 }

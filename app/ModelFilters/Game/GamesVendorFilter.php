@@ -23,7 +23,7 @@ class GamesVendorFilter extends ModelFilter
      * @param  integer $status Status.
      * @return object
      */
-    public function status(int $status) :object
+    public function status(int $status): object
     {
         return $this->where('status', $status);
     }
@@ -32,8 +32,17 @@ class GamesVendorFilter extends ModelFilter
      * @param  string $name Name.
      * @return object
      */
-    public function name(string $name) :object
+    public function name(string $name): object
     {
         return $this->where('name', $name);
+    }
+
+    /**
+     * @param integer $vendor_id
+     * @return object
+     */
+    public function vendor(int $vendor_id): object
+    {
+        return $this->where('games_vendors.id', $vendor_id);
     }
 }

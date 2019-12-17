@@ -44,7 +44,7 @@ class SendSystemEmailCommand extends Command
      * @param SystemEmail $systemEmail SystemEmail.
      * @return void
      */
-    public function handle(SystemEmail $systemEmail)
+    public function handle(SystemEmail $systemEmail): void
     {
         $delayEmails = SystemEmail::where('is_send', $systemEmail::IS_SEND_NO)->where(
             'is_timing',
