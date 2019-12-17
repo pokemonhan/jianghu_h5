@@ -10,18 +10,19 @@ use Illuminate\Http\JsonResponse;
  */
 class DoHotAction extends BaseAction
 {
-   /**
-    * @param array $inputDatas InputDatas.
-    * @return JsonResponse
-    * @throws \Exception Exception.
-    */
-   public function execute(array $inputDatas) :JsonResponse
-   {
-       if ($this->model->where('id', $inputDatas['id'])->update(['is_hot' => $inputDatas['is_hot']])) {
-           $results = msgOut(true);
-           return $results;
-       } else {
-           throw new \Exception('200200');
-       }
-   }
+    /**
+     * @param array $inputDatas InputDatas.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function execute(array $inputDatas): JsonResponse
+    {
+        if ($this->model->where('id', $inputDatas['id'])->update(['is_hot' => $inputDatas['is_hot']])) {
+            $results = msgOut(true);
+            return $results;
+        } else {
+            throw new \Exception('200200');
+        }
+    }
 }
+
