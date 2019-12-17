@@ -4,6 +4,10 @@ namespace App\Http\Requests\Backend\Merchant\Game;
 
 use App\Http\Requests\BaseFormRequest;
 
+/**
+ * Class DoHotRequest
+ * @package App\Http\Requests\Backend\Merchant\Game
+ */
 class DoHotRequest extends BaseFormRequest
 {
     /**
@@ -19,7 +23,7 @@ class DoHotRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array[]
      */
     public function rules(): array
     {
@@ -30,7 +34,7 @@ class DoHotRequest extends BaseFormRequest
     }
 
     /**
-     * @return array
+     * @return array[]
      */
     public function messages(): array
     {
