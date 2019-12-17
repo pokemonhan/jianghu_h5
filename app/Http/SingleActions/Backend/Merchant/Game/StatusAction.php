@@ -15,8 +15,7 @@ class StatusAction extends BaseAction
    {
        if ($this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']])) {
            return msgOut(true);
-       } else {
-           throw new \Exception('300203');
        }
+       throw new \Exception('300203');
    }
 }
