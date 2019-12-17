@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Merchant\Game;
 
 use App\Models\Platform\GamesPlatform;
