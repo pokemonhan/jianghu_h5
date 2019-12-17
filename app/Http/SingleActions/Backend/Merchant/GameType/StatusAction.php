@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Merchant\GameType;
 
 use Illuminate\Http\JsonResponse;
@@ -9,6 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class StatusAction extends BaseAction
 {
+
     /**
      * @param array $inputDatas InputDatas.
      * @return JsonResponse
@@ -18,8 +20,8 @@ class StatusAction extends BaseAction
     {
         if ($this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']])) {
             return msgOut(true);
-        } else {
-            throw new \Exception('300404');
         }
+        throw new \Exception('300404');
     }
 }
+
