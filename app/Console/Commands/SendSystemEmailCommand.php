@@ -40,15 +40,20 @@ class SendSystemEmailCommand extends Command
             'is_timing',
             $systemEmail::IS_TIMING_YES,
         )->where('send_time', '<=', Carbon::now())->get();
-        foreach ($delayEmails as $delayEmail) {
-            event(
-                new SystemEmailEvent(
-                    $delayEmail->id,
-                    $delayEmail->receiver_type,
-                    json_decode($delayEmail->receivers, true),
-                    $delayEmail->platform_sign ?? '',
-                ),
-            );
+        try {
+            foreach ($delayEmails as $delayEmail) {
+                event(
+                    new SystemEmailEvent(
+                        $delayEmail->id,
+                        $delayEmail->receiver_type,
+                        json_decode($delayEmail->receivers, true),
+                        $delayEmail->platform_sign ?? '',
+                    ),
+                );
+            }
+            return true;
+        } catch (\Exception $exception) {
+            return false;
         }
     }
 }
