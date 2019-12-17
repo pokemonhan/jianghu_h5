@@ -31,10 +31,6 @@ class LogoutAction
         $this->limiter()->clear($throtleKey);
         $contll->currentAuth->logout();
         $contll->currentAuth->invalidate();
-        return response()->json(
-            [
-            'message' => 'Successfully logged out',
-            ],
-        );
+        msgOut(true, '302100');
     }
 }
