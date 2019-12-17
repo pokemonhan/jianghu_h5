@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\ModelFilters\Platform;
 
@@ -12,11 +12,11 @@ class GamesPlatformFilter extends ModelFilter
 {
 
     /**
-    * Related Models that have ModelFilters as well as the method on the ModelFilter
-    * As [relationMethod => [input_key1, input_key2]].
-    *
-    * @var array
-    */
+     * Related Models that have ModelFilters as well as the method on the ModelFilter
+     * As [relationMethod => [input_key1, input_key2]].
+     *
+     * @var array
+     */
     public $relations = [
         'games' => ['name'],
         'vendor' => ['vendor_id'],
@@ -29,7 +29,8 @@ class GamesPlatformFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): object
     {
-        return $this->where('platform_sign', $platform_sign);
+        $object = $this->where('platform_sign', $platform_sign);
+        return $object;
     }
 
     /**
@@ -38,7 +39,8 @@ class GamesPlatformFilter extends ModelFilter
      */
     public function device(int $device): object
     {
-        return $this->where('device', $device);
+        $object = $this->where('device', $device);
+        return $object;
     }
 
     /**
@@ -47,6 +49,7 @@ class GamesPlatformFilter extends ModelFilter
      */
     public function status(int $status): object
     {
-        return $this->where('status', $status);
+        $object = $this->where('status', $status);
+        return $object;
     }
 }
