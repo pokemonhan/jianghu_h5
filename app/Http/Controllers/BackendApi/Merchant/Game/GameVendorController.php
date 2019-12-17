@@ -26,8 +26,8 @@ class GameVendorController extends MerchantApiMainController
      */
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
-        $inputDatas = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $inputDatas =  $request->validated();
+        $outputDatas =  $action->execute($this, $inputDatas);
         return $outputDatas;
     }
 
@@ -40,8 +40,8 @@ class GameVendorController extends MerchantApiMainController
      */
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
-        $inputDatas = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
+        $inputDatas =  $request->validated();
+        $outputDatas =  $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -53,8 +53,8 @@ class GameVendorController extends MerchantApiMainController
      */
     public function sort(SortAction $action, SortRequest $request): JsonResponse
     {
-        $inputDatas = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
+        $inputDatas =  $request->validated();
+        $outputDatas =  $action->execute($inputDatas);
         return $outputDatas;
     }
 }
