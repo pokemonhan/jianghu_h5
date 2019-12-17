@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\BackendApi\Merchant\Game\GameController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameTypeController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameVendorController;
-use App\Http\Controllers\BackendApi\Merchant\Game\GameController;
 
 //游戏种类
 Route::group(
