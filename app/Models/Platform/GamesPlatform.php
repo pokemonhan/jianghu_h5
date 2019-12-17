@@ -25,7 +25,8 @@ class GamesPlatform extends BaseModel
      */
     public function games(): object
     {
-        return $this->belongsTo(Game::class,'game_sign','sign');
+        $object = $this->belongsTo(Game::class, 'game_sign', 'sign');
+        return $object;
     }
 
     /**
@@ -33,11 +34,13 @@ class GamesPlatform extends BaseModel
      */
     public function vendor(): object
     {
-        return $this->hasOneThrough(GamesVendor::class, Game::class, 'sign','id','game_sign','vendor_id');
+        $object = $this->hasOneThrough(GamesVendor::class, Game::class, 'sign', 'id', 'game_sign', 'vendor_id');
+        return $object;
     }
 
     public function type(): object
     {
-        return $this->hasOneThrough(GamesType::class, Game::class, 'sign','id','game_sign','type_id');
+        $object = $this->hasOneThrough(GamesType::class, Game::class, 'sign', 'id', 'game_sign', 'type_id');
+        return $object;
     }
 }
