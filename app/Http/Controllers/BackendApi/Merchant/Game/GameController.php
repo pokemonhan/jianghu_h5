@@ -26,7 +26,7 @@ class GameController extends MerchantApiMainController
      */
     public function appIndex(IndexAction $action, IndexRequest $request): JsonResponse
     {
-        $inputDatas = $request->validated();
+        $inputDatas  = $request->validated();
         $outputDatas = $action->execute($this, $inputDatas);
         return $outputDatas;
     }
@@ -40,7 +40,7 @@ class GameController extends MerchantApiMainController
      */
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
-        $inputDatas = $request->validated();
+        $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
@@ -54,7 +54,7 @@ class GameController extends MerchantApiMainController
      */
     public function doHot(DoHotAction $action, DoHotRequest $request): JsonResponse
     {
-        $inputDatas = $request->validated();
+        $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
