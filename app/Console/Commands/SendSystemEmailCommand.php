@@ -52,7 +52,7 @@ class SendSystemEmailCommand extends Command
                 );
             }
             return true;
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             return false;
         }
     }
