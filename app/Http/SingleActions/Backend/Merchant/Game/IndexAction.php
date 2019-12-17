@@ -18,20 +18,21 @@ class IndexAction extends BaseAction
      */
     protected $model;
 
-   /**
+    /**
      * @param MerchantApiMainController $contll     Contll.
      * @param array                     $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-   public function execute(MerchantApiMainController $contll, array $inputDatas) :JsonResponse
-   {
-       $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
-       $inputDatas['device'] = GameVendorPlatform::DEVICE_APP;
+    public function execute(MerchantApiMainController $contll, array $inputDatas) :JsonResponse
+    {
+        $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
+        $inputDatas['device'] = GameVendorPlatform::DEVICE_APP;
         $datas = $this->model::with(['games:id,name,sign', 'vendor'])
             ->filter($inputDatas, GamesPlatformFilter::class)
             ->withCacheCooldownSeconds(86400)
             ->get();
-        return msgOut(true, $datas);
-   }
+        $result = msgOut(true, $datas);
+        return $result;
+    }
 }
