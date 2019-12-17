@@ -29,7 +29,7 @@ class IndexAction extends BaseAction
     {
         $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
         $inputDatas['device']        = GameVendorPlatform::DEVICE_APP;
-        $datas = $this->model::with(['games:id,name,sign', 'vendor'])
+        $datas                       = $this->model::with(['games:id,name,sign', 'vendor'])
             ->filter($inputDatas, GamesPlatformFilter::class)
             ->withCacheCooldownSeconds(86400)
             ->get();
