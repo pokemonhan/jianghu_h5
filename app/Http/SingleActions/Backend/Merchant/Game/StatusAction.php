@@ -16,9 +16,10 @@ class StatusAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        if ($this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']])) {
+        $result = $this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']]);
+        if ($result) {
             return msgOut(true);
         }
         throw new \Exception('300203');
