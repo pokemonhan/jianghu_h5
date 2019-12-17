@@ -41,7 +41,7 @@ class GamesTypeFilter extends ModelFilter
     }
 
     /**
-     * @param integer $type_id
+     * @param integer $type_id TypeId.
      * @return object
      */
     public function type(int $type_id): object
