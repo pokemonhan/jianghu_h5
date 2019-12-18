@@ -21,6 +21,7 @@ class GamesTypeFilter extends ModelFilter
     public $relations = [];
 
     /**
+     * 状态查询
      * @param  integer $status Status.
      * @return object
      */
@@ -31,6 +32,7 @@ class GamesTypeFilter extends ModelFilter
     }
 
     /**
+     * 名称查询
      * @param  string $name Name.
      * @return object
      */
@@ -41,6 +43,7 @@ class GamesTypeFilter extends ModelFilter
     }
 
     /**
+     * 分类查询
      * @param integer $type_id TypeId.
      * @return object
      */
