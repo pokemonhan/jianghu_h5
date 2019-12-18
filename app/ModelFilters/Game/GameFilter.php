@@ -57,7 +57,7 @@ class GameFilter extends ModelFilter
     /**
      * 未分配给平台的游戏
      * @param  string $unassign_platform_sign Unassign_platform_sign.
-     * @return GameFilter|\Illuminate\Database\Query\Builder
+     * @return GameFilter
      */
     public function unassignPlatformSign(string $unassign_platform_sign): GameFilter
     {
@@ -72,7 +72,7 @@ class GameFilter extends ModelFilter
     /**
      * 已分配给平台的游戏
      * @param  string $assigned_platform_sign Assigned_platform_sign.
-     * @return GameFilter|\Illuminate\Database\Query\Builder
+     * @return GameFilter
      */
     public function assignedPlatformSign(string $assigned_platform_sign): GameFilter
     {
