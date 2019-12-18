@@ -20,7 +20,9 @@ class GameVendorPlatformFilter extends ModelFilter
     public $relations = [
         'gameVendor' => ['name'],
     ];
+
     /**
+     * 根据状态查询
      * @param  integer $status Status.
      * @return object
      */
@@ -31,6 +33,7 @@ class GameVendorPlatformFilter extends ModelFilter
     }
 
     /**
+     * 根据平台查询
      * @param  integer $platform_id PlatformId.
      * @return object
      */
@@ -41,6 +44,7 @@ class GameVendorPlatformFilter extends ModelFilter
     }
 
     /**
+     * 根据设备查询
      * @param integer $device Device.
      * @return object
      */

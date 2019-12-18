@@ -19,7 +19,9 @@ class GamesVendorFilter extends ModelFilter
      * @var array
      */
     public $relations = [];
+
     /**
+     * 状态查询
      * @param  integer $status Status.
      * @return object
      */
@@ -30,6 +32,7 @@ class GamesVendorFilter extends ModelFilter
     }
 
     /**
+     * 名称查询
      * @param  string $name Name.
      * @return object
      */
@@ -40,6 +43,7 @@ class GamesVendorFilter extends ModelFilter
     }
 
     /**
+     * 厂商查询
      * @param integer $vendor_id VendorId.
      * @return object
      */
