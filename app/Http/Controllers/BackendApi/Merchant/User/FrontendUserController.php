@@ -4,9 +4,9 @@ namespace App\Http\Controllers\BackendApi\Merchant\User;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\IndexRequest;
-use App\Http\Requests\Backend\Merchant\User\FrontendUser\loginLogRequest;
+use App\Http\Requests\Backend\Merchant\User\FrontendUser\LoginLogRequest;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\IndexAction;
-use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\loginLogAction;
+use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\LoginLogAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -30,11 +30,11 @@ class FrontendUserController extends MerchantApiMainController
 
     /**
      * 会员登录记录
-     * @param  loginLogRequest $request Request.
-     * @param  loginLogAction  $action  Action.
+     * @param  LoginLogRequest $request Request.
+     * @param  LoginLogAction  $action  Action.
      * @return JsonResponse
      */
-    public function loginLog(loginLogRequest $request, loginLogAction $action): JsonResponse
+    public function loginLog(LoginLogRequest $request, LoginLogAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas, $this->currentPlatformEloq->sign);
