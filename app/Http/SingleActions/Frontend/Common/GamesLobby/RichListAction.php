@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\SingleActions\Frontend\App\GamesLobby;
+namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Models\User\FrontendUsersAccount;
 use Illuminate\Http\JsonResponse;

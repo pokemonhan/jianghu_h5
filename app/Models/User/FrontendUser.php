@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -117,5 +118,14 @@ class FrontendUser extends BaseAuthModel
     public function platform(): HasOne
     {
         return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
+    }
+
+    /**
+     * get user game_type_platforms
+     * @return HasMany
+     */
+    public function gameTypePlatform(): HasMany
+    {
+        return $this->hasMany(GameTypePlatform::class, 'platform_id', 'platform_id');
     }
 }
