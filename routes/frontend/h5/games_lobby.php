@@ -10,11 +10,13 @@ Route::group(
             ['get', 'options'],
             'rich-list',
             [GamesLobbyController::class, 'richList'],
-        )->name('app-api.games-lobby.rich-list');
+        )
+        ->name('app-api.games-lobby.rich-list');
         Route::match(
             ['get', 'options'],
             'game-categories',
             [GamesLobbyController::class, 'category'],
-        )->name('app-api.games-lobby.rich-list');
+        )
+        ->name('app-api.games-lobby.rich-list');
     },
 );

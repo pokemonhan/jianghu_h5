@@ -12,11 +12,12 @@ Route::group(
         Route::match(
             ['get', 'options'],
             'logout',
-            [FrontendAuthController::class, 'logout']
+            [FrontendAuthController::class, 'logout'],
         )->name($namePrefix . 'logout');
-        Route::match(['put', 'options'],
+        Route::match(
+            ['put', 'options'],
             'refresh-token',
-            [FrontendAuthController::class,'refreshToken']
+            [FrontendAuthController::class,'refreshToken'],
         )->name($namePrefix . 'refresh-token');
     },
 );
