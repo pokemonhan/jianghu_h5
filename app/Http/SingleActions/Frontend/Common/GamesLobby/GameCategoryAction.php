@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Models\Game\GameTypePlatform;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class GameCategoryAction
@@ -11,21 +12,26 @@ use Illuminate\Http\JsonResponse;
  */
 class GameCategoryAction
 {
+
     /**
-     * @param array $inputDatas InputDatas.
+     * @param  Request $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(Request $request): JsonResponse
     {
-        $user = $request->user();
+        $user      = $request->user();
         $condition = [
             'status' => 1,
             'device' => 2,
             'platform_id' => $user->platform_id,
         ];
 
-        $outputDatas = GameTypePlatform::where($condition)->with('gameType:id,name,sign,created_at')->first()->getRelation('gameType');
-        return msgOut(true, $outputDatas);
+        $outputDatas = GameTypePlatform::where($condition)
+            ->with('gameType:id,name,sign,created_at')
+            ->first()
+            ->getRelation('gameType');
+        $result      = msgOut(true, $outputDatas);
+        return $result;
     }
 }

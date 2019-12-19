@@ -12,12 +12,12 @@ Route::group(
             'rich-list',
             [GamesLobbyController::class, 'richList'],
         )
-        ->name('h5-api.games-lobby.rich-list');
+        ->name($namePrefix . 'games-lobby.rich-list');
         Route::match(
             ['get', 'options'],
             'game-categories',
             [GamesLobbyController::class, 'category'],
         )
-        ->name('h5-api.games-lobby.rich-list');
+        ->name($namePrefix . 'games-lobby.rich-list');
     },
 );

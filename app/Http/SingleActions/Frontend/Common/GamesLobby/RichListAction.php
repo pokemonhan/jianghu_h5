@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Models\User\FrontendUsersAccount;
@@ -17,7 +18,11 @@ class RichListAction
      */
     public function execute(): JsonResponse
     {
-        $outputDatas = FrontendUsersAccount::with('frontendUser.specificInfo')->orderBy('balance', 'desc')->limit(3)->get();
-        return msgOut(true, $outputDatas);
+        $outputDatas = FrontendUsersAccount::with('frontendUser.specificInfo')
+            ->orderBy('balance', 'desc')
+            ->limit(3)
+            ->get();
+        $result      = msgOut(true, $outputDatas);
+        return $result;
     }
 }

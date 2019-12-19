@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\FrontendApi\H5;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\SingleActions\Frontend\App\GamesLobby\RichListAction;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\GameCategoryAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\RichListAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -24,16 +24,20 @@ class GamesLobbyController extends FrontendApiMainController
      */
     public function richList(RichListAction $action): JsonResponse
     {
-        return $action->execute();
+        $result = $action->execute();
+        return $result;
     }
 
     /**
      * game category
+     * @param  GameCategoryAction $action  Action.
+     * @param  Request            $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function category(GameCategoryAction $action, Request $request): JsonResponse
     {
-        return $action->execute($request);
+        $result = $action->execute($request);
+        return $result;
     }
 }
