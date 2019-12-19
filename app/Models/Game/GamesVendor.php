@@ -5,6 +5,7 @@ namespace App\Models\Game;
 use App\ModelFilters\Game\GamesVendorFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class GamesVendor
@@ -19,19 +20,21 @@ class GamesVendor extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function lastEditor()
+    public function lastEditor(): BelongsTo
     {
-        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        return $object;
     }
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        return $object;
     }
 
     /**
@@ -41,7 +44,8 @@ class GamesVendor extends BaseModel
     public function setWhitelistIpsAttribute(array $value)
     {
         if (!empty($value)) {
-            return json_encode($value);
+            $value = json_encode($value);
+            return $value;
         }
         return '';
     }
@@ -51,6 +55,7 @@ class GamesVendor extends BaseModel
      */
     public function modelFilter()
     {
-        return $this->provideFilter(GamesVendorFilter::class);
+        $object = $this->provideFilter(GamesVendorFilter::class);
+        return $object;
     }
 }

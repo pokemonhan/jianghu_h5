@@ -2,8 +2,10 @@
 
 namespace App\Models\Game;
 
+use App\ModelFilters\Game\GameFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Game
@@ -18,34 +20,47 @@ class Game extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function lastEditor()
+    public function lastEditor(): BelongsTo
     {
-        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
+    {
+        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function vendor(): BelongsTo
+    {
+        $object = $this->belongsTo(GamesVendor::class, 'vendor_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function type(): BelongsTo
+    {
+        $object = $this->belongsTo(GamesType::class, 'type_id', 'id');
+        return $object;
     }
 
     /**
      * @return mixed
      */
-    public function author()
+    public function modelFilter()
     {
-        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function vendor()
-    {
-        return $this->belongsTo(GamesVendor::class, 'vendor_id', 'id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function type()
-    {
-        return $this->belongsTo(GamesType::class, 'type_id', 'id');
+        $object = $this->provideFilter(GameFilter::class);
+        return $object;
     }
 }

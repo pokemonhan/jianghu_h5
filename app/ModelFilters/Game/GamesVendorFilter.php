@@ -19,21 +19,37 @@ class GamesVendorFilter extends ModelFilter
      * @var array
      */
     public $relations = [];
+
     /**
+     * 状态查询
      * @param  integer $status Status.
-     * @return object
+     * @return GamesVendorFilter
      */
-    public function status(int $status) :object
+    public function status(int $status): GamesVendorFilter
     {
-        return $this->where('status', $status);
+        $object = $this->where('status', $status);
+        return $object;
     }
 
     /**
+     * 名称查询
      * @param  string $name Name.
-     * @return object
+     * @return GamesVendorFilter
      */
-    public function name(string $name) :object
+    public function name(string $name): GamesVendorFilter
     {
-        return $this->where('name', $name);
+        $object = $this->where('name', $name);
+        return $object;
+    }
+
+    /**
+     * 厂商查询
+     * @param integer $vendor_id VendorId.
+     * @return GamesVendorFilter
+     */
+    public function vendor(int $vendor_id): GamesVendorFilter
+    {
+        $object = $this->where('games_vendors.id', $vendor_id);
+        return $object;
     }
 }
