@@ -6,17 +6,18 @@ use App\Http\Controllers\FrontendApi\H5\GamesLobbyController;
 Route::group(
     ['prefix' => 'games-lobby'],
     static function (): void {
+        $namePrefix = 'h5-api.games-lobby.';
         Route::match(
             ['get', 'options'],
             'rich-list',
             [GamesLobbyController::class, 'richList'],
         )
-        ->name('app-api.games-lobby.rich-list');
+        ->name('h5-api.games-lobby.rich-list');
         Route::match(
             ['get', 'options'],
             'game-categories',
             [GamesLobbyController::class, 'category'],
         )
-        ->name('app-api.games-lobby.rich-list');
+        ->name('h5-api.games-lobby.rich-list');
     },
 );

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\FrontendApi\H5;
+namespace App\Http\Controllers\FrontendApi\App;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\SingleActions\Frontend\App\GamesLobby\RichListAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\RichListAction;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\GameCategoryAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
