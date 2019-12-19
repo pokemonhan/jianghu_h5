@@ -23,9 +23,12 @@ class BackendSystemEmailController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function send(SendAction $action, SendRequest $request):JsonResponse
-    {
+    public function send(
+        SendAction $action,
+        SendRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }
