@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Setting\LoginLogDetailRequest;
 use App\Http\SingleActions\Backend\Headquarters\Setting\LoginLogDetailAction;
 use Illuminate\Http\JsonResponse;

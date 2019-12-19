@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\GameType\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\GameType\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;

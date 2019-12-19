@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Email\SendRequest;
 use App\Http\SingleActions\Backend\Headquarters\Email\SendAction;
 use Illuminate\Http\JsonResponse;
