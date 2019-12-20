@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\FrontendLoginEvent;
 use App\Events\SystemEmailEvent;
+use App\Listeners\FrontendLoginEventListener;
 use App\Listeners\SystemEmailEventListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
         SystemEmailEvent::class => [
             SystemEmailEventListener::class,
         ],
+        FrontendLoginEvent::class => [
+            FrontendLoginEventListener::class,
+        ]
     ];
 
     /**
