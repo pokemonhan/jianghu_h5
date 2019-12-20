@@ -74,7 +74,7 @@ class UsersTagController extends BackEndApiMainController
         DeleteAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 }
