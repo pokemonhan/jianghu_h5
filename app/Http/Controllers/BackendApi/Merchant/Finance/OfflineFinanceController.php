@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\Merchant\Finance\Offline\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\IndexRequest;
 use App\Http\SingleActions\Backend\Merchant\Finance\Offline\AddDoAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Offline\IndexAction;
+use App\Http\SingleActions\Backend\Merchant\Finance\Offline\TypesAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -16,6 +17,7 @@ use Illuminate\Http\JsonResponse;
 class OfflineFinanceController extends BackEndApiMainController
 {
     /**
+     * 添加线下支付
      * @param AddDoAction  $action  Action.
      * @param AddDoRequest $request Request.
      * @return JsonResponse
@@ -29,6 +31,7 @@ class OfflineFinanceController extends BackEndApiMainController
     }
 
     /**
+     * 获取线下支付列表
      * @param IndexAction  $action  Action.
      * @param IndexRequest $request Request.
      * @return JsonResponse
@@ -38,6 +41,18 @@ class OfflineFinanceController extends BackEndApiMainController
     {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($this, $inputDatas);
+        return $outputDatas;
+    }
+
+    /**
+     * 获取分类列表
+     * @param TypesAction $action Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function types(TypesAction $action): JsonResponse
+    {
+        $outputDatas = $action->execute();
         return $outputDatas;
     }
 }
