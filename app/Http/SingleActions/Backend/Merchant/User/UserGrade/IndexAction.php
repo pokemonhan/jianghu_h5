@@ -33,6 +33,7 @@ class IndexAction
         $data   = $this->model
                      ->select('id', 'name', 'experience_min', 'experience_max', 'grade_gift', 'week_gift', 'updated_at')
                      ->where('platform_sign', $sign)
+                     ->orderBy('experience_max', 'asc')
                      ->get()
                      ->toArray();
         $msgOut = msgOut(true, $data);
