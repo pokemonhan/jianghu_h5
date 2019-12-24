@@ -17,8 +17,13 @@ class UsersTag extends BaseAuthModel
      */
     protected $guarded = ['id'];
 
+    /**
+     * 标签下的会员
+     * @return HasMany
+     */
     public function user(): HasMany
     {
-    	return $this->hasMany(FrontendUser::class, 'user_tag_id', 'id');
+        $users = $this->hasMany(FrontendUser::class, 'user_tag_id', 'id');
+        return $users;
     }
 }
