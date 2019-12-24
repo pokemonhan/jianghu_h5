@@ -31,6 +31,12 @@ class SeederCommand extends GeneratorCommand
      */
     protected $footerStr = "\t\t\t],";
 
+    /**
+     * 最大执行条数
+     * @var integer $maxLimit
+     */
+    protected $maxLimit = 10000;
+
     public const MODE_APPEND = 'append'; //附加模式
     public const MODE_COVER  = 'cover';  //覆盖模式
 
@@ -39,9 +45,10 @@ class SeederCommand extends GeneratorCommand
      */
     protected $signature = 'make:seeder 
                                 {name}
+                                {--m=append}
                                 {--c=}
                                 {--f=}
-                                {--m=cover}';
+                                {--force}';
 
     /**
      * The console command description.
@@ -53,7 +60,8 @@ class SeederCommand extends GeneratorCommand
     {--c=:This is the ID of the data to be inserted,for example --c=1,2,3}
     {--f=:This is the column name of the data to be inserted,for example --f=id,name,email}
     {--m=cover:This is the data update mode. Cover means to overwrite the original data,
-               and append means to append data to the original data.}';
+               and append means to append data to the original data.
+               --force:Delegate to enforce.}';
 
     /**
      * The type of class being generated.
@@ -202,9 +210,27 @@ class SeederCommand extends GeneratorCommand
             $condition = explode(',', $condition);
             $model     = $model->whereIn('id', $condition);
         }
-        $data = $model->get()->toJson();
-        $data = \json_decode($data, true);
-        if (!empty($data)) {
+        try {
+            $data = $model->get()->toJson();
+        } catch (\Throwable $exception) {
+            $message = $exception->getMessage();
+            $this->error($message);
+            die(0);
+        }
+        $data   = \json_decode($data, true);
+        $number = count($data);
+        $force  = $this->option('force');
+        if ($number > $this->maxLimit && !$force) {
+            $flag = $this->confirm(
+                'Data is greater than the maximum number of ' .
+                $this->maxLimit . '. Are you sure to continue to generate Seeder?[y|N]',
+            );
+            if (!$flag) {
+                $this->error('Canceled generation of Seeder!');
+                die(0);
+            }
+        }
+        if ($number > 0) {
             $data = $this->_arrToStr($data); //格式格式化字符串
         } else {
             $data = '';
