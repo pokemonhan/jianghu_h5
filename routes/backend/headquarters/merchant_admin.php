@@ -6,36 +6,37 @@
  * Time: 12:22 PM
  */
 
+use App\Http\Controllers\BackendApi\Merchant\Admin\MerchantAdminUserController;
+
 //管理员相关
 Route::group(
     ['prefix' => 'merchant-admin-user', 'namespace' => 'Admin'],
     static function () {
         $namePrefix = 'merchant-api.merchant-admin-user.';
-        $controller = 'MerchantAdminUserController@';
         Route::match(
             ['post', 'options'],
             'create',
-            ['as' => $namePrefix . 'create', 'uses' => $controller . 'create'],
+            [MerchantAdminUserController::class, 'create'],
         );
         Route::match(
             ['get', 'options'],
             'get-all-admins',
-            ['as' => $namePrefix . 'get-all-admins', 'uses' => $controller . 'allAdmins'],
+            [MerchantAdminUserController::class, 'allAdmins'],
         );
         Route::match(
             ['post', 'options'],
             'update-admin-group',
-            ['as' => $namePrefix . 'update-admin-group', 'uses' => $controller . 'updateAdminGroup'],
+            [MerchantAdminUserController::class, 'updateAdminGroup'],
         );
         Route::match(
             ['post', 'options'],
             'delete-admin',
-            ['as' => $namePrefix . 'delete-admin', 'uses' => $controller . 'deletePartnerAdmin'],
+            [MerchantAdminUserController::class, 'deletePartnerAdmin'],
         );
         Route::match(
             ['post', 'options'],
             'search-admin',
-            ['as' => $namePrefix . 'search-admin', 'uses' => $controller . 'searchAdmin'],
+            [MerchantAdminUserController::class, 'searchAdmin'],
         );
     },
 );
