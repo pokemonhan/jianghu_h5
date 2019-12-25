@@ -2,14 +2,13 @@
     <div class="activityDetail">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
-            <div class="textTitle" v-text="activityDetail.title">活动详情</div>
+            <div class="textTitle">存取帮助</div>
         </div>
         <div class="contentView">
-            <div class="detail">
-                <img class="imgContent" :src="activityDetail.imgContent"/>
-                <div class="btnTodo" @click="open(activityPath[activityDetail.title])"></div>
+            <div class="stepText" v-for="item in promoted">
+                <div class="stepTitle" v-text="item.title"></div>
+                <div class="stepContent" v-text="item.content"></div>
             </div>
-
         </div>
     </div>
 </template>
@@ -18,20 +17,16 @@
     export default {
         data () {
             return {
-                activityDetail:null,
-                activityPath:{
-                    "每日签到":"/mine",
-
-                }
+                promoted:[
+                    {title:"1.取款有什么要求？",content:"游戏主界面，点击“取款”就能查看您当前可取款的额度，若是没有完成打码量就行取是回被扣除费用的，扣除的具体费用可联系客服咨询；最低提款额度为100元，单笔提现高达50000万。通过审核后即可到账。"},
+                    {title:"2.充值有什么要求？",content:"充值通道有在线充值和官方入款充值渠道，最低充值金额10元，使用线下充值时资金到账时间大约在5~10分钟。"},
+                ]
             }
         },
         methods:{
             open(path){all.router.push(path)},
             back(){all.router.go(-1)}
         },
-        created() {
-            this.activityDetail=all.tool.getStore("activityDetail")
-        }
     }
 </script>
 
@@ -67,25 +62,28 @@
         flex:1;
         display:flex;
         flex-direction:column;
-        align-items:center;
+        align-items:flex-start;
         overflow:scroll;
-        padding-top:0.45rem;
+        padding-top:0.3rem;
     }
-    .detail{
+    .stepText{
         width:6.9rem;
-        position:relative;
         margin-bottom:0.3rem;
+        border-radius:0.1rem;
+        background:#ffffff;
+        font-size:0.2rem;
+        color:#999999;
+        padding:0.3rem 0.2rem;
     }
-    .imgContent{
-        width:100%;
-        height:auto;
+    .stepTitle{
+        font-size:0.24rem;
+        color:#666666;
+        font-weight:400;
     }
-    .btnTodo{
-        width:5.7rem;
-        height:0.56rem;
-        position:absolute;
-        left:0.6rem;
-        bottom:0.45rem;
+    .stepContent{
+        padding:0.1rem;
+        line-height:0.35rem;
+        text-indent:2em;
     }
 
 </style>

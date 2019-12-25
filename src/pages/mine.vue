@@ -1,10 +1,7 @@
 <template>
     <div class="mine">
         <div class="pageTitle">
-            <div class="textTitle">
-                <span>个人中心</span>
-                <img class="iconService" src="../assets/homePage/icon_Service.png"/>
-            </div>
+            <div class="textTitle">个人中心</div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
             <img class="circleA" src="../assets/mine/img_CircleA.png"/>
             <img class="circleB" src="../assets/mine/img_CircleB.png"/>
@@ -30,68 +27,27 @@
                 </div>
                 <div class="currentNumber">当前经验值：3000/10000</div>
             </div>
-            <div class="itemBox">
-                <div class="boxTitle">个人信息</div>
+            <div class="itemBox" v-for="item in itemBox">
+                <div class="boxTitle" v-text="item.title">个人信息</div>
                 <div class="boxItem">
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_Credits.png"/>
-                        <div class="itemName">当前积分</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_Vip.png"/>
-                        <div class="itemName">我的VIP</div>
+                    <div class="item" v-for="itemCount in item.list" @click="open(itemCount.path)">
+                        <img class="itemIcon" :src="itemCount.icon"/>
+                        <div class="itemName" v-text="itemCount.name">当前积分</div>
                     </div>
                 </div>
             </div>
-            <div class="itemBox">
-                <div class="boxTitle">报表管理</div>
-                <div class="boxItem">
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_UserDetail.png"/>
-                        <div class="itemName">账户明细</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_PersonalList.png"/>
-                        <div class="itemName">个人报表</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_BetRecord.png"/>
-                        <div class="itemName">投注记录</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_LoadRecord.png"/>
-                        <div class="itemName">充值记录</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_WithdrawRecord.png"/>
-                        <div class="itemName">提现记录</div>
-                    </div>
-                </div>
-            </div>
-            <div class="itemBox">
-                <div class="boxTitle">其他服务</div>
-                <div class="boxItem">
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_SafelyCenter.png"/>
-                        <div class="itemName">安全中心</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_HelpCenter.png"/>
-                        <div class="itemName">帮助中心</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_MessageCenter.png"/>
-                        <div class="itemName">消息中心</div>
-                    </div>
-                    <div class="item">
-                        <img class="itemIcon" src="../assets/mine/icon_ServiceCenter.png"/>
-                        <div class="itemName">客服中心</div>
-                    </div>
-                </div>
-            </div>
-            <div class="exitLogin">退出登录</div>
+            <div class="exitLogin" @click="showExitWin">退出登录</div>
         </div>
         <comMenu/>
+        <div class="exitLoginBox" v-if="isShowExitLoginBox">
+            <div class="tipWin">
+                <div class="tipText">是否确定退出当前登录账号？</div>
+                <div class="btnBar">
+                    <div class="cancel" @click="hideExitWin">取消</div>
+                    <div class="sure" @click="logout">确定</div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -103,13 +59,35 @@
         },
         data () {
             return {
-
+                itemBox:[
+                    {title:"个人信息",list:[
+                        {icon:require("../assets/mine/icon_Credits.png"),name:"当前积分"},
+                        {icon:require("../assets/mine/icon_Vip.png"),name:"我的VIP",path:"/myVip"}
+                        ]},
+                    {title:"报表管理",list:[
+                        {icon:require("../assets/mine/icon_UserDetail.png"),name:"账户明细"},
+                        {icon:require("../assets/mine/icon_PersonalList.png"),name:"个人报表"},
+                        {icon:require("../assets/mine/icon_BetRecord.png"),name:"投注记录"},
+                        {icon:require("../assets/mine/icon_LoadRecord.png"),name:"充值记录"},
+                        {icon:require("../assets/mine/icon_WithdrawRecord.png"),name:"提现记录"}
+                        ]},
+                    {title:"其他服务",list:[
+                        {icon:require("../assets/mine/icon_SafelyCenter.png"),name:"安全中心",path:"/safelyCenter"},
+                        {icon:require("../assets/mine/icon_HelpCenter.png"),name:"帮助中心",path:"/helpCenter"},
+                        {icon:require("../assets/mine/icon_MessageCenter.png"),name:"消息中心",path:"/messageCenter"},
+                        {icon:require("../assets/mine/icon_ServiceCenter.png"),name:"客服中心",path:"/serviceCenter"},
+                        ]}
+                ],
+                isShowExitLoginBox:false
             }
         },
 
         methods:{
             open(path){all.router.push(path)},
-            back(){all.router.go(-1)}
+            back(){all.router.go(-1)},
+            showExitWin(){this.isShowExitLoginBox=true},
+            hideExitWin(){this.isShowExitLoginBox=false},
+            logout(){all.store.commit("isLogin",false);this.open("/")}
         },
 
     }
@@ -119,7 +97,6 @@
     .mine{
         display:flex;
         flex-direction:column;
-        justify-content:space-between;
         background:#eeeeee;
     }
     .pageTitle{
@@ -137,12 +114,6 @@
         font-size:0.36rem;
         font-weight:400;
         position:relative;
-    }
-    .iconService{
-        width:0.45rem;
-        height:auto;
-        position:absolute;
-        right:0;
     }
     .circleA{
         width:2.58rem;
@@ -287,6 +258,50 @@
         box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
         margin-bottom:0.6rem;
         flex-shrink:0;
+    }
+    .exitLoginBox{
+        width:100%;
+        height:100%;
+        background:rgba(0,0,0,0.5);
+        position:absolute;
+        z-index:3;
+        font-size:0.24rem;
+        color:#7f7f7f;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    .tipWin{
+        width:5rem;
+        height:2.2rem;
+        border-radius:0.1rem;
+        background:#ffffff;
+    }
+    .tipText{
+        text-align:center;
+        line-height:1.25rem;
+        border-bottom:0.01rem solid #eeeeee;
+        font-weight:400;
+    }
+    .btnBar{
+        display:flex;
+        height:0.95rem;
+        font-size:0.3rem;
+        font-weight:400;
+        color:#1d7ef0;
+    }
+    .cancel{
+        flex:1;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    .sure{
+        flex:1;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border-left:0.01rem solid #eeeeee;
     }
 
 </style>

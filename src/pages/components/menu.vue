@@ -1,24 +1,8 @@
 <template>
     <div class="menuBox">
-        <div class="menuItem" @click="open('/')">
-            <img class="menuIcon" src="../../assets/componentMenu/icon_HomeActive.png"/>
-            <div class="menuText">首页</div>
-        </div>
-        <div class="menuItem">
-            <img class="menuIcon" src="../../assets/componentMenu/icon_Brokerage.png"/>
-            <div class="menuText">佣金</div>
-        </div>
-        <div class="menuItem">
-            <img class="menuIcon" src="../../assets/componentMenu/icon_ReCharge.png"/>
-            <div class="menuText">充值</div>
-        </div>
-        <div class="menuItem" @click="open('/activity')">
-            <img class="menuIcon" src="../../assets/componentMenu/icon_Activity.png"/>
-            <div class="menuText">活动</div>
-        </div>
-        <div class="menuItem" @click="open('/mine')">
-            <img class="menuIcon" src="../../assets/componentMenu/icon_Mine.png"/>
-            <div class="menuText">我的</div>
+        <div class="menuItem" @click="open(item.path,index)" v-for="(item,index) in menuItem">
+            <img class="menuIcon" :src="currentIndex===index?item.iconActive:item.icon"/>
+            <div class="menuText" v-text="item.name">首页</div>
         </div>
     </div>
 </template>
@@ -27,11 +11,23 @@
     export default {
         data () {
             return {
-
+                currentIndex:all.tool.getStore("currentMenu") || 0,
+                menuItem:[
+                    {name:"首页",icon:require('../../assets/componentMenu/icon_Home.png'),iconActive:require('../../assets/componentMenu/icon_HomeActive.png'),path:"/"},
+                    {name:"佣金",icon:require('../../assets/componentMenu/icon_Brokerage.png'),iconActive:require('../../assets/componentMenu/icon_BrokerageActive.png'),path:"/promote"},
+                    {name:"充值",icon:require('../../assets/componentMenu/icon_ReCharge.png'),iconActive:require('../../assets/componentMenu/icon_ReChargeActive.png'),path:"/reCharge"},
+                    {name:"活动",icon:require('../../assets/componentMenu/icon_Activity.png'),iconActive:require('../../assets/componentMenu/icon_ActivityActive.png'),path:"/activity"},
+                    {name:"我的",icon:require('../../assets/componentMenu/icon_Mine.png'),iconActive:require('../../assets/componentMenu/icon_MineActive.png'),path:"/mine"},
+                ]
             }
         },
         methods:{
-            open(path){all.router.history.current.path!==path && all.router.push(path)},
+            open(path,index){
+                this.currentIndex=index;
+                all.tool.setStore("currentMenu",index);
+                if(path!=='/' && !all.store.state.isLogin)all.router.push('/login');
+                else {all.router.history.current.path!==path && all.router.push(path)}
+            },
         }
     }
 </script>

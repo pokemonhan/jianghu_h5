@@ -2,7 +2,7 @@
     <div class="homePage">
         <div class="pageTitle">
             <div class="userInfo" v-if="this.$store.state.isLogin">
-                <img class="imgUser" src="../assets/homePage/img_User.png"/>
+                <img class="imgUser" @click="fullScreen" src="../assets/homePage/img_User.png"/>
                 <div class="nameId">
                     <div class="name">两只小蜜蜂</div>
                     <div class="id">ID：189673</div>
@@ -10,13 +10,13 @@
                 <div class="amountBar">
                     <img class="iconGoldCoin" src="../assets/homePage/icon_GoldCoin.png"/>
                     <div class="amount" v-text="this.$store.state.amount"></div>
-                    <img class="iconAdd" src="../assets/homePage/icon_Add.png"/>
+                    <img class="iconAdd" @click="toReCharge" src="../assets/homePage/icon_Add.png"/>
                 </div>
             </div>
             <div class="shortcutMenu">
-                <img class="iconService" src="../assets/homePage/icon_Service.png"/>
-                <div class="menuText" v-if="!this.$store.state.isLogin">登录</div>
-                <div class="menuText" v-if="!this.$store.state.isLogin">注册</div>
+                <img class="iconService" @click="open('onlineService')" src="../assets/homePage/icon_Service.png"/>
+                <div class="menuText" v-if="!this.$store.state.isLogin" @click="open('/login')">登录</div>
+                <div class="menuText" v-if="!this.$store.state.isLogin" @click="open('/register')">注册</div>
             </div>
         </div>
         <div class="contentView">
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="shortcutTitle">常玩游戏</div>
-            <div class="shortcutGameBox">
+            <div class="shortcutGameBox" :class="{downloadHeight:isShowDownLoad}">
                 <img class="imgGame" src="../assets/homePage/img_GameA.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameB.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameC.png"/>
@@ -81,6 +81,13 @@
                 <img class="imgGame" src="../assets/homePage/img_GameH.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameI.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameJ.png"/>
+            </div>
+            <div class="downloadBox" v-if="isShowDownLoad">
+                <div class="downloadText">
+                    <img class="iconClose" @click="closeDownLoad" src="../assets/homePage/icon_Close.png"/>
+                    <span>下载APP，体验更好的游戏乐趣！</span>
+                </div>
+                <div class="downloadBtn">下载APP</div>
             </div>
         </div>
         <comMenu/>
@@ -95,13 +102,15 @@
         },
         data () {
             return {
+                isShowDownLoad:true,
                 currentIndex:0,
                 bannerList:[
                     require("../assets/homePage/bannerA.png"),
                     require("../assets/homePage/bannerB.png"),
                     require("../assets/homePage/bannerC.png"),
                     require("../assets/homePage/bannerD.png"),
-                ]
+                ],
+                timeRun:null
             }
         },
         watch:{
@@ -115,9 +124,19 @@
         },
         methods:{
             open(path){all.router.push(path)},
+            closeDownLoad(){this.isShowDownLoad=false},
+            toReCharge(){
+                all.tool.setStore("currentMenu",2);
+                this.open("/reCharge")
+            },
+            fullScreen(){all.tool.fullScreen()}
         },
         created() {
-            setInterval(()=>{this.currentIndex>=3?this.currentIndex=0:this.currentIndex+=1},6000)
+            this.timeRun=setInterval(()=>{this.currentIndex>=3?this.currentIndex=0:this.currentIndex+=1},6000)
+        },
+        destroyed() {
+            clearInterval(this.timeRun);
+            this.timeRun=null;
         }
     }
 </script>
@@ -126,7 +145,6 @@
     .homePage{
         display:flex;
         flex-direction:column;
-        justify-content:space-between;
     }
     .pageTitle{
         height:0.9rem;
@@ -158,7 +176,7 @@
         font-size:0.18rem;
         position:relative;
         width:2.2rem;
-        height:0.42rem;
+        height:0.5rem;
         background:url("../assets/homePage/bg_Amount.png") no-repeat ;
         background-size:100% 100%;
     }
@@ -170,11 +188,11 @@
     }
     .amount{
         width:2.2rem;
-        height:0.42rem;
+        height:0.5rem;
         text-align:center;
-        line-height:0.42rem;
+        line-height:0.5rem;
         font-weight:bold;
-        background: linear-gradient(180deg,#fff991,#ffce24);
+        background:linear-gradient(180deg,#fff991,#ffce24);
         -webkit-background-clip: text;
         color:transparent;
         -webkit-text-stroke:0.01rem #501300;
@@ -183,7 +201,7 @@
         height:0.4rem;
         width:auto;
         position:absolute;
-        right:-0.2rem;
+        right:-0.1rem;
     }
     .shortcutMenu{
         position:absolute;
@@ -194,7 +212,7 @@
     }
     .iconService{
         width:0.45rem;
-        height:auto;
+        height:0.38rem;
     }
     .menuText{
         margin-left:0.2rem;
@@ -266,6 +284,7 @@
         display:flex;
         justify-content:space-between;
         flex-wrap:wrap;
+        flex-shrink:0;
     }
     .gameItem{
         position:relative;
@@ -362,10 +381,42 @@
         box-shadow:0 0.01rem 0.05rem rgba(0,27,97,0.8);
         overflow:scroll;
     }
+    .downloadHeight{
+        margin-bottom:1.1rem
+    }
     .imgGame{
         width:1.2rem;
         height:1.2rem;
         margin-right:0.35rem;
         flex-shrink:0;
+    }
+    .downloadBox{
+        width:100%;
+        height:0.88rem;
+        background:rgba(0,0,0,0.7);
+        flex-shrink:0;
+        position:absolute;
+        bottom:1rem;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        font-size:0.26rem;
+        color:#ffffff;
+        padding:0 0.7rem;
+    }
+    .iconClose{
+        width:0.3rem;
+        height:0.3rem;
+        margin-right:0.2rem;
+    }
+    .downloadBtn{
+        width:1.28rem;
+        height:0.54rem;
+        border-radius:0.08rem;
+        background:#1d7ef0;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
     }
 </style>

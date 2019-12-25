@@ -2,7 +2,6 @@
     <div class="activity">
         <div class="pageTitle">
             <div class="textTitle">活动</div>
-            <img class="iconService" src="../assets/homePage/icon_Service.png"/>
         </div>
         <div class="contentView">
             <img class="bgActivity" v-for="item in activityInfo" @click="open('/activityDetail',item)" :src="item.imgTitle"/>
@@ -42,7 +41,6 @@
     .activity{
         display:flex;
         flex-direction:column;
-        justify-content:space-between;
     }
     .pageTitle{
         height:0.9rem;
@@ -58,12 +56,6 @@
     .textTitle{
         font-size:0.36rem;
         font-weight:400;
-    }
-    .iconService{
-        width:0.45rem;
-        height:auto;
-        position:absolute;
-        right:0.3rem;
     }
     .contentView{
         margin:0 0.3rem;

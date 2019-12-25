@@ -2,13 +2,9 @@
     <div class="activityDetail">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
-            <div class="textTitle" v-text="activityDetail.title">活动详情</div>
+            <div class="textTitle">在线客服</div>
         </div>
         <div class="contentView">
-            <div class="detail">
-                <img class="imgContent" :src="activityDetail.imgContent"/>
-                <div class="btnTodo" @click="open(activityPath[activityDetail.title])"></div>
-            </div>
 
         </div>
     </div>
@@ -18,20 +14,13 @@
     export default {
         data () {
             return {
-                activityDetail:null,
-                activityPath:{
-                    "每日签到":"/mine",
 
-                }
             }
         },
         methods:{
             open(path){all.router.push(path)},
-            back(){all.router.go(-1)}
+            back(){all.router.go(-1)},
         },
-        created() {
-            this.activityDetail=all.tool.getStore("activityDetail")
-        }
     }
 </script>
 
@@ -69,23 +58,8 @@
         flex-direction:column;
         align-items:center;
         overflow:scroll;
-        padding-top:0.45rem;
+        padding-bottom:0.3rem;
     }
-    .detail{
-        width:6.9rem;
-        position:relative;
-        margin-bottom:0.3rem;
-    }
-    .imgContent{
-        width:100%;
-        height:auto;
-    }
-    .btnTodo{
-        width:5.7rem;
-        height:0.56rem;
-        position:absolute;
-        left:0.6rem;
-        bottom:0.45rem;
-    }
+
 
 </style>

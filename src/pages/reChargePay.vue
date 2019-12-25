@@ -2,14 +2,13 @@
     <div class="activityDetail">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
-            <div class="textTitle" v-text="activityDetail.title">活动详情</div>
+            <div class="textTitle">在线支付</div>
         </div>
         <div class="contentView">
-            <div class="detail">
-                <img class="imgContent" :src="activityDetail.imgContent"/>
-                <div class="btnTodo" @click="open(activityPath[activityDetail.title])"></div>
-            </div>
-
+            <div class="orderNumber">订单号：684521394520189346</div>
+            <div class="amount">￥5000.00</div>
+            <img class="rqCode" src="../assets/reCharge/icon_RqCode.png"/>
+            <div class="tipText">请截图保存该二维码打开支付宝客户端扫码付款或是十分钟没有到账请将该截图发经客服补单，不要重复支付，造成损失概不负责。</div>
         </div>
     </div>
 </template>
@@ -18,20 +17,13 @@
     export default {
         data () {
             return {
-                activityDetail:null,
-                activityPath:{
-                    "每日签到":"/mine",
 
-                }
             }
         },
         methods:{
             open(path){all.router.push(path)},
             back(){all.router.go(-1)}
         },
-        created() {
-            this.activityDetail=all.tool.getStore("activityDetail")
-        }
     }
 </script>
 
@@ -39,7 +31,6 @@
     .activityDetail{
         display:flex;
         flex-direction:column;
-        background:#eeeeee;
     }
     .pageTitle{
         height:0.9rem;
@@ -69,23 +60,29 @@
         flex-direction:column;
         align-items:center;
         overflow:scroll;
-        padding-top:0.45rem;
+        padding-top:1rem;
     }
-    .detail{
-        width:6.9rem;
-        position:relative;
-        margin-bottom:0.3rem;
+    .orderNumber{
+        font-size:0.24rem;
+        color:#666666;
     }
-    .imgContent{
-        width:100%;
-        height:auto;
+    .amount{
+        font-size:0.36rem;
+        font-weight:400;
+        color:#333333;
+        margin-top:0.3rem;
+        margin-bottom:0.6rem;
     }
-    .btnTodo{
-        width:5.7rem;
-        height:0.56rem;
-        position:absolute;
-        left:0.6rem;
-        bottom:0.45rem;
+    .rqCode{
+        width:2.8rem;
+        height:2.8rem;
+        margin-bottom:0.4rem;
     }
-
+    .tipText{
+        font-size:0.24rem;
+        color:#999999;
+        width:4.2rem;
+        line-height:0.35rem;
+        font-weight:400
+    }
 </style>
