@@ -74,7 +74,7 @@ class LoginAction
         $backendLoginLog = new BackendLoginLog();
         $backendLoginLog->insertData($user, $request, BackendLoginLog::TYPE_MERCHANT);
 
-        $data = [
+        $data   = [
             'access_token' => $token,
             'token_type'   => 'Bearer',
             'expires_at'   => $expireAt,
