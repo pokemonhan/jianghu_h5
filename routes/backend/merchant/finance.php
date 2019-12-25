@@ -31,5 +31,11 @@ Route::group(
             'types',
             [OfflineFinanceController::class, 'types'],
         )->name($namePrefix . 'types');
+        //删除线下金流
+        Route::match(
+            ['post', 'options'],
+            'del-do',
+            [OfflineFinanceController::class, 'delDo'],
+        )->name($namePrefix . 'del-do');
     },
 );
