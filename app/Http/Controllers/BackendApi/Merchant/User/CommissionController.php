@@ -3,31 +3,30 @@
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
-use App\Http\Requests\Backend\Merchant\User\UserGrade\DeleteRequest;
-use App\Http\Requests\Backend\Merchant\User\UserGrade\DoAddRequest;
-use App\Http\Requests\Backend\Merchant\User\UserGrade\EditRequest;
-use App\Http\Requests\Backend\Merchant\User\UserGrade\GradeConfigRequest;
-use App\Http\SingleActions\Backend\Merchant\User\UserGrade\DeleteAction;
-use App\Http\SingleActions\Backend\Merchant\User\UserGrade\DoAddAction;
-use App\Http\SingleActions\Backend\Merchant\User\UserGrade\EditAction;
-use App\Http\SingleActions\Backend\Merchant\User\UserGrade\GradeConfigAction;
-use App\Http\SingleActions\Backend\Merchant\User\UserGrade\IndexAction;
+use App\Http\Requests\Backend\Merchant\User\Commission\DeleteRequest;
+use App\Http\Requests\Backend\Merchant\User\Commission\DoAddRequest;
+use App\Http\Requests\Backend\Merchant\User\Commission\EditRequest;
+use App\Http\Requests\Backend\Merchant\User\Commission\IndexRequest;
+use App\Http\SingleActions\Backend\Merchant\User\Commission\DeleteAction;
+use App\Http\SingleActions\Backend\Merchant\User\Commission\DoAddAction;
+use App\Http\SingleActions\Backend\Merchant\User\Commission\EditAction;
+use App\Http\SingleActions\Backend\Merchant\User\Commission\IndexAction;
 use Illuminate\Http\JsonResponse;
 
 /**
- * 用户等级管理
+ * 洗码设置
  */
-class UserGradeController extends BackEndApiMainController
+class CommissionController extends BackEndApiMainController
 {
 
     /**
-     * 用户等级-配置
+     * 洗码设置-列表
      *
-     * @param  GradeConfigRequest $request Request.
-     * @param  GradeConfigAction  $action  Action.
+     * @param  IndexRequest $request Request.
+     * @param  IndexAction  $action  Action.
      * @return JsonResponse
      */
-    public function gradeConfig(GradeConfigRequest $request, GradeConfigAction $action): JsonResponse
+    public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
@@ -35,19 +34,7 @@ class UserGradeController extends BackEndApiMainController
     }
 
     /**
-     * 用户等级-列表
-     *
-     * @param  IndexAction $action Action.
-     * @return JsonResponse
-     */
-    public function index(IndexAction $action): JsonResponse
-    {
-        $msgOut = $action->execute($this->currentPlatformEloq->sign);
-        return $msgOut;
-    }
-
-    /**
-     * 用户等级-添加
+     * 洗码设置-添加
      *
      * @param  DoAddRequest $request Request.
      * @param  DoAddAction  $action  Action.
@@ -61,7 +48,7 @@ class UserGradeController extends BackEndApiMainController
     }
 
     /**
-     * 用户等级-编辑
+     * 洗码设置-编辑
      *
      * @param  EditRequest $request Request.
      * @param  EditAction  $action  Action.
@@ -75,7 +62,7 @@ class UserGradeController extends BackEndApiMainController
     }
 
     /**
-     * 用户等级-删除
+     * 洗码设置-删除
      *
      * @param  DeleteRequest $request Request.
      * @param  DeleteAction  $action  Action.
@@ -84,7 +71,7 @@ class UserGradeController extends BackEndApiMainController
     public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }
