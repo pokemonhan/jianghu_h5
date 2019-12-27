@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\SignController;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -63,10 +64,16 @@ class Kernel extends HttpKernel
             'bindings',
             'cors',
         ],
-        'registration' => [
+        /**
+         * verification code
+         */
+        'frontend-verification' => [
             'throttle:1,1',
         ],
-        'frontend-auth' => [
+        /**
+         * login / registration
+         */
+        'frontend-registration' => [
             'throttle:5,1',
         ],
     ];
