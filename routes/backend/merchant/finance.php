@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BackendApi\Merchant\Finance\OfflineFinanceController;
+use App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController;
 
 //线下金流
 Route::group(
@@ -47,13 +48,13 @@ Route::group(
 );
 
 //线下金流
-//Route::group(
-//    ['prefix' => 'online-finance'],
-//    static function (): void {
-//        $namePrefix = 'merchant-api.online-finance.';
-//        Route::get('get-channels', [OnlineFinanceController::class, 'getChannels'])
-//            ->name($namePrefix . 'get-channels');
-//        Route::post('add-do', [OnlineFinanceController::class, 'addDo'])
-//            ->name($namePrefix . 'add-do');
-//    },
-//);
+Route::group(
+    ['prefix' => 'online-finance'],
+    static function (): void {
+        $namePrefix = 'merchant-api.online-finance.';
+        Route::get('get-channels', [OnlineFinanceController::class, 'getChannels'])
+            ->name($namePrefix . 'get-channels');
+        Route::post('add-do', [OnlineFinanceController::class, 'addDo'])
+            ->name($namePrefix . 'add-do');
+    },
+);

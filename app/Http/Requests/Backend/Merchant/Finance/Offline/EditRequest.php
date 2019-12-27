@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\Offline;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Rules\CustomUnique;
 
 /**
  * Class EditRequest
@@ -27,13 +28,14 @@ class EditRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $myId = $this->get('id');
+        $myId   = $this->get('id');
+        $unique = new CustomUnique($this, 'system_finance_offline_infos', 'platform_id', $myId);
         if ($this->isMethod('post')) {
             return [
                 'id' => 'required|exists:system_finance_offline_infos,id',
                 'type_id' => 'required|exists:system_finance_types,id',
                 'bank_id' => 'exists:system_banks,id',
-                'name' => 'required|unique:system_finance_offline_infos,name,' . $myId,
+                'name' => ['required', $unique],
                 'username' => 'required',
                 'qrcode' => 'string',
                 'account' => 'required|unique:system_finance_offline_infos,account,' . $myId,

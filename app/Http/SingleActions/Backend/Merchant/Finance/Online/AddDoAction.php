@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
+namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Finance\SystemFinanceType;
@@ -9,10 +9,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class EditAction
- * @package App\Http\SingleActions\Backend\Merchant\Finance\Offline
+ * Class AddDoAction
+ * @package App\Http\SingleActions\Backend\Merchant\Finance\Online
  */
-class EditAction extends BaseAction
+class AddDoAction extends BaseAction
 {
     /**
      * @param BackEndApiMainController $contll     Contll.
@@ -22,40 +22,30 @@ class EditAction extends BaseAction
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        $method = strtolower($inputDatas['method']);
-        if ($method === 'get') {
-            $userTags = SystemFinanceUserTag::where('is_online', SystemFinanceType::IS_ONLINE_NO)
-                ->where('finance_id', $inputDatas['id'])->select('tag_id')->get();
-            $result   = msgOut(true, $userTags);
-            return $result;
-        }
         $flag = false;
         try {
-            $platformId                   = $contll->currentPlatformEloq->id;
-            $inputDatas['platform_id']    = $platformId;
-            $inputDatas['last_editor_id'] = $contll->currentAdmin->id;
-            $tags                         = [];
+            $platformSign                = $contll->currentPlatformEloq->sign;
+            $platformId                  = $contll->currentPlatformEloq->id;
+            $inputDatas['platform_sign'] = $platformSign;
+            $inputDatas['author_id']     = $contll->currentAdmin->id;
+            $tags                        = [];
             if (isset($inputDatas['tags'])) {
                 $tags = $inputDatas['tags'];
                 unset($inputDatas['tags']);
             }
             DB::beginTransaction();
-            $model = $this->model->find($inputDatas['id']);
-            $model->fill($inputDatas);
-            if ($model->save()) {
+            $this->model->fill($inputDatas);
+            if ($this->model->save()) {
                 $tmpData = [];
                 $data    = [];
                 foreach ($tags as $tagId) {
                     $tmpData['platform_id'] = $platformId;
-                    $tmpData['is_online']   = SystemFinanceType::IS_ONLINE_NO;
-                    $tmpData['finance_id']  = $inputDatas['id'];
+                    $tmpData['is_online']   = SystemFinanceType::IS_ONLINE_YES;
+                    $tmpData['finance_id']  = $this->model->id;
                     $tmpData['tag_id']      = $tagId;
                     $data[]                 = $tmpData;
                 }
                 if (!empty($data)) {
-                    SystemFinanceUserTag::where('platform_id', $platformId)
-                        ->where('finance_id', $inputDatas['id'])
-                        ->delete();
                     SystemFinanceUserTag::insert($data);
                 }
                 $flag = true;
@@ -69,6 +59,6 @@ class EditAction extends BaseAction
             return $result;
         }
         DB::rollBack();
-        throw new \Exception('200600');
+        throw new \Exception('201400');
     }
 }
