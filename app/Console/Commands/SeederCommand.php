@@ -24,12 +24,12 @@ class SeederCommand extends GeneratorCommand
     /**
      * @var string $headerStr
      */
-    protected $headerStr = "\t\t\t[\r\n";
+    protected $headerStr = "            [\r\n";
 
     /**
      * @var string $footerStr
      */
-    protected $footerStr = "\t\t\t],";
+    protected $footerStr = '            ],';
 
     /**
      * 最大执行条数
@@ -262,7 +262,7 @@ class SeederCommand extends GeneratorCommand
      */
     private function _arrToStr(array $array): string
     {
-        $tabKey  = "\t";
+        $tabKey  = '    ';
         $enter   = "\r\n";
         $header  = $this->headerStr;
         $footer  = $this->footerStr;
