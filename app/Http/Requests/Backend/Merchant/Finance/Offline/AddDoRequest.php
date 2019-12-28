@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\Offline;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Rules\CustomUnique;
 
 /**
  * Class AddDoRequest
@@ -28,10 +29,11 @@ class AddDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
+        $unique = new CustomUnique($this, 'system_finance_offline_infos', 'platform_id');
         return [
             'type_id' => 'required|exists:system_finance_types,id',
             'bank_id' => 'exists:system_banks,id',
-            'name' => 'required|unique:system_finance_offline_infos,name',
+            'name' => ['required', $unique],
             'username' => 'required',
             'qrcode' => 'string',
             'account' => 'required|unique:system_finance_offline_infos,account',
