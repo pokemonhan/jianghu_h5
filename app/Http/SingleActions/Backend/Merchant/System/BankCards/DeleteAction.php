@@ -34,7 +34,7 @@ class DeleteAction
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        $filterArr       = [
+        $filterArr = [
             'dataId' => $inputDatas['id'],
             'sign'   => $contll->currentPlatformEloq->sign,
         ];
