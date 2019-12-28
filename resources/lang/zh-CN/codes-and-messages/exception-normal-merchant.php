@@ -79,4 +79,7 @@ return [
     '201303' => '删除帮助设置时发生错误',
     //Merchant/Finance/OfflineFinanceController
     '201400' => '线上金流,添加失败',
+    //BankCardsController
+    '201500' => '该银行卡不存在',
+    '201501' => '删除银行卡时发生错误',
 ];
