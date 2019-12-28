@@ -18,6 +18,7 @@ return [
         'http://madmin.jianghu.local',
         'http://cadmin.jianghu.local',
         'http://10.10.50.127:8080',
+        'http://10.10.50.194:8081',
     ],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
