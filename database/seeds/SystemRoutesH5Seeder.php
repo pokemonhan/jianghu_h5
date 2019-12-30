@@ -33,11 +33,6 @@ class SystemRoutesH5Seeder extends Seeder
                     'is_open' => 0,
                 ],
                 [
-                    'route_name' => 'h5-api.games-lobby.rich-list',
-                    'method' => 'richList',
-                    'is_open' => 0,
-                ],
-                [
                     'route_name' => 'h5-api.games-lobby.games-categories',
                     'method' => 'category',
                     'is_open' => 0,
@@ -50,6 +45,21 @@ class SystemRoutesH5Seeder extends Seeder
                 [
                     'route_name' => 'h5-api.user.game-list',
                     'method' => 'gameList',
+                    'is_open' => 0,
+                ],
+                [
+                    'route_name' => 'h5-api.register',
+                    'method' => 'store',
+                    'is_open' => 1,
+                ],
+                [
+                    'route_name' => 'h5-api.register/verification-code',
+                    'method' => 'code',
+                    'is_open' => 1,
+                ],
+                [
+                    'route_name' => 'h5-api.user.home-information',
+                    'method' => 'home-information',
                     'is_open' => 0,
                 ],
             ],

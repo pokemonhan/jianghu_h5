@@ -17,6 +17,7 @@ class RegisterController extends FrontendApiMainController
 {
 
     /**
+     * Store new user.
      * @param RegisterAction  $action  RegisterAction.
      * @param RegisterRequest $request RegisterRequest.
      * @return JsonResponse
@@ -29,6 +30,7 @@ class RegisterController extends FrontendApiMainController
     }
 
     /**
+     * Get registration verification code.
      * @param VerificationCodeAction  $action  VerificationCodeAction.
      * @param VerificationCodeRequest $request VerificationCodeRequest.
      * @return JsonResponse
