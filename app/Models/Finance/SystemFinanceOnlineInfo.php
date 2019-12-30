@@ -2,7 +2,9 @@
 
 namespace App\Models\Finance;
 
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class SystemFinanceOnlineInfo
@@ -18,4 +20,31 @@ class SystemFinanceOnlineInfo extends BaseModel
 
     public const ENCRYPT_MODE_SECRET = 1;
     public const ENCRYPT_MODE_CERT   = 2;
+
+    /**
+     * @return BelongsTo
+     */
+    public function channel(): BelongsTo
+    {
+        $object = $this->belongsTo(SystemFinanceChannel::class, 'channel_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function lastEditor(): BelongsTo
+    {
+        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
+    {
+        $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
+        return $object;
+    }
 }
