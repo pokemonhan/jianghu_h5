@@ -18,16 +18,18 @@ class FrontendUserAccountSeeder extends Seeder
         FrontendUsersAccount::insert(
             [
                 [
-                    'user_id' => '1',
+                    'uid' => 189673,
                     'balance' => 999022347.8236,
                     'frozen' => 86853.2200,
                     'status' => 1,
+                    'pic_path' => '/storage/avatar/avatar.png',
                 ],
                 [
-                    'user_id' => '2',
+                    'uid' => 189674,
                     'balance' => 173114.1489,
                     'frozen' => 17360.0000,
                     'status' => 1,
+                    'pic_path' => '/storage/avatar/avatar.png',
                 ],
             ],
         );

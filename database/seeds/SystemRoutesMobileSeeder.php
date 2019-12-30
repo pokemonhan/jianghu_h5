@@ -52,6 +52,21 @@ class SystemRoutesMobileSeeder extends Seeder
                     'method' => 'gameList',
                     'is_open' => 0,
                 ],
+                [
+                    'route_name' => 'app-api.register',
+                    'method' => 'store',
+                    'is_open' => 1,
+                ],
+                [
+                    'route_name' => 'app-api.register/verification-code',
+                    'method' => 'code',
+                    'is_open' => 1,
+                ],
+                [
+                    'route_name' => 'app-api.user.home-information',
+                    'method' => 'home-information',
+                    'is_open' => 0,
+                ],
             ],
         );
     }
