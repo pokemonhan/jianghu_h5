@@ -35,7 +35,7 @@ class FrontendUserSeeder extends Seeder
                     'user_specific_id' => 1,
                     'status' => 1,
                     'invite_code' => 123456,
-                    'pic_path' => '/storage/avatar/avatar.png',
+                    'pic_path' => '/avatar.png',
                 ],
                 [
                     'uid' => 189674,
@@ -55,7 +55,7 @@ class FrontendUserSeeder extends Seeder
                     'user_specific_id' => 2,
                     'status' => 1,
                     'invite_code' => 123456,
-                    'pic_path' => '/storage/avatar/avatar.png',
+                    'pic_path' => '/avatar.png',
                 ],
             ],
         );
