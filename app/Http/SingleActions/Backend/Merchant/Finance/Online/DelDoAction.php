@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
+namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Finance\SystemFinanceType;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Class DelDoAction
- * @package App\Http\SingleActions\Backend\Merchant\Finance\Offline
+ * @package App\Http\SingleActions\Backend\Merchant\Finance\Online
  */
 class DelDoAction extends BaseAction
 {
@@ -24,12 +24,12 @@ class DelDoAction extends BaseAction
     {
         try {
             DB::beginTransaction();
-            $offlineDel  = $this->model->where('id', $inputDatas['id'])->delete();
+            $onlineDel   = $this->model->where('id', $inputDatas['id'])->delete();
             $userTagsDel = SystemFinanceUserTag::where('finance_id', $inputDatas['id'])
                 ->where('platform_id', $contll->currentPlatformEloq->id)
-                ->where('is_online', SystemFinanceType::IS_ONLINE_NO)
+                ->where('is_online', SystemFinanceType::IS_ONLINE_YES)
                 ->delete();
-            $flag        = $offlineDel && $userTagsDel;
+            $flag        = $onlineDel && $userTagsDel;
         } catch (\Throwable $exception) {
             $flag = false;
         }
@@ -39,6 +39,6 @@ class DelDoAction extends BaseAction
             return $msgOut;
         }
         DB::rollBack();
-        throw new \Exception('200601');
+        throw new \Exception('201402');
     }
 }

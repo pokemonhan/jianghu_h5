@@ -71,7 +71,7 @@ class CustomUnique implements Rule
             $result = DB::table($this->table)
                 ->where($this->field, $platform_sign)
                 ->where($attribute, $value)
-                ->where('id', '<>', $this->myId)
+                ->where('id', '!=', $this->myId)
                 ->first();
         }
         return $result === null;
