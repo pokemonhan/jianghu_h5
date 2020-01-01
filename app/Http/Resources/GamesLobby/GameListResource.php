@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\GamesLobby;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
- * Class HomePersonalInformationResource
+ * Class GameListResource
  * @package App\Http\Resources
  */
-class HomePersonalInformationResource extends JsonResource
+class GameListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,10 +20,8 @@ class HomePersonalInformationResource extends JsonResource
     public function toArray($request): array
     {
         $result = [
-            'uid' => $this->uid,
-            'pic_path' => $this->pic_path,
-            'username' => $this->username,
-            'balance' => optional($this->account)->balance,
+            'type_id' => optional($this->games)->type_id,
+            'name' => optional($this->games)->name,
         ];
         return $result;
     }
