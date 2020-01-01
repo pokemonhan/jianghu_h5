@@ -32,7 +32,7 @@ class EditRequest extends BaseFormRequest
         return [
             'id' => 'required|exists:games_types,id',
             'name' => 'required|unique:games_types,name,' . $myId,
-            'sign' => ['required', 'regex:/\w+/', 'unique:games_types,sign,' . $myId],
+            'sign' => 'required|regex:/\w+/|unique:games_types,sign,' . $myId,
         ];
     }
 
