@@ -91,6 +91,8 @@ return [
     '302005' => '尝试修改权限时出现错误',
     //BackendAuthController
     '302100' => '退出成功',
+    '302101' => '登录失败，请重试',
+    '302102' => '对不起，您的帐号异常，请联系管理员',
     //BackEndApiMainController
     '302200' => '路由非法',
     //BackendSystemEmailController
