@@ -26,6 +26,7 @@ class LoginResource extends JsonResource
             'group_id'       => $this->group_id,
             'status'         => $this->status,
             'created_at'     => $this->created_at,
+            'token_type'     => 'Bearer',
         ];
         return $result;
     }
