@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend\RouteController;
+use App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Merchant\RouteController;
 
-//总后台路由相关
+//代理后台路由相关
 Route::group(
-    ['prefix' => 'headquarters-route'],
+    ['prefix' => 'merchant-route'],
     static function (): void {
-        $namePrefix = 'headquarters-api.headquarters-route.';
+        $namePrefix = 'headquarters-api.merchant-route.';
         //路由-列表
         Route::get(
             'index',
