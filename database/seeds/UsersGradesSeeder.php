@@ -19,7 +19,7 @@ class UsersGradesSeeder extends Seeder
             [
                 [
                     'name' => 'VIP1',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 0.0000,
                     'experience_max' => 100.0000,
                     'grade_gift' => 1.0000,
@@ -27,7 +27,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP2',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 101.0000,
                     'experience_max' => 200.0000,
                     'grade_gift' => 1.0000,
@@ -35,7 +35,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP3',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 301.0000,
                     'experience_max' => 500.0000,
                     'grade_gift' => 4.0000,
@@ -43,7 +43,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP4',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 0.0000,
                     'experience_max' => 100.0000,
                     'grade_gift' => 10.0000,
@@ -51,7 +51,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP5',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 101.0000,
                     'experience_max' => 200.0000,
                     'grade_gift' => 15.0000,
@@ -59,7 +59,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP6',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 201.0000,
                     'experience_max' => 500.0000,
                     'grade_gift' => 20.0000,
@@ -67,7 +67,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP7',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 201.0000,
                     'experience_max' => 500.0000,
                     'grade_gift' => 20.0000,
@@ -75,7 +75,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP8',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 201.0000,
                     'experience_max' => 500.0000,
                     'grade_gift' => 20.0000,
@@ -83,7 +83,7 @@ class UsersGradesSeeder extends Seeder
                 ],
                 [
                     'name' => 'VIP9',
-                    'platform_sign' => 'b',
+                    'platform_sign' => 'a',
                     'experience_min' => 201.0000,
                     'experience_max' => 500.0000,
                     'grade_gift' => 20.0000,
