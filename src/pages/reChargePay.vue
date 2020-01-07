@@ -1,5 +1,5 @@
 <template>
-    <div class="activityDetail">
+    <div class="reChargePay">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
             <div class="textTitle">在线支付</div>
@@ -28,7 +28,7 @@
 </script>
 
 <style scoped>
-    .activityDetail{
+    .reChargePay{
         display:flex;
         flex-direction:column;
     }

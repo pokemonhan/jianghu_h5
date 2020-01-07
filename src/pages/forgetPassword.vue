@@ -1,5 +1,5 @@
 <template>
-    <div class="mine">
+    <div class="forgetPassword">
         <div class="pageTitle">
             <div class="textTitle">
                 <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
@@ -69,7 +69,7 @@
 </script>
 
 <style scoped>
-    .mine{
+    .forgetPassword{
         display:flex;
         flex-direction:column;
         background:#eeeeee;

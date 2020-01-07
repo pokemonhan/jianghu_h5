@@ -1,5 +1,5 @@
 <template>
-    <div class="activityDetail">
+    <div class="systemNotice">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
             <div class="textTitle">系统公告</div>
@@ -52,7 +52,7 @@
 </script>
 
 <style scoped>
-    .activityDetail{
+    .systemNotice{
         display:flex;
         flex-direction:column;
         background:#ffffff;

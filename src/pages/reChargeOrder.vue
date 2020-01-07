@@ -1,5 +1,5 @@
 <template>
-    <div class="activityDetail">
+    <div class="reChargeOrder">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
             <div class="textTitle" v-text="reChargeItem.name"></div>
@@ -143,7 +143,7 @@
 </script>
 
 <style scoped>
-    .activityDetail{
+    .reChargeOrder{
         display:flex;
         flex-direction:column;
         background:#eeeeee;

@@ -1,5 +1,5 @@
 <template>
-    <div class="mine">
+    <div class="register">
         <div class="pageTitle">
             <div class="textTitle">
                 <span>注册</span>
@@ -72,7 +72,7 @@
 </script>
 
 <style scoped>
-    .mine{
+    .register{
         display:flex;
         flex-direction:column;
         background:#eeeeee;

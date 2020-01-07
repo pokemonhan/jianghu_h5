@@ -1,5 +1,5 @@
 <template>
-    <div class="mine">
+    <div class="reCharge">
         <div class="pageTitle">
             <div class="textTitle">充值</div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
@@ -101,7 +101,7 @@
 </script>
 
 <style scoped>
-    .mine{
+    .reCharge{
         display:flex;
         flex-direction:column;
         background:#eeeeee;

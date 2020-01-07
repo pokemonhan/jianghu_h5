@@ -11,7 +11,7 @@
     export default {
         data () {
             return {
-                currentIndex:all.tool.getStore("currentMenu") || 0,
+                currentIndex:0,
                 menuItem:[
                     {name:"首页",icon:require('../../assets/componentMenu/icon_Home.png'),iconActive:require('../../assets/componentMenu/icon_HomeActive.png'),path:"/"},
                     {name:"佣金",icon:require('../../assets/componentMenu/icon_Brokerage.png'),iconActive:require('../../assets/componentMenu/icon_BrokerageActive.png'),path:"/promote"},
@@ -23,11 +23,13 @@
         },
         methods:{
             open(path,index){
-                this.currentIndex=index;
-                all.tool.setStore("currentMenu",index);
                 if(path!=='/' && !all.store.state.isLogin)all.router.push('/login');
                 else {all.router.history.current.path!==path && all.router.push(path)}
             },
+        },
+        created() {
+            let path=all.router.history.current.path;
+            path==="/"?this.currentIndex=0:path==="/promote"?this.currentIndex=1:path==="/reCharge"?this.currentIndex=2:path==="/activity"?this.currentIndex=3:this.currentIndex=4;
         }
     }
 </script>

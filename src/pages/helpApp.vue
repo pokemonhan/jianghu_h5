@@ -1,5 +1,5 @@
 <template>
-    <div class="activityDetail">
+    <div class="helpApp">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
             <div class="textTitle">APP安装教程</div>
@@ -26,7 +26,7 @@
 </script>
 
 <style scoped>
-    .activityDetail{
+    .helpApp{
         display:flex;
         flex-direction:column;
         background:#eeeeee;

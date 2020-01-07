@@ -43,34 +43,34 @@
                     <img class="gameBg" src="../assets/homePage/bg_GameB.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameB.png"/>
                     <img class="gameIconB" src="../assets/homePage/icon_GameB.png"/>
-                    <div class="gameText">赚现金 赢大奖</div>
+                    <div class="gameText">最热门的都在这里</div>
                 </div>
                 <div class="gameItem">
                     <img class="gameBg" src="../assets/homePage/bg_GameC.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameC.png"/>
                     <img class="gameIconC" src="../assets/homePage/icon_GameC.png"/>
-                    <div class="gameText">赚现金 赢大奖</div>
+                    <div class="gameText">更大威力炮台发射</div>
                 </div>
                 <div class="gameItem">
                     <img class="gameBg" src="../assets/homePage/bg_GameD.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameD.png"/>
                     <img class="gameIconD" src="../assets/homePage/icon_GameD.png"/>
-                    <div class="gameText">赚现金 赢大奖</div>
+                    <div class="gameText">娱乐赚钱两不误</div>
                 </div>
                 <div class="gameItem">
                     <img class="gameBg" src="../assets/homePage/bg_GameE.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameE.png"/>
                     <img class="gameIconE" src="../assets/homePage/icon_GameE.png"/>
-                    <div class="gameText">赚现金 赢大奖</div>
+                    <div class="gameText">真人荷官现在发牌</div>
                 </div>
                 <div class="gameItem">
                     <img class="gameBg" src="../assets/homePage/bg_GameF.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameF.png"/>
                     <img class="gameIconF" src="../assets/homePage/icon_GameF.png"/>
-                    <div class="gameText">赚现金 赢大奖</div>
+                    <div class="gameText">中奖几率翻一翻</div>
                 </div>
             </div>
-            <div class="shortcutTitle">常玩游戏</div>
+            <div class="shortcutTitle">热门游戏</div>
             <div class="shortcutGameBox" :class="{downloadHeight:isShowDownLoad}">
                 <img class="imgGame" src="../assets/homePage/img_GameA.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameB.png"/>
@@ -307,18 +307,18 @@
         left:0.2rem;
     }
     .gameIconA{
-        width:0.83rem;
+        width: 1.24rem;
         height:1.07rem;
         position:absolute;
-        right:0.25rem;
-        bottom:0.02rem;
+        right:-0.02rem;
+        bottom:-0.1rem;
     }
     .gameIconB{
-        width:1.24rem;
-        height:1.07rem;
+        width:0.76rem;
+        height:0.78rem;
         position:absolute;
-        right:-0.1rem;
-        bottom:-0.2rem;
+        right:0.15rem;
+        bottom:0.05rem;
     }
     .gameIconC{
         width:1.18rem;

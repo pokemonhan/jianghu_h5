@@ -1,5 +1,5 @@
 <template>
-    <div class="activityDetail">
+    <div class="onlineService">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
             <div class="textTitle">在线客服</div>
@@ -25,7 +25,7 @@
 </script>
 
 <style scoped>
-    .activityDetail{
+    .onlineService{
         display:flex;
         flex-direction:column;
         background:#eeeeee;

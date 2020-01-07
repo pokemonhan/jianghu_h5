@@ -1,5 +1,5 @@
 <template>
-    <div class="mine">
+    <div class="promote">
         <div class="pageTitle">
             <div class="textTitle">佣金</div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
@@ -35,6 +35,14 @@
                     </div>
                     <span class="copy">复制</span>
                 </div>
+                <div class="net">
+                    <div class="netText">www.JiangHuHuYu.com</div>
+                    <span class="copy">复制</span>
+                </div>
+                <div class="shareBtn">
+                    <div class="shareWeChat">分享微信好友</div>
+                    <div class="shareFriend">分享到朋友圈</div>
+                </div>
             </div>
         </div>
         <comMenu/>
@@ -49,17 +57,10 @@
         },
         data () {
             return {
-                itemBox:[
-                    {title:"推广管理",list:[
-                            {icon:require("../assets/promote/icon_Notice.png"),name:"推广说明"},
-                            {icon:require("../assets/promote/icon_Earnings.png"),name:"推广收益",path:"/myVip"},
-                            {icon:require("../assets/promote/icon_Xingma.png"),name:"洗码收益",path:"/myVip"}
-                        ]}
-                ],
                 itemList:[
-                    {icon:require("../assets/promote/icon_Notice.png"),name:"推广说明"},
-                    {icon:require("../assets/promote/icon_Earnings.png"),name:"推广收益",path:"/myVip"},
-                    {icon:require("../assets/promote/icon_Xingma.png"),name:"洗码收益",path:"/myVip"}
+                    {icon:require("../assets/promote/icon_Notice.png"),name:"推广说明",path:"/promoteExplain"},
+                    {icon:require("../assets/promote/icon_Earnings.png"),name:"推广收益",path:"/promoteEarnings"},
+                    {icon:require("../assets/promote/icon_Xingma.png"),name:"洗码收益",path:"/promoteWashCode"}
                 ],
                 dataList:[
                     {title:"活跃人数",value:"10人"},
@@ -81,7 +82,7 @@
 </script>
 
 <style scoped>
-    .mine{
+    .promote{
         display:flex;
         flex-direction:column;
         background:#eeeeee;
@@ -261,17 +262,65 @@
         width:3rem;
         display:flex;
         justify-content:space-between;
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space:nowrap;
     }
     .codeText{
-
+        width:2.5rem;
     }
     .id{
         font-size:0.3rem;
         color:#000000;
         font-weight:400;
     }
+    .net{
+        display:flex;
+        justify-content:space-between;
+        font-size:0.24rem;
+        line-height:0.4rem;
+        margin-top:0.05rem;
+    }
     .copy{
         color:#1d7ef0;
         text-decoration:underline;
+    }
+    .netText{
+        width:2.5rem;
+        font-size:0.24rem;
+        color:#666666;
+        text-overflow:ellipsis;
+        overflow:hidden;
+        white-space:nowrap;
+        font-weight:400;
+    }
+    .shareBtn{
+        width:5.1rem;
+        display:flex;
+        justify-content:space-between;
+        color:#ffffff;
+        font-size:0.3rem;
+        margin-top:0.5rem;
+        margin-bottom:0.3rem;
+    }
+    .shareWeChat{
+        width:2.2rem;
+        height:0.58rem;
+        background:#1dd258;
+        border-radius:0.08rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
+    }
+    .shareFriend{
+        width:2.2rem;
+        height:0.58rem;
+        background:#1d7ef0;
+        border-radius:0.08rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
     }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="activityDetail">
+    <div class="messageCenter">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
             <div class="textTitle">消息中心</div>
@@ -67,7 +67,7 @@
 </script>
 
 <style scoped>
-    .activityDetail{
+    .messageCenter{
         display:flex;
         flex-direction:column;
         background:#ffffff;

@@ -1,5 +1,5 @@
 <template>
-    <div class="mine">
+    <div class="login">
         <div class="pageTitle">
             <div class="textTitle">
                 <span>登录</span>
@@ -17,16 +17,16 @@
                     <div class="editContent">
                         <div class="inputItem">
                             <div class="inputTitle">手机号码:</div>
-                            <input class="inputEdit" type="text" placeholder="请输入11位手机号码">
+                            <input class="inputEdit inputMobile" type="text" v-model="mobile" placeholder="请输入11位手机号码" @blur="checkMobile" @keyup="limitMobile" maxlength="11">
                         </div>
                         <div class="inputItem">
                             <div class="inputTitle">密码:</div>
-                            <input class="inputEdit" :type="placeholderState" placeholder="请输入密码">
+                            <input class="inputEdit" :type="placeholderState"  v-model="password" placeholder="请输入8-16位英文和数字组合" @blur="checkPassword" @keyup="limitPassword" maxlength="16">
                             <img v-if="placeholderState==='password'" class="iconEye" @click="eyeState('text')" src="../assets/mine/icon_EyeClose.png"/>
                             <img v-if="placeholderState==='text'" class="iconEye" @click="eyeState('password')" src="../assets/mine/icon_EyeOpen.png"/>
                         </div>
                         <div class="tipItem">
-                            <div class="errorTip">请确认输入了正确的账号或密码</div>
+                            <div class="errorTip" v-text="errorTip" :style="{opacity:errorTip?1:0}"></div>
                             <div class="forget" @click="open('/forgetPassword')">忘记密码</div>
                         </div>
                     </div>
@@ -41,7 +41,10 @@
     export default {
         data () {
             return {
-                placeholderState:"password"
+                placeholderState:"password",
+                mobile:"",
+                password:"",
+                errorTip:null
             }
         },
 
@@ -49,14 +52,51 @@
             open(path){all.router.push(path)},
             back(){all.router.go(-1)},
             eyeState(value){this.placeholderState=value},
-            toDoLogin(){all.store.commit("isLogin",true);this.open("/")}
+            limitMobile(){
+                this.errorTip=null;
+                this.mobile=this.mobile.match(/[0-9]*/i)[0]
+            },
+            checkMobile(){
+                if(this.mobile.length===0){
+                    this.errorTip="手机号码不能为空";
+                    return false;
+                }
+                else if(!/^1[3456789][0-9]{9}$/.test(this.mobile)){
+                    this.errorTip="请输入正确的11位手机号码";
+                    return false
+                }
+                else return true;
+            },
+            limitPassword(){
+                this.errorTip=null;
+                this.password=this.password.match(/[a-zA-Z0-9]*/i)[0]
+            },
+            checkPassword(){
+                if(this.password.length===0){
+                    this.errorTip="密码不能为空";
+                    return false
+                }
+                else if(!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(this.password)){
+                    this.errorTip="密码为8-16位字母和数字组合";
+                    return false
+                }
+                else return true;
+            },
+            toDoLogin(){
+                if(this.checkMobile() && this.checkPassword()){
+                    all.http.post(all.config.api.login.url,{
+                        mobile:this.mobile,
+                        password:this.password
+                    }).then(res=>{console.log('成功',res)}).catch(err=>{console.log('失败',err)});
+                }
+            }
         },
 
     }
 </script>
 
 <style scoped>
-    .mine{
+    .login{
         display:flex;
         flex-direction:column;
         background:#eeeeee;

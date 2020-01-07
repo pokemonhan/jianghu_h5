@@ -22,6 +22,9 @@ import login from '../pages/login'
 import register from '../pages/register'
 import forgetPassword from '../pages/forgetPassword'
 import promote from '../pages/promote'
+import promoteExplain from '../pages/promoteExplain'
+import promoteEarnings from '../pages/promoteEarnings'
+import promoteWashCode from '../pages/promoteWashCode'
 
 
 Vue.use(Router);
@@ -51,5 +54,8 @@ export default new Router({
         { path: '/register', component: register},
         { path: '/forgetPassword', component: forgetPassword},
         { path: '/promote', component: promote},
+        { path: '/promoteExplain', component: promoteExplain},
+        { path: '/promoteEarnings', component: promoteEarnings},
+        { path: '/promoteWashCode', component: promoteWashCode},
     ]
 })

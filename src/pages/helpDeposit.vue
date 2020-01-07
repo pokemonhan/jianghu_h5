@@ -1,5 +1,5 @@
 <template>
-    <div class="activityDetail">
+    <div class="helpDeposit">
         <div class="pageTitle">
             <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
             <div class="textTitle">存取帮助</div>
@@ -31,7 +31,7 @@
 </script>
 
 <style scoped>
-    .activityDetail{
+    .helpDeposit{
         display:flex;
         flex-direction:column;
         background:#eeeeee;
