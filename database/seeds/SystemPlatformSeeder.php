@@ -17,10 +17,10 @@ class SystemPlatformSeeder extends Seeder
     {
         SystemPlatform::insert(
             [
-                'id' => 2,
-                'name' => 'bb',
-                'sign' => 'b',
-                'owner_id' => 19,
+                'id' => 1,
+                'name' => '测试平台',
+                'sign' => 'test',
+                'owner_id' => 1,
                 'status' => 1,
             ],
         );
