@@ -7,6 +7,7 @@ use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
+use App\Services\FactoryService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 
@@ -57,8 +58,17 @@ class RechargeAction
         $data = $this->_generateOrderData();
         //保存订单
         if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
-            $order  = $this->_saveOnlineOrderData($data);
-            $result = msgOut(true, $order);
+            $order        = $this->_saveOnlineOrderData($data);
+            $platformSign = $this->model->channel->vendor->sign; //第三方平台厂商的标记
+            $channelSign  = $this->model->channel->sign; //第三方通道的标记
+            try {
+                $result = FactoryService::getInstence()
+                    ->generatePay($platformSign, $channelSign)
+                    ->setPreDataOfRecharge($order)
+                    ->recharge();
+            } catch (\Throwable $exception) {
+                throw new \Exception('100300');
+            }
             return $result;
         }
 
@@ -99,7 +109,7 @@ class RechargeAction
     private function _checkChannelIsOpen(): void
     {
         if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
-            if ((int) ($this->model->status && $this->model->channel->status)) {
+            if ((int) ($this->model->status && $this->model->channel->status) === self::STUTAS_NO) {
                 throw new \Exception('100300');
             }
         } elseif ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
@@ -154,6 +164,7 @@ class RechargeAction
         $returnData['username']   = $this->model->username;
         $returnData['branch']     = $this->model->branch;
         $returnData['real_money'] = $order->real_money;
+        $returnData['money']      = $order->money;
         $returnData['order_no']   = $order->order_no;
         $returnData['qrcode']     = $this->model->qrcode;
         $returnData['created_at'] = $order->created_at->toDateTimeString();
