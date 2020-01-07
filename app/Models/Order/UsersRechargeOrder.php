@@ -3,6 +3,10 @@
 namespace App\Models\Order;
 
 use App\Models\BaseModel;
+use App\Models\Finance\SystemFinanceOnlineInfo;
+use App\Models\User\FrontendUser;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class UsersRechargeOrder
@@ -22,4 +26,22 @@ class UsersRechargeOrder extends BaseModel
     public const STATUS_EXPIRED = -2; //过期的订单状态
 
     public const EXPIRED = 15; //订单有效期 单位分钟
+
+    /**
+     * @return HasOne
+     */
+    public function onlineInfo(): HasOne
+    {
+        $object = $this->hasOne(SystemFinanceOnlineInfo::class, 'id', 'finance_channel_id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        $object = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
+        return $object;
+    }
 }
