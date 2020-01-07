@@ -169,6 +169,10 @@ class BackendAdminAccessGroupDetailSeeder extends Seeder
                     'group_id' => 1,
                     'menu_id' => 38,
                 ],
+                [
+                    'group_id' => 1,
+                    'menu_id' => 39,
+                ],
             ],
         );
     }
