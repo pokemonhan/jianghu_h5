@@ -11,8 +11,8 @@
                 <div class="detail">
                     <img class="imgUser" src="../assets/homePage/img_User.png"/>
                     <div class="nameId">
-                        <div class="nameBar">两只小蜜蜂</div>
-                        <div class="id">ID：189673</div>
+                        <div class="nameBar" v-text="this.$store.state.nickName">两只小蜜蜂</div>
+                        <div class="id" v-text="'ID：'+this.$store.state.uid">ID：189673</div>
                     </div>
                 </div>
                 <div class="currentAmount">

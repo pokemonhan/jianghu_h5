@@ -42,8 +42,8 @@
         data () {
             return {
                 placeholderState:"password",
-                mobile:"",
-                password:"",
+                mobile:"18844446666",
+                password:"12345Eth",
                 errorTip:null
             }
         },
@@ -83,13 +83,15 @@
                 else return true;
             },
             toDoLogin(){
-                if(this.checkMobile() && this.checkPassword()){
-                    all.http.post(all.config.api.login.url,{
-                        mobile:this.mobile,
-                        password:this.password
-                    }).then(res=>{console.log('成功',res)}).catch(err=>{console.log('失败',err)});
-                }
-            }
+                all.tool.send("login",{mobile:this.mobile,password:this.password},res=>{
+                    all.tool.setStore("Authorization",res.data.token_type+" "+res.data.access_token);
+                    all.tool.send("information",null,res=>{
+                        all.tool.setLoginData(res.data);
+                        all.router.push("/")
+                    },this.fail);
+                },this.fail);
+            },
+            fail(err){console.log('失败',err.response)}
         },
 
     }

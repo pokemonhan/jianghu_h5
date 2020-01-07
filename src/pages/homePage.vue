@@ -4,8 +4,8 @@
             <div class="userInfo" v-if="this.$store.state.isLogin">
                 <img class="imgUser" @click="fullScreen" src="../assets/homePage/img_User.png"/>
                 <div class="nameId">
-                    <div class="name">两只小蜜蜂</div>
-                    <div class="id">ID：189673</div>
+                    <div class="name" v-text="this.$store.state.nickName"></div>
+                    <div class="id" v-text="'ID：'+this.$store.state.uid">ID：189673</div>
                 </div>
                 <div class="amountBar">
                     <img class="iconGoldCoin" src="../assets/homePage/icon_GoldCoin.png"/>

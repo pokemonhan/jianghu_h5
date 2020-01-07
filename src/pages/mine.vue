@@ -12,10 +12,10 @@
                     <img class="imgUser" src="../assets/homePage/img_User.png"/>
                     <div class="nameId">
                         <div class="nameBar">
-                            <span class="name">两只小蜜蜂</span>
+                            <span class="name" v-text="this.$store.state.nickName"></span>
                             <img class="iconEdit" src="../assets/mine/icon_Edit.png"/>
                         </div>
-                        <div class="id">ID：189673</div>
+                        <div class="id" v-text="'ID：'+this.$store.state.uid"></div>
                     </div>
                 </div>
                 <div class="vipBar">
@@ -36,10 +36,10 @@
                     </div>
                 </div>
             </div>
-            <div class="exitLogin" @click="showExitWin">退出登录</div>
+            <div class="exitLogin" @click="logout">退出登录</div>
         </div>
         <comMenu/>
-        <div class="exitLoginBox" v-if="isShowExitLoginBox">
+        <!--<div class="exitLoginBox" v-if="isShowExitLoginBox">
             <div class="tipWin">
                 <div class="tipText">是否确定退出当前登录账号？</div>
                 <div class="btnBar">
@@ -47,7 +47,7 @@
                     <div class="sure" @click="logout">确定</div>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 
@@ -85,9 +85,14 @@
         methods:{
             open(path){all.router.push(path)},
             back(){all.router.go(-1)},
-            showExitWin(){this.isShowExitLoginBox=true},
-            hideExitWin(){this.isShowExitLoginBox=false},
-            logout(){all.store.commit("isLogin",false);this.open("/")}
+            logout(){
+                all.tool.tipWinShow("是否确定退出当前登录账号",[{name:"取消",callback:null},{name:"确定",callback:()=>{
+                        all.tool.send("logout",null,res=>{
+                            all.tool.setLogoutData();
+                            all.router.push("/")
+                        },req=>{console.log(req)});
+                }}])
+            },
         },
 
     }

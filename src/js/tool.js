@@ -1,3 +1,5 @@
+import tipWin from "../pages/components/tipWin";
+
 const Tool = {//工具汇总
 
     //TODO 本地存储类工具*************************************************************************//
@@ -60,6 +62,41 @@ const Tool = {//工具汇总
             all.store.commit("isHorizontal",false)
         }
     },
+
+    //工具类别分割线---------------------------------------------------------------------------------------------//
+
+    //TODO 网络请求类工具*************************************************************************//
+    send:(url,data,success,fail)=>{
+        all.http({
+            method:all.config.api[url].method,
+            url:all.config.api[url].url,
+            data:data
+        }).then(res=>{typeof(success)==="function"?success(res):null}).catch(err=>{typeof(fail)==="function"?fail(err):null});
+        // all.http[all.config.api[url].method](all.config.api[url].url,data).then(res=>success(res)).catch(err=>fail(err));
+    },
+
+
+
+    //工具类别分割线---------------------------------------------------------------------------------------------//
+
+    //TODO 项目控制类工具*************************************************************************//
+
+    tipWinShow:(content,btn,name)=>{
+        all.store.commit("tipWin",{isShow:true,content:content,btn:typeof(btn)==="function"?[{name:name,callback:btn}]:btn})
+    },
+    tipWinHide:()=>{all.store.commit("tipWin",{isShow:false,content:"",btn:[{name:"取消",callback:null},{name:"确定",callback:null}]})},
+    setLoginData:data=>{
+        console.log(data);
+        all.store.commit("isLogin",true);
+        all.store.commit("nickName",data.username);
+        all.store.commit("uid",data.uid);
+    },
+    setLogoutData:()=>{
+        all.store.commit("isLogin",false);
+        all.store.commit("nickName","");
+        all.store.commit("uid","");
+        all.tool.clearStore("Authorization")
+    }
 
     //工具类别分割线---------------------------------------------------------------------------------------------//
 };

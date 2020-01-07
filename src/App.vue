@@ -1,12 +1,17 @@
 <template>
     <div id="app">
         <router-view class="pageView"/>
+        <tipWin v-if="this.$store.state.tipWin.isShow"></tipWin>
     </div>
 </template>
 
 <script>
+    import tipWin from '../src/pages/components/tipWin'
     export default {
-        name: 'App'
+        name: 'App',
+        components:{
+            "tipWin": tipWin,
+        }
     }
 </script>
 
