@@ -342,6 +342,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'index',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -349,6 +350,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'status',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -356,6 +358,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'index',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -363,6 +366,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'status',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -370,6 +374,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'sort',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -377,6 +382,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'appIndex',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -384,6 +390,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'status',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -391,6 +398,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'doHot',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -398,6 +406,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'sort',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -405,6 +414,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'maintain',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -412,6 +422,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'recommend',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -419,6 +430,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'getSearchConditionData',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -426,6 +438,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'h5Index',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -433,6 +446,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'pcIndex',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -440,6 +454,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'addDo',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -447,6 +462,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'index',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -454,6 +470,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => 'edit',
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -461,6 +478,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -468,6 +486,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -475,6 +494,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -482,6 +502,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -489,6 +510,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -496,6 +518,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -503,6 +526,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -510,6 +534,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -517,6 +542,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -524,6 +550,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -531,6 +558,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -538,6 +566,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -545,6 +574,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
                 [
@@ -552,6 +582,7 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'controller' => null,
                     'method' => null,
                     'menu_group_id' => 2,
+                    'title' => '',
                     'is_open' => 0,
                 ],
             ],
