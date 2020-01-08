@@ -22,6 +22,7 @@ class SystemPlatformSeeder extends Seeder
                 'sign' => 'test',
                 'owner_id' => 1,
                 'status' => 1,
+                'created_at' => '2020-01-01 00:00:00',
             ],
         );
     }
