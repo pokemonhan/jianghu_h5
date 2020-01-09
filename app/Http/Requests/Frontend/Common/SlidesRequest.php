@@ -28,7 +28,7 @@ class SlidesRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'flag' => 'integer|required',
+            'flag' => 'integer',
         ];
     }
 
