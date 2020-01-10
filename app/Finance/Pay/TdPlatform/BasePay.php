@@ -4,7 +4,6 @@ namespace App\Finance\Pay\TdPlatform;
 
 use App\Finance\Pay\Core\Base;
 use App\Finance\Pay\Core\Payment;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class BasePay
@@ -49,22 +48,20 @@ class BasePay extends Base implements Payment
         $data['pay_md5sign']     = $sign;
         $data['pay_returnType']  = 'html';
         $data['clientip']        = $this->payInfo['clientIp'];
-        Log::channel('finance-recharge-data')->info(
-            [
-                'orderNo' => $this->payInfo['orderNo'],
-                'msg' => '天道支付(支付宝扫码) 请求数据信息',
-                'data' => $data,
-            ],
+        $this->writeLog(
+            'finance-recharge-data',
+            $this->payInfo['orderNo'],
+            '天道支付(支付宝扫码) 请求数据信息',
+            $data,
         );
         $html                           = $this->generateRedirectPayString($data, 'post');
         $this->returnData['payContent'] = $html;
         $this->returnData['mode']       = self::MODE_HTML;
-        Log::channel('finance-recharge-sign')->info(
-            [
-                'orderNo' => $this->payInfo['orderNo'],
-                'msg' => '天道支付(支付宝扫码) 支付签名信息',
-                'data' => ['signBefore' => $signStr, 'sign' => $sign],
-            ],
+        $this->writeLog(
+            'finance-recharge-sign',
+            $this->payInfo['orderNo'],
+            '天道支付(支付宝扫码) 支付签名信息',
+            ['signBefore' => $signStr, 'sign' => $sign],
         );
         return $this->returnData;
     }
@@ -89,12 +86,11 @@ class BasePay extends Base implements Payment
                 $this->payInfo['merchantSecret'],
             );
             $newSign = strtoupper(md5($signStr));
-            Log::channel('finance-callback-sign')->info(
-                [
-                    'orderNo' => $this->payInfo['orderNo'],
-                    'msg' => '天道支付(支付宝扫码) 回调验签信息',
-                    'data' => ['signBefore' => $signStr, 'oldSign' => $oldSign, 'newSign' => $newSign],
-                ],
+            $this->writeLog(
+                'finance-callback-sign',
+                $this->payInfo['orderNo'],
+                '天道支付(支付宝扫码) 回调验签信息',
+                ['signBefore' => $signStr, 'oldSign' => $oldSign, 'newSign' => $newSign],
             );
             if ($oldSign === $newSign) {
                 $this->verifyData['flag']            = true;
@@ -102,6 +98,7 @@ class BasePay extends Base implements Payment
                 $this->verifyData['merchantOrderNo'] = $data['transaction_id'];
             }
         }
+        $this->verifyData['flag']    = true;
         $this->verifyData['backStr'] = 'OK';
         return $this->verifyData;
     }
