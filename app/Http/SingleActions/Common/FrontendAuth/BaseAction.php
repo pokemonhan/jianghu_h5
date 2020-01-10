@@ -32,8 +32,8 @@ class BaseAction
         $item = [
            'verification_key' => $verification_key,
            'expired_at' => $expiredAt->toDayDateTimeString(),
-           'nextReqTime' => $nextReqTime,
-           'currentReqTime' => $currentReqTime,
+           'nextReqTime' => $nextReqTime, // Next allowed request timestamp.
+           'currentReqTime' => $currentReqTime, // Current request timestamp.
         ];
 
         if (!app()->environment('production')) {
