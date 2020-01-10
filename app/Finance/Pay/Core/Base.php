@@ -60,7 +60,7 @@ abstract class Base implements Payment
     public $verifyData = [
         'flag' => false, //验签是否成功的标记
         'money' => null, //订单金额
-        'real_money' => null, //实际支付金额
+        'realMoney' => null, //实际支付金额
         'orderNo' => null, //系统订单号
         'merchantOrderNo' => null, //商户订单号
         'backStr' => 'success', //返回给第三方的信息
@@ -105,7 +105,20 @@ abstract class Base implements Payment
      */
     public function setPreDataOfVerify(object $data)
     {
-        $this->payInfo['orderNo'] = $data->order_no;
+        $this->payInfo['platformSign']       = $data->platform_sign;
+        $this->payInfo['orderNo']            = $data->order_no;
+        $this->payInfo['money']              = $data->money;
+        $this->payInfo['merchantCode']       = $data->onlineInfo->merchant_code;
+        $this->payInfo['merchantSecret']     = $data->onlineInfo->merchant_secret;
+        $this->payInfo['publicKey']          = $data->onlineInfo->public_key;
+        $this->payInfo['privateKey']         = $data->onlineInfo->private_key;
+        $this->payInfo['appId']              = $data->onlineInfo->app_id;
+        $this->payInfo['clientIp']           = $data->client_ip;
+        $this->payInfo['certificatePath']    = $data->onlineInfo->certificate;
+        $this->verifyData['money']           = $data->money;
+        $this->verifyData['realMoney']       = $data->money;
+        $this->verifyData['orderNo']         = $data->order_no;
+        $this->verifyData['merchantOrderNo'] = $data->order_no;
         return $this;
     }
 }
