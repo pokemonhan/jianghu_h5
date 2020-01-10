@@ -14,7 +14,7 @@ abstract class Base implements Payment
 
     public const MODE_JUMP   = 'jump'; //前端拿到链接直接跳转
     public const MODE_QRCODE = 'qrcode'; //前端拿到链接做成二维码展示,或者拿到二维码直接展示
-    public const MODE_HTML   = 'html'; //前端拿到链接做成二维码展示,或者拿到二维码直接展示
+    public const MODE_HTML   = 'html'; //前端拿到支付内容开一个新页面
     public const CALLBACK    = '/online-finance/callback/'; //回调的基础地址
 
     /**
@@ -40,7 +40,7 @@ abstract class Base implements Payment
     ];
 
     /**
-     * request mode 为 0 时 返回的数据
+     * request mode 为 0 时 返回的数据.
      *
      * @var array $returnData
      */
@@ -53,7 +53,7 @@ abstract class Base implements Payment
     ];
 
     /**
-     * 验签完毕返回上层的数据
+     * 验签完毕返回上层的数据.
      *
      * @var array $verifyData
      */
@@ -67,9 +67,9 @@ abstract class Base implements Payment
     ];
 
     /**
-     * 设置发起支付时的前置数据
+     * 设置发起支付时的前置数据.
      *
-     * @param object $data Data.
+     * @param object $data 数据.
      * @return $this
      */
     public function setPreDataOfRecharge(object $data)
@@ -100,7 +100,7 @@ abstract class Base implements Payment
     /**
      * 设置发起验签时的前置数据.
      *
-     * @param object $data Data.
+     * @param object $data 数据.
      * @return $this
      */
     public function setPreDataOfVerify(object $data)
