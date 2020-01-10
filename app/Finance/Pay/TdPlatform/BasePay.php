@@ -4,6 +4,7 @@ namespace App\Finance\Pay\TdPlatform;
 
 use App\Finance\Pay\Core\Base;
 use App\Finance\Pay\Core\Payment;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class BasePay
@@ -31,38 +32,77 @@ class BasePay extends Base implements Payment
         $data['pay_memberid'] = $this->payInfo['merchantCode'];
         $platformNeedNo       = date('YmdHis') . $this->payInfo['orderNo'];
         $this->setPlatformNeedNo($platformNeedNo);
-        $data['pay_orderid']            = $platformNeedNo;
-        $data['pay_applydate']          = date('Y-m-d H:i:s');
-        $data['pay_bankcode']           = $this->channel;
-        $data['pay_notifyurl']          = $this->payInfo['callbackUrl'];
-        $data['pay_callbackurl']        = $this->payInfo['redirectUrl'];
-        $data['pay_amount']             = sprintf('%0.2f', $this->payInfo['money']);
-        $signStr                        = $this->generateToBeSignedString(
+        $data['pay_orderid']     = $platformNeedNo;
+        $data['pay_applydate']   = date('Y-m-d H:i:s');
+        $data['pay_bankcode']    = $this->channel;
+        $data['pay_notifyurl']   = $this->payInfo['callbackUrl'];
+        $data['pay_callbackurl'] = $this->payInfo['redirectUrl'];
+        $data['pay_amount']      = sprintf('%0.2f', $this->payInfo['money']);
+        $signStr                 = $this->generateToBeSignedString(
             $data,
             'ksort',
             '&',
             'key',
             $this->payInfo['merchantSecret'],
         );
-        $sign                           = strtoupper(md5($signStr));
-        $data['pay_md5sign']            = $sign;
-        $data['pay_returnType']         = 'html';
-        $data['clientip']               = $this->payInfo['clientIp'];
+        $sign                    = strtoupper(md5($signStr));
+        $data['pay_md5sign']     = $sign;
+        $data['pay_returnType']  = 'html';
+        $data['clientip']        = $this->payInfo['clientIp'];
+        Log::channel('finance-recharge-data')->info(
+            [
+                'orderNo' => $this->payInfo['orderNo'],
+                'msg' => '天道支付(支付宝扫码) 请求数据信息',
+                'data' => $data,
+            ],
+        );
         $html                           = $this->generateRedirectPayString($data, 'post');
         $this->returnData['payContent'] = $html;
         $this->returnData['mode']       = self::MODE_HTML;
+        Log::channel('finance-recharge-sign')->info(
+            [
+                'orderNo' => $this->payInfo['orderNo'],
+                'msg' => '天道支付(支付宝扫码) 支付签名信息',
+                'data' => ['signBefore' => $signStr, 'sign' => $sign],
+            ],
+        );
         return $this->returnData;
     }
 
     /**
      * 校验返回参数.
      *
-     * @param array $data Data.
+     * @param array $data 回调过来的参数.
      * @return mixed[]
      * @throws \Exception Exception.
      */
     public function verify(array $data): array
     {
-        return $data;
+        if ($data['returncode'] === '00') {
+            $oldSign = $data['sign'];
+            unset($data['sign'], $data['attach']);
+            $signStr = $this->generateToBeSignedString(
+                $data,
+                'ksort',
+                '&',
+                'key',
+                $this->payInfo['merchantSecret'],
+            );
+            $newSign = strtoupper(md5($signStr));
+            Log::channel('finance-callback-sign')->info(
+                [
+                    'orderNo' => $this->payInfo['orderNo'],
+                    'msg' => '天道支付(支付宝扫码) 回调验签信息',
+                    'data' => ['signBefore' => $signStr, 'oldSign' => $oldSign, 'newSign' => $newSign],
+                ],
+            );
+            if ($oldSign === $newSign) {
+                $this->verifyData['flag']            = true;
+                $this->verifyData['realMoney']       = $data['amount'];
+                $this->verifyData['merchantOrderNo'] = $data['transaction_id'];
+            }
+        }
+        $this->verifyData['backStr'] = 'OK';
+        return $this->verifyData;
     }
 }
