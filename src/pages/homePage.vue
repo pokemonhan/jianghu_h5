@@ -1,7 +1,7 @@
 <template>
     <div class="homePage">
         <div class="pageTitle">
-            <div class="userInfo" v-if="this.$store.state.isLogin">
+            <div class="userInfo animated bounceInLeft" v-if="this.$store.state.isLogin">
                 <img class="imgUser" @click="fullScreen" src="../assets/homePage/img_User.png"/>
                 <div class="nameId">
                     <div class="name" v-text="this.$store.state.nickName"></div>
@@ -14,64 +14,67 @@
                 </div>
             </div>
             <div class="shortcutMenu">
-                <img class="iconService" @click="open('onlineService')" src="../assets/homePage/icon_Service.png"/>
-                <div class="menuText" v-if="!this.$store.state.isLogin" @click="open('/login')">登录</div>
-                <div class="menuText" v-if="!this.$store.state.isLogin" @click="open('/register')">注册</div>
+                <img class="iconLogo animated flipInX" src="../assets/login/icon_Logo.png"/>
+                <img class="iconService animated bounceInRight" @click="open('onlineService')" src="../assets/homePage/icon_Service.png"/>
+                <div class="menuText animated bounceInRight" v-if="!this.$store.state.isLogin" @click="open('/login')">登录</div>
+                <div class="menuText animated bounceInRight" v-if="!this.$store.state.isLogin" @click="open('/register')">注册</div>
             </div>
         </div>
         <div class="contentView">
-            <div class="bannerBox">
-                <img v-for="item in bannerList" class="banner" :src="item"/>
+            <div class="bannerBox animated fadeInDown faster" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @touchmove.capture="touchMove">
+                <div class="bannerImg">
+                    <img v-for="item in bannerList" class="banner" :src="item.pic_path" @click="connect(item)"/>
+                </div>
                 <div class="bannerPoint">
                     <div v-for="(item,index) in bannerList" class="point" :class="{currentPoint:index===currentIndex}"></div>
                 </div>
             </div>
-            <div class="noticeBox">
-                <img class="noticeIcon" src="../assets/homePage/icon_Notice.png"/>
+            <div class="noticeBox animated flipInX faster">
+                <img class="noticeIcon animated tada infinite" src="../assets/homePage/icon_Notice.png"/>
                 <marquee class="noticeText" align="left" behavior="scroll" direction="left" scrollamount="5" scrolldelay="100">
                     恭喜玩家 “江湖王者”在飞禽走兽中一掷1000金币，成功登上本周单次下注榜首...
                 </marquee>
             </div>
             <div class="gameBox">
-                <div class="gameItem">
+                <div class="gameItem animated flipInX fast">
                     <img class="gameBg" src="../assets/homePage/bg_GameA.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameA.png"/>
                     <img class="gameIconA" src="../assets/homePage/icon_GameA.png"/>
                     <div class="gameText">赚现金 赢大奖</div>
                 </div>
-                <div class="gameItem">
+                <div class="gameItem animated flipInY fast">
                     <img class="gameBg" src="../assets/homePage/bg_GameB.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameB.png"/>
                     <img class="gameIconB" src="../assets/homePage/icon_GameB.png"/>
                     <div class="gameText">最热门的都在这里</div>
                 </div>
-                <div class="gameItem">
+                <div class="gameItem animated flipInY fast">
                     <img class="gameBg" src="../assets/homePage/bg_GameC.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameC.png"/>
                     <img class="gameIconC" src="../assets/homePage/icon_GameC.png"/>
                     <div class="gameText">更大威力炮台发射</div>
                 </div>
-                <div class="gameItem">
+                <div class="gameItem animated flipInX fast">
                     <img class="gameBg" src="../assets/homePage/bg_GameD.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameD.png"/>
                     <img class="gameIconD" src="../assets/homePage/icon_GameD.png"/>
                     <div class="gameText">娱乐赚钱两不误</div>
                 </div>
-                <div class="gameItem">
+                <div class="gameItem animated flipInX fast">
                     <img class="gameBg" src="../assets/homePage/bg_GameE.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameE.png"/>
                     <img class="gameIconE" src="../assets/homePage/icon_GameE.png"/>
                     <div class="gameText">真人荷官现在发牌</div>
                 </div>
-                <div class="gameItem">
+                <div class="gameItem animated flipInY fast">
                     <img class="gameBg" src="../assets/homePage/bg_GameF.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameF.png"/>
                     <img class="gameIconF" src="../assets/homePage/icon_GameF.png"/>
                     <div class="gameText">中奖几率翻一翻</div>
                 </div>
             </div>
-            <div class="shortcutTitle">热门游戏</div>
-            <div class="shortcutGameBox" :class="{downloadHeight:isShowDownLoad}">
+            <div class="shortcutTitle animated flash">热门游戏</div>
+            <div class="shortcutGameBox animated fadeInUp faster" :class="{downloadHeight:isShowDownLoad}">
                 <img class="imgGame" src="../assets/homePage/img_GameA.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameB.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameC.png"/>
@@ -82,7 +85,7 @@
                 <img class="imgGame" src="../assets/homePage/img_GameI.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameJ.png"/>
             </div>
-            <div class="downloadBox" v-if="isShowDownLoad">
+            <div class="downloadBox animated fadeInUp fast delay-1s" v-if="isShowDownLoad">
                 <div class="downloadText">
                     <img class="iconClose" @click="closeDownLoad" src="../assets/homePage/icon_Close.png"/>
                     <span>下载APP，体验更好的游戏乐趣！</span>
@@ -102,7 +105,7 @@
         },
         data () {
             return {
-                isShowDownLoad:true,
+                isShowDownLoad:all.tool.getStore("isShowDownLoad"),
                 currentIndex:0,
                 bannerList:[
                     require("../assets/homePage/bannerA.png"),
@@ -116,28 +119,61 @@
         watch:{
             currentIndex:{
                 handler(newVal,oldVal){
-                    all.$(".banner:first-child").animate({marginLeft:0-parseInt(all.$(".banner:first-child").width())},"swing",
-                        ()=>{all.$(".banner:first-child").css("marginLeft",0).insertBefore(all.$(".bannerPoint"))});
+                    all.$(".bannerImg").animate({left:0-this.currentIndex*parseInt(all.$(".bannerImg").width())},200);
                 },
                 deep:true
             },
         },
         methods:{
             open(path){all.router.push(path)},
-            closeDownLoad(){this.isShowDownLoad=false},
+            closeDownLoad(){
+                all.$(".downloadBox").removeClass("delay-1s").addClass("fadeOutDown");
+                setTimeout(()=>{
+                    all.tool.setStore("isShowDownLoad",false);
+                    this.isShowDownLoad=false
+                },500)
+            },
+            connect(item){
+                if(item.type===1)this.open(item.redirect_url);
+                if(item.type===2)window.open(item.redirect_url);
+            },
             toReCharge(){
                 all.tool.setStore("currentMenu",2);
                 this.open("/reCharge")
             },
-            fullScreen(){all.tool.fullScreen()}
+            fullScreen(){all.tool.fullScreen()},
+            touchStart(e){
+                clearInterval(this.timeRun);
+                this.timeRun=null;
+                this.startX=e.touches[0].clientX;
+                this.left=parseInt(all.$(".bannerImg").css("left"));
+            },
+            touchMove(e){
+                let move=this.startX-e.changedTouches[0].clientX;
+                let moveLeftAvail=all.$(".bannerImg").width()*(this.bannerList.length-this.currentIndex-1);
+                let moveRightAvail=all.$(".bannerImg").width()*this.currentIndex;
+                if(move>moveLeftAvail)return;
+                if(move<0-moveRightAvail)return;
+                all.$(".bannerImg").css("left",this.left-move);
+            },
+            touchEnd(e){
+                this.endX=e.changedTouches[0].clientX;
+                if((this.startX-this.endX)>all.$(".banner").width()/4 && this.currentIndex<this.bannerList.length-1)this.currentIndex+=1;
+                if((this.startX-this.endX)<0-all.$(".banner").width()/4 && this.currentIndex>0)this.currentIndex-=1;
+                all.$(".bannerImg").animate({left:0-this.currentIndex*parseInt(all.$(".bannerImg").width())},150);
+                this.startX=0;
+                this.endX=0;
+                this.timeRun=setInterval(()=>{this.currentIndex<this.bannerList.length-1?this.currentIndex+=1:this.currentIndex=0},4000);
+            },
         },
         created() {
-            this.timeRun=setInterval(()=>{this.currentIndex>=3?this.currentIndex=0:this.currentIndex+=1},6000)
+            this.timeRun=setInterval(()=>{this.currentIndex<this.bannerList.length-1?this.currentIndex+=1:this.currentIndex=0},4000);
+            all.tool.send("slides",{flag:"1"},res=>{this.bannerList=res.data})
         },
         destroyed() {
             clearInterval(this.timeRun);
             this.timeRun=null;
-        }
+        },
     }
 </script>
 
@@ -159,6 +195,7 @@
     .userInfo{
         display:flex;
         align-items:center;
+        flex-shrink:0;
     }
     .imgUser{
         width:0.52rem;
@@ -204,18 +241,26 @@
         right:-0.1rem;
     }
     .shortcutMenu{
-        position:absolute;
-        right:0.3rem;
+        width:100%;
         font-size:0.3rem;
         font-weight:400;
         display:flex;
+        justify-content:flex-end;
+        align-items:center;
+        position:relative;
+    }
+    .iconLogo{
+        width:1.5rem;
+        height:auto;
+        position:absolute;
+        left:0.25rem;
     }
     .iconService{
         width:0.45rem;
         height:0.38rem;
     }
     .menuText{
-        margin-left:0.2rem;
+        margin-left:0.25rem;
     }
     .contentView{
         margin:0 0.3rem;
@@ -234,6 +279,13 @@
         display:flex;
         position:relative;
         overflow:hidden;
+    }
+    .bannerImg{
+        display:flex;
+        width:6.9rem;
+        height:3.14rem;
+        position:absolute;
+        left:0;
     }
     .banner{
         width:6.9rem;
@@ -403,6 +455,7 @@
         font-size:0.26rem;
         color:#ffffff;
         padding:0 0.7rem;
+        opacity:0;
     }
     .iconClose{
         width:0.3rem;

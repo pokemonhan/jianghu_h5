@@ -5,7 +5,9 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state={
-    tipWin:{isShow:false,content:"",btn:[{name:"取消",callback:null},{name:"确定",callback:null}]},
+    isLoading:false,
+    editTip:{isShow:false,content:""},
+    tipWin:{isShow:false,content:"",callback:null,type:{icon:"",name:""}},
     isLogin:false,
     amount:"12345678.00",
     nickName:"哈土奇一号",

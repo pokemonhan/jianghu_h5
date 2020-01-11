@@ -67,11 +67,12 @@ const Tool = {//工具汇总
 
     //TODO 网络请求类工具*************************************************************************//
     send:(url,data,success,fail)=>{
+        if(!all.config.api[url])return all.tool.editTipShow("API不存在或已失效");
         all.http({
             method:all.config.api[url].method,
             url:all.config.api[url].url,
             data:data
-        }).then(res=>{typeof(success)==="function"?success(res):null}).catch(err=>{typeof(fail)==="function"?fail(err):null});
+        }).then(res=>{console.log(res);typeof(success)==="function"?success(res):null}).catch(err=>{typeof(fail)==="function"?fail(err):null});
         // all.http[all.config.api[url].method](all.config.api[url].url,data).then(res=>success(res)).catch(err=>fail(err));
     },
 
@@ -81,20 +82,24 @@ const Tool = {//工具汇总
 
     //TODO 项目控制类工具*************************************************************************//
 
-    tipWinShow:(content,btn,name)=>{
-        all.store.commit("tipWin",{isShow:true,content:content,btn:typeof(btn)==="function"?[{name:name,callback:btn}]:btn})
+    tipWinShow:(content,callback,type)=>{
+        all.store.commit("tipWin",{isShow:true,content:content,callback:typeof(callback)==="function"?callback:null,type:type?{icon:type.icon?type.icon:"right",name:type.name?type.name:"确定"}:{icon:"right",name:"确定"}})
     },
-    tipWinHide:()=>{all.store.commit("tipWin",{isShow:false,content:"",btn:[{name:"取消",callback:null},{name:"确定",callback:null}]})},
+    tipWinHide:()=>{all.store.commit("tipWin",{isShow:false,content:"",type:null})},
+    editTipShow:content=>{all.store.commit("editTip",{isShow:true,content:content})},
+    editTipHide:()=>{all.store.commit("editTip",{isShow:false,content:""})},
     setLoginData:data=>{
         console.log(data);
         all.store.commit("isLogin",true);
         all.store.commit("nickName",data.username);
         all.store.commit("uid",data.uid);
+        all.store.commit("amount",data.balance);
     },
     setLogoutData:()=>{
         all.store.commit("isLogin",false);
         all.store.commit("nickName","");
         all.store.commit("uid","");
+        all.store.commit("amount","");
         all.tool.clearStore("Authorization")
     }
 

@@ -1,33 +1,33 @@
 <template>
     <div class="promote">
         <div class="pageTitle">
-            <div class="textTitle">佣金</div>
+            <div class="textTitle animated flipInX">佣金</div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
             <img class="circleA" src="../assets/mine/img_CircleA.png"/>
             <img class="circleB" src="../assets/mine/img_CircleB.png"/>
         </div>
         <div class="contentView">
-            <img class="banner" src="../assets/homePage/bannerA.png"/>
-            <div class="itemBox">
+            <img class="banner animated flipInX" :src="banner"/>
+            <div class="itemBox animated bounceInUp">
                 <div class="boxTitle">推广管理</div>
                 <div class="boxItem">
-                    <div class="item" v-for="item in itemList" @click="open(item.path)">
+                    <div class="item animated delay-350" :class="{flipInX:index%2===0,flipInY:index%2===1}" v-for="(item,index) in itemList" @click="open(item.path)">
                         <img class="itemIcon" :src="item.icon"/>
                         <div class="itemName" v-text="item.name">当前积分</div>
                     </div>
                 </div>
             </div>
-            <div class="itemBox">
+            <div class="itemBox animated bounceInUp">
                 <div class="boxTitle">今日数据</div>
                 <div class="boxItem">
-                    <div class="itemData" v-for="item in dataList" @click="open(item.path)">
+                    <div class="itemData animated swing delay-1s" v-for="(item,index) in dataList" @click="open(item.path)">
                         <div class="itemTitle" v-text="item.title"></div>
                         <div class="itemValue" v-text="item.value"></div>
                     </div>
                 </div>
             </div>
-            <div class="rqBox">
-                <img class="code" src="../assets/promote/icon_RqCode.png"/>
+            <div class="rqBox animated bounceInUp">
+                <img class="code animated delay-2s flash" src="../assets/promote/icon_RqCode.png"/>
                 <div class="codeId">
                     <div class="codeText">
                         <span>邀请码：</span>
@@ -57,6 +57,7 @@
         },
         data () {
             return {
+                banner:require("../assets/homePage/bannerA.png"),
                 itemList:[
                     {icon:require("../assets/promote/icon_Notice.png"),name:"推广说明",path:"/promoteExplain"},
                     {icon:require("../assets/promote/icon_Earnings.png"),name:"推广收益",path:"/promoteEarnings"},
@@ -77,7 +78,9 @@
             back(){all.router.go(-1)},
 
         },
-
+        created() {
+            all.tool.send("slides",{flag:"2"},res=>{res.data.forEach(item=>{if(item.redirect_url==="promote")this.banner=item.pic_path})});
+        }
     }
 </script>
 
@@ -110,6 +113,7 @@
         top:0.2rem;
         left:0.5rem;
         z-index:1;
+        animation:circleA 8s infinite alternate;
     }
     .circleB{
         width:1.65rem;
@@ -118,6 +122,7 @@
         top:1.8rem;
         left:4.8rem;
         z-index:1;
+        animation:circleB 7s infinite alternate;
     }
     .circleC{
         width:1.1rem;
@@ -126,6 +131,7 @@
         top:0.7rem;
         left:2.7rem;
         z-index:1;
+        animation:circleC 6s infinite alternate;
     }
     .contentView{
         margin:-2.3rem 0 0;

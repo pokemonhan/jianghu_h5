@@ -1,13 +1,13 @@
 <template>
     <div class="reCharge">
         <div class="pageTitle">
-            <div class="textTitle">充值</div>
+            <div class="textTitle animated flipInX">充值</div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
             <img class="circleA" src="../assets/mine/img_CircleA.png"/>
             <img class="circleB" src="../assets/mine/img_CircleB.png"/>
         </div>
         <div class="contentView">
-            <div class="personalInfo">
+            <div class="personalInfo animated flipInY">
                 <div class="detail">
                     <img class="imgUser" src="../assets/homePage/img_User.png"/>
                     <div class="nameId">
@@ -17,13 +17,13 @@
                 </div>
                 <div class="currentAmount">
                     <span>当前余额：</span>
-                    <span class="amount">5000</span>
+                    <span class="amount animated flash delay-1s" v-text="this.$store.state.amount">5000</span>
                 </div>
                 <div class="withdrawal">取款</div>
             </div>
-            <div class="chooseTitle">请选择支付方式：</div>
-            <div class="recommend">推荐使用官方充值，安全快捷精确到秒到帐！</div>
-            <div class="reChargeItem" v-for="item in reChargeType" @click="open('/reChargeOrder',item)">
+            <div class="chooseTitle animated fadeInUp">请选择支付方式：</div>
+            <div class="recommend animated fadeInDown">推荐使用官方充值，安全快捷精确到秒到帐！</div>
+            <div class="reChargeItem animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in reChargeType" @click="open('/reChargeOrder',item)">
                 <div class="itemImg">
                     <img class="iconImg" :src="item.icon"/>
                 </div>
@@ -129,6 +129,7 @@
         top:0.2rem;
         left:0.5rem;
         z-index:1;
+        animation:circleA 8s infinite alternate;
     }
     .circleB{
         width:1.65rem;
@@ -137,6 +138,7 @@
         top:1.8rem;
         left:4.8rem;
         z-index:1;
+        animation:circleB 7s infinite alternate;
     }
     .circleC{
         width:1.1rem;
@@ -145,6 +147,7 @@
         top:0.7rem;
         left:2.7rem;
         z-index:1;
+        animation:circleC 6s infinite alternate;
     }
     .contentView{
         margin:-2.2rem 0 0;

@@ -4,34 +4,34 @@
             <div class="textTitle">
                 <span>登录</span>
                 <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+                <span class="forget" @click="open('/forgetPassword')">忘记密码</span>
             </div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
             <img class="circleA" src="../assets/mine/img_CircleA.png"/>
             <img class="circleB" src="../assets/mine/img_CircleB.png"/>
         </div>
         <div class="contentView">
-            <img class="banner" src="../assets/homePage/bannerA.png"/>
-            <div class="editBox">
+            <img class="banner" :src="banner"/>
+            <div class="loginBox">
+                <img class="bgLogin" src="../assets/login/bg_Login.png"/>
                 <img class="iconLogo" src="../assets/login/icon_Logo.png"/>
                 <div class="editBar">
-                    <div class="editContent">
-                        <div class="inputItem">
-                            <div class="inputTitle">手机号码:</div>
-                            <input class="inputEdit inputMobile" type="text" v-model="mobile" placeholder="请输入11位手机号码" @blur="checkMobile" @keyup="limitMobile" maxlength="11">
+                    <div class="inputItem">
+                        <div class="itemIcon">
+                            <img class="icon" src="../assets/login/icon_Mobile.png"/>
                         </div>
-                        <div class="inputItem">
-                            <div class="inputTitle">密码:</div>
-                            <input class="inputEdit" :type="placeholderState"  v-model="password" placeholder="请输入8-16位英文和数字组合" @blur="checkPassword" @keyup="limitPassword" maxlength="16">
-                            <img v-if="placeholderState==='password'" class="iconEye" @click="eyeState('text')" src="../assets/mine/icon_EyeClose.png"/>
-                            <img v-if="placeholderState==='text'" class="iconEye" @click="eyeState('password')" src="../assets/mine/icon_EyeOpen.png"/>
-                        </div>
-                        <div class="tipItem">
-                            <div class="errorTip" v-text="errorTip" :style="{opacity:errorTip?1:0}"></div>
-                            <div class="forget" @click="open('/forgetPassword')">忘记密码</div>
-                        </div>
+                        <input type="text" class="inputEdit" v-model="mobile" placeholder="请输入手机号码（11位数字）" @blur="checkMobile" @keyup="limitMobile" maxlength="11">
                     </div>
-                    <div class="commit" @click="toDoLogin">登录</div>
+                    <div class="inputItem">
+                        <div class="itemIcon">
+                            <img class="icon" src="../assets/login/icon_Lock.png"/>
+                        </div>
+                        <input class="inputEdit" :type="placeholderState" v-model="password" placeholder="请输入密码（8-16位英文和数字组合）" @blur="checkPassword" @keyup="limitPassword" maxlength="16">
+                        <img v-if="placeholderState==='password'" class="iconEye" @click="eyeState('text')" src="../assets/mine/icon_EyeClose.png"/>
+                        <img v-if="placeholderState==='text'" class="iconEye" @click="eyeState('password')" src="../assets/mine/icon_EyeOpen.png"/>
+                    </div>
                 </div>
+                <div class="commit" @click="toDoLogin">登录</div>
             </div>
         </div>
     </div>
@@ -41,59 +41,63 @@
     export default {
         data () {
             return {
+                banner:require("../assets/homePage/bannerA.png"),
                 placeholderState:"password",
                 mobile:"18844446666",
                 password:"12345Eth",
-                errorTip:null
             }
         },
 
         methods:{
             open(path){all.router.push(path)},
-            back(){all.router.go(-1)},
-            eyeState(value){this.placeholderState=value},
-            limitMobile(){
-                this.errorTip=null;
-                this.mobile=this.mobile.match(/[0-9]*/i)[0]
+            back(){
+                all.tool.clearStore("guardPath");
+                all.router.go(-1);
             },
+            eyeState(value){this.placeholderState=value},
+            limitMobile(){this.mobile=this.mobile.match(/[0-9]*/i)[0]},
             checkMobile(){
                 if(this.mobile.length===0){
-                    this.errorTip="手机号码不能为空";
+                    all.tool.editTipShow("手机号码不能为空！");
                     return false;
                 }
                 else if(!/^1[3456789][0-9]{9}$/.test(this.mobile)){
-                    this.errorTip="请输入正确的11位手机号码";
+                    all.tool.editTipShow("请输入正确的11位手机号码！");
                     return false
                 }
                 else return true;
             },
-            limitPassword(){
-                this.errorTip=null;
-                this.password=this.password.match(/[a-zA-Z0-9]*/i)[0]
-            },
+            limitPassword(){this.password=this.password.match(/[a-zA-Z0-9]*/i)[0]},
             checkPassword(){
                 if(this.password.length===0){
-                    this.errorTip="密码不能为空";
+                    all.tool.editTipShow("密码不能为空！");
                     return false
                 }
                 else if(!/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/.test(this.password)){
-                    this.errorTip="密码为8-16位字母和数字组合";
+                    all.tool.editTipShow("密码为8-16位字母和数字组合！");
                     return false
                 }
                 else return true;
             },
             toDoLogin(){
-                all.tool.send("login",{mobile:this.mobile,password:this.password},res=>{
-                    all.tool.setStore("Authorization",res.data.token_type+" "+res.data.access_token);
-                    all.tool.send("information",null,res=>{
-                        all.tool.setLoginData(res.data);
-                        all.router.push("/")
-                    },this.fail);
-                },this.fail);
+                if(this.checkMobile() && this.checkPassword()){
+                    all.tool.send("login",{mobile:this.mobile,password:this.password},res=>{
+                        all.tool.setStore("Authorization",res.data.token_type+" "+res.data.access_token);
+                        all.tool.send("information",null,res=>{
+                            all.tool.setLoginData(res.data);
+                            if(all.tool.getStore("guardPath")){
+                                all.router.push(all.tool.getStore("guardPath"));
+                                all.tool.clearStore("guardPath");
+                            }
+                            else all.router.push("/");
+                        });
+                    });
+                }
             },
-            fail(err){console.log('失败',err.response)}
         },
-
+        created() {
+            all.tool.send("slides",{flag:"2"},res=>{res.data.forEach(item=>{if(item.redirect_url==="login")this.banner=item.pic_path})})
+        }
     }
 </script>
 
@@ -124,6 +128,12 @@
         font-size:0.36rem;
         font-weight:400;
         position:relative;
+    }
+    .forget{
+        font-size:0.24rem;
+        color:#ffffff;
+        position:absolute;
+        right:0;
     }
     .circleA{
         width:2.58rem;
@@ -165,18 +175,25 @@
         border-radius:0.15rem;
         box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
     }
-    .editBox{
+    .loginBox{
         width:6.9rem;
-        height:7.82rem;
-        background:url("../assets/login/bg_EditBox.png") no-repeat;
-        background-size:100% 100%;
+        height:5.1rem;
+        border-radius:0.08rem;
+        background:#20a6f9;
+        box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
+        position:relative;
         display:flex;
         flex-direction:column;
         align-items:center;
         flex-shrink:0;
         margin-bottom:0.5rem;
-        border-radius:0.1rem;
-        box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
+    }
+    .bgLogin{
+        width:6.61rem;
+        height:1.35rem;
+        position:absolute;
+        left:0;
+        top:0;
     }
     .iconLogo{
         width:1.93rem;
@@ -185,92 +202,69 @@
     }
     .editBar{
         width:6.5rem;
-        height:6.5rem;
+        height:2.7rem;
+        border-radius:0.08rem;
+        background:#ffffff;
+        padding-top:0.4rem;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+    .inputItem{
+        width:5.4rem;
+        height:0.8rem;
         background:url("../assets/login/bg_Edit.png") no-repeat;
         background-size:100% 100%;
         display:flex;
-        flex-direction:column;
         align-items:center;
-        justify-content:space-between;
-    }
-    .editContent{
-        width:5.2rem;
-        margin-top:0.5rem;
-        margin-bottom:0.5rem;
-        flex:1;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-    }
-    .commit{
-        font-size:0.34rem;
-        color:#ffffff;
-        width:4.62rem;
-        height:0.68rem;
-        border-radius:0.12rem;
-        background:linear-gradient(to bottom,#65a3ff,#006cff);
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        margin-bottom:0.5rem;
-    }
-    .inputItem{
-        display:flex;
-        background:url("../assets/login/icon_UnderLine.png") no-repeat center bottom;
-        background-size:5.16rem 0.08rem;
-        height:0.8rem;
-        align-items:center;
+        margin-bottom:0.3rem;
         position:relative;
+        flex-shrink:0;
     }
-    .inputTitle{
-        font-size:0.28rem;
-        color:#666666;
-        font-weight:400;
-        width:1.2rem;
-        text-align:justify;
-        overflow:hidden;
+    .inputItem:last-child{
+        margin-bottom:0;
+    }
+    .itemIcon{
+        width:0.8rem;
         height:0.8rem;
-        line-height:0.8rem;
+        display:flex;
+        justify-content:center;
+        align-items:center;
     }
-    .inputTitle:after{
-        content:"";
-        padding-left:100%;
-        display:inline-block;
+    .icon{
+        height:0.3rem;
+        width:auto
     }
     .inputEdit{
         flex:1;
-        height:0.6rem;
+        height:0.8rem;
         border:none;
+        background:none;
         font-size:0.3rem;
-        color:#333333;
-        margin-left:0.2rem
+        color:#ffffff;
     }
     .inputEdit::placeholder{
-        font-size:0.22rem;
-        color:#999999
+        font-size:0.24rem;
+        color:#e9e9e9
     }
     .iconEye{
         width:0.35rem;
         height:auto;
         position:absolute;
-        right:0.4rem;
+        right:0.2rem;
     }
-    .tipItem{
-        line-height:0.8rem;
+    .commit{
+        font-size:0.34rem;
+        color:#ffffff;
+        width:4.8rem;
+        height:0.7rem;
+        border-radius:0.08rem;
+        background:url("../assets/login/bg_Commit.png") no-repeat;
+        background-size:100% 100%;
         display:flex;
-        justify-content:space-between;
-    }
-    .errorTip{
-        font-size:0.18rem;
-        color:#d90000;
-        background:url("../assets/mine/icon_Error.png") no-repeat left center;
-        background-size:0.2rem 0.2rem;
-        padding-left:0.3rem;
-    }
-    .forget{
-        font-size:0.24rem;
-        color:#1f80f1;
-        text-decoration:underline;
-        margin-right:0.4rem;
+        justify-content:center;
+        align-items:center;
+        margin-top:0.3rem;
+        box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
     }
 </style>

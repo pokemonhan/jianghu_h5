@@ -23,8 +23,7 @@
         },
         methods:{
             open(path,index){
-                if(path!=='/' && !all.store.state.isLogin)all.router.push('/login');
-                else {all.router.history.current.path!==path && all.router.push(path)}
+                all.router.history.current.path!==path && all.router.push(path)
             },
         },
         created() {
@@ -44,6 +43,7 @@
         font-size:0.18rem;
         color:#fff;
         flex-shrink:0;
+        z-index:1000;
     }
     .menuItem{
         flex:1;

@@ -1,11 +1,10 @@
 <template>
     <div class="activity">
         <div class="pageTitle">
-            <div class="textTitle">活动</div>
+            <div class="textTitle animated flipInX">活动</div>
         </div>
         <div class="contentView">
-            <img class="bgActivity" v-for="item in activityInfo" @click="open('/activityDetail',item)" :src="item.imgTitle"/>
-
+            <img class="bgActivity animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in activityInfo" @click="open('/activityDetail',item)" :src="item.imgTitle"/>
         </div>
         <comMenu/>
     </div>
