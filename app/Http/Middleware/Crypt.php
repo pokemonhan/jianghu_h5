@@ -45,7 +45,11 @@ class Crypt
             }
             return $next($request);
         }
-
+        //空参放行
+        if (count($request->request) === 0) {
+            return $next($request);
+        }
+        
         //数据解密处理
         $this->_dataHandle($request);
         
