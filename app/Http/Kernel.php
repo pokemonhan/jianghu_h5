@@ -43,7 +43,7 @@ class Kernel extends HttpKernel
             'throttle:300,1',
             'bindings',
             'cors',
-        //            'crypt',
+            'crypt',
         ],
         'frontend-h5-api' => [
             'throttle:300,1',
@@ -93,6 +93,7 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'crypt' =>  \App\Http\Middleware\Crypt::class,//全局加密
     ];
 
     /**
