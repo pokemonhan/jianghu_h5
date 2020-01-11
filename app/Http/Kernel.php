@@ -49,6 +49,7 @@ class Kernel extends HttpKernel
             'throttle:300,1',
             'bindings',
             'cors',
+            'crypt',
         ],
         'backend-api' => [
             'throttle:500,1',
