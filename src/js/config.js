@@ -17,7 +17,8 @@ const config={
         "/",
         "/login",
         "/register",
-        "/forgetPassword"
+        "/forgetPassword",
+        "/onlineService"
     ]
 };
 export default config;

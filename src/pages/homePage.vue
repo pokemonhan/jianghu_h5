@@ -85,12 +85,13 @@
                 <img class="imgGame" src="../assets/homePage/img_GameI.png"/>
                 <img class="imgGame" src="../assets/homePage/img_GameJ.png"/>
             </div>
-            <div class="downloadBox animated fadeInUp fast delay-1s" v-if="isShowDownLoad">
-                <div class="downloadText">
-                    <img class="iconClose" @click="closeDownLoad" src="../assets/homePage/icon_Close.png"/>
-                    <span>下载APP，体验更好的游戏乐趣！</span>
+            <div class="downloadBox animated fadeInUp fast delay-500" v-if="isShowDownLoad">
+                <div class="downloadContent">
+                    <img class="iconFish animated bounce infinite slower" src="../assets/homePage/icon_Fish.png"/>
+                    <img class="textDownload animated flash infinite slower" src="../assets/homePage/text_Download.png"/>
+                    <img class="iconGold animated pulse infinite" src="../assets/homePage/icon_Gold.png"/>
+                    <img class="btnDownload animated wobble infinite slower" src="../assets/homePage/btn_Download.png"/>
                 </div>
-                <div class="downloadBtn">下载APP</div>
             </div>
         </div>
         <comMenu/>
@@ -127,7 +128,7 @@
         methods:{
             open(path){all.router.push(path)},
             closeDownLoad(){
-                all.$(".downloadBox").removeClass("delay-1s").addClass("fadeOutDown");
+                all.$(".downloadBox").removeClass("delay-500").addClass("fadeOutDown");
                 setTimeout(()=>{
                     all.tool.setStore("isShowDownLoad",false);
                     this.isShowDownLoad=false
@@ -167,6 +168,7 @@
             },
         },
         created() {
+            setTimeout(()=>{this.closeDownLoad()},10000);
             this.timeRun=setInterval(()=>{this.currentIndex<this.bannerList.length-1?this.currentIndex+=1:this.currentIndex=0},4000);
             all.tool.send("slides",{flag:"1"},res=>{this.bannerList=res.data})
         },
@@ -444,32 +446,48 @@
     }
     .downloadBox{
         width:100%;
-        height:0.88rem;
-        background:rgba(0,0,0,0.7);
+        height:0.9rem;
+        background:linear-gradient(to bottom,#ffa0a0,#a10920);
         flex-shrink:0;
         position:absolute;
         bottom:1rem;
         display:flex;
         align-items:center;
-        justify-content:space-between;
+        justify-content:center;
         font-size:0.26rem;
         color:#ffffff;
-        padding:0 0.7rem;
         opacity:0;
     }
-    .iconClose{
-        width:0.3rem;
-        height:0.3rem;
-        margin-right:0.2rem;
-    }
-    .downloadBtn{
-        width:1.28rem;
-        height:0.54rem;
-        border-radius:0.08rem;
-        background:#1d7ef0;
+    .downloadContent{
+        width:7.3rem;
+        height:0.7rem;
+        border-radius:0.1rem;
+        border:0.01rem solid #fff6d5;
+        position:relative;
         display:flex;
         align-items:center;
-        justify-content:center;
-        box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
+    }
+    .iconFish{
+        width:0.89rem;
+        height:0.98rem;
+        position:absolute;
+        left:0.25rem;
+        top:-0.3rem;
+    }
+    .textDownload{
+        height:0.27rem;
+        width:auto;
+        margin-left:1.3rem;
+        margin-right:0.3rem;
+    }
+    .iconGold{
+        width:0.68rem;
+        height:0.59rem;
+    }
+    .btnDownload{
+        width:1.62rem;
+        height:0.48rem;
+        position:absolute;
+        right:0.1rem;
     }
 </style>

@@ -55,6 +55,7 @@ all.http.interceptors.response.use(res=>{
     if(error.response.status===404)all.tool.tipWinShow("页面离家出走了",()=>{},{icon:"error"});
     if(error.response.status===405)all.tool.tipWinShow("系统故障，请联系客服",()=>{},{icon:"error"});
     if(error.response.status===429)all.tool.tipWinShow(error.response.data.message,()=>{},{icon:"warn"});
+    if(error.response.status===500)all.tool.tipWinShow(error.response.data.message,()=>{},{icon:"error"});
     return Promise.reject(error)
 });
 all.$=$;
