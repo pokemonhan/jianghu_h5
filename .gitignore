@@ -17,6 +17,7 @@ npm-debug.log
 yarn-error.log
 phpcs-rule
 jianghu_entertain_composer
+composer.json
 \.editorconfig
 \.idea/
 \.phpintel/
