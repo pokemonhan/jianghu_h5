@@ -21,7 +21,7 @@ Route::group(
 // Verification code
 Route::group(
     [
-        //'middleware' => ['frontend-verification'],
+        'middleware' => ['frontend-verification'],
         'prefix'    => 'h5-api',
     ],
     static function (): void {
@@ -36,7 +36,7 @@ Route::group(
 );
 Route::group(
     [
-        //'middleware' => ['frontend-verification'],
+        'middleware' => ['frontend-verification'],
         'prefix'     => 'app-api',
     ],
     static function (): void {
@@ -55,7 +55,7 @@ Route::group(
 // Login & register
 Route::group(
     [
-        //'middleware' => ['frontend-registration'],
+        'middleware' => ['frontend-registration'],
         'prefix'     => 'app-api',
     ],
     static function (): void {
@@ -64,7 +64,7 @@ Route::group(
 );
 Route::group(
     [
-        // 'middleware' => ['frontend-registration'],
+         'middleware' => ['frontend-registration'],
         'prefix'     => 'h5-api',
     ],
     static function (): void {
