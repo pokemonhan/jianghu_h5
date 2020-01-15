@@ -4,6 +4,7 @@
         <tipWin v-if="this.$store.state.tipWin.isShow"></tipWin>
         <loading v-if="this.$store.state.isLoading"></loading>
         <editTip v-if="this.$store.state.editTip.isShow"></editTip>
+        <horizontal v-if="this.$store.state.isHorizontal"></horizontal>
     </div>
 </template>
 
@@ -11,12 +12,14 @@
     import tipWin from '../src/pages/components/tipWin'
     import loading from '../src/pages/components/loading'
     import editTip from '../src/pages/components/editTip'
+    import horizontal from '../src/pages/components/horizontal'
     export default {
         name: 'App',
         components:{
-            "tipWin": tipWin,
-            "loading": loading,
-            "editTip": editTip,
+            tipWin,
+            loading,
+            editTip,
+            horizontal,
         }
     }
 </script>

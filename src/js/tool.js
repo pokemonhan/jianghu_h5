@@ -28,6 +28,10 @@ const Tool = {//工具汇总
     //工具类别分割线---------------------------------------------------------------------------------------------//
 
     //TODO 屏幕控制类工具*************************************************************************//
+    clientIos: () => { //判断是否苹果设备工具
+        if(window.navigator.platform.slice(0, 2) === 'iP')return true;
+        return false;
+    },
     fullScreen: element => {//屏幕全屏工具
         if(!element)element=document.documentElement;
         element.requestFullScreen && element.requestFullScreen();

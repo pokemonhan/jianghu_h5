@@ -83,3 +83,5 @@ new Vue({
     template: '<App/>'
 });
 
+all.tool.clientIos()?window.onorientationchange=all.tool.rotationScreenIos:window.screen.orientation.onchange=all.tool.rotationScreenAndroid;
+if(window.screen.availWidth>window.screen.availHeight || window.innerWidth>window.innerHeight)all.store.commit("isHorizontal",true);

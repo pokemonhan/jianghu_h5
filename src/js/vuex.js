@@ -5,6 +5,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state={
+    isHorizontal:false,
     isLoading:false,
     editTip:{isShow:false,content:""},
     tipWin:{isShow:false,content:"",callback:null,type:{icon:"",name:""}},

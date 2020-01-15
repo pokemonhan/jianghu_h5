@@ -13,11 +13,11 @@
             return {
                 currentIndex:0,
                 menuItem:[
-                    {name:"首页",icon:require('../../assets/componentMenu/icon_Home.png'),iconActive:require('../../assets/componentMenu/icon_HomeActive.png'),path:"/"},
-                    {name:"佣金",icon:require('../../assets/componentMenu/icon_Brokerage.png'),iconActive:require('../../assets/componentMenu/icon_BrokerageActive.png'),path:"/promote"},
-                    {name:"充值",icon:require('../../assets/componentMenu/icon_ReCharge.png'),iconActive:require('../../assets/componentMenu/icon_ReChargeActive.png'),path:"/reCharge"},
-                    {name:"活动",icon:require('../../assets/componentMenu/icon_Activity.png'),iconActive:require('../../assets/componentMenu/icon_ActivityActive.png'),path:"/activity"},
-                    {name:"我的",icon:require('../../assets/componentMenu/icon_Mine.png'),iconActive:require('../../assets/componentMenu/icon_MineActive.png'),path:"/mine"},
+                    {name:"首页",icon:require('../../assets/component/icon_Home.png'),iconActive:require('../../assets/component/icon_HomeActive.png'),path:"/"},
+                    {name:"佣金",icon:require('../../assets/component/icon_Brokerage.png'),iconActive:require('../../assets/component/icon_BrokerageActive.png'),path:"/promote"},
+                    {name:"充值",icon:require('../../assets/component/icon_ReCharge.png'),iconActive:require('../../assets/component/icon_ReChargeActive.png'),path:"/reCharge"},
+                    {name:"活动",icon:require('../../assets/component/icon_Activity.png'),iconActive:require('../../assets/component/icon_ActivityActive.png'),path:"/activity"},
+                    {name:"我的",icon:require('../../assets/component/icon_Mine.png'),iconActive:require('../../assets/component/icon_MineActive.png'),path:"/mine"},
                 ]
             }
         },
