@@ -9,7 +9,7 @@
         <div class="contentView">
             <div class="personalInfo animated flipInY">
                 <div class="detail">
-                    <img class="imgUser" src="../assets/homePage/img_User.png"/>
+                    <img class="imgUser" :src="this.$store.state.userPicture"/>
                     <div class="nameId">
                         <div class="nameBar" v-text="this.$store.state.nickName">两只小蜜蜂</div>
                         <div class="id" v-text="'ID：'+this.$store.state.uid">ID：189673</div>

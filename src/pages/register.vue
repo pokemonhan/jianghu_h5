@@ -181,8 +181,8 @@
         },
         created() {
             all.tool.send("slides",{flag:"2"},res=>{res.data.forEach(item=>{if(item.redirect_url==="register")this.banner=item.pic_path})});
-            this.nextReqTime=all.tool.getStore("nextReqTime");console.log(this.nextReqTime);
-            let now=new Date().getTime()/1000;console.log(this.nextReqTime-now);
+            this.nextReqTime=all.tool.getStore("nextReqTime");
+            let now=new Date().getTime()/1000;
             if(now<this.nextReqTime){
                 this.startCount(parseInt(this.nextReqTime-now));
             }

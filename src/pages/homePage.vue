@@ -2,7 +2,7 @@
     <div class="homePage">
         <div class="pageTitle">
             <div class="userInfo animated bounceInLeft" v-if="this.$store.state.isLogin">
-                <img class="imgUser" @click="fullScreen" src="../assets/homePage/img_User.png"/>
+                <img class="imgUser" @click="fullScreen" :src="this.$store.state.userPicture"/>
                 <div class="nameId">
                     <div class="name" v-text="this.$store.state.nickName"></div>
                     <div class="id" v-text="'ID：'+this.$store.state.uid">ID：189673</div>

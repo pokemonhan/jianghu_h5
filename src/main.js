@@ -9,6 +9,7 @@ import config from './js/config'
 import animate from 'animate.css'
 import $ from 'jquery'
 import http from 'axios'
+import forge from 'node-forge'
 
 Vue.config.productionTip = false;
 Vue.use(animate);
@@ -17,6 +18,7 @@ all.store=store;
 all.router=router;
 all.tool=tool;
 all.config=config;
+all.forge=forge;
 all.http=http.create({
     baseURL:all.config.basePath,
     timeout:5000,
@@ -61,7 +63,7 @@ all.http.interceptors.response.use(res=>{
 all.$=$;
 all.router.beforeEach((to,from,next)=>{
     let safePath=false;
-    if(all.store.state.isLogin){safePath=true;console.log(safePath);}
+    if(all.store.state.isLogin){safePath=true}
     all.config.routerGuard.forEach(item=>{
         if(to.path===item)safePath=true
     });

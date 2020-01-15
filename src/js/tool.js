@@ -93,12 +93,14 @@ const Tool = {//工具汇总
         all.store.commit("isLogin",true);
         all.store.commit("nickName",data.username);
         all.store.commit("uid",data.uid);
+        all.store.commit("userPicture",data.pic_path);
         all.store.commit("amount",data.balance);
     },
     setLogoutData:()=>{
         all.store.commit("isLogin",false);
         all.store.commit("nickName","");
         all.store.commit("uid","");
+        all.store.commit("userPicture",require("../assets/homePage/img_User.png"));
         all.store.commit("amount","");
         all.tool.clearStore("Authorization")
     }

@@ -12,6 +12,9 @@ const state={
     amount:"12345678.00",
     nickName:"哈土奇一号",
     uid:"123456",
+    userPicture:require("../assets/homePage/img_User.png"),
+    isShowChangeName:false,
+    isShowChangeUserImg:false,
     messageData:{
         notice:[
             {title:"1系统维护通知",content:"尊敬的玩家，本站因系统升级，将于2019-12-30 15:30:00至2019-12-30 16:30:00期间暂停游戏服务，进行升级，如有不便，敬请谅解！",time:"2019-12-30 15:30:24",isRead:false},

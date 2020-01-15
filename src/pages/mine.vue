@@ -9,11 +9,11 @@
         <div class="contentView">
             <div class="personalInfo animated flipInY">
                 <div class="detail">
-                    <img class="imgUser" src="../assets/homePage/img_User.png"/>
+                    <img class="imgUser" @click="showChangeUserImg" :src="this.$store.state.userPicture"/>
                     <div class="nameId">
                         <div class="nameBar">
                             <span class="name" v-text="this.$store.state.nickName"></span>
-                            <img class="iconEdit" src="../assets/mine/icon_Edit.png"/>
+                            <img class="iconEdit" @click="showChangeName" src="../assets/mine/icon_Edit.png"/>
                         </div>
                         <div class="id" v-text="'ID：'+this.$store.state.uid"></div>
                     </div>
@@ -39,14 +39,20 @@
             <div class="exitLogin" @click="logout">退出登录</div>
         </div>
         <comMenu/>
+        <changeName v-if="this.$store.state.isShowChangeName"/>
+        <changeUserImg v-if="this.$store.state.isShowChangeUserImg"/>
     </div>
 </template>
 
 <script>
     import comMenu from '../pages/components/menu'
+    import changeName from '../pages/components/changeName'
+    import changeUserImg from '../pages/components/changeUserImg'
     export default {
         components:{
-            comMenu
+            comMenu,
+            changeName,
+            changeUserImg,
         },
         data () {
             return {
@@ -76,6 +82,12 @@
         methods:{
             open(path){all.router.push(path)},
             back(){all.router.go(-1)},
+            showChangeName(){
+                all.store.commit("isShowChangeName",true)
+            },
+            showChangeUserImg(){
+                all.store.commit("isShowChangeUserImg",true)
+            },
             logout(){
                 all.tool.tipWinShow("是否确定退出当前登录账号",()=>{
                     all.tool.send("logout",null,res=>{
@@ -85,7 +97,6 @@
                 },{icon:"warn",name:"退出登录"})
             },
         },
-
     }
 </script>
 
@@ -157,6 +168,7 @@
         padding:0 0.55rem;
         margin:0 0.3rem 0.4rem;
         flex-shrink:0;
+        z-index:2;
     }
     .detail{
         color:#ffffff;
