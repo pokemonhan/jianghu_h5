@@ -31,7 +31,7 @@ class CreateSystemSmsConfigsTable extends Migration
                 $table->string('url', 255)->nullable()->comment('请求地址');
                 $table->integer('author_id')->nullable()->comment('创建人ID');
                 $table->integer('last_editor_id')->nullable()->comment('最后修改人ID');
-                $table->tinyInteger('status')->nullable()->comment('状态  0.关闭 1.开启');
+                $table->tinyInteger('status')->default(0)->comment('状态  0.关闭 1.开启');
                 $table->timestamps();
             },
         );
