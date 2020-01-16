@@ -33,7 +33,6 @@ class CreateSystemSmsConfigsTable extends Migration
                 $table->integer('last_editor_id')->nullable()->comment('最后修改人ID');
                 $table->tinyInteger('status')->nullable()->comment('状态  0.关闭 1.开启');
                 $table->timestamps();
-                $table->index('title');
             },
         );
         DB::statement("ALTER TABLE `system_sms_configs` comment '短信配置'");
