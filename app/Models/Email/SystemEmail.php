@@ -42,6 +42,16 @@ class SystemEmail extends BaseModel
     public const IS_SEND_NO = 0;
 
     /**
+     * 已读
+     */
+    public const IS_READ_YES = 1;
+
+    /**
+     * 未读
+     */
+    public const IS_READ_NO = 0;
+
+    /**
      * 厅主发往总控
      *
      */
