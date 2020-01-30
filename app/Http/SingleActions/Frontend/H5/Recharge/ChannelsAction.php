@@ -6,6 +6,7 @@ use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
+use App\Models\Finance\SystemFinanceUserTag;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -43,36 +44,29 @@ class ChannelsAction
      */
     private function _getOnlineChannels(array $inputDatas): array
     {
-        $data = SystemFinanceType::with(
+        $financeIds = SystemFinanceUserTag::where(
             [
-             'onlineInfos' => static function ($query) use ($inputDatas) {
-                        $query = $query->where('platform_sign', $inputDatas['platform_sign'])
-                        ->join(
-                            'system_finance_user_tags',
-                            'system_finance_online_infos.id',
-                            '=',
-                            'system_finance_user_tags.finance_id',
-                        )->where('system_finance_user_tags.is_online', SystemFinanceType::IS_ONLINE_YES)
-                        ->where('system_finance_user_tags.tag_id', $inputDatas['tag_id'])
-                        ->where('system_finance_online_infos.status', SystemFinanceOnlineInfo::STATUS_YES)
-                        ->select(
-                            [
-                             'system_finance_online_infos.id',
-                             'frontend_name',
-                             'frontend_remark',
-                             'min',
-                             'max',
-                             'handle_fee',
-                             'merchant_no',
-                             'system_finance_online_infos.desc',
-                            ],
-                        );
-                        return $query;
-             },
+             'is_online' => SystemFinanceType::IS_ONLINE_YES,
+             'tag_id'    => $inputDatas['tag_id'],
             ],
-        )->select(['id', 'name', 'sign', 'is_online'])
-            ->where('id', $inputDatas['type_id'])
-            ->get()->toArray();
+        )->get()->pluck('finance_id');
+        $data       = SystemFinanceOnlineInfo::where(
+            [
+             'platform_sign' => $inputDatas['platform_sign'],
+             'status'        => SystemFinanceOnlineInfo::STATUS_YES,
+            ],
+        )->whereIn('id', $financeIds)->get(
+            [
+             'id',
+             'frontend_name',
+             'frontend_remark',
+             'min',
+             'max',
+             'handle_fee',
+             'merchant_no',
+             'desc',
+            ],
+        )->toArray();
         return $data;
     }
 
@@ -83,37 +77,29 @@ class ChannelsAction
      */
     private function _getOfflineChannels(array $inputDatas): array
     {
-        $data = SystemFinanceType::with(
+        $financeIds = SystemFinanceUserTag::where(
             [
-             'offlineInfos' => static function ($query) use ($inputDatas) {
-                        $query = $query->with('bank:id,name,code')
-                        ->where('system_finance_offline_infos.platform_id', $inputDatas['platform_id'])
-                        ->join(
-                            'system_finance_user_tags',
-                            'system_finance_offline_infos.id',
-                            '=',
-                            'system_finance_user_tags.finance_id',
-                        )->where('system_finance_user_tags.is_online', SystemFinanceType::IS_ONLINE_NO)
-                        ->where('system_finance_user_tags.tag_id', $inputDatas['tag_id'])
-                        ->where('system_finance_offline_infos.status', SystemFinanceOfflineInfo::STATUS_YES)
-                        ->select(
-                            [
-                             'system_finance_offline_infos.id',
-                             'bank_id',
-                             'type_id',
-                             'name',
-                             'remark',
-                             'min',
-                             'max',
-                             'fee',
-                            ],
-                        );
-                        return $query;
-             },
+             'is_online' => SystemFinanceType::IS_ONLINE_NO,
+             'tag_id'    => $inputDatas['tag_id'],
             ],
-        )->select(['id', 'name', 'sign', 'is_online'])
-            ->where('id', $inputDatas['type_id'])
-            ->get()->toArray();
+        )->get()->pluck('finance_id');
+        $data       = SystemFinanceOfflineInfo::with('bank:id,name,code')->where(
+            [
+             'type_id' => $inputDatas['type_id'],
+             'status'  => SystemFinanceOfflineInfo::STATUS_YES,
+            ],
+        )->whereIn('id', $financeIds)->get(
+            [
+             'id',
+             'bank_id',
+             'type_id',
+             'name',
+             'remark',
+             'min',
+             'max',
+             'fee',
+            ],
+        )->toArray();
         return $data;
     }
 }
