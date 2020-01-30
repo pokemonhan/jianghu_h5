@@ -139,17 +139,16 @@ class RechargeAction
      */
     private function _saveOfflineOrderData(array $data): array
     {
-        $platformSign = $this->contll->currentPlatformEloq->sign;
-        $order        = UsersRechargeOrder::where(
-            [
-             'status'             => UsersRechargeOrder::STATUS_INIT,
-             'money'              => $this->inputDatas['money'],
-             'finance_channel_id' => $this->inputDatas['channel_id'],
-             'platform_sign'      => $platformSign,
-             'is_online'          => SystemFinanceType::IS_ONLINE_NO,
-             'real_money'         => $data['real_money'],
-            ],
-        )->first();
+        $platformSign   = $this->contll->currentPlatformEloq->sign;
+        $whereCondition = [
+                           'status'             => UsersRechargeOrder::STATUS_INIT,
+                           'money'              => $this->inputDatas['money'],
+                           'finance_channel_id' => $this->inputDatas['channel_id'],
+                           'platform_sign'      => $platformSign,
+                           'is_online'          => SystemFinanceType::IS_ONLINE_NO,
+                           'real_money'         => $data['real_money'],
+                          ];
+        $order          = UsersRechargeOrder::where($whereCondition)->first();
         if ($order) {
             $data['real_money'] = $this->_getRealMoney();
             $result             = $this->_saveOfflineOrderData($data);
@@ -249,17 +248,17 @@ class RechargeAction
      */
     private function _getRealMoney(): float
     {
-        $platformSign = $this->contll->currentPlatformEloq->sign;
-        $orders       = UsersRechargeOrder::where(
-            [
-             'status'             => UsersRechargeOrder::STATUS_INIT,
-             'money'              => $this->inputDatas['money'],
-             'finance_channel_id' => $this->inputDatas['channel_id'],
-             'platform_sign'      => $platformSign,
-             'is_online'          => SystemFinanceType::IS_ONLINE_NO,
-            ],
-        )->get('real_money')->pluck('real_money')->toArray();
-        $exists       = []; //已经存在的
+        $platformSign   = $this->contll->currentPlatformEloq->sign;
+        $whereConfition = [
+                           'status'             => UsersRechargeOrder::STATUS_INIT,
+                           'money'              => $this->inputDatas['money'],
+                           'finance_channel_id' => $this->inputDatas['channel_id'],
+                           'platform_sign'      => $platformSign,
+                           'is_online'          => SystemFinanceType::IS_ONLINE_NO,
+                          ];
+        $orders         = UsersRechargeOrder::where($whereConfition)
+            ->get('real_money')->pluck('real_money')->toArray();
+        $exists         = []; //已经存在的
         foreach ($orders as $order) {
             $money    = round($order - $this->inputDatas['money'], 2);
             $exists[] = $money;

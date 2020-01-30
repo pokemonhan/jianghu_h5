@@ -60,16 +60,18 @@ class ChannelsAction
                         'desc',
                        ];
 
-        $data = SystemFinanceOnlineInfo::where($whereConditions)->whereExists(
-            static function ($query) use ($inputDatas): void {
-                $query->from('system_finance_user_tags')->where(
+        $data = SystemFinanceOnlineInfo::whereHas(
+            'tags',
+            static function ($query) use ($inputDatas): object {
+                $query = $query->where(
                     [
-                     'is_online' => SystemFinanceType::IS_ONLINE_YES,
                      'tag_id'    => $inputDatas['tag_id'],
+                     'is_online' => SystemFinanceType::IS_ONLINE_YES,
                     ],
-                )->whereRaw('system_finance_user_tags.finance_id = system_finance_online_infos.id');
+                );
+                return $query;
             },
-        )->get($returnField)->toArray();
+        )->where($whereConditions)->get($returnField)->toArray();
         return $data;
     }
 
@@ -97,16 +99,13 @@ class ChannelsAction
                         'fee',
                        ];
 
-        $data = SystemFinanceOfflineInfo::with('bank:id,name,code')->where($whereConditions)->whereExists(
-            static function ($query) use ($inputDatas): void {
-                $query->from('system_finance_user_tags')->where(
-                    [
-                     'is_online' => SystemFinanceType::IS_ONLINE_NO,
-                     'tag_id'    => $inputDatas['tag_id'],
-                    ],
-                )->whereRaw('system_finance_user_tags.finance_id = system_finance_offline_infos.id');
+        $data = SystemFinanceOfflineInfo::with('bank:id,name,code')->whereHas(
+            'tags',
+            static function ($query) use ($inputDatas): object {
+                $query = $query->where('tag_id', $inputDatas['tag_id']);
+                return $query;
             },
-        )->get($returnField)->toArray();
+        )->where($whereConditions)->get($returnField)->toArray();
         return $data;
     }
 }
