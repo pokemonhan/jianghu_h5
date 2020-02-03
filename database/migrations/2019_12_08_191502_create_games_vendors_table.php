@@ -30,6 +30,8 @@ class CreateGamesVendorsTable extends Migration
                 $table->integer('author_id')->default('0')->comment('添加人id');
                 $table->integer('last_editor_id')->default('0')->comment('最后编辑人id');
                 $table->nullableTimestamps();
+                $table->index('name');
+                $table->index('sign');
             },
         );
         DB::statement("ALTER TABLE `games_vendors` comment '游戏厂商表'");

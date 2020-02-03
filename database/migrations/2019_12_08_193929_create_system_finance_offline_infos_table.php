@@ -39,6 +39,9 @@ class CreateSystemFinanceOfflineInfosTable extends Migration
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->decimal('fee', 20, 4)->default(0)->comment('手续费');
                 $table->nullableTimestamps();
+                $table->index('name');
+                $table->index('account');
+                $table->index('username');
             },
         );
         DB::statement("ALTER TABLE `system_finance_offline_infos` comment '线下金流详情表'");

@@ -31,6 +31,10 @@ class CreateGamesPlatformsTable extends Migration
                 $table->tinyInteger('is_maintain')->default(0)->comment('是否维护 0 否 1 是');
                 $table->tinyInteger('is_recommend')->default(0)->comment('是否推荐 0 否 1 是');
                 $table->nullableTimestamps();
+                $table->index('platform_sign');
+                $table->index('game_sign');
+                $table->index('device');
+                $table->index('is_hot');
             },
         );
         DB::statement("ALTER TABLE `games_platforms` comment '游戏与平台关联表'");
