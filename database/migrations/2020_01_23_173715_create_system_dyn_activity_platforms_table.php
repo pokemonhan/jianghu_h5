@@ -30,6 +30,9 @@ class CreateSystemDynActivityPlatformsTable extends Migration
                 $table->timestamp('start_time')->useCurrent()->comment('开始时间');
                 $table->timestamp('end_time')->useCurrent()->comment('结束时间');
                 $table->timestamps();
+                $table->index('platform_sign');
+                $table->index('activity_sign');
+                $table->index('status');
             },
         );
     }
