@@ -59,7 +59,14 @@ class ChannelsAction
                         'merchant_no',
                         'desc',
                        ];
-
+        // select id,frontend_name,frontend_remark,min,max,handle_fee,merchant_no,`desc`
+        // from system_finance_online_infos
+        // where exists (
+        //                select *
+        //                from system_finance_user_tags
+        //                where tag_id=4 and is_online=1 and finance_id=1
+        //              )
+        //  and channel_id in (select id from system_finance_channels where type_id=5);
         $data = SystemFinanceOnlineInfo::whereHas(
             'tags',
             static function ($query) use ($inputDatas): object {
@@ -69,6 +76,12 @@ class ChannelsAction
                      'is_online' => SystemFinanceType::IS_ONLINE_YES,
                     ],
                 );
+                return $query;
+            },
+        )->whereHas(
+            'type',
+            static function ($query) use ($inputDatas): object {
+                $query = $query->where(['system_finance_types.id' => $inputDatas['type_id']]);
                 return $query;
             },
         )->where($whereConditions)->get($returnField)->toArray();
@@ -98,11 +111,19 @@ class ChannelsAction
                         'max',
                         'fee',
                        ];
-
+        // select id,bank_id,type_id,`name`,remark,min,max,fee,system_banks.id,system_banks.`name`,system_banks.`code`
+        // from system_finance_offline_infos
+        // left join system_banks on system_finance_offline_infos.bank_id = system_banks.id where type_id=1
+        // and exists (select * from system_finance_user_tags where tag_id=4 and is_online=1 and finance_id=1)
         $data = SystemFinanceOfflineInfo::with('bank:id,name,code')->whereHas(
             'tags',
             static function ($query) use ($inputDatas): object {
-                $query = $query->where('tag_id', $inputDatas['tag_id']);
+                $query = $query->where(
+                    [
+                     'tag_id'    => $inputDatas['tag_id'],
+                     'is_online' => SystemFinanceType::IS_ONLINE_NO,
+                    ],
+                );
                 return $query;
             },
         )->where($whereConditions)->get($returnField)->toArray();

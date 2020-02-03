@@ -58,7 +58,14 @@ class SystemFinanceOnlineInfo extends BaseModel
      */
     public function type(): HasOneThrough
     {
-        $object = $this->hasOneThrough(SystemFinanceType::class, SystemFinanceChannel::class, 'channel_id', 'type_id');
+        $object = $this->hasOneThrough(
+            SystemFinanceType::class,
+            SystemFinanceChannel::class,
+            'id',
+            'id',
+            'channel_id',
+            'type_id',
+        );
         return $object;
     }
 

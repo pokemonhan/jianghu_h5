@@ -54,8 +54,7 @@ class SystemFinanceOfflineInfo extends BaseModel
      */
     public function tags(): HasMany
     {
-        $object = $this->hasMany(SystemFinanceUserTag::class, 'finance_id', 'id')
-            ->where('is_online', SystemFinanceType::IS_ONLINE_NO);
+        $object = $this->hasMany(SystemFinanceUserTag::class, 'finance_id', 'id');
         return $object;
     }
 }
