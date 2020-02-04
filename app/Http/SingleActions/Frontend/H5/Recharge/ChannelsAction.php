@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
@@ -12,19 +12,18 @@ use Illuminate\Http\JsonResponse;
  * Class ChannelsAction
  * @package App\Http\SingleActions\Frontend\H5\Recharge
  */
-class ChannelsAction
+class ChannelsAction extends MainAction
 {
     /**
-     * @param FrontendApiMainController $contll     Contll.
-     * @param array                     $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['tag_id']        = $contll->frontendUser->user_tag_id;
-        $inputDatas['platform_sign'] = $contll->frontendUser->platform_sign;
-        $inputDatas['platform_id']   = $contll->frontendUser->platform_id;
+        $inputDatas['tag_id']        = $this->user->user_tag_id;
+        $inputDatas['platform_sign'] = $this->user->platform_sign;
+        $inputDatas['platform_id']   = $this->user->platform_id;
         $type                        = SystemFinanceType::find($inputDatas['type_id']);
         $data                        = [];
         if ($type->is_online === SystemFinanceType::IS_ONLINE_YES) {

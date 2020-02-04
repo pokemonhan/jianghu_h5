@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\FrontendApi\H5;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\H5\Recharge\ChannelsRequest;
 use App\Http\Requests\Frontend\H5\Recharge\RechargeRequest;
 use App\Http\Requests\Frontend\H5\Recharge\TypesRequest;
@@ -15,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Class RechargeController
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class RechargeController extends FrontendApiMainController
+class RechargeController
 {
     /**
      * 获取分类
@@ -41,7 +40,7 @@ class RechargeController extends FrontendApiMainController
     public function channels(ChannelsAction $action, ChannelsRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $outputs    = $action->execute($this, $inputDatas);
+        $outputs    = $action->execute($inputDatas);
         return $outputs;
     }
 
@@ -56,7 +55,7 @@ class RechargeController extends FrontendApiMainController
     {
         $inputDatas       = $request->validated();
         $inputDatas['ip'] = $request->ip();
-        $outputs          = $action->execute($this, $inputDatas);
+        $outputs          = $action->execute($inputDatas);
         return $outputs;
     }
 }

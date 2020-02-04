@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
  * Class RechargeAction
  * @package App\Http\SingleActions\Frontend\H5\Recharge
  */
-class RechargeAction
+class RechargeAction extends MainAction
 {
 
     public const STUTAS_NO = 0;
@@ -24,11 +24,6 @@ class RechargeAction
      * @var array $inputDatas
      */
     protected $inputDatas;
-
-    /**
-     * @var FrontendApiMainController $contll
-     */
-    protected $contll;
 
     /**
      * @var mixed $model
@@ -41,15 +36,13 @@ class RechargeAction
     protected $order;
 
     /**
-     * @param FrontendApiMainController $contll     Contll.
-     * @param array                     $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $result           = [];
-        $this->contll     = $contll;
         $this->inputDatas = $inputDatas;
         //获取模型
         $this->_getModel();
@@ -139,7 +132,7 @@ class RechargeAction
      */
     private function _saveOfflineOrderData(array $data): array
     {
-        $platformSign   = $this->contll->currentPlatformEloq->sign;
+        $platformSign   = $this->currentPlatformEloq->sign;
         $whereCondition = [
                            'status'             => UsersRechargeOrder::STATUS_INIT,
                            'money'              => $this->inputDatas['money'],
@@ -203,9 +196,9 @@ class RechargeAction
     private function _generateOrderData(): array
     {
         $data                       = [];
-        $platformSign               = $this->contll->currentPlatformEloq->sign;
+        $platformSign               = $this->currentPlatformEloq->sign;
         $data['platform_sign']      = $platformSign;
-        $data['user_id']            = $this->contll->frontendUser->id;
+        $data['user_id']            = $this->user->id;
         $data['order_no']           = $this->_generateOrderNo($platformSign);
         $data['finance_channel_id'] = $this->inputDatas['channel_id'];
         $data['money']              = $this->inputDatas['money'];
@@ -248,7 +241,7 @@ class RechargeAction
      */
     private function _getRealMoney(): float
     {
-        $platformSign   = $this->contll->currentPlatformEloq->sign;
+        $platformSign   = $this->currentPlatformEloq->sign;
         $whereConfition = [
                            'status'             => UsersRechargeOrder::STATUS_INIT,
                            'money'              => $this->inputDatas['money'],
