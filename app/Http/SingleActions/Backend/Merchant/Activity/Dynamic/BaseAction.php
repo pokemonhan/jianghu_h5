@@ -7,7 +7,7 @@ use App\Models\Platform\SystemDynActivityPlatform;
 use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\Activity\Dyn
  */
 class BaseAction extends MainAction
@@ -24,8 +24,10 @@ class BaseAction extends MainAction
       * @param Request                   $request                   Request.
       * @throws \Exception Exception.
       */
-    public function __construct(SystemDynActivityPlatform $systemDynActivityPlatform, Request $request)
-    {
+    public function __construct(
+        SystemDynActivityPlatform $systemDynActivityPlatform,
+        Request $request
+    ) {
         parent::__construct($request);
         $this->model = $systemDynActivityPlatform;
     }
