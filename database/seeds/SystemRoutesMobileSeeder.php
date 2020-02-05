@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\DeveloperUsage\Frontend\SystemRoutesMobile;
 use Illuminate\Database\Seeder;
 
 /**
@@ -127,9 +126,9 @@ class SystemRoutesMobileSeeder extends Seeder
              ],
              [
               'id'                => 10,
-              'route_name'        => 'app-api.user.reset-password',
+              'route_name'        => 'app-api.user.password-reset',
               'controller'        => null,
-              'method'            => 'password',
+              'method'            => 'passwordReset',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
@@ -346,6 +345,30 @@ class SystemRoutesMobileSeeder extends Seeder
               'route_name'        => 'app-api.recharge.recharge',
               'controller'        => null,
               'method'            => 'recharge',
+              'frontend_model_id' => null,
+              'title'             => null,
+              'description'       => null,
+              'is_open'           => 0,
+              'created_at'        => null,
+              'updated_at'        => null,
+             ],
+             [
+              'id'                => 29,
+              'route_name'        => 'app-api.password.change-code',
+              'controller'        => null,
+              'method'            => 'passwordChangeCode',
+              'frontend_model_id' => null,
+              'title'             => null,
+              'description'       => null,
+              'is_open'           => 0,
+              'created_at'        => null,
+              'updated_at'        => null,
+             ],
+             [
+              'id'                => 30,
+              'route_name'        => 'app-api.password.change',
+              'controller'        => null,
+              'method'            => 'passwordChange',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
