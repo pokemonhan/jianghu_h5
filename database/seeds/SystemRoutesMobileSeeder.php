@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\DeveloperUsage\Frontend\SystemRoutesMobile;
 use Illuminate\Database\Seeder;
 
 /**
