@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Email\SystemEmail;
 
 /**
@@ -9,7 +10,7 @@ use App\Models\Email\SystemEmail;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\Email
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
