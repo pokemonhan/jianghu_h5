@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\User\FrontendUsersAccount;
+use App\Models\User\FrontendUser;
 use Illuminate\Database\Seeder;
 
 /**
@@ -15,27 +15,11 @@ class FrontendUserAccountSeeder extends Seeder
      */
     public function run(): void
     {
-        FrontendUsersAccount::insert(
-            [
-             [
-              'user_id' => 1,
-              'balance' => 999022347.8236,
-              'frozen'  => 86853.2200,
-              'status'  => 1,
-             ],
-             [
-              'user_id' => 2,
-              'balance' => 3000000.0000,
-              'frozen'  => 0.0000,
-              'status'  => 1,
-             ],
-             [
-              'user_id' => 3,
-              'balance' => 2000000.0000,
-              'frozen'  => 0.0000,
-              'status'  => 1,
-             ],
-            ],
-        );
+        $balance = 1000000000.99;
+        FrontendUser::all()->map(function ($item) use($balance) {
+            $item->account()->create([
+                'balance' => $balance - $item->id,
+            ]);
+        });
     }
 }
