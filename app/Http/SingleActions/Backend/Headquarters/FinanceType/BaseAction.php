@@ -2,14 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceType;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceType;
+use Illuminate\Http\Request;
 
 /**
  * Class BaseAction
  *
  * @package App\Http\SingleActions\Backend\Headquarters\FinanceType
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -20,10 +22,14 @@ class BaseAction
     /**
      * BaseAction constructor.
      *
+     * @param Request           $request           Request.
      * @param SystemFinanceType $systemFinanceType SystemFinanceType.
      */
-    public function __construct(SystemFinanceType $systemFinanceType)
-    {
+    public function __construct(
+        Request $request,
+        SystemFinanceType $systemFinanceType
+    ) {
+        parent::__construct($request);
         $this->model = $systemFinanceType;
     }
 }
