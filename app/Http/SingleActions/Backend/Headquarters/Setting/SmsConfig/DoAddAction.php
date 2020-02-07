@@ -5,6 +5,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\Setting\SmsConfig;
 use App\Http\SingleActions\MainAction;
 use App\Models\Systems\SystemSmsConfig;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 短信配置-添加
@@ -18,10 +19,14 @@ class DoAddAction extends MainAction
     protected $model;
 
     /**
+     * @param Request         $request         Request.
      * @param SystemSmsConfig $systemSmsConfig 短信配置Model.
      */
-    public function __construct(SystemSmsConfig $systemSmsConfig)
-    {
+    public function __construct(
+        Request $request,
+        SystemSmsConfig $systemSmsConfig
+    ) {
+        parent::__construct($request);
         $this->model = $systemSmsConfig;
     }
 
@@ -32,8 +37,8 @@ class DoAddAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['author_id']      = $this->currentAdmin->id;
-        $inputDatas['last_editor_id'] = $this->currentAdmin->id;
+        $inputDatas['author_id']      = $this->user->id;
+        $inputDatas['last_editor_id'] = $this->user->id;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('302400');

@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class StatusDoAction extends BaseAction
 {
+    
     /**
      * @param  array $inputDatas InputDatas.
      * @return JsonResponse
@@ -21,7 +22,7 @@ class StatusDoAction extends BaseAction
         $update = $this->model->where('id', $inputDatas['id'])->update(
             [
              'status'         => $inputDatas['status'],
-             'last_editor_id' => $this->currentAdmin->id,
+             'last_editor_id' => $this->user->id,
             ],
         );
         if (!$update) {

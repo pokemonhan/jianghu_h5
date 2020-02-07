@@ -36,11 +36,11 @@ class DoAddAction extends MainAction
     {
         DB::beginTransaction();
         //生成平台
-        $this->_createPlatform($inputDatas, $this->currentAdmin->id);
+        $this->_createPlatform($inputDatas, $this->user->id);
         //生成平台加密数据用的证书
         $this->_createSSL();
         //平台绑定域名
-        $this->_createPlatformDomain($inputDatas['domains'], $this->currentAdmin->id);
+        $this->_createPlatformDomain($inputDatas['domains'], $this->user->id);
         //生成平台银行配置
         $this->_createBanks();
         //生成超级管理员组
