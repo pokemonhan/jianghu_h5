@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
  */
 class SendAction extends BaseAction
 {
+    
     /**
      * @param  array $inputDatas InputDatas.
      * @return JsonResponse
@@ -24,7 +25,7 @@ class SendAction extends BaseAction
         $inputDatas['receiver_ids'] = MerchantAdminUser::whereIn('email', $inputDatas['receivers'])
             ->get()->pluck('id')->toJson();
         $inputDatas['type']         = SystemEmail::TYPE_HEAD_TO_MER;
-        $inputDatas['sender_id']    = $this->currentAdmin->id;
+        $inputDatas['sender_id']    = $this->user->id;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');

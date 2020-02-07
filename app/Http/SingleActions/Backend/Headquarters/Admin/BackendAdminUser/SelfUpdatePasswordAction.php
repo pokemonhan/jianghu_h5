@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
  */
 class SelfUpdatePasswordAction extends MainAction
 {
+
     /**
      * @param array $inputDatas 传递的参数.
      * @throws \Exception Exception.
@@ -19,16 +20,16 @@ class SelfUpdatePasswordAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (!Hash::check($inputDatas['old_password'], $this->currentAdmin->password)) {
+        if (!Hash::check($inputDatas['old_password'], $this->user->password)) {
             throw new \Exception('301102');
         }
-        $token                                = $this->currentAuth->refresh();
-        $this->currentAdmin->password       = Hash::make($inputDatas['password']);
-        $this->currentAdmin->remember_token = $token;
-        if (!$this->currentAdmin->save()) {
+        $token                      = $this->user->refresh();
+        $this->user->password       = Hash::make($inputDatas['password']);
+        $this->user->remember_token = $token;
+        if (!$this->user->save()) {
             throw new \Exception('301103');
         }
-        $expireInMinute = $this->currentAuth->factory()->getTTL();
+        $expireInMinute = $this->user->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
         $data           = [
                            'access_token' => $token,

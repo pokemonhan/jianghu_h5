@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class EditDoAction extends BaseAction
 {
+
     /**
      * @param  array $inputDatas InputDatas.
      * @return JsonResponse
@@ -19,7 +20,7 @@ class EditDoAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $model                        = $this->model->find($inputDatas['id']);
-        $inputDatas['last_editor_id'] = $this->currentAdmin->id;
+        $inputDatas['last_editor_id'] = $this->user->id;
         $model->fill($inputDatas);
         if (!$model->save()) {
             throw new \Exception('300403');

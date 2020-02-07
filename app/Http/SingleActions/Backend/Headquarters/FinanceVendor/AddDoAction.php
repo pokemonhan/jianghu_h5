@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
  */
 class AddDoAction extends BaseAction
 {
+    
     /**
      * @param  array $inputDatas InputDatas.
      * @return JsonResponse
@@ -18,7 +19,7 @@ class AddDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['author_id'] = $this->currentAdmin->id;
+        $inputDatas['author_id'] = $this->user->id;
         $this->model->fill($inputDatas);
         if ($this->model->save()) {
             return msgOut();

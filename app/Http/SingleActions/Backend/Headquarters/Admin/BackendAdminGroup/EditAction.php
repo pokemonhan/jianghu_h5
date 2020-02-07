@@ -3,11 +3,11 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Http\SingleActions\MainAction;
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
@@ -23,10 +23,14 @@ class EditAction extends MainAction
     protected $model;
 
     /**
+     * @param Request                 $request                 Request.
      * @param BackendAdminAccessGroup $backendAdminAccessGroup BackendAdminAccessGroup.
      */
-    public function __construct(BackendAdminAccessGroup $backendAdminAccessGroup)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminAccessGroup $backendAdminAccessGroup
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminAccessGroup;
     }
 

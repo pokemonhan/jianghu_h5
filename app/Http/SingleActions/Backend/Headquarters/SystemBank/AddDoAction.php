@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
  */
 class AddDoAction extends BaseAction
 {
+    
     /**
      * @param  array $inputDatas InputDatas.
      * @return JsonResponse
@@ -23,7 +24,7 @@ class AddDoAction extends BaseAction
     {
         $flag = false;
         try {
-            $inputDatas['author_id'] = $this->currentAdmin->id;
+            $inputDatas['author_id'] = $this->user->id;
             DB::beginTransaction();
             $this->model->fill($inputDatas);
             if ($this->model->save()) {
