@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
-use App\Http\SingleActions\MainAction;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
@@ -10,19 +10,22 @@ use Illuminate\Support\Arr;
 /**
  * 创建后台管理员
  */
-class CreateAction extends MainAction
+class CreateAction
 {
     /**
      * Register api
-     * @param array $inputDatas 接收的参数.
+     * @param BackEndApiMainController $contll     Controller.
+     * @param array                    $inputDatas 接收的参数.
      * @return JsonResponse
      */
-    public function execute(array $inputDatas): JsonResponse
-    {
+    public function execute(
+        BackEndApiMainController $contll,
+        array $inputDatas
+    ): JsonResponse {
         $inputDatas['password'] = bcrypt($inputDatas['password']);
         $user                   = BackendAdminUser::create($inputDatas);
         $credentials            = Arr::only($inputDatas, ['email', 'password']);
-        $token                  = $this->currentAuth->attempt($credentials);
+        $token                  = $contll->currentAuth->attempt($credentials);
         $success                = [
                                    'token' => $token,
                                    'name'  => $user->name,

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\FinanceChannel\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceChannel\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceChannel\EditDoRequest;
@@ -23,7 +24,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendFinanceChannelController
+class BackendFinanceChannelController extends BackEndApiMainController
 {
     /**
      * 金流通道添加
@@ -38,7 +39,7 @@ class BackendFinanceChannelController
         AddDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 
@@ -55,7 +56,7 @@ class BackendFinanceChannelController
         EditDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 
@@ -72,7 +73,7 @@ class BackendFinanceChannelController
         OptEditDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
     /**
@@ -135,7 +136,7 @@ class BackendFinanceChannelController
         StatusDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 }

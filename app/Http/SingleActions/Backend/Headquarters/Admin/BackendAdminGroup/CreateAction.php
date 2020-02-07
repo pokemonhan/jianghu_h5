@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
-use App\Http\SingleActions\MainAction;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 /**
  * Class for create action.
  */
-class CreateAction extends MainAction
+class CreateAction
 {
 
     /**
@@ -32,16 +32,17 @@ class CreateAction extends MainAction
     /**
      * Show the form for creating a new resource.
      *
-     * @param  array $inputDatas 传递的参数.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @throws \Exception Exception.
      * @return JsonResponse
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         DB::beginTransaction();
         //只提取当前登录管理员也拥有的权限
         $role = Arr::wrap(json_decode($inputDatas['role'], true));
-        $role = array_intersect($role, $this->adminAccessGroupDetail);
+        $role = array_intersect($role, $contll->adminAccessGroupDetail);
         //添加AdminGroup数据
         $objAdminGroup = $this->model;
         $objAdminGroup->fill(['group_name' => $inputDatas['group_name']]);

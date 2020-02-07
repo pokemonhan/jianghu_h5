@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Admin;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\CreateRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\DeleteAdminRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\SearchAdminRequest;
@@ -21,7 +22,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 管理员
  */
-class BackendAdminUserController
+class BackendAdminUserController extends BackEndApiMainController
 {
     /**
      * 生成管理员
@@ -32,7 +33,7 @@ class BackendAdminUserController
     public function create(CreateRequest $request, CreateAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 
@@ -92,7 +93,7 @@ class BackendAdminUserController
         SelfUpdatePasswordAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 

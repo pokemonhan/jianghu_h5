@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
@@ -14,17 +15,17 @@ use Illuminate\Support\Facades\DB;
  */
 class AddDoAction extends BaseAction
 {
-    
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas InputDatas.
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $flag = false;
         try {
-            $inputDatas['author_id'] = $this->user->id;
+            $inputDatas['author_id'] = $contll->currentAdmin->id;
             DB::beginTransaction();
             $this->model->fill($inputDatas);
             if ($this->model->save()) {

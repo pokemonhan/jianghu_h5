@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\SystemDynActivity;
 
-use App\Http\SingleActions\MainAction;
 use App\Models\Activity\SystemDynActivity;
 
 /**
@@ -10,7 +9,7 @@ use App\Models\Activity\SystemDynActivity;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\SystemDynActivity
  */
-class BaseAction extends MainAction
+class BaseAction
 {
 
     /**

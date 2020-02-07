@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Merchant;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Route\DeleteRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Route\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Route\EditRequest;
@@ -14,7 +15,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 路由
  */
-class RouteController
+class RouteController extends BackEndApiMainController
 {
     /**
      * 路由-列表

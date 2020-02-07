@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Admin;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\CreateRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\DestroyRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\EditRequest;
@@ -16,7 +17,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 管理员角色组
  */
-class BackendAdminGroupController
+class BackendAdminGroupController extends BackEndApiMainController
 {
     /**
      * Display a listing of the resource.
@@ -40,7 +41,7 @@ class BackendAdminGroupController
     public function create(CreateRequest $request, CreateAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 
@@ -54,7 +55,7 @@ class BackendAdminGroupController
     public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 

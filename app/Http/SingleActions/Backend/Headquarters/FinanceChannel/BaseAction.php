@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceChannel;
 
-use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceChannel;
 
 /**
@@ -10,7 +9,7 @@ use App\Models\Finance\SystemFinanceChannel;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\FinanceChannel
  */
-class BaseAction extends MainAction
+class BaseAction
 {
 
     /**

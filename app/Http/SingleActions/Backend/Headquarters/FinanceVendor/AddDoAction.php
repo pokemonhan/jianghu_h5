@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceVendor;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,19 +12,20 @@ use Illuminate\Http\JsonResponse;
  */
 class AddDoAction extends BaseAction
 {
-    
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param  BackEndApiMainController $contll     Contll.
+     * @param  array                    $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        $inputDatas['author_id'] = $this->user->id;
+        $inputDatas['author_id'] = $contll->currentAdmin->id;
         $this->model->fill($inputDatas);
         if ($this->model->save()) {
             return msgOut();
+        } else {
+            throw new \Exception('300600');
         }
-        throw new \Exception('300600');
     }
 }

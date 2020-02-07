@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\FinanceType\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\EditDoRequest;
@@ -19,7 +20,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendFinanceTypeController
+class BackendFinanceTypeController extends BackEndApiMainController
 {
     /**
      * @param  AddDoAction  $action  Action.
@@ -32,7 +33,7 @@ class BackendFinanceTypeController
         AddDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 
@@ -62,7 +63,7 @@ class BackendFinanceTypeController
         EditDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
     /**
@@ -91,7 +92,7 @@ class BackendFinanceTypeController
         StatusDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 }

@@ -2,19 +2,18 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
-use App\Http\SingleActions\MainAction;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
  * Class for edit action.
  */
-class EditAction extends MainAction
+class EditAction
 {
 
     /**
@@ -23,23 +22,20 @@ class EditAction extends MainAction
     protected $model;
 
     /**
-     * @param Request                 $request                 Request.
      * @param BackendAdminAccessGroup $backendAdminAccessGroup BackendAdminAccessGroup.
      */
-    public function __construct(
-        Request $request,
-        BackendAdminAccessGroup $backendAdminAccessGroup
-    ) {
-        parent::__construct($request);
+    public function __construct(BackendAdminAccessGroup $backendAdminAccessGroup)
+    {
         $this->model = $backendAdminAccessGroup;
     }
 
     /**
-     * @param  array $inputDatas 传递的参数.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
         if ((int) $id === 1) {
@@ -56,7 +52,7 @@ class EditAction extends MainAction
             //只提取当前登录管理员也拥有的权限
             BackendAdminAccessGroupDetail::where('group_id', $id)->delete();
             $role = Arr::wrap(json_decode($inputDatas['role'], true));
-            $role = array_intersect($this->adminAccessGroupDetail, $role);
+            $role = array_intersect($contll->adminAccessGroupDetail, $role);
             //添加AdminGroupDetails数据
             $data = ['group_id' => $id];
             foreach ($role as $roleId) {
