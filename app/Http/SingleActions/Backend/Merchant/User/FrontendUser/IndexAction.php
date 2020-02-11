@@ -39,8 +39,47 @@ class IndexAction
                 $inputDatas['parentId'] = $parentId->id;
             }
         }
-        $data   = $this->model->filter($inputDatas, FrontendUserFilter::class)->paginate($this->model::getPageSize());
-        $msgOut = msgOut($data);
+        $datas = $this->model->filter($inputDatas, FrontendUserFilter::class)
+            ->select(
+                [
+                 'id',
+                 'mobile',
+                 'parent_id',
+                 'is_online',
+                 'guid',
+                 'user_tag_id',
+                 'register_ip',
+                 'last_login_ip',
+                 'created_at',
+                ],
+            )
+            ->with(
+                [
+                 'userTag:id,title',
+                 'specificInfo:user_id,total_members',
+                 'parent:id,mobile',
+                 'account:user_id,balance',
+                ],
+            )
+            ->paginate($this->model::getPageSize())
+            ->toArray();
+        foreach ($datas['data'] as $userKey => $user) {
+            $data                    = [
+                                        'id'            => $user['id'],
+                                        'mobile'        => $user['mobile_hidden'],
+                                        'guid'          => $user['guid'],
+                                        'is_online'     => $user['is_online'],
+                                        'register_ip'   => $user['register_ip'],
+                                        'last_login_ip' => $user['last_login_ip'],
+                                        'created_at'    => $user['created_at'],
+                                        'user_tag'      => $user['user_tag']['title'] ?? null,
+                                        'total_members' => $user['specific_info']['total_members'] ?? 0,
+                                        'parent_mobile' => $user['parent']['mobile'] ?? null,
+                                        'balance'       => $user['account']['balance'] ?? 0,
+                                       ];
+            $datas['data'][$userKey] = $data;
+        }
+        $msgOut = msgOut($datas);
         return $msgOut;
     }
 }
