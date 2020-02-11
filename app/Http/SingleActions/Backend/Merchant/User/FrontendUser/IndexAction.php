@@ -46,6 +46,7 @@ class IndexAction
                  'mobile',
                  'parent_id',
                  'is_online',
+                 'is_tester',
                  'guid',
                  'user_tag_id',
                  'register_ip',
@@ -61,14 +62,14 @@ class IndexAction
                  'account:user_id,balance',
                 ],
             )
-            ->paginate($this->model::getPageSize())
-            ->toArray();
+            ->paginate($this->model::getPageSize())->toArray();
         foreach ($datas['data'] as $userKey => $user) {
-            $data                    = [
+            $datas['data'][$userKey] = [
                                         'id'            => $user['id'],
                                         'mobile'        => $user['mobile_hidden'],
                                         'guid'          => $user['guid'],
                                         'is_online'     => $user['is_online'],
+                                        'is_tester'     => $user['is_tester'],
                                         'register_ip'   => $user['register_ip'],
                                         'last_login_ip' => $user['last_login_ip'],
                                         'created_at'    => $user['created_at'],
@@ -77,7 +78,6 @@ class IndexAction
                                         'parent_mobile' => $user['parent']['mobile'] ?? null,
                                         'balance'       => $user['account']['balance'] ?? 0,
                                        ];
-            $datas['data'][$userKey] = $data;
         }
         $msgOut = msgOut($datas);
         return $msgOut;
