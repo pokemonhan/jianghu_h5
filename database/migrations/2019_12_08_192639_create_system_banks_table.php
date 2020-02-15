@@ -29,6 +29,7 @@ class CreateSystemBanksTable extends Migration
                 $table->integer('last_editor_id')->default('0')->comment('最后修改人');
                 $table->nullableTimestamps();
                 $table->index('name');
+                $table->index('status');
             },
         );
         DB::statement("ALTER TABLE `system_banks` comment '出入款账户配置表'");
