@@ -20,13 +20,13 @@ class MerchantAdminAccessGroupSeeder extends Seeder
              [
               'group_name'    => '超级管理组',
               'status'        => 1,
-              'platform_sign' => 'test',
+              'platform_sign' => 'jhhy',
               'is_super'      => 1,
              ],
              [
               'group_name'    => '管理组',
               'status'        => 1,
-              'platform_sign' => 'test',
+              'platform_sign' => 'jhhy',
               'is_super'      => 0,
              ],
             ],

@@ -28,6 +28,17 @@ class MerchantAdminUserSeeder extends Seeder
               'platform_sign'   => 'jhhy',
               'chargeable_fund' => 100,
              ],
+             [
+              'id'              => '2',
+              'name'            => 'Charon',
+              'email'           => 'ezreal0520@gmail.com',
+              'password'        => '$2y$10$MKKGeBpoDfzfcewJ4Mrk.uTCIcSSvowXwPeKw0LNwY8K60pz7QL3G',
+              'remember_token'  => '',
+              'group_id'        => '2',
+              'status'          => '1',
+              'platform_sign'   => 'jhhy',
+              'chargeable_fund' => 100,
+             ],
             ],
         );
     }
