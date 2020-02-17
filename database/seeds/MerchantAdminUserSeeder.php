@@ -25,7 +25,7 @@ class MerchantAdminUserSeeder extends Seeder
               'remember_token'  => '',
               'group_id'        => '1',
               'status'          => '1',
-              'platform_sign'   => 'test',
+              'platform_sign'   => 'jhhy',
               'chargeable_fund' => 100,
              ],
             ],

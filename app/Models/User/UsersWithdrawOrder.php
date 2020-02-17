@@ -17,6 +17,13 @@ class UsersWithdrawOrder extends BaseAuthModel
     protected $guarded = ['id'];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['account_snap' => 'array'];
+
+    /**
      * The "booting" method of the model
      * @return void
      */
@@ -43,7 +50,7 @@ class UsersWithdrawOrder extends BaseAuthModel
         $prefix = date('YmdHis');
         for ($i = 0; $i < 10; $i++) {
             $order_no = $prefix . str_pad(strval(random_int(0, 999999)), 6, '0', STR_PAD_LEFT);
-            if (!static::query()->where('order_no', $order_no)->exists()) {
+            if (!static::query()->select('order_no')->where('order_no', $order_no)->exists()) {
                 return $order_no;
             }
         }
