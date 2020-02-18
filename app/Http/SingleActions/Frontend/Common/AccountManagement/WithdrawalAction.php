@@ -6,6 +6,7 @@ use App\Http\Requests\Frontend\Common\FrontendUser\WithdrawalRequest;
 use App\Http\SingleActions\MainAction;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\UsersWithdrawOrder;
+use Arr;
 use DB;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
@@ -47,7 +48,7 @@ class WithdrawalAction extends MainAction
             $account_snapshot->type,
             $user->mobile,
             $balance,
-            $account_snapshot,
+            Arr::only($account_snapshot->toArray(), ['owner_name', 'card_number', 'branch']),
             $total_withdrawal + $balance,
             $num_withdrawal,
             $num_top_up,
@@ -80,7 +81,7 @@ class WithdrawalAction extends MainAction
      * @param integer $account_type     账户类型.
      * @param string  $mobile           Mobile.
      * @param float   $balance          账户总额.
-     * @param string  $account_snapshot 账户快照.
+     * @param array   $account_snapshot 账户快照.
      * @param integer $month_total      当月总提现.
      * @param integer $num_withdrawal   今日出款次数.
      * @param integer $num_top_up       今日充值次数.
@@ -91,7 +92,7 @@ class WithdrawalAction extends MainAction
         int $account_type,
         string $mobile,
         float $balance,
-        string $account_snapshot,
+        array $account_snapshot,
         int $month_total,
         int $num_withdrawal,
         int $num_top_up
