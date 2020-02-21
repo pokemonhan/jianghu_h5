@@ -113,6 +113,15 @@ trait MerchantMenuLogics
     }
 
     /**
+     * delete menu cache
+     * @return void
+     */
+    public function deleteCache(): void
+    {
+        Cache::tags($this->redisFirstTag)->flush();
+    }
+
+    /**
      * @param  array $parseDatas 修改的数据.
      * @throws \Exception Exception.
      * @return string
@@ -176,14 +185,5 @@ trait MerchantMenuLogics
     {
         $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
         return $firstLevelList;
-    }
-
-    /**
-     * delete menu cache
-     * @return void
-     */
-    public function deleteCache(): void
-    {
-        Cache::tags($this->redisFirstTag)->flush();
     }
 }
