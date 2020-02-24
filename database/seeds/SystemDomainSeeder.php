@@ -105,6 +105,14 @@ class SystemDomainSeeder extends Seeder
               'type'          => null,
               'is_default'    => 0,
              ],
+             [
+              'platform_sign' => 'jhhy',
+              'admin_id'      => null,
+              'domain'        => 'app.jianghu.com',
+              'status'        => 1,
+              'type'          => null,
+              'is_default'    => 0,
+             ],
             ],
         );
     }
