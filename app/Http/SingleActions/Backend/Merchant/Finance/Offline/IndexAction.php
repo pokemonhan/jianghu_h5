@@ -32,6 +32,7 @@ class IndexAction extends BaseAction
              'lastEditor:id,name',
              'author:id,name',
              'bank:id,name',
+             'type:id,name',
              'tags:online_finance_id,tag_id',
             ],
         )
