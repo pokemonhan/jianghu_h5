@@ -84,7 +84,7 @@ class SystemDomainSeeder extends Seeder
              [
               'platform_sign' => 'jhhy',
               'admin_id'      => null,
-              'domain'        => 'api.jianghu.ethan',
+              'domain'        => 'api.397017.com',
               'status'        => 1,
               'type'          => null,
               'is_default'    => 0,
@@ -92,7 +92,7 @@ class SystemDomainSeeder extends Seeder
              [
               'platform_sign' => 'jhhy',
               'admin_id'      => null,
-              'domain'        => 'api.397017.com',
+              'domain'        => 'app.397017.com',
               'status'        => 1,
               'type'          => null,
               'is_default'    => 0,
