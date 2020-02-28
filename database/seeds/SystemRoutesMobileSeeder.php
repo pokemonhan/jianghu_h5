@@ -263,7 +263,7 @@ class SystemRoutesMobileSeeder extends Seeder
              [
               'route_name'        => 'app-api.account.claim-gifts',
               'controller'        => null,
-              'method'            => 'claimGift',
+              'method'            => 'claimBenefits',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
@@ -272,7 +272,7 @@ class SystemRoutesMobileSeeder extends Seeder
              [
               'route_name'        => 'app-api.account.check-gifts',
               'controller'        => null,
-              'method'            => 'checkGift',
+              'method'            => 'checkBenefits',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
