@@ -25,7 +25,7 @@ class SystemLevelResource extends JsonResource
                    'level'          => $this->level,
                    'experience_min' => $this->experience_min,
                    'experience_max' => $this->experience_max,
-                   'level_gift'     => (float) sprintf('%.2f', $this->level_gift),
+                   'promotion_gift' => (float) sprintf('%.2f', $this->promotion_gift),
                    'weekly_gift'    => (float) sprintf('%.2f', $this->weekly_gift),
                   ];
         return $result;

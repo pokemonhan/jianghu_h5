@@ -27,7 +27,7 @@ class CreateFrontendUserLevelsTable extends Migration
                 $table->tinyInteger('level')->comment('等级ID');
                 $table->integer('experience_min')->nullable()->default(null)->comment('级别最小经验值');
                 $table->integer('experience_max')->nullable()->default(null)->comment('级别最大经验值');
-                $table->decimal('level_gift', 18, 4)->nullable()->default(null)->comment('晋级礼金');
+                $table->decimal('promotion_gift', 18, 4)->nullable()->default(null)->comment('晋级礼金');
                 $table->decimal('weekly_gift', 18, 4)->nullable()->default(null)->comment('周礼金');
                 $table->index('platform_sign');
                 $table->nullableTimestamps();

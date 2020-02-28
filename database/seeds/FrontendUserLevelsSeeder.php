@@ -22,7 +22,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'platform_sign'  => 'jhhy',
               'experience_min' => 1000,
               'experience_max' => 1999,
-              'level_gift'     => 5.88,
+              'promotion_gift' => 5.88,
               'weekly_gift'    => 5.88,
              ],
              [
@@ -30,7 +30,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'platform_sign'  => 'jhhy',
               'experience_min' => 2000,
               'experience_max' => 2999,
-              'level_gift'     => 10.88,
+              'promotion_gift' => 10.88,
               'weekly_gift'    => 10.88,
              ],
              [
@@ -38,7 +38,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'platform_sign'  => 'jhhy',
               'experience_min' => 3000,
               'experience_max' => 3999,
-              'level_gift'     => 15.88,
+              'promotion_gift' => 15.88,
               'weekly_gift'    => 15.88,
              ],
              [
@@ -46,7 +46,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'platform_sign'  => 'jhhy',
               'experience_min' => 4000,
               'experience_max' => 4999,
-              'level_gift'     => 20.88,
+              'promotion_gift' => 20.88,
               'weekly_gift'    => 20.88,
              ],
              [
@@ -54,7 +54,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'platform_sign'  => 'jhhy',
               'experience_min' => 5000,
               'experience_max' => 5999,
-              'level_gift'     => 25.88,
+              'promotion_gift' => 25.88,
               'weekly_gift'    => 25.88,
              ],
              [
@@ -62,7 +62,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'platform_sign'  => 'jhhy',
               'experience_min' => 6000,
               'experience_max' => 6999,
-              'level_gift'     => 30.88,
+              'promotion_gift' => 30.88,
               'weekly_gift'    => 30.88,
              ],
              [
@@ -70,7 +70,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'platform_sign'  => 'jhhy',
               'experience_min' => 7000,
               'experience_max' => 7999,
-              'level_gift'     => 35.88,
+              'promotion_gift' => 35.88,
               'weekly_gift'    => 35.88,
              ],
             ],
