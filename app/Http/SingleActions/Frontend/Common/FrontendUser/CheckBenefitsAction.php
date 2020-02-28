@@ -24,7 +24,7 @@ class CheckBenefitsAction extends MainAction
         $item                   = [];
         $item['level_benefits'] = $this->user->levelBenefits;
         $item['system_level']   = FrontendUserLevel::where('platform_sign', $this->user->platform_sign)
-            ->get(['level', 'experience_min', 'experience_max', 'level_gift', 'weekly_gift']);
+            ->get(['level', 'experience_min', 'experience_max', 'promotion_gift', 'weekly_gift']);
         $result                 = msgOut(new BenefitsResource($item));
         return $result;
     }
