@@ -31,8 +31,8 @@ class EditRequest extends BaseFormRequest
                 'name'           => 'required|alpha_num|max:5',     //等级名称
                 'experience_min' => 'required|numeric|gte:0',       //最小经验值
                 'experience_max' => 'gte:experience_min',           //最大经验值
-                'grade_gift'     => 'required|numeric|gte:0',       //晋级奖励
-                'week_gift'      => 'required|numeric|gte:0',       //周奖励
+                'level_gift'     => 'required|numeric|gte:0',       //晋级奖励
+                'weekly_gift'    => 'required|numeric|gte:0',       //周奖励
                ];
     }
 
@@ -47,12 +47,12 @@ class EditRequest extends BaseFormRequest
                 'experience_min.numeric'  => '等级最小经验值必须是数字',
                 'experience_min.gte'      => '等级最小经验值必须大于等于0',
                 'experience_max.gte'      => '等级最大经验值必须大于最小经验值',
-                'grade_gift.required'     => '缺少晋级奖励',
-                'grade_gift.numeric'      => '晋级奖励必须是数字',
-                'grade_gift.gte'          => '晋级奖励必须大于等于0',
-                'week_gift.required'      => '缺少周奖励',
-                'week_gift.numeric'       => '周奖励必须是数字',
-                'week_gift.gte'           => '周奖励必须大于等于0',
+                'level_gift.required'     => '缺少晋级奖励',
+                'level_gift.numeric'      => '晋级奖励必须是数字',
+                'level_gift.gte'          => '晋级奖励必须大于等于0',
+                'weekly_gift.required'    => '缺少周奖励',
+                'weekly_gift.numeric'     => '周奖励必须是数字',
+                'weekly_gift.gte'         => '周奖励必须大于等于0',
                ];
     }
 }
