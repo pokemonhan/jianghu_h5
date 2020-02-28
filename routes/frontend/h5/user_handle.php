@@ -23,10 +23,10 @@ Route::group(
         Route::get('dynamic-information', [FrontendUserController::class, 'dynamicInformation'])
             ->name($namePrefix . 'information');
         Route::post('information', [FrontendUserController::class, 'updateInformation'])
-            ->name($namePrefix . 'information');
+            ->name($namePrefix . 'update-information');
         Route::post('claim-benefits', [FrontendUserController::class, 'claimBenefits'])
             ->name($namePrefix . 'claim-benefits');
-        Route::post('check-gifts', [FrontendUserController::class, 'checkBenefits'])
+        Route::post('check-benefits', [FrontendUserController::class, 'checkBenefits'])
             ->name($namePrefix . 'check-gifts');
     },
 );
