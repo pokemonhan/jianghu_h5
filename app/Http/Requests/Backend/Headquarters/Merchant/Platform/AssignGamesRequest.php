@@ -30,7 +30,7 @@ class AssignGamesRequest extends BaseFormRequest
     public function rules(): array
     {
         $platformSign = $this->get('platform_sign');
-        $unique       = Rule::unique('games_platforms', 'game_sign')
+        $unique       = Rule::unique('game_platforms', 'game_sign')
             ->where('platform_sign', $platformSign);
         return [
                 'platform_sign' => 'required|exists:system_platforms,sign',
