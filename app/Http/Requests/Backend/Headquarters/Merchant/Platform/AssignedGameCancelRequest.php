@@ -33,7 +33,7 @@ class AssignedGameCancelRequest extends BaseFormRequest
                 'game_signs'    => 'required|array',
                 'game_signs.*'  => [
                                     'required',
-                                    'exists:games_platforms,game_sign',
+                                    'exists:game_platforms,game_sign',
                                    ],
                ];
     }
