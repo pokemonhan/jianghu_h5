@@ -6,16 +6,16 @@
                 <span>VIP特权</span>
             </div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
-            <img class="circleA" src="../assets/mine/img_CircleA.png"/>
+            <img class="circleA" src="../assets/mine/img_CircleA.png"/>1234
             <img class="circleB" src="../assets/mine/img_CircleB.png"/>
         </div>
         <div class="contentView">
             <div class="personalInfo">
                 <div class="detail">
-                    <img class="imgUser" src="../assets/homePage/img_User.png"/>
+                    <img class="imgUser" :src="this.$store.state.userPicture"/>
                     <div class="nameId">
-                        <div class="name">两只小蜜蜂</div>
-                        <div class="id">ID：189673</div>
+                        <div class="name" v-text="this.$store.state.nickName">两只小蜜蜂</div>
+                        <div class="id" v-text="'ID：'+this.$store.state.guid">ID：189673</div>
                     </div>
                 </div>
                 <div class="vipBar">
@@ -104,14 +104,17 @@
                 ]
             }
         },
-
         methods:{
             open(path){all.router.push(path)},
             back(){all.router.go(-1)},
             prevLevel(){if(this.levelIndex>0)this.levelIndex-=1},
             nextLevel(){if(this.levelIndex<this.vipLevel.length-1)this.levelIndex+=1},
         },
-
+        created() {
+            all.tool.send("grades",null,res=>{
+                console.log('res',res)
+            })
+        }
     }
 </script>
 

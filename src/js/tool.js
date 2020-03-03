@@ -70,18 +70,66 @@ const Tool = {//工具汇总
     //工具类别分割线---------------------------------------------------------------------------------------------//
 
     //TODO 网络请求类工具*************************************************************************//
-    send:(url,data,success,fail)=>{
+    send:(url,data,success,fail)=>{console.log("向接口"+url+"发送数据",data);
         if(!all.config.api[url])return all.tool.editTipShow("API不存在或已失效");
         all.http({
             method:all.config.api[url].method,
             url:all.config.api[url].url,
             data:data
-        }).then(res=>{console.log(res);typeof(success)==="function"?success(res):null}).catch(err=>{typeof(fail)==="function"?fail(err):null});
-        // all.http[all.config.api[url].method](all.config.api[url].url,data).then(res=>success(res)).catch(err=>fail(err));
+        }).then(res=>{console.log('接口'+url+'返回数据',res);typeof(success)==="function"?success(res):null}).catch(err=>{typeof(fail)==="function"?fail(err):null});
     },
-
-
-
+    encrypt:data=>{
+        let IV=all.tool.randomString(16);
+        let KEY=all.tool.randomString(16);
+        let publicKey="-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgy6JOupuDqE9itVQvGSBDJotBEJFASuklIwvcMNtXUH99PdihJ+TJN2AjNphzCdgL9KlguDG+u4C719DZOC3YrGn7Ps9vWOFtQYLzh69cGd+nlqOR4LKVSAYRn2NtrV9elAzBjie/Y7ITMsU9+ZTsccRqb+qd+OlBsYdg9dhvVQIDAQAB-----END PUBLIC KEY-----";
+        if(data!==null && Object.keys(data).length!==0){
+            let key_utf8 = all.CryptoJS.enc.Utf8.parse(KEY);// 秘钥
+            let iv_utf8= all.CryptoJS.enc.Utf8.parse(IV);//向量iv
+            let srcs = typeof (data)==='string'?all.CryptoJS.enc.Utf8.parse(data):typeof (data)==='object'?all.CryptoJS.enc.Utf8.parse(JSON.stringify(data)):all.CryptoJS.enc.Utf8.parse(data.toString());
+            //AES 加密
+            let encrypted = all.CryptoJS.AES.encrypt(srcs, key_utf8, { iv: iv_utf8, mode: all.CryptoJS.mode.CBC, padding: all.CryptoJS.pad.Pkcs7}).toString();
+            //RSA 加密 组包
+            let jsencrypt = new all.JSEncrypt();
+            jsencrypt.setKey(publicKey);
+            let rsa_iv =  jsencrypt.encrypt(IV);
+            let rsa_key = jsencrypt.encrypt(KEY);
+            let splitFlag = 'aesrsastart';
+            return encrypted+splitFlag+rsa_iv+splitFlag+rsa_key;
+        }
+    },
+    decrypt:data=>{
+        if (Object.keys(data).length === 1){
+            let cryptData = data.data;
+            if (cryptData !== null) {
+                let cryptDataArr = cryptData.split("hDdoAPaXI3S");
+                if (cryptDataArr.length === 3) {
+                    let cryptDataStr = cryptDataArr[0];
+                    let privateKey = "-----BEGIN PRIVATE KEY-----MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAPTYUA2oNnnEwCM+firQEh3qtvhzy2sPcCCPBuk1ALN98ThFtwbsAIXn4iflC8cL74OxsW5LhVLqRaNJwrj19nUWRNg2V0UG0qiSMDoFQzcf14Tl3YEMVhHmhT60KEc/mcOkGp7BGFneNRkUrnAedUPaI18hHfwlOXCTBOXjsLEHAgMBAAECgYAOsZCUUTz7r8gMFWsC7Lu5meVjIafag/GpsouqoSiqnOtGAkEKpE0fvBvBYyiCyH+WOqq4QMX+hNqrAvkxmmkw3Zj6pqGIGBm8qP0sC7kV9l3+1GyNweBaPqnZs02Kb3WCZnw8h1NaJRR9uqXFITzLkNgxEOuq9oiQqmI9UmP7sQJBAP1qL2O32RS/i08lCHR1r/XQTF/0pkSPX+a6SEf25iewzKm5do8hOtSG7+zjOlOQwsGwCPuNovz5g8BPMv2juQ8CQQD3V78skMtTp+0c6WjVh5ORIkkYAyOnSfl3nigkQKCfGyiTwX1cm3GLTHkDHZBVJjFyz8U/ngZZbG8ScHZCMtiJAkEAroiApQxNXaXiu5rE7PjVPNa+k2P7U8LviQiJmc7pizKQcuDCUCfRzeg1vJBvbniIOkAUn7RYKiVrYXrqopgtbwJAd+zzpIgQDd+99+a0DdROmHAnQJ1FDDex3W2xyOIM/xgL9Jg8UEqOIxxREFGlSaPbFe/nk5DrQzBwKmCc9jvxAQJALe9ZaKqPeZywh2aUa8huotTe5lj/iDeGdHOgxx4xkDK9ddzuSks1dbJQ/gHl8lA7MjOI6TvtgeLB9FOOvsi5EQ==-----END PRIVATE KEY-----";
+                    let jsencrypt = new all.JSEncrypt();
+                    jsencrypt.setPrivateKey(privateKey);
+                    let iValue = jsencrypt.decrypt(cryptDataArr[1]);
+                    let iKey = jsencrypt.decrypt(cryptDataArr[2]);
+                    let decrypted = '';
+                    decrypted=all.CryptoJS.AES.decrypt(cryptDataStr,all.CryptoJS.enc.Utf8.parse(iKey),{
+                        iv : all.CryptoJS.enc.Utf8.parse(iValue),
+                        mode : all.CryptoJS.mode.CBC,
+                        padding : all.CryptoJS.pad.Pkcs7
+                    });
+                    return JSON.parse(decrypted.toString(all.CryptoJS.enc.Utf8));
+                }
+            }
+        }
+    },
+    randomString:len=>{
+        len = len || 32;
+        let chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; //默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1
+        let maxPos = chars.length;
+        let pwd = '';
+        for (let i = 0; i < len; i++) {
+          pwd += chars.charAt(Math.floor(Math.random() * maxPos));
+        }
+        return pwd;
+    },
     //工具类别分割线---------------------------------------------------------------------------------------------//
 
     //TODO 项目控制类工具*************************************************************************//
@@ -93,21 +141,26 @@ const Tool = {//工具汇总
     editTipShow:content=>{all.store.commit("editTip",{isShow:true,content:content})},
     editTipHide:()=>{all.store.commit("editTip",{isShow:false,content:""})},
     setLoginData:data=>{
-        console.log(data);
         all.store.commit("isLogin",true);
-        all.store.commit("nickName",data.username);
-        all.store.commit("uid",data.uid);
-        all.store.commit("userPicture",data.pic_path);
-        all.store.commit("amount",data.balance);
+        all.tool.setStore("isLogin",true);
+        all.store.commit("nickName",data.nickname);
+        all.store.commit("guid",data.guid);
+        all.store.commit("userPicture",data.avatar);
     },
     setLogoutData:()=>{
         all.store.commit("isLogin",false);
+        all.tool.clearStore("isLogin");
         all.store.commit("nickName","");
-        all.store.commit("uid","");
+        all.store.commit("guid","");
         all.store.commit("userPicture",require("../assets/homePage/img_User.png"));
         all.store.commit("amount","");
         all.tool.clearStore("Authorization")
-    }
+    },
+    setInformation:data=>{
+        all.store.commit("amount",data.balance);
+        all.store.commit("vipLevel",data.grade);
+        all.store.commit("experience",data.experience);
+    },
 
     //工具类别分割线---------------------------------------------------------------------------------------------//
 };

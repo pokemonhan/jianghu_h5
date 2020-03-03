@@ -10,6 +10,8 @@ import animate from 'animate.css'
 import $ from 'jquery'
 import http from 'axios'
 import forge from 'node-forge'
+import CryptoJS from 'crypto-js'
+import {JSEncrypt} from 'jsencrypt'
 
 Vue.config.productionTip = false;
 Vue.use(animate);
@@ -19,6 +21,8 @@ all.router=router;
 all.tool=tool;
 all.config=config;
 all.forge=forge;
+all.CryptoJS=CryptoJS;
+all.JSEncrypt=JSEncrypt;
 all.http=http.create({
     baseURL:all.config.basePath,
     timeout:5000,
@@ -34,23 +38,32 @@ all.http.interceptors.request.use(req=>{
     let Authorization=all.tool.getStore("Authorization");
     let notLoginApi=req.url.indexOf("h5-api/login")===-1;
     if(Authorization && notLoginApi)req.headers.Authorization=Authorization;
+    let encryptData=all.tool.encrypt(req.data);
+    req.data={};
+    req.data.data=encryptData;
     all.store.commit("isLoading",true);
     return req;
 });
 if(all.tool.getStore("Authorization")){
     all.tool.send("information",null,res=>{
         all.store.commit("isLoading",false);
-        all.tool.setLoginData(res.data.data)
+        all.tool.setLoginData(all.tool.decrypt(res.data).data);console.log("个人信息",all.tool.decrypt(res.data))
     },err=>{
         all.store.commit("isLoading",false);
-        console.log(err.response);
+    });
+    all.tool.send("dynamicInformation",null,res=>{
+        all.store.commit("isLoading",false);
+        all.tool.setInformation(all.tool.decrypt(res.data).data);console.log("频繁个人信息",all.tool.decrypt(res.data))
+    },err=>{
+        all.store.commit("isLoading",false);
     });
 }
 all.http.interceptors.response.use(res=>{
     all.store.commit("isLoading",false);
-    return Promise.resolve(res.data);
+    return Promise.resolve(all.tool.decrypt(res.data));
     },error=>{
     all.store.commit("isLoading",false);
+    error.response.data=all.tool.decrypt(error.response.data);
     console.log("拦截器",error.response);
     if(error.response.status===401)all.tool.tipWinShow(error.response.data.message,()=>{all.router.push("/login")},{icon:"warn",name:"前往登陆"});
     if(error.response.status===403)all.tool.tipWinShow(error.response.data.message,()=>{},{icon:"error"});
@@ -63,7 +76,7 @@ all.http.interceptors.response.use(res=>{
 all.$=$;
 all.router.beforeEach((to,from,next)=>{
     let safePath=false;
-    if(all.store.state.isLogin){safePath=true}
+    if(all.tool.getStore("isLogin")){safePath=true}
     all.config.routerGuard.forEach(item=>{
         if(to.path===item)safePath=true
     });

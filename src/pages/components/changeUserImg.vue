@@ -5,7 +5,7 @@
             <img class="iconClose" @click="toDoClose" src="../../assets/mine/icon_Close.png"/>
             <span class="changeTitle">选择头像</span>
             <div class="changeBar">
-                <img class="userImg" :class="{choose:chooseIndex===index}" @click="choosePic(index)" v-for="(item,index) in imgList" :src="item.img"/>
+                <img class="userImg" :class="{choose:chooseIndex===index}" @click="choosePic(index,item.id)" v-for="(item,index) in imgList" :src="item.pic_path"/>
             </div>
             <div class="commit" @click="toDoCommit">确定</div>
         </div>
@@ -17,24 +17,8 @@
         data(){
             return{
                 chooseIndex:all.tool.getStore("userImgIndex") || 0,
-                imgList:[
-                    {img:require("../../assets/mine/img_UserA.png")},
-                    {img:require("../../assets/mine/img_UserB.png")},
-                    {img:require("../../assets/mine/img_UserC.png")},
-                    {img:require("../../assets/mine/img_UserD.png")},
-                    {img:require("../../assets/mine/img_UserE.png")},
-                    {img:require("../../assets/mine/img_UserF.png")},
-                    {img:require("../../assets/mine/img_UserG.png")},
-                    {img:require("../../assets/mine/img_UserH.png")},
-                    {img:require("../../assets/mine/img_UserI.png")},
-                    {img:require("../../assets/mine/img_UserJ.png")},
-                    {img:require("../../assets/mine/img_UserK.png")},
-                    {img:require("../../assets/mine/img_UserL.png")},
-                    {img:require("../../assets/mine/img_UserM.png")},
-                    {img:require("../../assets/mine/img_UserN.png")},
-                    {img:require("../../assets/mine/img_UserO.png")},
-                    {img:require("../../assets/mine/img_UserP.png")},
-                ]
+                imgList:[],
+                picId:null
             }
         },
         methods:{
@@ -42,14 +26,22 @@
                 all.$(".changeBox").addClass("zoomOut");
                 setTimeout(()=>{all.store.commit("isShowChangeUserImg",false)},150)
             },
-            choosePic(index){
-                this.chooseIndex=index
+            choosePic(index,id){
+                this.chooseIndex=index;
+                this.picId=id
             },
-            toDoCommit(index){
-                this.toDoClose();
-                all.tool.setStore("userImgIndex",this.chooseIndex);
-                all.store.commit("userPicture",this.imgList[this.chooseIndex].img)
+            toDoCommit(){
+                all.tool.send("informationP",{avatar:this.picId},res=>{
+                    all.tool.setStore("userImgIndex",this.chooseIndex);
+                    all.store.commit("userPicture",this.imgList[this.chooseIndex].pic_path);
+                    this.toDoClose();
+                });
             },
+        },
+        created() {
+            all.tool.send("avatar",null,res=>{
+                this.imgList=res.data
+            })
         }
     }
 </script>

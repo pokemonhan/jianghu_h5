@@ -5,7 +5,7 @@
                 <img class="imgUser" @click="fullScreen" :src="this.$store.state.userPicture"/>
                 <div class="nameId">
                     <div class="name" v-text="this.$store.state.nickName"></div>
-                    <div class="id" v-text="'ID：'+this.$store.state.uid">ID：189673</div>
+                    <div class="id" v-text="'ID：'+this.$store.state.guid">ID：189673</div>
                 </div>
                 <div class="amountBar">
                     <img class="iconGoldCoin" src="../assets/homePage/icon_GoldCoin.png"/>
@@ -109,10 +109,10 @@
                 isShowDownLoad:all.tool.getStore("isShowDownLoad"),
                 currentIndex:0,
                 bannerList:[
-                    require("../assets/homePage/bannerA.png"),
-                    require("../assets/homePage/bannerB.png"),
-                    require("../assets/homePage/bannerC.png"),
-                    require("../assets/homePage/bannerD.png"),
+                  /*{pic_path:require("../assets/homePage/bannerA.png"),type:1,redirect_url:"www.baidu.com"},
+                  {pic_path:require("../assets/homePage/bannerB.png"),type:1,redirect_url:"www.baidu.com"},
+                  {pic_path:require("../assets/homePage/bannerC.png"),type:1,redirect_url:"www.baidu.com"},
+                  {pic_path:require("../assets/homePage/bannerD.png"),type:1,redirect_url:"www.baidu.com"},*/
                 ],
                 timeRun:null
             }

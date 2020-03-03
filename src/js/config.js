@@ -12,6 +12,10 @@ const config={
         slides:{url:'h5-api/games-lobby/slides',method:'post'},
         gameCategories:{url:'h5-api/games-lobby/game-categories',method:'get'},
         information:{url:'h5-api/user/information',method:'get'},
+        informationP:{url:'h5-api/user/information',method:'post'},
+        dynamicInformation:{url:'h5-api/user/dynamic-information',method:'get'},
+        avatar:{url:'h5-api/system/avatar',method:'get'},
+        grades:{url:'h5-api/user/grades',method:'get'},
     },
     routerGuard:[
         "/",

@@ -85,11 +85,14 @@
                         all.tool.setStore("Authorization",res.data.token_type+" "+res.data.access_token);
                         all.tool.send("information",null,res=>{
                             all.tool.setLoginData(res.data);
-                            if(all.tool.getStore("guardPath")){
-                                all.router.push(all.tool.getStore("guardPath"));
-                                all.tool.clearStore("guardPath");
-                            }
-                            else all.router.push("/");
+                            all.tool.send("dynamicInformation",null,res=>{
+                               all.tool.setInformation(res.data);
+                                if(all.tool.getStore("guardPath")){
+                                    all.router.push(all.tool.getStore("guardPath"));
+                                    all.tool.clearStore("guardPath");
+                                }
+                                else all.router.push("/");
+                            });
                         });
                     });
                 }

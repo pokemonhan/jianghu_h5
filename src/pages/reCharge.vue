@@ -12,14 +12,14 @@
                     <img class="imgUser" :src="this.$store.state.userPicture"/>
                     <div class="nameId">
                         <div class="nameBar" v-text="this.$store.state.nickName">两只小蜜蜂</div>
-                        <div class="id" v-text="'ID：'+this.$store.state.uid">ID：189673</div>
+                        <div class="id" v-text="'ID：'+this.$store.state.guid">ID：189673</div>
                     </div>
                 </div>
                 <div class="currentAmount">
                     <span>当前余额：</span>
                     <span class="amount animated flash delay-1s" v-text="this.$store.state.amount">5000</span>
                 </div>
-                <div class="withdrawal">取款</div>
+                <div class="withdrawal" @click="isHasCard">取款</div>
             </div>
             <div class="chooseTitle animated fadeInUp">请选择支付方式：</div>
             <div class="recommend animated fadeInDown">推荐使用官方充值，安全快捷精确到秒到帐！</div>
@@ -94,7 +94,9 @@
                 all.router.push(path);
             },
             back(){all.router.go(-1)},
-
+            isHasCard(){
+                if(!all.store.state.isHasCard)all.tool.tipWinShow("您还未绑定取款银行卡或支付宝账号！",()=>{all.router.push("/login")},{icon:"warn",name:"前往绑定"});
+            }
         },
 
     }
@@ -211,6 +213,7 @@
         display:flex;
         justify-content:center;
         align-items:center;
+        z-index:10;
     }
     .chooseTitle{
         font-size:0.3rem;

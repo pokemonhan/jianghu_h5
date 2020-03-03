@@ -43,8 +43,12 @@
                 setTimeout(()=>{all.store.commit("isShowChangeName",false)},150)
             },
             toDoCommit(){
-                this.toDoClose();
-                if(this.checkName())all.store.commit("nickName",this.name);
+                if(this.checkName()){
+                    all.tool.send("informationP",{nickname:this.name},res=>{
+                        all.store.commit("nickName",this.name);
+                        this.toDoClose();
+                    })
+                }
             },
         }
     }

@@ -15,17 +15,17 @@
                             <span class="name" v-text="this.$store.state.nickName"></span>
                             <img class="iconEdit" @click="showChangeName" src="../assets/mine/icon_Edit.png"/>
                         </div>
-                        <div class="id" v-text="'ID：'+this.$store.state.uid"></div>
+                        <div class="id" v-text="'ID：'+this.$store.state.guid"></div>
                     </div>
                 </div>
                 <div class="vipBar">
-                    <div class="vipName">vip0</div>
+                    <div class="vipName" v-text="'vip'+this.$store.state.vipLevel">vip0</div>
                     <div class="vipLine">
                         <div class="currentLine"></div>
                     </div>
-                    <div class="vipName">vip1</div>
+                    <div class="vipName" v-text="'vip'+(this.$store.state.vipLevel+1)">vip1</div>
                 </div>
-                <div class="currentNumber">当前经验值：3000/10000</div>
+                <div class="currentNumber" v-text="'当前经经验值：'+this.$store.state.experience+'/10000'">当前经验值：3000/10000</div>
             </div>
             <div class="itemBox animated bounceInUp" v-for="item in itemBox">
                 <div class="boxTitle" v-text="item.title">个人信息</div>
