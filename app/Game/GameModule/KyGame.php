@@ -138,18 +138,18 @@ class KyGame extends BaseGame
     }
 
     /**
-     * @param integer $series    Login or other types.
-     * @param string  $account   Guid.
-     * @param float   $money     Money in float unit.
-     * @param string  $ipAddress Ip address.
-     * @param string  $orderId   Order id.
+     * @param integer     $series    Login or other types.
+     * @param string      $account   Guid.
+     * @param float       $money     Money in float unit.
+     * @param string|null $ipAddress Ip address.
+     * @param string      $orderId   Order id.
      * @return mixed[]
      */
     private function _createParams(
         int $series,
         string $account,
         float $money,
-        string $ipAddress,
+        ?string $ipAddress,
         string $orderId
     ): array {
         $param = [];
@@ -211,7 +211,7 @@ class KyGame extends BaseGame
     {
         $strToEncrypt = $this->pkcs5Pad(trim($strToEncrypt), 16);
         $encrypt_str  = openssl_encrypt($strToEncrypt, 'AES-128-ECB', $desKey, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
-        $result       = base64_encode($encrypt_str);
+        $result       = base64_encode((string) $encrypt_str);
         return $result;
     }
 
@@ -224,7 +224,8 @@ class KyGame extends BaseGame
     {
         $strToDecode = base64_decode($strToDecode);
         $decrypt_str = openssl_decrypt($strToDecode, 'AES-128-ECB', $desKey, OPENSSL_RAW_DATA | OPENSSL_ZERO_PADDING);
-        $result      = trim($this->pkcs5Unpad($decrypt_str));
+        $dataUnpad   = $this->pkcs5Unpad((string) $decrypt_str);
+        $result      = trim((string) $dataUnpad);
         return $result;
     }
 
