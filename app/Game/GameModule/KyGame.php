@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Game\Ky;
+namespace App\Game\GameModule;
 
-use App\Game\Core\Base;
+use App\Game\BaseGame;
 use App\Http\SingleActions\MainAction;
 use App\Models\Game\Game;
 use GuzzleHttp\Client;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Request;
  * Class KyGame
  * @package App\Game\Ky
  */
-class KyGame extends Base
+class KyGame extends BaseGame
 {
 
     /**
