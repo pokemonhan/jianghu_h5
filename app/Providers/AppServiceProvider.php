@@ -35,6 +35,9 @@ class AppServiceProvider extends ServiceProvider
             },
         );
         $gameClass = Config::get('games_classes');
+        if (empty($gameClass)) {
+            return;
+        }
         $gameClass = Arr::flatten($gameClass);
         if (empty($gameClass)) {
             return;
