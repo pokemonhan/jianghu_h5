@@ -43,17 +43,18 @@ class IndexAction extends MainAction
             ->with(
                 [
                  'bank:id,name',
-                 'user:id,mobile',
+                 'user:id,mobile,guid',
                 ],
             )
             ->select(['id', 'platform_sign', 'user_id', 'owner_name', 'bank_id', 'card_number', 'created_at'])
             ->paginate($this->model::getPageSize())
             ->toArray();
-
+            
         $bankCards = [];
         foreach ($returnData['data'] as $item) {
             $data        = [
                             'id'          => $item['id'],
+                            'guid'        => $item['user']['guid'] ?? null,
                             'owner_name'  => $item['owner_name'],
                             'card_number' => $item['card_number'],
                             'binding_num' => $item['binding_num'],
