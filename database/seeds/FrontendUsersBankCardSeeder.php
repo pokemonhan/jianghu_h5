@@ -20,7 +20,7 @@ class FrontendUsersBankCardSeeder extends Seeder
              [
               'platform_sign' => 'jhhy',
               'user_id'       => 2,
-              'bank_id'       => 0,
+              'bank_id'       => 1,
               'owner_name'    => '亚索',
               'card_number'   => '18844446666',
               'branch'        => null,
