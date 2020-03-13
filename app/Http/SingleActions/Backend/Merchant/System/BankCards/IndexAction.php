@@ -42,7 +42,7 @@ class IndexAction extends MainAction
             ->filter($inputDatas, FrontendUsersBankCardFilter::class)
             ->with(
                 [
-                 'bank:id,name',
+                 'bank.bank',
                  'user:id,mobile,guid',
                 ],
             )
@@ -58,7 +58,7 @@ class IndexAction extends MainAction
                             'owner_name'  => $item['owner_name'],
                             'card_number' => $item['card_number'],
                             'binding_num' => $item['binding_num'],
-                            'bank_name'   => $item['bank']['name'] ?? null,
+                            'bank_name'   => $item['bank']['bank']['name'] ?? null,
                             'mobile'      => $item['user']['mobile'] ?? null,
                             'created_at'  => $item['created_at'],
                            ];
