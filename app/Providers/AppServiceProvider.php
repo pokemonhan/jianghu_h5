@@ -3,8 +3,8 @@
 namespace App\Providers;
 
 use App\Game\GameIF;
+use App\Models\Game\GameSubType;
 use App\Models\Game\GameType;
-use App\Models\Game\GameTypeChild;
 use App\Models\User\FrontendUser;
 use App\Observers\FrontendUserObserver;
 use App\Observers\GameTypeChildObserver;
@@ -99,6 +99,6 @@ class AppServiceProvider extends ServiceProvider
         );
         FrontendUser::observe(FrontendUserObserver::class);
         GameType::observe(GameTypeObserver::class);
-        GameTypeChild::observe(GameTypeChildObserver::class);
+        GameSubType::observe(GameTypeChildObserver::class);
     }
 }

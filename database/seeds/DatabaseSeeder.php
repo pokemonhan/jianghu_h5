@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
              GameTypeSeeder::class,
              GameVendorSeeder::class,
              GameSeeder::class,
-             GameTypeChildSeeder::class,
+             GameSubTypeSeeder::class,
              GameTypePlatformSeeder::class,
              GamePlatformSeeder::class,
              GameVendorUrlFieldSeeder::class,
