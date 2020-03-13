@@ -69,6 +69,7 @@ class DetailAction extends MainAction
             $returnData[] = [
                              'id'             => $item->id,
                              'cn_name'        => $item->cn_name,
+                             'email'          => $item->owner->email,
                              'sign'           => $item->sign,
                              'agency_method'  => $item->agency_method,
                              'pc_skin_id'     => $item->pc_skin_id,
