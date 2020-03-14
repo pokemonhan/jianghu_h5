@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\CommonApi;
 
-use App\Http\Requests\Backend\Headquarters\Sortable\UpdateRequest;
+use App\Http\Requests\Backend\Headquarters\Sortable\UpdateSortRequest;
 use App\Http\SingleActions\Common\Sortable\UpdateSortAction;
 use Illuminate\Http\JsonResponse;
 
@@ -15,13 +15,15 @@ class SortableController
 
     /**
      * Drag and drop sortable.
-     * @param UpdateSortAction $action  UpdateSortAction.
-     * @param UpdateRequest    $request Sortable Request.
+     * @param UpdateSortAction  $action  UpdateSortAction.
+     * @param UpdateSortRequest $request UpdateSortRequest.
      * @return JsonResponse
      * @throws \Throwable Throwable.
      */
-    public function updateSortable(UpdateSortAction $action, UpdateRequest $request): JsonResponse
-    {
+    public function updateSortable(
+        UpdateSortAction $action,
+        UpdateSortRequest $request
+    ): JsonResponse {
         $result = $action->execute($request);
         return $result;
     }
