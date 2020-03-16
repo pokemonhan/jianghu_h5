@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\Sortable;
 
-use App\Http\Requests\Backend\Headquarters\Sortable\UpdateRequest;
+use App\Http\Requests\Backend\Headquarters\Sortable\UpdateSortRequest;
 use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
 use Log;
@@ -16,11 +16,11 @@ class UpdateSortAction extends MainAction
 
     /**
      * Update sort order.
-     * @param UpdateRequest $request Sortable UpdateRequest.
+     * @param UpdateSortRequest $request Sortable UpdateRequest.
      * @return JsonResponse
      * @throws \RuntimeException Exception.
      */
-    public function execute(UpdateRequest $request): JsonResponse
+    public function execute(UpdateSortRequest $request): JsonResponse
     {
         $validatedData = $request->validated();
         $model         = $request->get('model'); // 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入

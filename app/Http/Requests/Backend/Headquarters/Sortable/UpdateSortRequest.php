@@ -9,7 +9,7 @@ use App\Rules\Backend\Common\Sortable\CheckSortableModel;
  * Class UpdateRequest
  * @package App\Http\Requests\Backend\Headquarters\Sortable
  */
-class UpdateRequest extends BaseFormRequest
+class UpdateSortRequest extends BaseFormRequest
 {
 
     /**
