@@ -36,7 +36,7 @@ class GameSeeder extends Seeder
               'status'       => 1,
              ],
              [
-              'type_id'      => 2,
+              'type_id'      => 1,
               'sub_type_id'  => 1,
               'vendor_id'    => 1,
               'name'         => '炸金花',
@@ -47,7 +47,7 @@ class GameSeeder extends Seeder
              [
               'type_id'      => 1,
               'sub_type_id'  => 1,
-              'vendor_id'    => 2,
+              'vendor_id'    => 1,
               'name'         => '三公',
               'sign'         => '860',
               'request_mode' => 1,
