@@ -29,24 +29,19 @@ class DetailRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'email'     => 'email|max:64',  //邮箱
-                'maintain'  => 'in:0,1',        //维护状态
-                'status'    => 'in:0,1',        //状态
-                'createdAt' => 'string',        //生成时间
+                'email'        => 'email|max:64',   //邮箱
+                'maintain'     => 'integer|in:0,1', //维护状态
+                'status'       => 'integer|in:0,1', //状态
+                'created_at'   => 'array',          //生成时间
+                'created_at.*' => 'date',           //生成时间
                ];
     }
 
     /**
      * @return mixed[]
      */
-    public function messages(): array
+    public function filters(): array
     {
-        return [
-                'email.email'      => '邮箱格式不正确',
-                'email.max'        => '邮箱不能超过64个字符',
-                'maintain.in'      => '维护状态数据非法',
-                'status.in'        => '站点状态数据非法',
-                'createdAt.string' => '站点添加时间数据格式不正确',
-               ];
+        return ['created_at' => 'cast:array'];
     }
 }

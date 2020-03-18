@@ -29,10 +29,11 @@ class AssignedGameCancelRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_id' => 'required|exists:system_platforms,id',
+                'platform_id' => 'required|integer|exists:system_platforms,id',
                 'game_ids'    => 'required|array',
                 'game_ids.*'  => [
                                   'required',
+                                  'integer',
                                   'exists:game_platforms,game_id',
                                  ],
                ];

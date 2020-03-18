@@ -34,10 +34,13 @@ class CreateRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'name'     => 'required|unique:backend_admin_users', //用户名
-                  'email'    => 'required|email|unique:backend_admin_users', //邮箱
-                  'password' => 'required|string', //密码
-                  'group_id' => 'required|numeric|exists:backend_admin_access_groups,id', //管理员组ID
+                  'name'     => 'required|string|max:16|unique:backend_admin_users', //用户名
+                  'email'    => 'required|email|max:64|unique:backend_admin_users', //邮箱
+                  'password' => [
+                                 'required',
+                                 'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(必须存在大小写字母+数字的8-16位)
+                                ], //密码
+                  'group_id' => 'required|integer|exists:backend_admin_access_groups,id', //管理员组ID
                  ];
         return $rules;
     }

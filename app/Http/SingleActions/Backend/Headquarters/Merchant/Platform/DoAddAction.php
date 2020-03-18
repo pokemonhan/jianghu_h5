@@ -255,9 +255,7 @@ class DoAddAction extends MainAction
      */
     private function _createGroupRole(array $inputDatas, int $adminGroupId): void
     {
-        $role = Arr::wrap(json_decode($inputDatas['role'], true));
-
-        foreach ($role as $menuId) {
+        foreach ($inputDatas['role'] as $menuId) {
             $roleData = [
                          'group_id' => $adminGroupId,
                          'menu_id'  => $menuId,

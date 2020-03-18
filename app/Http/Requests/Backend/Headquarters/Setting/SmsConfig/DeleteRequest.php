@@ -33,6 +33,6 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:system_sms_configs'];
+        return ['id' => 'required|integer|exists:system_sms_configs'];
     }
 }

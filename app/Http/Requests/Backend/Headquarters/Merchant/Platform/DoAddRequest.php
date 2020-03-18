@@ -28,17 +28,21 @@ class DoAddRequest extends BaseFormRequest
     {
         return [
                 'email'         => 'required|email|max:64|unique:merchant_admin_users', //超管邮箱
-                'password'      => 'required|string',                                   //密码
-                'platform_name' => 'required|unique:system_platforms,cn_name',          //平台名称
-                'platform_sign' => 'required|unique:system_platforms,sign',             //平台标识
-                'agency_method' => 'required|string',                                   //代理方式
-                'domains'       => 'required|array',                                    //域名
-                'domains.*'     => 'unique:system_domains,domain',                      //域名
-                'role'          => 'required|string',                                   //权限
-                'sms_num'       => 'required|integer|gte:0',                            //短信条数
-                'status'        => 'required|integer|in:0,1',                           //开启状态
-                'start_time'    => 'required|date_format:Y-m-d H:i:s',                  //开始时间
-                'end_time'      => 'required|date_format:Y-m-d H:i:s',                  //结束时间
+                'password'      => [
+                                    'required',
+                                    'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(必须存在大小写字母+数字的8-16位)
+                                   ], //密码
+                'platform_name' => 'required|string|max:64|unique:system_platforms,cn_name', //平台名称
+                'platform_sign' => 'required|string|max:15|unique:system_platforms,sign',    //平台标识
+                'agency_method' => 'required|string',                                        //代理方式
+                'domains'       => 'required|array',                                         //域名
+                'domains.*'     => 'unique:system_domains,domain',                           //域名
+                'role'          => 'required|array',                                         //权限
+                'role.*'        => 'integer',                                                //权限
+                'sms_num'       => 'required|integer|gte:0',                                 //短信条数
+                'status'        => 'required|integer|in:0,1',                                //开启状态
+                'start_time'    => 'required|date_format:Y-m-d H:i:s',                       //开始时间
+                'end_time'      => 'required|date_format:Y-m-d H:i:s',                       //结束时间
                ];
     }
 
@@ -79,5 +83,13 @@ class DoAddRequest extends BaseFormRequest
                 'end_time.required'      => '缺少有效结束时间',
                 'end_time.date_format'   => '有效结束时间必须是Y-m-d H:i:s格式',
                ];
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['role' => 'cast:array'];
     }
 }

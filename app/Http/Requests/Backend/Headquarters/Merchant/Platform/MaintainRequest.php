@@ -34,7 +34,7 @@ class MaintainRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'             => 'required|exists:system_platforms',             //ID
+                'id'             => 'required|integer|exists:system_platforms',     //ID
                 'maintain_start' => 'date_format:Y-m-d H:i:s',                      //维护开始时间
                 'maintain_end'   => 'date_format:Y-m-d H:i:s|after:maintain_start', //维护结束时间
                ];

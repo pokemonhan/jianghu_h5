@@ -55,8 +55,7 @@ class EditAction extends MainAction
             $datas->save();
             //只提取当前登录管理员也拥有的权限
             BackendAdminAccessGroupDetail::where('group_id', $id)->delete();
-            $role = Arr::wrap(json_decode($inputDatas['role'], true));
-            $role = array_intersect($this->adminAccessGroupDetail, $role);
+            $role = array_intersect($this->adminAccessGroupDetail, $inputDatas['role']);
             //添加AdminGroupDetails数据
             $data = ['group_id' => $id];
             foreach ($role as $roleId) {

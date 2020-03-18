@@ -39,9 +39,9 @@ class UpdateAdminGroupRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'         => 'required|numeric|exists:backend_admin_users,id',         //管理员ID
-                  'group_id'   => 'required|numeric|exists:backend_admin_access_groups,id', //管理组ID
-                  'group_name' => 'required|string|exists:backend_admin_access_groups',     //管理组名称
+                  'id'         => 'required|integer|exists:backend_admin_users,id',           //管理员ID
+                  'group_id'   => 'required|integer|exists:backend_admin_access_groups,id',   //管理组ID
+                  'group_name' => 'required|string|max:15|exists:backend_admin_access_groups',//管理组名称
                  ];
         return $rules;
     }

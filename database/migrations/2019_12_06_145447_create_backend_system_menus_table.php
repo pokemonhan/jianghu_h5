@@ -23,10 +23,10 @@ class CreateBackendSystemMenusTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('label', 20)->nullable()->default(null)->comment('名称');
-                $table->string('en_name', 50)->nullable()->default(null)->comment('英文名');
+                $table->string('en_name', 20)->nullable()->default(null)->comment('英文名');
                 $table->string('route', 50)->nullable()->default(null)->comment('路由');
                 $table->integer('pid')->nullable()->default('0')->comment('菜单的父级别');
-                $table->string('icon', 50)->nullable()->default(null)->comment('图标');
+                $table->string('icon', 20)->nullable()->default(null)->comment('图标');
                 $table->tinyInteger('display')->nullable()->default('1')->comment('是否显示 0否 1是');
                 $table->integer('level')->nullable()->default('1')->comment('等级');
                 $table->integer('sort')->nullable()->default(null)->comment('排序');

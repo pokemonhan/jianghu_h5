@@ -45,8 +45,7 @@ class CreateAction extends MainAction
     {
         DB::beginTransaction();
         //只提取当前登录管理员也拥有的权限
-        $role = Arr::wrap(json_decode($inputDatas['role'], true));
-        $role = array_intersect($role, $this->adminAccessGroupDetail);
+        $role = array_intersect($inputDatas['role'], $this->adminAccessGroupDetail);
         //添加AdminGroup数据
         $objAdminGroup = $this->model;
         $objAdminGroup->fill(['group_name' => $inputDatas['group_name']]);

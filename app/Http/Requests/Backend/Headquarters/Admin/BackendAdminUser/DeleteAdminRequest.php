@@ -34,8 +34,8 @@ class DeleteAdminRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'   => 'required|numeric|exists:backend_admin_users', //管理员ID
-                  'name' => 'required|string|exists:backend_admin_users',  //管理员用户名
+                  'id'   => 'required|integer|exists:backend_admin_users',        //管理员ID
+                  'name' => 'required|string|max:16|exists:backend_admin_users',  //管理员用户名
                  ];
         return $rules;
     }

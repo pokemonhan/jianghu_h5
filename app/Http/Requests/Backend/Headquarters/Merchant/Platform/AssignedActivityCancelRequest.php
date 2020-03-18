@@ -28,10 +28,12 @@ class AssignedActivityCancelRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_sign' => 'required|exists:system_platforms,sign',
+                'platform_sign' => 'required|string|max:15|exists:system_platforms,sign',
                 'activities'    => 'required|array',
                 'activities.*'  => [
                                     'required',
+                                    'string',
+                                    'max:32',
                                     'exists:system_dyn_activity_platforms,activity_sign',
                                    ],
                ];
