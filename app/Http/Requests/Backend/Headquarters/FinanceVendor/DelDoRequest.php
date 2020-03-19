@@ -30,7 +30,7 @@ class DelDoRequest extends BaseFormRequest
     {
         if ($this->isMethod('post')) {
             $rules = [
-                      'id' => 'required|exists:system_finance_vendors,id',
+                      'id' => 'required|integer|exists:system_finance_vendors,id',
                      ];
             return $rules;
         }

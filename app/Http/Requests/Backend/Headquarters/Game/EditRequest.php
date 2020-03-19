@@ -38,10 +38,10 @@ class EditRequest extends BaseFormRequest
     {
         $thisId = $this->get('id');
         $rules  = [
-                   'id'           => 'required|exists:games,id',
-                   'type_id'      => 'required|exists:game_types,id',
-                   'vendor_id'    => 'required|exists:game_vendors,id',
-                   'name'         => 'required|max:64|unique:games,name,' . $thisId,
+                   'id'           => 'required|integer|exists:games,id',
+                   'type_id'      => 'required|integer|exists:game_types,id',
+                   'vendor_id'    => 'required|integer|exists:game_vendors,id',
+                   'name'         => 'required|string|max:64|unique:games,name,' . $thisId,
                    'sign'         => 'required|max:64|unique:games,sign,' . $thisId . '|regex:/\w+/', //(字母+下划线)
                    'request_mode' => 'required|integer|in:1,2',
                   ];

@@ -45,11 +45,11 @@ class AddDoRequest extends BaseFormRequest
     public function rules():array
     {
         $rules = [
-                  'name'            => 'required|unique:system_finance_vendors,name',
-                  'sign'            => 'required|alpha_dash|unique:system_finance_vendors,sign',
+                  'name'            => 'required|string|max:64|unique:system_finance_vendors,name',
+                  'sign'            => 'required|alpha_dash|max:64|unique:system_finance_vendors,sign',
                   'whitelist_ips'   => 'array',
                   'whitelist_ips.*' => 'ip',
-                  'status'          => 'required|in:0,1',
+                  'status'          => 'required|integer|in:0,1',
                  ];
         return $rules;
     }

@@ -36,8 +36,8 @@ class StatusRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:system_dyn_activities,id',
-                'status' => 'required|in:0,1',
+                'id'     => 'required|integer|exists:system_dyn_activities',
+                'status' => 'required|integer|in:0,1',
                ];
     }
 }

@@ -29,8 +29,8 @@ class StatusDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:games,id',
-                'status' => 'required|in:0,1',
+                'id'     => 'required|integer|exists:games,id',
+                'status' => 'required|integer|in:0,1',
                ];
     }
 

@@ -28,7 +28,7 @@ class DelRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:games,id'];
+        return ['id' => 'required|integer|exists:games,id'];
     }
 
     /**

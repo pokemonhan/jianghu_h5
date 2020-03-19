@@ -29,15 +29,15 @@ class AddDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'type_id'      => 'required|exists:system_finance_types,id',
-                'vendor_id'    => 'required|exists:system_finance_vendors,id',
-                'name'         => 'required|unique:system_finance_channels,name',
-                'sign'         => 'required|unique:system_finance_channels,sign|regex:/\w+/', //(字母+下划线)
-                'request_mode' => 'required|in:0,1',
+                'type_id'      => 'required|integer|exists:system_finance_types,id',
+                'vendor_id'    => 'required|integer|exists:system_finance_vendors,id',
+                'name'         => 'required|string|max:64|unique:system_finance_channels,name',
+                'sign'         => 'required|string|max:64|unique:system_finance_channels,sign|regex:/\w+/', //(字母+下划线)
+                'request_mode' => 'required|integer|in:0,1',
                 'request_url'  => 'required|url',
                 'banks_code'   => 'string',
-                'status'       => 'required|in:0,1',
-                'desc'         => 'string',
+                'status'       => 'required|integer|in:0,1',
+                'desc'         => 'string|string|max:64',
                ];
     }
 

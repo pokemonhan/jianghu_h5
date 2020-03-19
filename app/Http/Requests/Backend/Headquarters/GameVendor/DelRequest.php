@@ -29,9 +29,7 @@ class DelRequest extends BaseFormRequest
     public function rules():array
     {
         if ($this->isMethod('post')) {
-            $rules = [
-                'id' => 'required|exists:game_vendors,id',
-            ];
+            $rules = ['id' => 'required|integer|exists:game_vendors,id'];
             return $rules;
         }
         return [];

@@ -30,9 +30,9 @@ class OptEditDoRequest extends BaseFormRequest
     {
         $thisId = $this->get('id');
         return [
-                'id'   => 'required|exists:system_finance_channels,id',
-                'name' => 'required|unique:system_finance_channels,name,' . $thisId,
-                'desc' => 'string',
+                'id'   => 'required|integer|exists:system_finance_channels,id',
+                'name' => 'required|string|max:64|unique:system_finance_channels,name,' . $thisId,
+                'desc' => 'string|string|max:64',
                ];
     }
 

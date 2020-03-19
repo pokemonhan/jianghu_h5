@@ -46,9 +46,9 @@ class EditDoRequest extends BaseFormRequest
     {
         $myId = $this->get('ids');
         return [
-                'id'              => 'required|exists:system_finance_vendors,id',
-                'name'            => 'required|unique:system_finance_vendors,name,' . $myId,
-                'sign'            => 'required|alpha_dash|unique:system_finance_vendors,sign,' . $myId,
+                'id'              => 'required|integer|exists:system_finance_vendors,id',
+                'name'            => 'required|string|max:64|unique:system_finance_vendors,name,' . $myId,
+                'sign'            => 'required|alpha_dash|max:64|unique:system_finance_vendors,sign,' . $myId,
                 'whitelist_ips'   => 'array',
                 'whitelist_ips.*' => 'ip',
                ];

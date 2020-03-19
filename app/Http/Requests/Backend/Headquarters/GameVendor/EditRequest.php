@@ -45,8 +45,8 @@ class EditRequest extends BaseFormRequest
     {
         $myId  = $this->get('id');
         $rules = [
-                  'id'                 => 'required|exists:game_vendors,id',
-                  'name'               => 'required|unique:game_vendors,name,' . $myId,
+                  'id'                 => 'required|integer|exists:game_vendors,id',
+                  'name'               => 'required|string|max:64|unique:game_vendors,name,' . $myId,
                   'sign'               => 'required|string|max:6|unique:game_vendors,sign,' . $myId,
                   'whitelist_ips'      => 'required|array',
                   'whitelist_ips.*'    => 'ip',

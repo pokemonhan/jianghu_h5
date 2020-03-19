@@ -30,11 +30,11 @@ class EditDoRequest extends BaseFormRequest
     {
         $thisId = $this->get('id');
         return [
-                'id'        => 'required|exists:system_finance_types,id',
-                'name'      => 'required|unique:system_finance_types,name,' . $thisId,
-                'sign'      => 'required|unique:system_finance_types,sign,' . $thisId . '|regex:/\w+/',//(字母+下划线)
-                'is_online' => 'required|in:0,1',
-                'direction' => 'required|in:0,1',
+                'id'        => 'required|integer|exists:system_finance_types,id',
+                'name'      => 'required|string|max:64|unique:system_finance_types,name,' . $thisId,          //类型名
+                'sign'      => 'required|max:64|unique:system_finance_types,sign,' . $thisId . '|regex:/\w+/',//(字母+下划线)
+                'is_online' => 'required|integer|in:0,1',  //是否是在线支付 1 是 0 否
+                'direction' => 'required|integer|in:0,1',  //金流方向 1 入款 0 出款
                ];
     }
 

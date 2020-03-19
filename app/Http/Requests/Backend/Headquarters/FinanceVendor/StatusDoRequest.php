@@ -37,8 +37,8 @@ class StatusDoRequest extends BaseFormRequest
     public function rules() :array
     {
         $rules = [
-                  'id' => 'required|exists:system_finance_vendors,id',
-                  'status' => 'required|in:0,1',
+                  'id'     => 'required|integer|exists:system_finance_vendors,id',
+                  'status' => 'required|integer|in:0,1',
                  ];
         return $rules;
     }
