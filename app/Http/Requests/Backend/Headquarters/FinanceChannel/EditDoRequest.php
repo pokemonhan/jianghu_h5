@@ -30,16 +30,17 @@ class EditDoRequest extends BaseFormRequest
     {
         $thisId = $this->input('id');
         return [
-                'id'           => 'required|exists:system_finance_channels,id',
-                'type_id'      => 'required|exists:system_finance_types,id',
-                'vendor_id'    => 'required|exists:system_finance_vendors,id',
-                'name'         => 'required|unique:system_finance_channels,name,' . $thisId,
-                'sign'         => 'required|unique:system_finance_channels,sign,' . $thisId . '|regex:/\w+/',//(字母+下划线)
-                'request_mode' => 'required|in:0,1',
+                'id'           => 'required|integer|exists:system_finance_channels,id',
+                'type_id'      => 'required|integer|exists:system_finance_types,id',
+                'vendor_id'    => 'required|integer|exists:system_finance_vendors,id',
+                'name'         => 'required|string|max:64|unique:system_finance_channels,name,' . $thisId,
+                //(字母+下划线)
+                'sign'         => 'required|max:64|unique:system_finance_channels,sign,' . $thisId . '|regex:/\w+/',
+                'request_mode' => 'required|integer|in:0,1',
                 'request_url'  => 'required|url',
                 'banks_code'   => 'string',
-                'status'       => 'required|in:0,1',
-                'desc'         => 'string',
+                'status'       => 'required|integer|in:0,1',
+                'desc'         => 'string|string|max:64',
                ];
     }
 

@@ -30,14 +30,14 @@ class OptEditDoRequest extends BaseFormRequest
     {
         $thisId = $this->get('id');
         return [
-                'id'                 => 'required|exists:games,id',
+                'id'                 => 'required|integer|exists:games,id',
                 'name'               => 'required|unique:games,name,' . $thisId,
-                'app_id'             => 'string',
-                'authorization_code' => 'string',
-                'merchant_code'      => 'string',
-                'merchant_secret'    => 'string',
-                'public_key'         => 'string',
-                'private_key'        => 'string',
+                'app_id'             => 'string|max:128',
+                'authorization_code' => 'string|max:10',
+                'merchant_code'      => 'string|max:128',
+                'merchant_secret'    => 'string|max:128',
+                'public_key'         => 'string|max:2048',
+                'private_key'        => 'string|max:2048',
                ];
     }
 

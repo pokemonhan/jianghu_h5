@@ -28,7 +28,7 @@ class DelDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:system_finance_types,id'];
+        return ['id' => 'required|integer|exists:system_finance_types,id'];
     }
 
     /**

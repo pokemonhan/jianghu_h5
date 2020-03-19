@@ -29,8 +29,8 @@ class StatusDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:system_finance_channels,id',
-                'status' => 'required|in:0,1',
+                'id'     => 'required|integer|exists:system_finance_channels,id',
+                'status' => 'required|integer|in:0,1',
                ];
     }
 

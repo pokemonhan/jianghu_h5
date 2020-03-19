@@ -29,8 +29,8 @@ class IndexDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'status' => 'in:0,1',
-                'name'   => 'string',
+                'status' => 'integer|in:0,1', //状态 1 启用 0 禁用
+                'name'   => 'string|max:64',  //类型名
                ];
     }
 

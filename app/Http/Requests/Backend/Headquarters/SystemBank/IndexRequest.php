@@ -36,8 +36,8 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'status' => 'in:0,1',
-                'name'   => 'string',
+                'status' => 'integer|in:0,1',
+                'name'   => 'string|max:32',
                ];
     }
 }

@@ -36,9 +36,9 @@ class AddDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'name'   => 'required|unique:system_banks,name',
-                'code'   => 'required|unique:system_banks,code',
-                'status' => 'required|in:0,1',
+                'name'   => 'required|string:32|unique:system_banks,name',
+                'code'   => 'required|string:32|unique:system_banks,code',
+                'status' => 'required|integer|in:0,1',
                ];
     }
 }

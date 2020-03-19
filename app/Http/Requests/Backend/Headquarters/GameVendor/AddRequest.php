@@ -43,8 +43,8 @@ class AddRequest extends BaseFormRequest
     public function rules(): array
     {
         $result = [
-                   'name'               => 'required|unique:game_vendors,name',
-                   'sign'               => 'required|string|unique:game_vendors,sign|max:6',
+                   'name'               => 'required|string|max:64|unique:game_vendors,name',
+                   'sign'               => 'required|string|max:6|unique:game_vendors,sign',
                    'whitelist_ips'      => 'array',
                    'whitelist_ips.*'    => 'ip',
                    'type_id'            => 'required|integer',
@@ -53,14 +53,14 @@ class AddRequest extends BaseFormRequest
                    'test_urls'          => 'array',
                    'test_urls.*'        => 'url',
                    'app_id'             => 'string|nullable',
-                   'authorization_code' => 'string',
-                   'merchant_id'        => 'string',
-                   'merchant_secret'    => 'string',
-                   'public_key'         => 'string',
-                   'private_key'        => 'string',
-                   'des_key'            => 'string',
-                   'md5_key'            => 'string',
-                   'status'             => 'required|in:0,1',
+                   'authorization_code' => 'string|max:128',
+                   'merchant_id'        => 'string|max:10',
+                   'merchant_secret'    => 'string|max:128',
+                   'public_key'         => 'string|max:2048',
+                   'private_key'        => 'string|max:2048',
+                   'des_key'            => 'string|max:64',
+                   'md5_key'            => 'string|max:32',
+                   'status'             => 'required|integer|in:0,1',
                   ];
         return $result;
     }

@@ -47,13 +47,13 @@ class AddRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'name'          => 'required|unique:game_types,name',
-                  'sign'          => 'required|string|unique:game_types,sign|max:64',
-                  'status'        => 'required|in:0,1',
-                  'parent_id'     => 'numeric',
+                  'name'          => 'required|string|max:64|unique:game_types,name',
+                  'sign'          => 'required|string|max:64|unique:game_types,sign',
+                  'status'        => 'required|integer|in:0,1',
+                  'parent_id'     => 'integer',
                   'category_type' => [
                                       'required',
-                                      'numeric',
+                                      'integer',
                                       'in:1,2',
                                       new CheckSortableModel($this),
                                      ],

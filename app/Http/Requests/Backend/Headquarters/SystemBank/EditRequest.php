@@ -37,10 +37,10 @@ class EditRequest extends BaseFormRequest
     {
         $myId = $this->get('id');
         return [
-                'id'     => 'required|exists:system_banks,id',
-                'name'   => 'required|unique:system_banks,name,' . $myId,
-                'code'   => 'required|unique:system_banks,code,' . $myId,
-                'status' => 'required|in:0,1',
+                'id'     => 'required|integer|exists:system_banks,id',
+                'name'   => 'required|string|max:32|unique:system_banks,name,' . $myId,
+                'code'   => 'required|string|max:32|unique:system_banks,code,' . $myId,
+                'status' => 'required|integer|in:0,1',
                ];
     }
 }

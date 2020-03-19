@@ -56,7 +56,7 @@ class EditRequest extends BaseFormRequest
         $category_type = $this->get('category_type');
         $thisId        = $this->get('id');
         $rules         = [
-                          'id'            => 'required|numeric|exists:game_types,id',
+                          'id'            => 'required|integer|exists:game_types,id',
                           'category_type' => [
                                               'required',
                                               'integer',
@@ -65,11 +65,11 @@ class EditRequest extends BaseFormRequest
                                              ],
                          ];
         if ((int) $category_type === self::CATEGORY_TYPE_PARENT) {
-            $rules['name'] = 'required|max:64|unique:game_types,name,' . $thisId;
-            $rules['sign'] = 'required|max:64|unique:game_types,sign,' . $thisId . '|regex:/\w+/';//(字母+下划线)
+            $rules['name'] = 'required|string|max:64|unique:game_types,name,' . $thisId;
+            $rules['sign'] = 'required|string|max:64|unique:game_types,sign,' . $thisId . '|regex:/\w+/';//(字母+下划线)
         } else {
-            $rules['name'] = 'required|max:64|unique:game_sub_types,name,' . $thisId;
-            $rules['sign'] = 'required|max:64|unique:game_sub_types,sign,' . $thisId . '|regex:/\w+/';//(字母+下划线)
+            $rules['name'] = 'required|string|max:64|unique:game_sub_types,name,' . $thisId;
+            $rules['sign'] = 'required|string|max:64|unique:game_sub_types,sign,' . $thisId . '|regex:/\w+/';//(字母+下划线)
         }
         return $rules;
     }

@@ -29,11 +29,11 @@ class AddDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'name'      => 'required|unique:system_finance_types,name',
-                'sign'      => 'required|unique:system_finance_types,sign|regex:/\w+/',//(字母+下划线)
-                'is_online' => 'required|in:0,1',
-                'direction' => 'required|in:0,1',
-                'status'    => 'required|in:0,1',
+                'name'      => 'required|string|max:64|unique:system_finance_types,name',            //类型名
+                'sign'      => 'required|string|max:64|unique:system_finance_types,sign|regex:/\w+/',//(字母+下划线)
+                'is_online' => 'required|integer|in:0,1',                                            //是否是在线支付 1 是 0 否
+                'direction' => 'required|integer|in:0,1',                                            //金流方向 1 入款 0 出款
+                'status'    => 'required|integer|in:0,1',                                            //状态 1 启用 0 禁用
                ];
     }
 
