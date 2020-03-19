@@ -34,8 +34,8 @@ class IsOpenRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'      => 'required|exists:system_routes_backends', //路由ID
-                'is_open' => 'required|in:0,1',                   //是否开放  0否 1是
+                'id'      => 'required|integer|exists:system_routes_backends', //路由ID
+                'is_open' => 'required|integer|in:0,1',                        //是否开放  0否 1是
                ];
     }
 }

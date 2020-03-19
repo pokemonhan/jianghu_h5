@@ -27,10 +27,10 @@ class DomainAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_sign' => 'required|exists:system_platforms,sign', //平台标识
-                'domain'        => 'required|unique:system_domains',        //域名
-                'type'          => 'required|in:0,1,2,3',                   //类型 0.主域名 1.PC 2.H5 3.APP
-                'status'        => 'required|in:0,1',                       //状态 0关闭 1开启
+                'platform_sign' => 'required|string|max:15|exists:system_platforms,sign', //平台标识
+                'domain'        => 'required|string|unique:system_domains',               //域名
+                'type'          => 'required|integer|in:0,1,2,3',                         //类型 0.主域名 1.PC 2.H5 3.APP
+                'status'        => 'required|integer|in:0,1',                             //状态 0关闭 1开启
                ];
     }
 

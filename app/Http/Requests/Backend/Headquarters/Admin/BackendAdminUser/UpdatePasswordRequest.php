@@ -35,8 +35,11 @@ class UpdatePasswordRequest extends BaseFormRequest
     {
         $rules = [
                   'id'       => 'required|numeric|exists:backend_admin_users',
-                  'name'     => 'required|string',
-                  'password' => 'required|string',
+                  'name'     => 'required|string|max:16|exists:backend_admin_users', //用户名
+                  'password' => [
+                                 'required',
+                                 'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(必须存在大小写字母+数字的8-16位)
+                                ], //密码
                  ];
         return $rules;
     }

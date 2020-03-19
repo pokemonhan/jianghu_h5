@@ -33,7 +33,7 @@ class SpecificGroupUsersRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['id' => 'required|numeric|exists:backend_admin_access_groups,id'];
+        $rules = ['id' => 'required|integer|exists:backend_admin_access_groups'];
         return $rules;
     }
 }

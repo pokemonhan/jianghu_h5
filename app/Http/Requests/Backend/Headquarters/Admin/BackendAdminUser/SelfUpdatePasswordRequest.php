@@ -39,12 +39,13 @@ class SelfUpdatePasswordRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'old_password' => 'required|string', //旧密码
+                  'old_password' => [
+                                     'required',
+                                     'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(必须存在大小写字母+数字的8-16位)
+                                    ], //旧密码
                   'password'     => [
                                      'required',
-                                     'string',
-                                     'between:6,16',
-                                     'regex:/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/', //字母加数字
+                                     'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(必须存在大小写字母+数字的8-16位)
                                     ], //新密码
                  ];
         return $rules;

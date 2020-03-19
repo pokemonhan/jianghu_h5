@@ -34,8 +34,8 @@ class SwitchAdminRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'     => 'required|exists:backend_admin_users', //ID
-                  'status' => 'required|integer|in:0,1',             //状态
+                  'id'     => 'required|integer|exists:backend_admin_users', //ID
+                  'status' => 'required|integer|in:0,1',                     //状态
                  ];
         return $rules;
     }

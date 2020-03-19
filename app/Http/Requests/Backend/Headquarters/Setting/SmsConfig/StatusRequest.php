@@ -34,8 +34,8 @@ class StatusRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:system_sms_configs', //ID
-                'status' => 'required|integer|in:0,1',            //状态 0禁用 1启用
+                'id'     => 'required|integer|exists:system_sms_configs', //ID
+                'status' => 'required|integer|in:0,1',                    //状态 0禁用 1启用
                ];
     }
 }

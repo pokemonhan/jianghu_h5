@@ -29,9 +29,9 @@ class UnassignGamesRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_id' => 'required|exists:system_platforms,id',
-                'vendor_id'   => 'exists:game_vendors,id',
-                'game_id'     => 'exists:games,id',
+                'platform_id' => 'required|integer|exists:system_platforms,id',
+                'vendor_id'   => 'integer|exists:game_vendors,id',
+                'game_id'     => 'integer|exists:games,id',
                ];
     }
 

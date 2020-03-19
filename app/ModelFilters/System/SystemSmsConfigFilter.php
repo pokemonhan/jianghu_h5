@@ -25,17 +25,14 @@ class SystemSmsConfigFilter extends ModelFilter
     /**
      * 修改时间查询
      *
-     * @param  string $updatedAt 修改时间.
+     * @param  array $updatedAt 修改时间.
      * @return $this
      */
-    public function updatedAt(string $updatedAt): SystemSmsConfigFilter
+    public function updatedAt(array $updatedAt): SystemSmsConfigFilter
     {
-        $updateTime = json_decode($updatedAt, true);
-        $eloq       = $this;
-        if ($updateTime !== null) {
-            if (count($updateTime) === 2) {
-                $eloq = $this->whereBetween('updated_at', $updateTime);
-            }
+        $eloq = $this;
+        if (count($updatedAt) === 2) {
+            $eloq = $this->whereBetween('updated_at', $updatedAt);
         }
         return $eloq;
     }

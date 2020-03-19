@@ -33,10 +33,11 @@ class AssignGamesRequest extends BaseFormRequest
         $unique   = Rule::unique('game_platforms', 'game_id')
             ->where('platform_id', $platform);
         return [
-                'platform_id' => 'required|exists:system_platforms,id',
+                'platform_id' => 'required|integer|exists:system_platforms,id',
                 'game_ids'    => 'required|array',
                 'game_ids.*'  => [
                                   'required',
+                                  'integer',
                                   'exists:games,id',
                                   $unique,
                                  ],

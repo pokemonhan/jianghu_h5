@@ -35,21 +35,25 @@ class EditRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'      => 'required|numeric|exists:backend_system_menus,id',//ID
+                  'id'      => 'required|integer|exists:backend_system_menus,id',//ID
                   'label'   => [
                                 'required',
+                                'string',
+                                'max:20',
                                 Rule::unique('backend_system_menus')->ignore($this->get('id')),
                                 'regex:/[\x{4e00}-\x{9fa5}]+/u',
                                ], //菜单名称(中文)
                   'en_name' => [
                                 'required',
+                                'string',
+                                'max:20',
                                 Rule::unique('backend_system_menus')->ignore($this->get('id')),
                                 'regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/',
                                ], //英文名(小写+“-”)
-                  'display' => 'required|numeric|in:0,1',//是否显示  0否 1是
-                  'route'   => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', //路由(小写+数字+“/”)
+                  'display' => 'required|integer|in:0,1',//是否显示  0否 1是
+                  'route'   => 'required|string|max:50|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', //路由(小写+数字+“/”)
                   //图标(小写+数字+“-”)
-                  'icon'    => 'required|regex:/^(?!\-)(?!.*\-$)(?!.*?\-\-)(?!\ )(?!.*\ $)(?!.*?\ \ )[a-z0-9 -]+$/',
+                  'icon'    => 'required|string|max:20|regex:/^(?!\-)(?!.*\-$)(?!.*?\-\-)(?!\ )(?!.*\ $)(?!.*?\ \ )[a-z0-9 -]+$/',
                   'pid'     => 'required|integer', //上级id
                  ];
         return $rules;

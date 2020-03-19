@@ -39,10 +39,19 @@ class EditRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'         => 'required|numeric|exists:backend_admin_access_groups,id',
-                  'group_name' => 'required',
-                  'role'       => 'required',
+                  'id'         => 'required|numeric|exists:backend_admin_access_groups',
+                  'group_name' => 'required|string|max:15',
+                  'role'       => 'required|array',
+                  'role.*'     => 'integer',
                  ];
         return $rules;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['role' => 'cast:array'];
     }
 }

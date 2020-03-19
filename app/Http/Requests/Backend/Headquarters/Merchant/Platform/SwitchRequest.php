@@ -27,17 +27,8 @@ class SwitchRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:system_platforms', //ID
-                'status' => 'required|in:0,1', //状态 0关闭 1开启
+                'id'     => 'required|integer|exists:system_platforms', //ID
+                'status' => 'required|integer|in:0,1',                  //状态 0关闭 1开启
                ];
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

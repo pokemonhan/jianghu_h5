@@ -75,13 +75,10 @@ class EditAction extends MainAction
             throw new \Exception('302004');
         }
         //权限修改
-        $role = json_decode($inputDatas['role'], true);
-        if (is_array($role)) {
-            $editRole = $this->_editRole($platformELoq->sign, $role);
-            if ($editRole === false) {
-                DB::rollback();
-                throw new \Exception('302005');
-            }
+        $editRole = $this->_editRole($platformELoq->sign, $inputDatas['role']);
+        if ($editRole === false) {
+            DB::rollback();
+            throw new \Exception('302005');
         }
         DB::commit();
         $msgOut = msgOut();

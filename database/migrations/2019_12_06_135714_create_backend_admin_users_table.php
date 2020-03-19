@@ -22,8 +22,8 @@ class CreateBackendAdminUsersTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('name', 64)->nullable()->default(null)->comment('名称');
-                $table->string('email')->nullable()->default(null)->comment('邮箱');
+                $table->string('name', 16)->nullable()->default(null)->comment('名称');
+                $table->string('email', 64)->nullable()->default(null)->comment('邮箱');
                 $table->timestamp('email_verified_at')->nullable()->default(null)->comment('验证邮箱的时间');
                 $table->string('password')->nullable()->default(null)->comment('密码');
                 $table->text('remember_token')->nullable()->default(null)->comment('token');

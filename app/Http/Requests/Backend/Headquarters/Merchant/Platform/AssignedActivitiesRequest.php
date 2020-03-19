@@ -37,7 +37,7 @@ class AssignedActivitiesRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_sign' => 'required|exists:system_platforms,sign',
+                'platform_sign' => 'required|string|max:15|exists:system_platforms,sign',
                 'name'          => 'string|min:1|max:16',
                ];
     }

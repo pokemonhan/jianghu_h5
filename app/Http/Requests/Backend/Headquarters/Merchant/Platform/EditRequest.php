@@ -50,11 +50,20 @@ class EditRequest extends BaseFormRequest
                 'pc_skin_id'    => 'required|integer',                 //PC皮肤
                 'h5_skin_id'    => 'required|integer',                 //H5皮肤
                 'app_skin_id'   => 'required|integer',                 //APP皮肤
-                'role'          => 'required|string',                  //权限
+                'role'          => 'required|array',                   //权限
+                'role.*'        => 'integer',                          //权限
                 'type'          => 'in:0,1',                           //短信操作方式  0减少  1增加
                 'sms_num'       => 'integer|gte:0',                    //操作短信数量
                 'start_time'    => 'required|date_format:Y-m-d H:i:s', //开始时间
                 'end_time'      => 'required|date_format:Y-m-d H:i:s', //结束时间
                ];
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['role' => 'cast:array'];
     }
 }
