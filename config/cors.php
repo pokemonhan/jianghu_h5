@@ -57,6 +57,8 @@ $config = [
                                           'chrome-extension://jenkimcegeigaklkimboldgkpfliakpa',// Ethan
                                           'chrome-extension://pbmmpghdpldmkehedckllojmlfaihpkk',// Charon
                                           'chrome-extension://obakjhlbmehmopebcdcmnbaffocpdlgf',// Aaron
+                                          'http://192.168.1.30:8081',// Aaron
+                                          'http://192.168.1.29:8081',// Charon
                                          ],
 
            /*
