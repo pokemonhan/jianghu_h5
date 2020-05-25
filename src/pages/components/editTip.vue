@@ -1,7 +1,7 @@
 <template>
     <div class="editTip">
         <div class="errBox animated fadeInDown faster">
-            <img class="errIcon" src="../../assets/login/icon_Error.png"/>
+<!--            <img class="errIcon" src="../../assets/login/icon_Error.png"/>-->
             <div class="errText" v-text="this.$store.state.editTip.content"></div>
         </div>
     </div>

@@ -23,27 +23,52 @@
             </div>
             <div class="chooseTitle animated fadeInUp">请选择支付方式：</div>
             <div class="recommend animated fadeInDown">推荐使用官方充值，安全快捷精确到秒到帐！</div>
-            <div class="reChargeItem animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in reChargeType" @click="open('/reChargeOrder',item)">
+            <!--<div class="reChargeItem animated faster fadeInLeft" v-if="onlineReCharge.length>0">
                 <div class="itemImg">
-                    <img class="iconImg" :src="item.icon"/>
+                    <img class="iconImg" src="../assets/reCharge/icon_Officially.png"/>
+                </div>
+                <div class="itemName">官方充值</div>
+                <img class="iconFire" src="../assets/reCharge/icon_Fire.png"/>
+            </div>-->
+            <div class="reChargeItem animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in reChargeList" @click="order(item)">
+                <div class="itemImg">
+                    <img class="iconImg" :src="iconList[item.name]"/>
                 </div>
                 <div class="itemName" v-text="item.name"></div>
                 <img class="iconFire" v-if="item.isFire" src="../assets/reCharge/icon_Fire.png"/>
             </div>
         </div>
         <comMenu/>
+        <reChargeOrder v-if="this.$store.state.reChargeOrder.isShow"/>
     </div>
 </template>
 
 <script>
     import comMenu from '../pages/components/menu'
+    import reChargeOrder from '../pages/components/reChargeOrder'
     export default {
         components:{
-            comMenu
+            comMenu,
+            reChargeOrder
         },
         data () {
             return {
-                reChargeType:[
+                reChargeList:[],
+                onlineReCharge:[],
+                offlineReCharge:[],
+                iconList:{
+                    "支付宝转账":require('../assets/reCharge/icon_AliPay.png'),
+                    "支付宝支付":require('../assets/reCharge/icon_AliPay.png'),
+                    "微信转账":require('../assets/reCharge/icon_WeChat.png'),
+                    "微信支付":require('../assets/reCharge/icon_WeChat.png'),
+                    "银联支付":require('../assets/reCharge/icon_UnionPay.png'),
+                    "在线网银支付":require('../assets/reCharge/icon_OnlinePay.png'),
+                    "京东钱包":require('../assets/reCharge/icon_JdPay.jpg'),
+                    "百度钱包":require('../assets/reCharge/icon_BaiduPay.png'),
+                    "云闪付转账":require('../assets/reCharge/icon_CloudPay.png'),
+                    "银行卡转账":require('../assets/reCharge/icon_BankPay.png'),
+                },
+                /*reChargeType:[
                     {name:"官方充值",isFire:true,icon:require('../assets/reCharge/icon_Officially.png'),reChargeType:[
                             {type:"银行卡转账",icon:require('../assets/reCharge/icon_UnionPay.png')},
                             {type:"支付宝转账",icon:require('../assets/reCharge/icon_AliPay.png')}
@@ -84,7 +109,7 @@
                             {type:"支付宝2",icon:require('../assets/reCharge/icon_AliPay.png')},
                             {type:"支付宝3",icon:require('../assets/reCharge/icon_AliPay.png')},
                         ]},
-                ]
+                ]*/
             }
         },
 
@@ -94,10 +119,22 @@
                 all.router.push(path);
             },
             back(){all.router.go(-1)},
+            order(item){
+                all.store.commit("reChargeOrder",{isShow:true,item:item})
+            },
             isHasCard(){
                 if(!all.store.state.isHasCard)all.tool.tipWinShow("您还未绑定取款银行卡或支付宝账号！",()=>{all.router.push("/login")},{icon:"warn",name:"前往绑定"});
             }
         },
+        created() {
+            all.tool.send("rechargeList",null,res=>{
+                this.reChargeList=res.data;
+                res.data.forEach(item=>{
+                    if(item.is_online===1){this.onlineReCharge.push(item)}
+                    else {this.offlineReCharge.push(item)}
+                })
+            })
+        }
 
     }
 </script>

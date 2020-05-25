@@ -71,10 +71,15 @@ const Tool = {//工具汇总
 
     //TODO 网络请求类工具*************************************************************************//
     send:(url,data,success,fail)=>{console.log("向接口"+url+"发送数据",data);
-        if(!all.config.api[url])return all.tool.editTipShow("API不存在或已失效");
+        let apiUrl=null;
+        let sendType=null;
+        if(url.slice(0,8)==="openGame"){apiUrl=url.slice(8);sendType="get"}
+        else if(url.slice(0,11)==="setPassword"){apiUrl=url.slice(11);sendType="post"}
+        else if(!all.config.api[url])return all.tool.editTipShow("API不存在或已失效");
+        else {apiUrl=all.config.api[url].url;sendType=all.config.api[url].method}
         all.http({
-            method:all.config.api[url].method,
-            url:all.config.api[url].url,
+            method:sendType,
+            url:apiUrl,
             data:data
         }).then(res=>{console.log('接口'+url+'返回数据',res);typeof(success)==="function"?success(res):null}).catch(err=>{typeof(fail)==="function"?fail(err):null});
     },

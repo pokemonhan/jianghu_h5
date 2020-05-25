@@ -156,7 +156,8 @@
             toDoResetPassword(){
                 if(this.checkMobile() && this.checkPassword() && this.checkRePassword() && this.checkMsmCode()){
                     all.tool.send("resetPassword",{mobile:this.mobile,password:this.password,password_confirmation:this.rePassword,verification_code:this.msmCode,verification_key:this.verification_key},res=>{
-                        all.tool.setStore("Authorization",res.data.token_type+" "+res.data.access_token);
+                        all.tool.tipWinShow("修改密码成功！",()=>{all.router.push("/login");},{icon:"right"});
+                        /*all.tool.setStore("Authorization",res.data.token_type+" "+res.data.access_token);
                         all.tool.send("information",null,res=>{
                             all.tool.setLoginData(res.data);
                             if(all.tool.getStore("guardPath")){
@@ -164,7 +165,7 @@
                                 all.tool.clearStore("guardPath");
                             }
                             else all.router.push("/");
-                        });
+                        });*/
                     })
                 }
             },

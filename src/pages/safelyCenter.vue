@@ -5,15 +5,21 @@
             <div class="textTitle">安全中心</div>
         </div>
         <div class="contentView">
-            <div class="itemBox" @click="showChangeBox('修改登录密码')">
+            <div class="itemBox" @click="showChangePassword">
                 <img class="iconPassword" src="../assets/mine/icon_Password.png"/>
                 <div class="itemText">修改登录密码</div>
             </div>
             <div class="itemBox" @click="showChangeBox('修改安全码')">
                 <img class="iconSafely" src="../assets/mine/icon_Safely.png"/>
-                <div class="itemText">修改安全码</div>
+                <div class="itemText">修改安全密码</div>
+            </div>
+            <div class="itemBox" @click="showChangeGamePassword">
+                <img class="iconGame" src="../assets/mine/icon_Game.png"/>
+                <div class="itemText">修改游戏密码</div>
             </div>
         </div>
+        <changeGamePassword v-if="this.$store.state.changeGamePassword.isShow"/>
+        <changePassword v-if="this.$store.state.changePassword.isShow"/>
         <div class="changeBox" v-if="isShowChangeBox">
             <div class="changeWin">
                 <div class="changeTitle">
@@ -59,7 +65,13 @@
 </template>
 
 <script>
+    import changePassword from '../pages/components/changePassword'
+    import changeGamePassword from '../pages/components/changeGamePassword'
     export default {
+        components:{
+            changePassword,
+            changeGamePassword,
+        },
         data () {
             return {
                 isShowChangeBox:false,
@@ -72,6 +84,12 @@
         methods:{
             open(path){all.router.push(path)},
             back(){all.router.go(-1)},
+            showChangePassword(){
+                all.store.commit("changePassword",{isShow:true})
+            },
+            showChangeGamePassword(){
+                all.store.commit("changeGamePassword",{isShow:true})
+            },
             showChangeBox(title){
                 this.changeTitle=title;
                 this.isShowChangeBox=true
@@ -150,6 +168,10 @@
     .iconSafely{
         width:0.41rem;
         height:0.49rem;
+    }
+    .iconGame{
+        width:0.41rem;
+        height:0.36rem;
     }
     .changeBox{
         width:100%;

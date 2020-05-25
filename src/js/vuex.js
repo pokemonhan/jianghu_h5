@@ -10,7 +10,7 @@ const state={
     editTip:{isShow:false,content:""},
     tipWin:{isShow:false,content:"",callback:null,type:{icon:"",name:""}},
     isLogin:false,
-    amount:"12345678.00",
+    amount:"0",
     nickName:"",
     guid:"",
     vipLevel:"5",
@@ -18,6 +18,10 @@ const state={
     userPicture:"",
     isShowChangeName:false,
     isShowChangeUserImg:false,
+    setGamePassword:{isShow:false,registerUrl:null,item:null},
+    changeGamePassword:{isShow:false},
+    changePassword:{isShow:false,registerUrl:null,item:null},
+    reChargeOrder:{isShow:false},
     isHasCard:false,
     messageData:{
         notice:[

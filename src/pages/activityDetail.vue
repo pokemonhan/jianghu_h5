@@ -20,13 +20,22 @@
             return {
                 activityDetail:null,
                 activityPath:{
-                    "每日签到":"/mine",
+                    "有奖竞猜":"/",
+                    "幸运轮盘":"/",
+                    "每日签到":"/activitySign",
+                    "抢红包":"/",
+                    "推广返佣":"/promote",
+                    "注册有礼":"/register",
+                    "首充赠金":"/reCharge"
 
                 }
             }
         },
         methods:{
-            open(path){all.router.push(path)},
+            open(path){
+                all.tool.setStore("activityDetailTitle",this.activityDetail.title);
+                all.router.push(path)
+            },
             back(){all.router.go(-1)}
         },
         created() {

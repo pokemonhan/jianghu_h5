@@ -36,7 +36,13 @@
                 </marquee>
             </div>
             <div class="gameBox">
-                <div class="gameItem animated flipInX fast">
+                <div class="gameItem animated fast" @click="open('/gameList',item)" :class="{flipInX:index%2===0,flipInY:index%2===1}" v-for="(item,index) in gameList">
+                  <img class="gameBg" :src="gameBg[index]"/>
+                  <img class="gameTitle" :src="gameTitle[index]"/>
+                  <img :class="gameIconClass[index]" :src="gameIcon[index]"/>
+                  <div class="gameText" v-text="gameText[index]">赚现金 赢大奖</div>
+                </div>
+                <!--<div class="gameItem animated flipInX fast">
                     <img class="gameBg" src="../assets/homePage/bg_GameA.png"/>
                     <img class="gameTitle" src="../assets/homePage/title_GameA.png"/>
                     <img class="gameIconA" src="../assets/homePage/icon_GameA.png"/>
@@ -71,19 +77,14 @@
                     <img class="gameTitle" src="../assets/homePage/title_GameF.png"/>
                     <img class="gameIconF" src="../assets/homePage/icon_GameF.png"/>
                     <div class="gameText">中奖几率翻一翻</div>
-                </div>
+                </div>-->
             </div>
             <div class="shortcutTitle animated flash">热门游戏</div>
             <div class="shortcutGameBox animated fadeInUp faster" :class="{downloadHeight:isShowDownLoad}">
-                <img class="imgGame" src="../assets/homePage/img_GameA.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameB.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameC.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameD.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameE.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameF.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameH.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameI.png"/>
-                <img class="imgGame" src="../assets/homePage/img_GameJ.png"/>
+                <div class="hotGame" @click="getGame(item)" v-for="(item,index) in hotGame" v-if="index<10">
+                    <img class="imgGame" :src="item.icon"/>
+                    <span class="nameGame" v-text="item.name"></span>
+                </div>
             </div>
             <div class="downloadBox animated fadeInUp fast delay-500" v-if="isShowDownLoad">
                 <div class="downloadContent">
@@ -95,26 +96,67 @@
             </div>
         </div>
         <comMenu/>
+        <setGamePassword v-if="this.$store.state.setGamePassword.isShow"/>
     </div>
 </template>
 
 <script>
     import comMenu from '../pages/components/menu'
+    import setGamePassword from '../pages/components/setGamePassword'
     export default {
         components:{
-            comMenu
+            comMenu,
+            setGamePassword
         },
         data () {
             return {
                 isShowDownLoad:all.tool.getStore("isShowDownLoad"),
                 currentIndex:0,
-                bannerList:[
-                  /*{pic_path:require("../assets/homePage/bannerA.png"),type:1,redirect_url:"www.baidu.com"},
-                  {pic_path:require("../assets/homePage/bannerB.png"),type:1,redirect_url:"www.baidu.com"},
-                  {pic_path:require("../assets/homePage/bannerC.png"),type:1,redirect_url:"www.baidu.com"},
-                  {pic_path:require("../assets/homePage/bannerD.png"),type:1,redirect_url:"www.baidu.com"},*/
+                bannerList:[],
+                gameList:[],
+                gameDetailList:[],
+                gameText:[
+                    "赚现金　赢大奖",
+                    "最热门的都在这里",
+                    "更大威力炮台发射",
+                    "娱乐赚钱两不误",
+                    "真人性感荷官发牌",
+                    "超高中奖机率"
                 ],
-                timeRun:null
+                gameBg:[
+                    require("../assets/homePage/bg_GameA.png"),
+                    require("../assets/homePage/bg_GameB.png"),
+                    require("../assets/homePage/bg_GameC.png"),
+                    require("../assets/homePage/bg_GameD.png"),
+                    require("../assets/homePage/bg_GameE.png"),
+                    require("../assets/homePage/bg_GameF.png"),
+                ],
+                gameTitle:[
+                    require("../assets/homePage/title_GameA.png"),
+                    require("../assets/homePage/title_GameB.png"),
+                    require("../assets/homePage/title_GameC.png"),
+                    require("../assets/homePage/title_GameD.png"),
+                    require("../assets/homePage/title_GameE.png"),
+                    require("../assets/homePage/title_GameF.png"),
+                ],
+                gameIcon:[
+                    require("../assets/homePage/icon_GameA.png"),
+                    require("../assets/homePage/icon_GameB.png"),
+                    require("../assets/homePage/icon_GameC.png"),
+                    require("../assets/homePage/icon_GameD.png"),
+                    require("../assets/homePage/icon_GameE.png"),
+                    require("../assets/homePage/icon_GameF.png"),
+                ],
+                gameIconClass:[
+                    "gameIconA",
+                    "gameIconB",
+                    "gameIconC",
+                    "gameIconD",
+                    "gameIconE",
+                    "gameIconF",
+                ],
+                timeRun:null,
+                hotGame:[],
             }
         },
         watch:{
@@ -126,7 +168,23 @@
             },
         },
         methods:{
-            open(path){all.router.push(path)},
+            open(path,item){
+                if(item)all.tool.setStore("gameClass",item);
+                if(item)all.tool.setStore("gameDetailList",this.gameDetailList);
+                all.router.push(path)
+            },
+            getGame(item){
+                all.tool.send("openGame"+item.url,null,res=>{
+                    if(res.data.type===1){
+                        all.tool.setStore("gameFrameTitle",item.name);
+                        all.tool.setStore("gameFrameUrl",res.data.url);
+                        all.router.push("/gameFrame")
+                    }
+                    if(res.data.type===2){
+                        all.store.commit("setGamePassword",{isShow:true,registerUrl:res.data.url,item:item})
+                    }
+                });
+            },
             closeDownLoad(){
                 all.$(".downloadBox").removeClass("delay-500").addClass("fadeOutDown");
                 setTimeout(()=>{
@@ -170,7 +228,20 @@
         created() {
             setTimeout(()=>{this.closeDownLoad()},10000);
             this.timeRun=setInterval(()=>{this.currentIndex<this.bannerList.length-1?this.currentIndex+=1:this.currentIndex=0},4000);
-            all.tool.send("slides",{flag:"1"},res=>{this.bannerList=res.data})
+            all.tool.send("slides",{flag:"1"},res=>{this.bannerList=res.data});
+            all.tool.send("gameList",{device:2},res=>{
+                this.gameList=res.data.raw;
+                this.gameDetailList=res.data.list;
+                for(let key in res.data.list){
+                    for(let item in res.data.list[key]){
+                        res.data.list[key][item].forEach(game=>{
+                            if(game.hot_new===1){
+                                this.hotGame.push(game);
+                            }
+                        })
+                    }
+                }
+            })
         },
         destroyed() {
             clearInterval(this.timeRun);
@@ -249,13 +320,12 @@
         display:flex;
         justify-content:flex-end;
         align-items:center;
-        position:relative;
     }
     .iconLogo{
-        width:1.5rem;
+        width:1.2rem;
         height:auto;
-        position:absolute;
-        left:0.25rem;
+        margin-left:0.2rem;
+        margin-right:0.15rem;
     }
     .iconService{
         width:0.45rem;
@@ -435,13 +505,24 @@
         box-shadow:0 0.01rem 0.05rem rgba(0,27,97,0.8);
         overflow:scroll;
     }
+    .hotGame{
+        width:1.6rem;
+        height:1.6rem;
+        font-size:0.16rem;
+        color:#ffffff;
+        font-weight:bold;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        margin-right:0.35rem;
+    }
     .downloadHeight{
         margin-bottom:1.1rem
     }
     .imgGame{
         width:1.2rem;
-        height:1.2rem;
-        margin-right:0.35rem;
+        height:auto;
         flex-shrink:0;
     }
     .downloadBox{

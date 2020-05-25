@@ -31,13 +31,13 @@
                 <div class="codeId">
                     <div class="codeText">
                         <span>邀请码：</span>
-                        <span class="id">88888</span>
+                        <span class="id" v-text="userId"></span>
                     </div>
-                    <span class="copy">复制</span>
+                    <span class="copy" v-clipboard:copy="userId" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
                 </div>
                 <div class="net">
-                    <div class="netText">www.JiangHuHuYu.com</div>
-                    <span class="copy">复制</span>
+                    <div class="netText" v-text="userUrl"></div>
+                    <span class="copy" v-clipboard:copy="userUrl" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
                 </div>
                 <div class="shareBtn">
                     <div class="shareWeChat">分享微信好友</div>
@@ -58,6 +58,8 @@
         data () {
             return {
                 banner:require("../assets/homePage/bannerA.png"),
+                userId:"88888",
+                userUrl:"www.JiangHuHuYu.com",
                 itemList:[
                     {icon:require("../assets/promote/icon_Notice.png"),name:"推广说明",path:"/promoteExplain"},
                     {icon:require("../assets/promote/icon_Earnings.png"),name:"推广收益",path:"/promoteEarnings"},
@@ -76,6 +78,8 @@
         methods:{
             open(path){all.router.push(path)},
             back(){all.router.go(-1)},
+            onCopy(e){all.tool.editTipShow("成功复制"+e.text)},
+            onCopyError(){all.tool.editTipShow("复制失败","error")},
 
         },
         created() {

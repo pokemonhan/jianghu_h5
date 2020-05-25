@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import homePage from '../pages/homePage'
 import activity from '../pages/activity'
 import activityDetail from '../pages/activityDetail'
+import activitySign from '../pages/activitySign'
 import mine from '../pages/mine'
 import myVip from '../pages/myVip'
 import helpCenter from '../pages/helpCenter'
@@ -16,7 +17,7 @@ import systemNotice from '../pages/systemNotice'
 import messageList from '../pages/messageList'
 import onlineService from '../pages/onlineService'
 import reCharge from '../pages/reCharge'
-import reChargeOrder from '../pages/reChargeOrder'
+import reChargeOrderDetail from '../pages/reChargeOrderDetail'
 import reChargePay from '../pages/reChargePay'
 import login from '../pages/login'
 import register from '../pages/register'
@@ -25,6 +26,8 @@ import promote from '../pages/promote'
 import promoteExplain from '../pages/promoteExplain'
 import promoteEarnings from '../pages/promoteEarnings'
 import promoteWashCode from '../pages/promoteWashCode'
+import gameList from '../pages/gameList'
+import gameFrame from '../pages/gameFrame'
 
 
 Vue.use(Router);
@@ -35,6 +38,7 @@ export default new Router({
         { path: '/', component: homePage},
         { path: '/activity', component: activity},
         { path: '/activityDetail', component: activityDetail},
+        { path: '/activitySign', component: activitySign},
         { path: '/mine', component: mine},
         { path: '/myVip', component: myVip},
         { path: '/helpCenter', component: helpCenter},
@@ -48,7 +52,7 @@ export default new Router({
         { path: '/messageList', component: messageList},
         { path: '/onlineService', component: onlineService},
         { path: '/reCharge', component: reCharge},
-        { path: '/reChargeOrder', component: reChargeOrder},
+        { path: '/reChargeOrderDetail', component: reChargeOrderDetail},
         { path: '/reChargePay', component: reChargePay},
         { path: '/login', component: login},
         { path: '/register', component: register},
@@ -57,5 +61,7 @@ export default new Router({
         { path: '/promoteExplain', component: promoteExplain},
         { path: '/promoteEarnings', component: promoteEarnings},
         { path: '/promoteWashCode', component: promoteWashCode},
+        { path: '/gameList', component: gameList},
+        { path: '/gameFrame', component: gameFrame},
     ]
 })

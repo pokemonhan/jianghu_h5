@@ -12,9 +12,11 @@ import http from 'axios'
 import forge from 'node-forge'
 import CryptoJS from 'crypto-js'
 import {JSEncrypt} from 'jsencrypt'
+import VueClipboard from 'vue-clipboard2'
+
 
 Vue.config.productionTip = false;
-Vue.use(animate);
+Vue.use(VueClipboard,animate);
 window.all={};
 all.store=store;
 all.router=router;
@@ -66,8 +68,15 @@ all.http.interceptors.response.use(res=>{
     error.response.data=all.tool.decrypt(error.response.data);
     console.log("拦截器",error.response);
     if(error.response.status===401)all.tool.tipWinShow(error.response.data.message,()=>{all.router.push("/login")},{icon:"warn",name:"前往登陆"});
-    if(error.response.status===403)all.tool.tipWinShow(error.response.data.message,()=>{},{icon:"error"});
-    if(error.response.status===404)all.tool.tipWinShow("页面离家出走了",()=>{},{icon:"error"});
+    if(error.response.status===403){
+        let code=error.response.data.code;
+        if(code==="100700" || code==="100701" || code==="100702" || code==="100703" || code==="100704" || code==="100705" || code==="100706" || code==="100707" || code==="100708"){
+            all.tool.tipWinShow("游戏维护中...",()=>{},{icon:"warn"});
+        }else {
+            all.tool.tipWinShow(error.response.data.message,()=>{},{icon:"error"});
+        }
+    }
+    if(error.response.status===404)all.tool.tipWinShow("页面丢失",()=>{},{icon:"error"});
     if(error.response.status===405)all.tool.tipWinShow("系统故障，请联系客服",()=>{},{icon:"error"});
     if(error.response.status===429)all.tool.tipWinShow(error.response.data.message,()=>{},{icon:"warn"});
     if(error.response.status===500)all.tool.tipWinShow(error.response.data.message,()=>{},{icon:"error"});
