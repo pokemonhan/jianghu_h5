@@ -23,14 +23,14 @@
             </div>
             <div class="chooseTitle animated fadeInUp">请选择支付方式：</div>
             <div class="recommend animated fadeInDown">推荐使用官方充值，安全快捷精确到秒到帐！</div>
-            <!--<div class="reChargeItem animated faster fadeInLeft" v-if="onlineReCharge.length>0">
+            <div class="reChargeItem animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in offlineReCharge" @click="order(item,0)">
                 <div class="itemImg">
-                    <img class="iconImg" src="../assets/reCharge/icon_Officially.png"/>
+                    <img class="iconImg" :src="iconList[item.name]"/>
                 </div>
-                <div class="itemName">官方充值</div>
-                <img class="iconFire" src="../assets/reCharge/icon_Fire.png"/>
-            </div>-->
-            <div class="reChargeItem animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in reChargeList" @click="order(item)">
+                <div class="itemName" v-text="item.name"></div>
+                <img class="iconFire" v-if="item.isFire" src="../assets/reCharge/icon_Fire.png"/>
+            </div>
+            <div class="reChargeItem animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in onlineReCharge" @click="order(item,1)">
                 <div class="itemImg">
                     <img class="iconImg" :src="iconList[item.name]"/>
                 </div>
@@ -53,7 +53,6 @@
         },
         data () {
             return {
-                reChargeList:[],
                 onlineReCharge:[],
                 offlineReCharge:[],
                 iconList:{
@@ -68,48 +67,6 @@
                     "云闪付转账":require('../assets/reCharge/icon_CloudPay.png'),
                     "银行卡转账":require('../assets/reCharge/icon_BankPay.png'),
                 },
-                /*reChargeType:[
-                    {name:"官方充值",isFire:true,icon:require('../assets/reCharge/icon_Officially.png'),reChargeType:[
-                            {type:"银行卡转账",icon:require('../assets/reCharge/icon_UnionPay.png')},
-                            {type:"支付宝转账",icon:require('../assets/reCharge/icon_AliPay.png')}
-                        ],reChargeList:[
-                            [
-                                {type:"工商银行",icon:require('../assets/reCharge/icon_Icbc.png')},
-                                {type:"农业银行",icon:require('../assets/reCharge/icon_Tabc.png')},
-                                {type:"建设银行",icon:require('../assets/reCharge/icon_Ccb.png')},
-                            ],
-                            [
-                                {type:"支付宝1",icon:require('../assets/reCharge/icon_AliPay.png')},
-                                {type:"支付宝2",icon:require('../assets/reCharge/icon_AliPay.png')},
-                                {type:"支付宝3",icon:require('../assets/reCharge/icon_AliPay.png')},
-                            ],
-                        ]},
-                    {name:"银联扫码",isFire:false,icon:require('../assets/reCharge/icon_UnionPay.png'),reChargeType:null,reChargeList:[
-                            {type:"渠道1",icon:require('../assets/reCharge/icon_UnionPay.png')},
-                            {type:"渠道2",icon:require('../assets/reCharge/icon_UnionPay.png')},
-                            {type:"渠道3",icon:require('../assets/reCharge/icon_UnionPay.png')},
-                        ]},
-                    {name:"微信支付",isFire:false,icon:require('../assets/reCharge/icon_WeChat.png'),reChargeType:null,reChargeList:[
-                            {type:"微信1",icon:require('../assets/reCharge/icon_WeChat.png')},
-                            {type:"微信2",icon:require('../assets/reCharge/icon_WeChat.png')},
-                            {type:"微信3",icon:require('../assets/reCharge/icon_WeChat.png')},
-                        ]},
-                    {name:"微信扫码",isFire:false,icon:require('../assets/reCharge/icon_WeChat.png'),reChargeType:null,reChargeList:[
-                            {type:"微信1",icon:require('../assets/reCharge/icon_WeChat.png')},
-                            {type:"微信2",icon:require('../assets/reCharge/icon_WeChat.png')},
-                            {type:"微信3",icon:require('../assets/reCharge/icon_WeChat.png')},
-                        ]},
-                    {name:"支付宝支付",isFire:false,icon:require('../assets/reCharge/icon_AliPay.png'),reChargeType:null,reChargeList:[
-                            {type:"支付宝1",icon:require('../assets/reCharge/icon_AliPay.png')},
-                            {type:"支付宝2",icon:require('../assets/reCharge/icon_AliPay.png')},
-                            {type:"支付宝3",icon:require('../assets/reCharge/icon_AliPay.png')},
-                        ]},
-                    {name:"支付宝扫码",isFire:true,icon:require('../assets/reCharge/icon_AliPay.png'),reChargeType:null,reChargeList:[
-                            {type:"支付宝1",icon:require('../assets/reCharge/icon_AliPay.png')},
-                            {type:"支付宝2",icon:require('../assets/reCharge/icon_AliPay.png')},
-                            {type:"支付宝3",icon:require('../assets/reCharge/icon_AliPay.png')},
-                        ]},
-                ]*/
             }
         },
 
@@ -119,8 +76,9 @@
                 all.router.push(path);
             },
             back(){all.router.go(-1)},
-            order(item){
-                all.store.commit("reChargeOrder",{isShow:true,item:item})
+            order(item,isOnline){
+                all.store.commit("reChargeOrder",{isShow:true,item:item});
+                all.tool.setStore("reChargeIsOnline",isOnline);
             },
             isHasCard(){
                 if(!all.store.state.isHasCard)all.tool.tipWinShow("您还未绑定取款银行卡或支付宝账号！",()=>{all.router.push("/login")},{icon:"warn",name:"前往绑定"});
@@ -128,11 +86,8 @@
         },
         created() {
             all.tool.send("rechargeList",null,res=>{
-                this.reChargeList=res.data;
-                res.data.forEach(item=>{
-                    if(item.is_online===1){this.onlineReCharge.push(item)}
-                    else {this.offlineReCharge.push(item)}
-                })
+                this.onlineReCharge=res.data.online_infos;
+                this.offlineReCharge=res.data.offline_infos;
             })
         }
 

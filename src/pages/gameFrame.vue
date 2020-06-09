@@ -1,12 +1,11 @@
 <template>
     <div class="gameFrame">
         <div class="pageTitle" v-if="!this.$store.state.isHorizontal">
-            <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+            <div class="iconBack" @click="back"></div>
             <div class="textTitle" v-text="gameTitle"></div>
         </div>
         <div class="contentView">
             <iframe class="iframe" :src="gameUrl" frameborder="0"></iframe>
-
         </div>
     </div>
 </template>
@@ -52,8 +51,10 @@
         position:relative;
     }
     .iconBack{
-        width:0.18rem;
-        height:0.34rem;
+        width:0.5rem;
+        height:0.5rem;
+        background:url("../assets/activity/btn_Back.png") no-repeat left center;
+        background-size:0.18rem 0.34rem;
         position:absolute;
         left:0.3rem;
     }

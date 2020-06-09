@@ -1,7 +1,7 @@
 <template>
     <div class="serviceCenter">
         <div class="pageTitle">
-            <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+            <div class="iconBack" @click="back"></div>
             <div class="textTitle">客服中心</div>
         </div>
         <div class="contentView">
@@ -106,8 +106,10 @@
         position:relative;
     }
     .iconBack{
-        width:0.18rem;
-        height:0.34rem;
+        width:0.5rem;
+        height:0.5rem;
+        background:url("../assets/activity/btn_Back.png") no-repeat left center;
+        background-size:0.18rem 0.34rem;
         position:absolute;
         left:0.3rem;
     }

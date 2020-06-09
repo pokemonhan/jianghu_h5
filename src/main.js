@@ -67,7 +67,10 @@ all.http.interceptors.response.use(res=>{
     all.store.commit("isLoading",false);
     error.response.data=all.tool.decrypt(error.response.data);
     console.log("拦截器",error.response);
-    if(error.response.status===401)all.tool.tipWinShow(error.response.data.message,()=>{all.router.push("/login")},{icon:"warn",name:"前往登陆"});
+    if(error.response.status===401){
+        all.tool.clearStore("isLogin");
+        all.tool.tipWinShow(error.response.data.message,()=>{all.router.push("/login")},{icon:"warn",name:"前往登陆"});
+    }
     if(error.response.status===403){
         let code=error.response.data.code;
         if(code==="100700" || code==="100701" || code==="100702" || code==="100703" || code==="100704" || code==="100705" || code==="100706" || code==="100707" || code==="100708"){

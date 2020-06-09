@@ -166,6 +166,21 @@ const Tool = {//工具汇总
         all.store.commit("vipLevel",data.grade);
         all.store.commit("experience",data.experience);
     },
+    getBeforeDate:(today,n)=>{//获取N天前日期
+        let date = new Date(today);
+        let year = date.getFullYear();
+        let mon=date.getMonth()+1;
+        let day=date.getDate();
+        if(day<=n){
+            if(mon>1)mon=mon-1;
+            else {year=year-1;mon=12}
+        }
+        date.setDate(date.getDate()-n);
+        year=date.getFullYear();
+        mon=date.getMonth()+1;
+        day=date.getDate();
+        return year+"-"+(mon<10?('0'+mon):mon)+"-"+(day<10?('0'+day):day)+" "+"00:00:00";
+    },
 
     //工具类别分割线---------------------------------------------------------------------------------------------//
 };

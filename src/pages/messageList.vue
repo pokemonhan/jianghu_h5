@@ -1,7 +1,7 @@
 <template>
     <div class="messageList">
         <div class="pageTitle">
-            <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+            <div class="iconBack" @click="back"></div>
             <div class="textTitle" v-text="title"></div>
             <div class="btnDelete" v-if="messageList.length>0" @click="showDeleteWin('all')">全部删除</div>
         </div>
@@ -92,8 +92,10 @@
         position:relative;
     }
     .iconBack{
-        width:0.18rem;
-        height:0.34rem;
+        width:0.5rem;
+        height:0.5rem;
+        background:url("../assets/activity/btn_Back.png") no-repeat left center;
+        background-size:0.18rem 0.34rem;
         position:absolute;
         left:0.3rem;
     }

@@ -1,7 +1,7 @@
 <template>
     <div class="activityDetail">
         <div class="pageTitle">
-            <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+            <div class="iconBack" @click="back"></div>
             <div class="textTitle" v-text="activityDetail.title">活动详情</div>
         </div>
         <div class="contentView">
@@ -9,7 +9,6 @@
                 <img class="imgContent" :src="activityDetail.imgContent"/>
                 <div class="btnTodo" @click="open(activityPath[activityDetail.title])"></div>
             </div>
-
         </div>
     </div>
 </template>
@@ -62,8 +61,10 @@
         position:relative;
     }
     .iconBack{
-        width:0.18rem;
-        height:0.34rem;
+        width:0.5rem;
+        height:0.5rem;
+        background:url("../assets/activity/btn_Back.png") no-repeat left center;
+        background-size:0.18rem 0.34rem;
         position:absolute;
         left:0.3rem;
     }

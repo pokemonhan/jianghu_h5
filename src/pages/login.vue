@@ -3,7 +3,7 @@
         <div class="pageTitle">
             <div class="textTitle">
                 <span>登录</span>
-                <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+                <div class="iconBack" @click="back"></div>
                 <span class="forget" @click="open('/forgetPassword')">忘记密码</span>
             </div>
             <img class="circleC" src="../assets/mine/img_CircleC.png"/>
@@ -118,10 +118,13 @@
         flex-shrink:0;
     }
     .iconBack{
-        width:0.18rem;
-        height:0.34rem;
+        width:0.5rem;
+        height:0.5rem;
+        background:url("../assets/activity/btn_Back.png") no-repeat left center;
+        background-size:0.18rem 0.34rem;
         position:absolute;
-        left:0;
+        left:0.3rem;
+        z-index:5;
     }
     .textTitle{
         height:1rem;

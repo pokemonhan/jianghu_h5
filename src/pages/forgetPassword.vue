@@ -2,7 +2,7 @@
     <div class="forgetPassword">
         <div class="pageTitle">
             <div class="textTitle">
-                <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+                <div class="iconBack" @click="back"></div>
                 <span>忘记密码</span>
                 <img class="iconService" @click="open('onlineService')" src="../assets/homePage/icon_Service.png"/>
             </div>
@@ -195,17 +195,23 @@
         flex-shrink:0;
     }
     .iconBack{
-        width:0.18rem;
-        height:0.34rem;
+        width:0.5rem;
+        height:0.5rem;
+        background:url("../assets/activity/btn_Back.png") no-repeat left center;
+        background-size:0.18rem 0.34rem;
+        position:absolute;
+        left:0.3rem;
     }
     .iconService{
         width:0.45rem;
         height:0.38rem;
+        position:absolute;
+        right:0.3rem;
     }
     .textTitle{
         height:1rem;
         display:flex;
-        justify-content:space-between;
+        justify-content:center;
         align-items:center;
         font-size:0.36rem;
         font-weight:400;

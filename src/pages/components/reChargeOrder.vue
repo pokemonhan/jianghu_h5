@@ -49,7 +49,7 @@
             },
             toDoCommit(){
                 if(this.checkAmount()){
-                    all.tool.send("recharge",{is_online:this.item.is_online,channel_id:this.item.id,money:this.amount},res=>{
+                    all.tool.send("recharge",{is_online:all.tool.getStore("reChargeIsOnline"),channel_id:this.item.id,money:this.amount},res=>{
                         this.toDoClose();
                         all.tool.setStore("orderDetail",res.data);
                         all.router.push("/reChargeOrderDetail")

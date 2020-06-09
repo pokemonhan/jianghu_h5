@@ -1,7 +1,7 @@
 <template>
     <div class="orderDetail">
         <div class="pageTitle">
-            <img class="iconBack" src="../assets/activity/btn_Back.png" @click="back"/>
+            <div class="iconBack" @click="back"></div>
             <div class="textTitle">订单</div>
         </div>
         <div class="contentView">
@@ -15,7 +15,7 @@
                 <span class="user" v-text="orderDetail.username"></span>
                 <span class="copy" v-clipboard:copy="orderDetail.username" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
             </div>
-            <div class="branchBar">
+            <div class="branchBar" v-if="orderDetail.branch">
                 <span class="barTitle">开户行：</span>
                 <span class="branch" v-text="orderDetail.branch"></span>
                 <span class="copy" v-clipboard:copy="orderDetail.branch" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
@@ -63,7 +63,12 @@
                 })
             },
             confirmOrder(){
-                all.tool.send("confirm",{order_no:this.orderDetail.order_no},res=>{
+                let isOnline=all.tool.getStore("reChargeIsOnline");
+                let orderData={is_online:isOnline,order_no:this.orderDetail.order_no};
+                if(isOnline!==1){
+                    orderData={is_online:isOnline,order_no:this.orderDetail.order_no,card_number:this.orderDetail.account,branch:this.orderDetail.branch}
+                }
+                all.tool.send("confirm",orderData,res=>{
                     all.tool.tipWinShow("已通知管理员，系统将优先处理您的订单！",()=>{this.back()},{icon:"right"})
                 })
             },
@@ -117,8 +122,10 @@
         position:relative;
     }
     .iconBack{
-        width:0.18rem;
-        height:0.34rem;
+        width:0.5rem;
+        height:0.5rem;
+        background:url("../assets/activity/btn_Back.png") no-repeat left center;
+        background-size:0.18rem 0.34rem;
         position:absolute;
         left:0.3rem;
     }
