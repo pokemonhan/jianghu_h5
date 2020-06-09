@@ -162,6 +162,7 @@
         background:#ffffff;
         border-radius:0.08rem;
         padding-left:0.2rem;
+        flex-shrink:0;
     }
     .leftSide,.rightSide{
         display:flex;

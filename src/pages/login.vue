@@ -52,7 +52,7 @@
             open(path){all.router.push(path)},
             back(){
                 all.tool.clearStore("guardPath");
-                all.router.go(-1);
+                all.router.push("/");
             },
             eyeState(value){this.placeholderState=value},
             limitMobile(){this.mobile=this.mobile.match(/[0-9]*/i)[0]},
