@@ -126,6 +126,9 @@
     }
     .dateBar{
         width:6.9rem;
+        height:0.44rem;
+        flex-shrink:0;
+        margin-bottom:0.3rem;
         display:flex;
         justify-content:flex-start;
     }
@@ -158,7 +161,7 @@
         justify-content:space-between;
         width:6.9rem;
         height:1.1rem;
-        margin-top:0.3rem;
+        margin-bottom:0.3rem;
         background:#ffffff;
         border-radius:0.08rem;
         padding-left:0.2rem;
