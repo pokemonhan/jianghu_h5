@@ -29,6 +29,8 @@ import promoteWashCode from '../pages/promoteWashCode'
 import gameList from '../pages/gameList'
 import gameFrame from '../pages/gameFrame'
 import reChargeRecord from '../pages/reChargeRecord'
+import withdrawRecord from '../pages/withdrawRecord'
+import withdrawDetail from '../pages/withdrawDetail'
 
 
 Vue.use(Router);
@@ -56,6 +58,8 @@ export default new Router({
         { path: '/reChargeOrderDetail', component: reChargeOrderDetail},
         { path: '/reChargePay', component: reChargePay},
         { path: '/reChargeRecord', component: reChargeRecord},
+        { path: '/withdrawRecord', component: withdrawRecord},
+        { path: '/withdrawDetail', component: withdrawDetail},
         { path: '/login', component: login},
         { path: '/register', component: register},
         { path: '/forgetPassword', component: forgetPassword},

@@ -66,7 +66,7 @@
                         {icon:require("../assets/mine/icon_PersonalList.png"),name:"个人报表"},
                         {icon:require("../assets/mine/icon_BetRecord.png"),name:"投注记录"},
                         {icon:require("../assets/mine/icon_LoadRecord.png"),name:"充值记录",path:"/reChargeRecord"},
-                        {icon:require("../assets/mine/icon_WithdrawRecord.png"),name:"提现记录"}
+                        {icon:require("../assets/mine/icon_WithdrawRecord.png"),name:"提现记录",path:"/withdrawRecord"}
                         ]},
                     {title:"其他服务",list:[
                         {icon:require("../assets/mine/icon_SafelyCenter.png"),name:"安全中心",path:"/safelyCenter"},
