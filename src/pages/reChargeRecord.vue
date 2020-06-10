@@ -21,7 +21,7 @@
                 </div>
                 <div class="rightSide">
                     <div class="timeBar">
-                        <div class="status" :class="{red:item.status!==0 && item.status!==1,green:item.status===1,yellow:item.status===0}" v-text="item.status===0?'审核中':item.status===1?'审核通过':'审核失败'"></div>
+                        <div class="status" :class="{red:item.status===-1 || item.status===-2 || item.status===-3,green:item.status===1,yellow:item.status===0}" v-text="item.status===0?'审核中':item.status===1?'审核通过':item.status===-3?'订单撤销':item.status===-2?'订单过期':item.status===-1?'审核拒绝':'审核失败'"></div>
                         <div class="time" v-text="item.created_at"></div>
                     </div>
                     <div class="detailBtn">详情</div>

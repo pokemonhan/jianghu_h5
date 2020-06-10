@@ -79,6 +79,7 @@
             order(item,isOnline){
                 all.store.commit("reChargeOrder",{isShow:true,item:item});
                 all.tool.setStore("reChargeIsOnline",isOnline);
+                if(isOnline===0)all.tool.setStore("offlineRecharge",item);
             },
             isHasCard(){
                 if(!all.store.state.isHasCard)all.tool.tipWinShow("您还未绑定取款银行卡或支付宝账号！",()=>{all.router.push("/login")},{icon:"warn",name:"前往绑定"});

@@ -9,7 +9,7 @@
                     <div class="itemIcon">
                         <img class="icon" src="../../assets/reCharge/icon_Money .png"/>
                     </div>
-                    <input type="text" class="inputEdit" v-model="amount" placeholder="请输入您的充值金额" @blur="checkAmount" @keyup="limitAmount" maxlength="8">
+                    <input type="text" class="inputEdit" v-model="amount" :placeholder="'最小充值'+minAmount+'元,最大充值'+maxAmount+'元'" @blur="checkAmount" @keyup="limitAmount" maxlength="8">
                 </div>
                 <div class="fastItem">
                     <div class="amountFast" v-for="item in fastAmount" @click="fastEnter(item)" v-text="item"></div>
@@ -24,6 +24,8 @@
     export default {
         data(){
             return{
+                minAmount:0,
+                maxAmount:0,
                 amount:"",
                 fastAmount:[100,500,1000,2000,5000,10000,20000,50000],
                 item:this.$store.state.reChargeOrder.item
@@ -36,13 +38,25 @@
                     all.tool.editTipShow("充值金额不能为空！");
                     return false;
                 }
+                else if(this.amount>this.maxAmount){
+                    all.tool.editTipShow("最大充值额度为:"+this.maxAmount+"元");
+                    return false;
+                }
                 else if(!/^([0-9]{1,8})$/.test(this.amount)){
                     all.tool.editTipShow("请输入正确的充值金额！");
                     return false
                 }
+                else if(this.amount<this.minAmount){
+                    all.tool.editTipShow("最小充值额度为:"+this.minAmount+"元");
+                    return false
+                }
                 else return true;
             },
-            fastEnter(amount){this.amount=amount},
+            fastEnter(amount){
+                if(amount<this.minAmount)return all.tool.editTipShow("最小充值额度为:"+this.minAmount+"元");
+                if(amount>this.maxAmount)return all.tool.editTipShow("最大充值额度为:"+this.maxAmount+"元");
+                this.amount=amount
+            },
             toDoClose(){
                 all.$(".setBox").addClass("zoomOut");
                 setTimeout(()=>{all.store.commit("reChargeOrder",{isShow:false})},150)
@@ -56,6 +70,10 @@
                     })
                 }
             },
+        },
+        created() {
+            this.minAmount=all.tool.getStore("offlineRecharge").transfer_account.min_amount;
+            this.maxAmount=all.tool.getStore("offlineRecharge").transfer_account.max_amount
         }
     }
 </script>

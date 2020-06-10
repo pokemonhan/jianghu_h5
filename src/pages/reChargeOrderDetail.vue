@@ -7,18 +7,18 @@
         <div class="contentView">
             <div class="accountBar">
                 <span class="barTitle">账户：</span>
-                <span class="account" v-text="orderDetail.account"></span>
-                <span class="copy" v-clipboard:copy="orderDetail.account" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
+                <span class="account" v-text="cardInfos.transfer_account.account"></span>
+                <span class="copy" v-clipboard:copy="cardInfos.transfer_account.account" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
             </div>
             <div class="userBar">
                 <span class="barTitle">持卡人：</span>
-                <span class="user" v-text="orderDetail.username"></span>
-                <span class="copy" v-clipboard:copy="orderDetail.username" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
+                <span class="user" v-text="cardInfos.transfer_account.username"></span>
+                <span class="copy" v-clipboard:copy="cardInfos.transfer_account.username" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
             </div>
-            <div class="branchBar" v-if="orderDetail.branch">
+            <div class="branchBar" v-if="cardInfos.transfer_account.branch.length>1">
                 <span class="barTitle">开户行：</span>
-                <span class="branch" v-text="orderDetail.branch"></span>
-                <span class="copy" v-clipboard:copy="orderDetail.branch" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
+                <span class="branch" v-text="cardInfos.transfer_account.branch"></span>
+                <span class="copy" v-clipboard:copy="cardInfos.transfer_account.branch" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
             </div>
             <div class="orderNoBar">
                 <span class="barTitle">订单号：</span>
@@ -27,7 +27,7 @@
             </div>
             <div class="amountBar">
                 <span class="barTitle">转账额度：</span>
-                <span class="amount" v-text="orderDetail.real_money"></span>
+                <span class="amount" v-text="orderDetail.money"></span>
             </div>
             <div class="noticeBar">
                 <span class="noticeText">注意：请使用系统生成的转账金额</span>
@@ -49,6 +49,7 @@
         data () {
             return {
                 orderDetail:null,
+                cardInfos:null,
                 minute:0,
                 seconds:0,
                 timeRun:null
@@ -93,8 +94,7 @@
         },
         created() {
             this.orderDetail=all.tool.getStore("orderDetail");
-            console.log(new Date().getTime());
-            console.log(new Date(this.orderDetail.expired_at).getTime());
+            this.cardInfos=all.tool.getStore("offlineRecharge");
             this.timeRun=setInterval(()=>{this.countTime()},1000)
         },
         destroyed() {

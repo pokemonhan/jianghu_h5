@@ -147,6 +147,7 @@
         background-size:0.18rem 0.34rem;
         position:absolute;
         left:0.3rem;
+        z-index:3;
     }
     .circleA{
         width:2.58rem;
