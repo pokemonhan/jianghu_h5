@@ -10,6 +10,7 @@
                         <img class="icon" src="../../assets/reCharge/icon_Money .png"/>
                     </div>
                     <input type="text" class="inputEdit" v-model="amount" :placeholder="'最小充值'+minAmount+'元,最大充值'+maxAmount+'元'" @blur="checkAmount" @keyup="limitAmount" maxlength="8">
+                    <div class="clear" @click="clear">清除</div>
                 </div>
                 <div class="fastItem">
                     <div class="amountFast" v-for="item in fastAmount" @click="fastEnter(item)" v-text="item"></div>
@@ -56,6 +57,9 @@
                 if(amount<this.minAmount)return all.tool.editTipShow("最小充值额度为:"+this.minAmount+"元");
                 if(amount>this.maxAmount)return all.tool.editTipShow("最大充值额度为:"+this.maxAmount+"元");
                 this.amount=amount
+            },
+            clear(){
+                this.amount=""
             },
             toDoClose(){
                 all.$(".setBox").addClass("zoomOut");
@@ -146,6 +150,13 @@
         margin-bottom:0.3rem;
         position:relative;
         flex-shrink:0;
+    }
+    .clear{
+        color:#feff03;
+        font-weight:400;
+        text-decoration:underline;
+        position:absolute;
+        right:0.2rem;
     }
     .inputItem:last-child{
         margin-bottom:0;

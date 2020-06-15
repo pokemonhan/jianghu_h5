@@ -9,7 +9,7 @@
                 <div class="barTitle">快捷查询：</div>
                 <div class="dateBtn" :class="{choose:index===active}" v-for="(item,index) in btnArray" v-text="item" @click="chooseTime(index)"></div>
             </div>
-            <div class="recordBar animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in recordList">
+            <div class="recordBar animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in recordList" @click="showDetail(item)">
                 <div class="leftSide">
                     <div class="itemImg">
                         <img class="iconImg" :src="iconList[item.finance_type_name]"/>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="rightSide">
                     <div class="timeBar">
-                        <div class="status" :class="{red:item.status===-1 || item.status===-2 || item.status===-3,green:item.status===1,yellow:item.status===0}" v-text="item.status===0?'审核中':item.status===1?'审核通过':item.status===-3?'订单撤销':item.status===-2?'订单过期':item.status===-1?'审核拒绝':'审核失败'"></div>
+                        <div class="status" :class="{red:item.status===0 || item.status===3 || item.status===4,green:item.status===2,yellow:item.status===1}" v-text="statusList[item.status]"></div>
                         <div class="time" v-text="item.created_at"></div>
                     </div>
                     <div class="detailBtn">详情</div>
@@ -52,8 +52,11 @@
                     "银行卡转账":require('../assets/reCharge/icon_BankPay.png'),
                 },
                 statusList:{
-                    0:"审核中",
-                    1:"审核通过"
+                    0:"未确认支付",
+                    1:"审核中",
+                    2:"审核通过",
+                    3:"审核拒绝",
+                    4:"取消订单"
                 }
             }
         },
@@ -74,6 +77,16 @@
                     this.recordList=res.data.data;
                     if(res.data.total===0)all.tool.editTipShow("暂无充值记录")
                 })
+            },
+            showDetail(item){
+                if(item.status===0){
+                    all.tool.setStore("orderDetail",{money:item.money,real_money:item.real_money,order_no:item.order_no,expired_at:item.expired_at});
+                    all.tool.setStore("offlineRecharge",{transfer_account:{account:item.account,branch:item.branch,username:item.username}});
+                    all.router.push("/reChargeOrderDetail")
+                }else {
+                    all.tool.setStore("reChargeRecordDetail",item);
+                    all.router.push("/reChargeRecordDetail")
+                }
             }
         },
         created() {
@@ -211,7 +224,7 @@
         align-items:center;
     }
     .status{
-        width:1.3rem;
+        width:1.5rem;
     }
     .yellow{
         color:#ffc600;

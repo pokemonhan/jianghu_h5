@@ -186,6 +186,7 @@
             if(now<this.nextReqTime){
                 this.startCount(parseInt(this.nextReqTime-now));
             }
+            this.inviteCode=window.location.search.slice(4)
         }
     }
 </script>

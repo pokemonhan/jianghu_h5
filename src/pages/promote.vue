@@ -27,22 +27,22 @@
                 </div>
             </div>
             <div class="rqBox animated bounceInUp">
-                <img class="code animated delay-2s flash" src="../assets/promote/icon_RqCode.png"/>
+                <img class="code animated delay-2s flash" :src="'https://api.qrserver.com/v1/create-qr-code/?data='+rqCodeUrl"/>
                 <div class="codeId">
                     <div class="codeText">
                         <span>邀请码：</span>
                         <span class="id" v-text="userId"></span>
                     </div>
-                    <span class="copy" v-clipboard:copy="userId" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
+                    <span class="copy" v-clipboard:copy="userId" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制分享</span>
                 </div>
                 <div class="net">
-                    <div class="netText" v-text="userUrl"></div>
-                    <span class="copy" v-clipboard:copy="userUrl" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制</span>
+                    <div class="netText" v-text="rqCodeUrl"></div>
+                    <span class="copy" v-clipboard:copy="rqCodeUrl" v-clipboard:success="onCopy" v-clipboard:error="onCopyError">复制分享</span>
                 </div>
-                <div class="shareBtn">
+                <!--<div class="shareBtn">
                     <div class="shareWeChat">分享微信好友</div>
                     <div class="shareFriend">分享到朋友圈</div>
-                </div>
+                </div>-->
             </div>
         </div>
         <comMenu/>
@@ -57,9 +57,10 @@
         },
         data () {
             return {
+                rqCodeUrl:window.location.origin+"/register?id="+this.$store.state.guid,
                 banner:require("../assets/homePage/bannerA.png"),
-                userId:"88888",
-                userUrl:"www.JiangHuHuYu.com",
+                userId:this.$store.state.guid,
+             /*   userUrl:window.location.origin+this.,*/
                 itemList:[
                     {icon:require("../assets/promote/icon_Notice.png"),name:"推广说明",path:"/promoteExplain"},
                     {icon:require("../assets/promote/icon_Earnings.png"),name:"推广收益",path:"/promoteEarnings"},
@@ -269,7 +270,6 @@
         font-size:0.24rem;
         color:#666666;
         line-height:0.4rem;
-        width:3rem;
         display:flex;
         justify-content:space-between;
         text-overflow:ellipsis;
@@ -296,7 +296,6 @@
         text-decoration:underline;
     }
     .netText{
-        width:2.5rem;
         font-size:0.24rem;
         color:#666666;
         text-overflow:ellipsis;

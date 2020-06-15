@@ -29,6 +29,7 @@ import promoteWashCode from '../pages/promoteWashCode'
 import gameList from '../pages/gameList'
 import gameFrame from '../pages/gameFrame'
 import reChargeRecord from '../pages/reChargeRecord'
+import reChargeRecordDetail from '../pages/reChargeRecordDetail'
 import withdrawRecord from '../pages/withdrawRecord'
 import withdrawDetail from '../pages/withdrawDetail'
 
@@ -58,6 +59,7 @@ export default new Router({
         { path: '/reChargeOrderDetail', component: reChargeOrderDetail},
         { path: '/reChargePay', component: reChargePay},
         { path: '/reChargeRecord', component: reChargeRecord},
+        { path: '/reChargeRecordDetail', component: reChargeRecordDetail},
         { path: '/withdrawRecord', component: withdrawRecord},
         { path: '/withdrawDetail', component: withdrawDetail},
         { path: '/login', component: login},
