@@ -63,7 +63,7 @@
                                 this.$parent.bankAccountList=this.bankAccountList;
                                 this.$parent.aliAccountList=this.aliAccountList;
                             });
-                            all.tool.tipWinShow("删除成功！",()=>{},{icon:"right",name:"前往绑定"});
+                            all.tool.tipWinShow("删除成功！",()=>{},{icon:"right"});
                         })
 
                     })
