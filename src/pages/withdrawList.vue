@@ -5,12 +5,6 @@
             <div class="textTitle">取款管理</div>
         </div>
         <div class="contentView">
-            <!--<div class="noBind" v-if="cardList.length===0">
-                <img class="bindIcon" src="../assets/reCharge/icon_NoBind.png"/>
-                <div class="bindText">您还没绑定银行卡或支付宝账号！</div>
-                <div class="bindBtn" @click="showAddBankCard">去绑定银行卡</div>
-                <div class="bindBtn" @click="showAddAliPay">去绑定支付宝</div>
-            </div>-->
             <div class="bankCardList">
                 <div class="listTitle">
                     <div class="titleText">银行卡列表：</div>
@@ -34,7 +28,7 @@
                     <div class="addBtn" @click="showAddAliPay">添加支付宝</div>
                 </div>
                 <div class="cardItem" v-for="item in aliAccountList" @click="withdraw(item)">
-                    <img class="accountBg" :src="require('../assets/reCharge/bg_'+item.code+'.png')"/>
+                    <img class="accountBg" :src="bankBgList[item.code]"/>
                     <div class="itemText">
                         <div class="bankName" v-text="item.owner_name"></div>
                         <div>
@@ -73,7 +67,43 @@
             return {
                 cardList:[],
                 aliAccountList:[],
-                bankAccountList:[]
+                bankAccountList:[],
+                bankBgList:{
+                    ABC:require("../assets/reCharge/bg_ABC.png"),
+                    ADBC:require("../assets/reCharge/bg_ADBC.png"),
+                    ALIPAY:require("../assets/reCharge/bg_ALIPAY.png"),
+                    BCOM:require("../assets/reCharge/bg_BCOM.png"),
+                    BOB:require("../assets/reCharge/bg_BOB.png"),
+                    BOC:require("../assets/reCharge/bg_BOC.png"),
+                    BOHAIB:require("../assets/reCharge/bg_BOHAIB.png"),
+                    BOS:require("../assets/reCharge/bg_BOS.png"),
+                    BRCB:require("../assets/reCharge/bg_BRCB.png"),
+                    CCB:require("../assets/reCharge/bg_CCB.png"),
+                    CDB:require("../assets/reCharge/bg_CDB.png"),
+                    CEB:require("../assets/reCharge/bg_CEB.png"),
+                    CIB:require("../assets/reCharge/bg_CIB.png"),
+                    CITIC:require("../assets/reCharge/bg_CITIC.png"),
+                    CMB:require("../assets/reCharge/bg_CMB.png"),
+                    CMBC:require("../assets/reCharge/bg_CMBC.png"),
+                    CZB:require("../assets/reCharge/bg_CZB.png"),
+                    DLB:require("../assets/reCharge/bg_DLB.png"),
+                    EGBANK:require("../assets/reCharge/bg_EGBANK.png"),
+                    EXIMBANK:require("../assets/reCharge/bg_EXIMBANK.png"),
+                    GDB:require("../assets/reCharge/bg_GDB.png"),
+                    HANGSENG:require("../assets/reCharge/bg_HANGSENG.png"),
+                    HCCB:require("../assets/reCharge/bg_HCCB.png"),
+                    HKBEA:require("../assets/reCharge/bg_HKBEA.png"),
+                    HSBANK:require("../assets/reCharge/bg_HSBANK.png"),
+                    HSBC:require("../assets/reCharge/bg_HSBC.png"),
+                    HXB:require("../assets/reCharge/bg_HXB.png"),
+                    ICBC:require("../assets/reCharge/bg_ICBC.png"),
+                    NBBANK:require("../assets/reCharge/bg_NBBANK.png"),
+                    NJCB:require("../assets/reCharge/bg_NJCB.png"),
+                    PBC:require("../assets/reCharge/bg_PBC.png"),
+                    PSBC:require("../assets/reCharge/bg_PSBC.png"),
+                    SDB:require("../assets/reCharge/bg_SDB.png"),
+                    SPDB:require("../assets/reCharge/bg_SPDB.png"),
+                }
             }
         },
         methods:{
@@ -162,34 +192,6 @@
         flex-direction:column;
         align-items:center;
         overflow:scroll;
-    }
-    .noBind{
-        margin-top:0.5rem;
-    }
-    .bindIcon{
-        width:2.78rem;
-        height:auto;
-        display:block;
-        margin:0 auto;
-    }
-    .bindText{
-        font-size:0.3rem;
-        color:#96bbf3;
-        margin-top:0.2rem;
-        margin-bottom:1.4rem;
-        text-align:center;
-    }
-    .bindBtn{
-        width:5.76rem;
-        height:0.74rem;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        font-size:0.28rem;
-        color:#ffffff;
-        background:url("../assets/reCharge/btn_Bind.png") no-repeat center center;
-        background-size:100% 100%;
-        margin-bottom:0.4rem;
     }
     .bankCardList{
         width:6.9rem;
