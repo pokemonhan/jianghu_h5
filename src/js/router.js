@@ -32,6 +32,7 @@ import reChargeRecord from '../pages/reChargeRecord'
 import reChargeRecordDetail from '../pages/reChargeRecordDetail'
 import withdrawRecord from '../pages/withdrawRecord'
 import withdrawDetail from '../pages/withdrawDetail'
+import withdrawList from "../pages/withdrawList";
 
 
 Vue.use(Router);
@@ -62,6 +63,7 @@ export default new Router({
         { path: '/reChargeRecordDetail', component: reChargeRecordDetail},
         { path: '/withdrawRecord', component: withdrawRecord},
         { path: '/withdrawDetail', component: withdrawDetail},
+        { path: '/withdrawList', component: withdrawList},
         { path: '/login', component: login},
         { path: '/register', component: register},
         { path: '/forgetPassword', component: forgetPassword},

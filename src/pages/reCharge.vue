@@ -19,7 +19,7 @@
                     <span>当前余额：</span>
                     <span class="amount animated flash delay-1s" v-text="this.$store.state.amount">5000</span>
                 </div>
-                <div class="withdrawal" @click="isHasCard">取款</div>
+                <div class="withdrawal" @click="open('withdrawList')">取款</div>
             </div>
             <div class="chooseTitle animated fadeInUp">请选择支付方式：</div>
             <div class="recommend animated fadeInDown">推荐使用官方充值，安全快捷精确到秒到帐！</div>
@@ -32,9 +32,9 @@
             </div>
             <div class="reChargeItem animated faster" :class="{fadeInLeft:index%2===0,lightSpeedIn:index%2===1}" v-for="(item,index) in onlineReCharge" @click="order(item,1)">
                 <div class="itemImg">
-                    <img class="iconImg" :src="iconList[item.name]"/>
+                    <img class="iconImg" :src="iconList[item.frontend_name]"/>
                 </div>
-                <div class="itemName" v-text="item.name"></div>
+                <div class="itemName" v-text="item.frontend_name"></div>
                 <img class="iconFire" v-if="item.isFire" src="../assets/reCharge/icon_Fire.png"/>
             </div>
         </div>
@@ -58,21 +58,25 @@
                 iconList:{
                     "支付宝转账":require('../assets/reCharge/icon_AliPay.png'),
                     "支付宝支付":require('../assets/reCharge/icon_AliPay.png'),
+                    "支付宝扫码1":require('../assets/reCharge/icon_AliPay.png'),
+                    "支付宝 WAP":require('../assets/reCharge/icon_AliPay.png'),
                     "微信转账":require('../assets/reCharge/icon_WeChat.png'),
+                    "微信扫码":require('../assets/reCharge/icon_WeChat.png'),
+                    "微信H5":require('../assets/reCharge/icon_WeChat.png'),
                     "微信支付":require('../assets/reCharge/icon_WeChat.png'),
                     "银联支付":require('../assets/reCharge/icon_UnionPay.png'),
                     "在线网银支付":require('../assets/reCharge/icon_OnlinePay.png'),
                     "京东钱包":require('../assets/reCharge/icon_JdPay.jpg'),
                     "百度钱包":require('../assets/reCharge/icon_BaiduPay.png'),
                     "云闪付转账":require('../assets/reCharge/icon_CloudPay.png'),
+                    "云闪付":require('../assets/reCharge/icon_CloudPay.png'),
                     "银行卡转账":require('../assets/reCharge/icon_BankPay.png'),
                 },
             }
         },
 
         methods:{
-            open(path,item){
-                if(name!==null)all.tool.setStore("reChargeItem",item);
+            open(path){
                 all.router.push(path);
             },
             back(){all.router.go(-1)},
@@ -80,14 +84,14 @@
                 all.store.commit("reChargeOrder",{isShow:true,item:item});
                 all.tool.setStore("reChargeIsOnline",isOnline);
                 if(isOnline===0)all.tool.setStore("offlineRecharge",item);
+                if(isOnline===1)all.tool.setStore("onlineRecharge",item);
             },
-            isHasCard(){
-                if(!all.store.state.isHasCard)all.tool.tipWinShow("您还未绑定取款银行卡或支付宝账号！",()=>{all.router.push("/login")},{icon:"warn",name:"前往绑定"});
-            }
         },
         created() {
             all.tool.send("rechargeList",null,res=>{
-                this.onlineReCharge=res.data.online_infos;
+                res.data.online_infos.forEach(item=>{
+                    item.gateway.forEach(type=>{this.onlineReCharge.push(type)})
+                });
                 this.offlineReCharge=res.data.offline_infos;
             })
         }

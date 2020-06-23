@@ -1,19 +1,32 @@
 <template>
-    <div class="setGamePassword">
+    <div class="withdrawOrder">
         <div class="setBox animated fadeInDown faster">
             <img class="bgLogin" src="../../assets/login/bg_Login.png"/>
             <img class="iconClose" @click="toDoClose" src="../../assets/mine/icon_Close.png"/>
-            <span class="setTitle" v-text="this.$store.state.reChargeOrder.item.name"></span>
+            <span class="setTitle">提现</span>
             <div class="setBar">
                 <div class="inputItem">
                     <div class="itemIcon">
                         <img class="icon" src="../../assets/reCharge/icon_Money .png"/>
                     </div>
-                    <input type="text" class="inputEdit" v-model="amount" :placeholder="'最少'+minAmount+'元,最多'+maxAmount+'元'" @blur="checkAmount" @keyup="limitAmount" maxlength="8">
+                    <input type="text" class="inputEdit" v-model="amount" placeholder="请输入要提现的额度" @blur="checkAmount" @keyup="limitAmount" maxlength="8">
                     <div class="clear" @click="clear">清除</div>
                 </div>
-                <div class="fastItem">
-                    <div class="amountFast" v-for="item in fastAmount" @click="fastEnter(item)" v-text="item"></div>
+                <!--<div class="inputItem">
+                    <div class="itemIcon">
+                        <img class="icon" src="../../assets/login/icon_RePassword.png"/>
+                    </div>
+                    <input :type="rePasswordState" class="inputEdit" v-model="rePassword" placeholder="请确认安全码(取款密码)" @blur="checkRePassword" @keyup="limitRePassword" maxlength="16">
+                    <img v-if="rePasswordState==='password'" class="iconEye" @click="rePasswordShow('text')" src="../../assets/mine/icon_EyeClose.png"/>
+                    <img v-if="rePasswordState==='text'" class="iconEye" @click="rePasswordShow('password')" src="../../assets/mine/icon_EyeOpen.png"/>
+                </div>-->
+                <div class="inputItem">
+                    <div class="itemIcon">
+                        <img class="icon" src="../../assets/login/icon_Lock.png"/>
+                    </div>
+                    <input :type="passwordState" class="inputEdit" v-model="password" placeholder="请输入安全码(取款密码)" @blur="checkPassword" @keyup="limitPassword" maxlength="16">
+                    <img v-if="passwordState==='password'" class="iconEye" @click="passwordShow('text')" src="../../assets/mine/icon_EyeClose.png"/>
+                    <img v-if="passwordState==='text'" class="iconEye" @click="passwordShow('password')" src="../../assets/mine/icon_EyeOpen.png"/>
                 </div>
             </div>
             <div class="commit" @click="toDoCommit">确定</div>
@@ -25,79 +38,75 @@
     export default {
         data(){
             return{
-                minAmount:0,
-                maxAmount:0,
                 amount:"",
-                is_online:0,
-                fastAmount:[100,500,1000,2000,5000,10000,20000,50000],
-                item:this.$store.state.reChargeOrder.item
+                password:"",
+                passwordState:"password",
+                withdrawItem:""
             }
         },
         methods:{
             limitAmount(){this.amount=this.amount.match(/[0-9]*/i)[0]},
             checkAmount(){
                 if(this.amount.length===0){
-                    all.tool.editTipShow("充值金额不能为空！");
+                    all.tool.editTipShow("提现金额不能为空！");
                     return false;
                 }
-                else if(this.amount>this.maxAmount){
-                    all.tool.editTipShow("最大充值额度为:"+this.maxAmount+"元");
+                else if(this.amount>parseInt(this.$store.state.amount)){
+                    all.tool.editTipShow("最大提现额度为:"+parseInt(this.$store.state.amount)+"元");
                     return false;
                 }
                 else if(!/^([0-9]{1,8})$/.test(this.amount)){
                     all.tool.editTipShow("请输入正确的充值金额！");
                     return false
                 }
-                else if(this.amount<this.minAmount){
-                    all.tool.editTipShow("最小充值额度为:"+this.minAmount+"元");
+                else if(this.amount<0){
+                    all.tool.editTipShow("提现额度不能小于０元元");
                     return false
                 }
                 else return true;
             },
-            fastEnter(amount){
-                if(amount<this.minAmount)return all.tool.editTipShow("最小充值额度为:"+this.minAmount+"元");
-                if(amount>this.maxAmount)return all.tool.editTipShow("最大充值额度为:"+this.maxAmount+"元");
-                this.amount=amount
-            },
             clear(){
                 this.amount=""
             },
+            limitPassword(){this.password=this.password.match(/[0-9]*/i)[0]},
+            checkPassword(){
+                if(this.password.length===0){
+                    all.tool.editTipShow("安全码不能为空！");
+                    return false;
+                }
+                else if(!/^([a-zA-Z0-9]{8,16})$/.test(this.password)){
+                    all.tool.editTipShow("请输入正确的8至16位数字或字母安全码！");
+                    return false
+                }
+                else return true;
+            },
+            passwordShow(text){
+                this.passwordState=text
+            },
             toDoClose(){
                 all.$(".setBox").addClass("zoomOut");
-                setTimeout(()=>{all.store.commit("reChargeOrder",{isShow:false})},150)
+                setTimeout(()=>{all.store.commit("isShowWithdrawOrder",false)},150)
             },
             toDoCommit(){
-                if(this.checkAmount()){
-                    all.tool.send("recharge",{is_online:all.tool.getStore("reChargeIsOnline"),channel_id:this.item.id,money:this.amount},res=>{
+                if(this.checkAmount() && this.checkPassword()){
+                    all.tool.send("withdrawal",{amount:this.amount,bank_id:this.withdrawItem.id,fund_password:this.password},res=>{
                         this.toDoClose();
-                        if(this.is_online===1){
-                            window.open(res.data.url);
-                        }else {
-                            all.tool.setStore("orderDetail",res.data);
-                            all.router.push("/reChargeOrderDetail")
-                        }
-
+                        /*all.tool.send("dynamicInformation",null,result=>{
+                            all.store.commit("amount",result.data.balance)
+                        });*/
+                        all.tool.tipWinShow("已成功提交提现审请，请等待审核！",()=>{},{icon:"right"});
                     })
                 }
             },
         },
         created() {
-            this.is_online=all.tool.getStore("reChargeIsOnline");
-            if(this.is_online===0){
-                this.minAmount=all.tool.getStore("offlineRecharge").transfer_account.min_amount;
-                this.maxAmount=all.tool.getStore("offlineRecharge").transfer_account.max_amount
-            }
-            if(this.is_online===1){
-                this.minAmount=all.tool.getStore("onlineRecharge").min_amount;
-                this.maxAmount=all.tool.getStore("onlineRecharge").max_amount
-            }
-
+            this.withdrawItem=all.tool.getStore("withdrawItem")
         }
     }
 </script>
 
 <style scoped>
-    .setGamePassword{
+    .withdrawOrder{
         width:100%;
         height:100%;
         position:absolute;
@@ -113,7 +122,7 @@
     }
     .setBox{
         width:6.9rem;
-        height:5.9rem;
+        height:4.9rem;
         border-radius:0.08rem;
         background:#20a6f9;
         position:relative;
@@ -145,7 +154,7 @@
     }
     .setBar{
         width:6.5rem;
-        height:3.8rem;
+        height:2.8rem;
         border-radius:0.08rem;
         background:#ffffff;
         display:flex;
@@ -164,13 +173,6 @@
         margin-bottom:0.3rem;
         position:relative;
         flex-shrink:0;
-    }
-    .clear{
-        color:#feff03;
-        font-weight:400;
-        text-decoration:underline;
-        position:absolute;
-        right:0.2rem;
     }
     .inputItem:last-child{
         margin-bottom:0;
@@ -198,26 +200,11 @@
         font-size:0.24rem;
         color:#e9e9e9
     }
-    .fastItem{
-        display:flex;
-        width:5.4rem;
-        height:1.3rem;
-        flex-wrap:wrap;
-        justify-content:space-between;
-        align-content:space-between;
-
-    }
-    .amountFast{
-        width:1.2rem;
-        height:0.5rem;
-        border-radius:0.08rem;
-        background:#149cfb;
-        font-size:0.28rem;
-        color:#ffffff;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        font-weight:400;
+    .iconEye{
+        width:0.35rem;
+        height:auto;
+        position:absolute;
+        right:0.2rem;
     }
     .commit{
         font-size:0.34rem;
@@ -232,5 +219,12 @@
         align-items:center;
         margin-top:0.3rem;
         box-shadow:0 0.01rem 0.03rem rgba(0,27,97,0.5);
+    }
+    .clear{
+        color:#feff03;
+        font-weight:400;
+        text-decoration:underline;
+        position:absolute;
+        right:0.2rem;
     }
 </style>

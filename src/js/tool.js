@@ -74,6 +74,7 @@ const Tool = {//工具汇总
         let apiUrl=null;
         let sendType=null;
         if(url.slice(0,8)==="openGame"){apiUrl=url.slice(8);sendType="get"}
+        /*else if(url.slice(0,6)==="online"){apiUrl=url.slice(31);sendType="post"}*/
         else if(url.slice(0,11)==="setPassword"){apiUrl=url.slice(11);sendType="post"}
         else if(!all.config.api[url])return all.tool.editTipShow("API不存在或已失效");
         else {apiUrl=all.config.api[url].url;sendType=all.config.api[url].method}

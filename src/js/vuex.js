@@ -21,8 +21,14 @@ const state={
     setGamePassword:{isShow:false,registerUrl:null,item:null},
     changeGamePassword:{isShow:false},
     changePassword:{isShow:false,registerUrl:null,item:null},
+    isShowChangeSafePassword:false,
     reChargeOrder:{isShow:false},
     isHasCard:false,
+    isShowAddAliPay:false,
+    isShowSetSafePassword:false,
+    isShowCheckSafePassword:false,
+    isShowWithdrawOrder:false,
+    isShowAddBankCard:false,
     messageData:{
         notice:[
             {title:"1系统维护通知",content:"尊敬的玩家，本站因系统升级，将于2019-12-30 15:30:00至2019-12-30 16:30:00期间暂停游戏服务，进行升级，如有不便，敬请谅解！",time:"2019-12-30 15:30:24",isRead:false},
