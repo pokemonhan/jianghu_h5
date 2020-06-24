@@ -11,7 +11,7 @@
                     <div class="addBtn" @click="showAddBankCard">添加银行卡</div>
                 </div>
                 <div class="cardItem" v-for="item in bankAccountList" @click="withdraw(item)">
-<!--                    <img class="accountBg" :src="require('@/assets/reCharge/bg_'+item.code+'.png')"/>-->
+                    <img class="accountBg" :src="require('../assets/reCharge/bg_'+item.code+'.png')"/>
                     <div class="itemText">
                         <div class="bankName" v-text="item.bank"></div>
                         <div>
@@ -28,7 +28,7 @@
                     <div class="addBtn" @click="showAddAliPay">添加支付宝</div>
                 </div>
                 <div class="cardItem" v-for="item in aliAccountList" @click="withdraw(item)">
-<!--                    <img class="accountBg" :src="require('@/assets/reCharge/bg_'+item.code+'.png')"/>-->
+                    <img class="accountBg" :src="require('../assets/reCharge/bg_'+item.code+'.png')"/>
                     <div class="itemText">
                         <div class="bankName" v-text="item.owner_name"></div>
                         <div>
